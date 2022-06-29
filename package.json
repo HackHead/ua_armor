@@ -1,0 +1,44 @@
+{
+  "name": "military",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "serve": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-Solomon/ua_armor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/The-Solomon/ua_armor/issues"
+  },
+  "homepage": "https://github.com/The-Solomon/ua_armor#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "cli-table3": "^0.6.2",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.0",
+    "jest": "^28.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.3",
+    "mongoose": "^6.4.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.18",
+    "pug": "^3.0.2",
+    "sass": "^1.53.0"
+  }
+}
