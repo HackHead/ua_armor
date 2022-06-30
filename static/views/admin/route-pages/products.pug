@@ -1,0 +1,91 @@
+include ../components/head.pug
+.layout-wrapper.layout-content-navbar
+  .layout-container
+    include ../components/navigation.pug
+    .layout-page
+      include ../components/navbar.pug
+      .content-wrapper
+        // Content
+        .container-xxl.flex-grow-1.container-p-y
+          // Examples
+          h6.pb-1.mb-4.text-muted Header and footer
+          .row.mb-5
+            .col-md-6.col-lg-4.mb-3
+              .card.text-center
+                div(style='padding-top: 3em')
+                  img(src='/img/illustrations/product_1.jpg' alt='' style='max-width: 100%; vertical-align: middle; display: inline-block;')
+                .card-header 1850 &gcy;&rcy;&ncy;
+                .card-body
+                  h5.card-title &Kcy;&ocy;&fcy;&tcy;&acy; &khcy;&ucy;&dcy;&icy; Reebok UFC UFAN FZ Hoody Grey
+                  p.card-text &Kcy;&ocy;&dcy; &tcy;&ocy;&vcy;&acy;&rcy;&acy;: 8187
+                  .buttons.justify-content-center.align-items-center(style="width: 100%; display: flex;")
+                    a.btn.btn-danger.mr-2(href='javascript:void(0)') Удалить
+                    a.btn.btn-primary.ml-2(href='javascript:void(0)') Редактировать
+                .card-footer.text-muted 2 days ago
+            .col-md-6.col-lg-4.mb-3
+              .card.text-center
+                div(style='padding-top: 3em')
+                  img(src='/img/illustrations/product_2.jpg' alt='' style='max-width: 100%; vertical-align: middle; display: inline-block;')
+                .card-header Featured
+                .card-body
+                  h5.card-title Special title treatment
+                  p.card-text With supporting text below as a natural.
+                  .buttons.justify-content-center.align-items-center(style="width: 100%; display: flex;")
+                    a.btn.btn-danger.mr-2(href='javascript:void(0)') Удалить
+                    a.btn.btn-primary.ml-2(href='javascript:void(0)') Редактировать
+                .card-footer.text-muted 2 days ago
+            .col-md-6.col-lg-4.mb-3
+              .card.text-center
+                div(style='padding-top: 3em')
+                  img(src='/img/illustrations/product_3.jpg' alt='' style='max-width: 100%')
+                .card-header Featured
+                .card-body
+                  h5.card-title Special title treatment
+                  p.card-text With supporting text below as a natural.
+                  .buttons.justify-content-center.align-items-center(style="width: 100%; display: flex;")
+                    a.btn.btn-danger.mr-2(href='javascript:void(0)') Удалить
+                    a.btn.btn-primary.ml-2(href='javascript:void(0)') Редактировать
+                .card-footer.text-muted 2 days ago
+            .col-md-6.col-lg-4.mb-3
+              .card.text-center
+                div(style='padding-top: 3em')
+                  img(src='/img/illustrations/product_4.jpg' alt='' style='max-width: 100%')
+                .card-header Featured
+                .card-body
+                  h5.card-title Special title treatment
+                  p.card-text With supporting text below as a natural.
+                  .buttons.justify-content-center.align-items-center(style="width: 100%; display: flex;")
+                    a.btn.btn-danger.mr-2(href='javascript:void(0)') Удалить
+                    a.btn.btn-primary.ml-2(href='javascript:void(0)') Редактировать
+                .card-footer.text-muted 2 days ago
+          // / Content types
+          .row.mb-5 
+            .demo-inline-spacing
+              nav(aria-label='Page navigation')
+                ul.pagination.justify-content-center
+                  li.page-item.prev
+                    a.page-link(href='javascript:void(0);')
+                      i.tf-icon.bx.bx-chevrons-left
+                  li.page-item
+                    a.page-link(href='javascript:void(0);') 1
+                  li.page-item
+                    a.page-link(href='javascript:void(0);') 2
+                  li.page-item.active
+                    a.page-link(href='javascript:void(0);') 3
+                  li.page-item
+                    a.page-link(href='javascript:void(0);') 4
+                  li.page-item
+                    a.page-link(href='javascript:void(0);') 5
+                  li.page-item.next
+                    a.page-link(href='javascript:void(0);')
+                      i.tf-icon.bx.bx-chevrons-right
+
+        // / Content
+        // Footer
+        // / Footer
+        .content-backdrop.fade
+      // Content wrapper
+    // / Layout page
+  // Overlay
+  .layout-overlay.layout-menu-toggle
+include ../components/footer-js.pug

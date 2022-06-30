@@ -1,0 +1,342 @@
+include ../components/head.pug
+.layout-wrapper.layout-content-navbar
+  .layout-container
+    include ../components/navigation.pug
+    .layout-page
+      include ../components/navbar.pug
+      .content-wrapper
+        // Content
+        .container-xxl.flex-grow-1.container-p-y
+          .row
+            .col-lg-8.mb-4.order-0
+              .card
+                .d-flex.align-items-end.row
+                  .col-sm-7
+                    .card-body
+                      h5.card-title.text-primary Congratulations John! &#x1F389;
+                      p.mb-4
+                        | You have done 
+                        span.fw-bold 72%
+                        |  more sales today. Check your new badge in
+                        |                             your profile.
+                      a.btn.btn-sm.btn-outline-primary(href='javascript:;') View Badges
+                  .col-sm-5.text-center.text-sm-left
+                    .card-body.pb-0.px-0.px-md-4
+                      img(src='/img/illustrations/man-with-laptop-light.png' height='140' alt='View Badge User' data-app-dark-img='illustrations/man-with-laptop-dark.png' data-app-light-img='illustrations/man-with-laptop-light.png')
+            .col-lg-4.col-md-4.order-1
+              .row
+                .col-lg-6.col-md-12.col-6.mb-4
+                  .card
+                    .card-body
+                      .card-title.d-flex.align-items-start.justify-content-between
+                        .avatar.flex-shrink-0
+                          img.rounded(src='/img/icons/unicons/chart-success.png' alt='chart success')
+                        .dropdown
+                          button#cardOpt3.btn.p-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            i.bx.bx-dots-vertical-rounded
+                          .dropdown-menu.dropdown-menu-end(aria-labelledby='cardOpt3')
+                            a.dropdown-item(href='javascript:void(0);') View More
+                            a.dropdown-item(href='javascript:void(0);') Delete
+                      span.fw-semibold.d-block.mb-1 Profit
+                      h3.card-title.mb-2 $12,628
+                      small.text-success.fw-semibold
+                        i.bx.bx-up-arrow-alt
+                        |  +72.80%
+                .col-lg-6.col-md-12.col-6.mb-4
+                  .card
+                    .card-body
+                      .card-title.d-flex.align-items-start.justify-content-between
+                        .avatar.flex-shrink-0
+                          img.rounded(src='/img/icons/unicons/wallet-info.png' alt='Credit Card')
+                        .dropdown
+                          button#cardOpt6.btn.p-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            i.bx.bx-dots-vertical-rounded
+                          .dropdown-menu.dropdown-menu-end(aria-labelledby='cardOpt6')
+                            a.dropdown-item(href='javascript:void(0);') View More
+                            a.dropdown-item(href='javascript:void(0);') Delete
+                      span Sales
+                      h3.card-title.text-nowrap.mb-1 $4,679
+                      small.text-success.fw-semibold
+                        i.bx.bx-up-arrow-alt
+                        |  +28.42%
+            // Total Revenue
+            .col-12.col-lg-8.order-2.order-md-3.order-lg-2.mb-4
+              .card
+                .row.row-bordered.g-0
+                  .col-md-8
+                    h5.card-header.m-0.me-2.pb-3 Total Revenue
+                    #totalRevenueChart.px-2
+                  .col-md-4
+                    .card-body
+                      .text-center
+                        .dropdown
+                          button#growthReportId.btn.btn-sm.btn-outline-primary.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            | 2022
+                          .dropdown-menu.dropdown-menu-end(aria-labelledby='growthReportId')
+                            a.dropdown-item(href='javascript:void(0);') 2021
+                            a.dropdown-item(href='javascript:void(0);') 2020
+                            a.dropdown-item(href='javascript:void(0);') 2019
+                    #growthChart
+                    .text-center.fw-semibold.pt-3.mb-2 62% Company Growth
+                    .d-flex.px-xxl-4.px-lg-2.p-4.gap-xxl-3.gap-lg-1.gap-3.justify-content-between
+                      .d-flex
+                        .me-2
+                          span.badge.bg-label-primary.p-2
+                            i.bx.bx-dollar.text-primary
+                        .d-flex.flex-column
+                          small 2022
+                          h6.mb-0 $32.5k
+                      .d-flex
+                        .me-2
+                          span.badge.bg-label-info.p-2
+                            i.bx.bx-wallet.text-info
+                        .d-flex.flex-column
+                          small 2021
+                          h6.mb-0 $41.2k
+            // / Total Revenue
+            .col-12.col-md-8.col-lg-4.order-3.order-md-2
+              .row
+                .col-6.mb-4
+                  .card
+                    .card-body
+                      .card-title.d-flex.align-items-start.justify-content-between
+                        .avatar.flex-shrink-0
+                          img.rounded(src='/img/icons/unicons/paypal.png' alt='Credit Card')
+                        .dropdown
+                          button#cardOpt4.btn.p-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            i.bx.bx-dots-vertical-rounded
+                          .dropdown-menu.dropdown-menu-end(aria-labelledby='cardOpt4')
+                            a.dropdown-item(href='javascript:void(0);') View More
+                            a.dropdown-item(href='javascript:void(0);') Delete
+                      span.d-block.mb-1 Payments
+                      h3.card-title.text-nowrap.mb-2 $2,456
+                      small.text-danger.fw-semibold
+                        i.bx.bx-down-arrow-alt
+                        |  -14.82%
+                .col-6.mb-4
+                  .card
+                    .card-body
+                      .card-title.d-flex.align-items-start.justify-content-between
+                        .avatar.flex-shrink-0
+                          img.rounded(src='/img/icons/unicons/cc-primary.png' alt='Credit Card')
+                        .dropdown
+                          button#cardOpt1.btn.p-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            i.bx.bx-dots-vertical-rounded
+                          .dropdown-menu(aria-labelledby='cardOpt1')
+                            a.dropdown-item(href='javascript:void(0);') View More
+                            a.dropdown-item(href='javascript:void(0);') Delete
+                      span.fw-semibold.d-block.mb-1 Транзакции
+                      h3.card-title.mb-2 $14,857
+                      small.text-success.fw-semibold
+                        i.bx.bx-up-arrow-alt
+                        |  +28.14%
+                //
+                  </div>
+                  <div class="row">
+                .col-12.mb-4
+                  .card
+                    .card-body
+                      .d-flex.justify-content-between.flex-sm-row.flex-column.gap-3
+                        .d-flex.flex-sm-column.flex-row.align-items-start.justify-content-between
+                          .card-title
+                            h5.text-nowrap.mb-2 Profile Report
+                            span.badge.bg-label-warning.rounded-pill Year 2021
+                          .mt-sm-auto
+                            small.text-success.text-nowrap.fw-semibold
+                              i.bx.bx-chevron-up
+                              |  68.2%
+                            h3.mb-0 $84,686k
+                        #profileReportChart
+          .row
+            // Order Statistics
+            .col-md-6.col-lg-4.col-xl-4.order-0.mb-4
+              .card.h-100
+                .card-header.d-flex.align-items-center.justify-content-between.pb-0
+                  .card-title.mb-0
+                    h5.m-0.me-2 Order Statistics
+                    small.text-muted 42.82k Total Sales
+                  .dropdown
+                    button#orederStatistics.btn.p-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                      i.bx.bx-dots-vertical-rounded
+                    .dropdown-menu.dropdown-menu-end(aria-labelledby='orederStatistics')
+                      a.dropdown-item(href='javascript:void(0);') Select All
+                      a.dropdown-item(href='javascript:void(0);') Refresh
+                      a.dropdown-item(href='javascript:void(0);') Share
+                .card-body
+                  .d-flex.justify-content-between.align-items-center.mb-3
+                    .d-flex.flex-column.align-items-center.gap-1
+                      h2.mb-2 8,258
+                      span Total Orders
+                    #orderStatisticsChart
+                  ul.p-0.m-0
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        span.avatar-initial.rounded.bg-label-primary
+                          i.bx.bx-mobile-alt
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          h6.mb-0 Electronic
+                          small.text-muted Mobile, Earbuds, TV
+                        .user-progress
+                          small.fw-semibold 82.5k
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        span.avatar-initial.rounded.bg-label-success
+                          i.bx.bx-closet
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          h6.mb-0 Fashion
+                          small.text-muted T-shirt, Jeans, Shoes
+                        .user-progress
+                          small.fw-semibold 23.8k
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        span.avatar-initial.rounded.bg-label-info
+                          i.bx.bx-home-alt
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          h6.mb-0 Decor
+                          small.text-muted Fine Art, Dining
+                        .user-progress
+                          small.fw-semibold 849k
+                    li.d-flex
+                      .avatar.flex-shrink-0.me-3
+                        span.avatar-initial.rounded.bg-label-secondary
+                          i.bx.bx-football
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          h6.mb-0 Sports
+                          small.text-muted Football, Cricket Kit
+                        .user-progress
+                          small.fw-semibold 99
+            // / Order Statistics
+            // Expense Overview
+            .col-md-6.col-lg-4.order-1.mb-4
+              .card.h-100
+                .card-header
+                  ul.nav.nav-pills(role='tablist')
+                    li.nav-item
+                      button.nav-link.active(type='button' role='tab' data-bs-toggle='tab' data-bs-target='#navs-tabs-line-card-income' aria-controls='navs-tabs-line-card-income' aria-selected='true')
+                        | Income
+                    li.nav-item
+                      button.nav-link(type='button' role='tab') Expenses
+                    li.nav-item
+                      button.nav-link(type='button' role='tab') Profit
+                .card-body.px-0
+                  .tab-content.p-0
+                    #navs-tabs-line-card-income.tab-pane.fade.show.active(role='tabpanel')
+                      .d-flex.p-4.pt-3
+                        .avatar.flex-shrink-0.me-3
+                          img(src='/img/icons/unicons/wallet.png' alt='User')
+                        div
+                          small.text-muted.d-block Total Balance
+                          .d-flex.align-items-center
+                            h6.mb-0.me-1 $459.10
+                            small.text-success.fw-semibold
+                              i.bx.bx-chevron-up
+                              |                                   42.9%
+                      #incomeChart
+                      .d-flex.justify-content-center.pt-4.gap-2
+                        .flex-shrink-0
+                          #expensesOfWeek
+                        div
+                          p.mb-n1.mt-1 Expenses This Week
+                          small.text-muted $39 less than last week
+            // / Expense Overview
+            // Transactions
+            .col-md-6.col-lg-4.order-2.mb-4
+              .card.h-100
+                .card-header.d-flex.align-items-center.justify-content-between
+                  h5.card-title.m-0.me-2 Транзакции
+                  .dropdown
+                    button#transactionID.btn.p-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                      i.bx.bx-dots-vertical-rounded
+                    .dropdown-menu.dropdown-menu-end(aria-labelledby='transactionID')
+                      a.dropdown-item(href='javascript:void(0);') Last 28 Days
+                      a.dropdown-item(href='javascript:void(0);') Last Month
+                      a.dropdown-item(href='javascript:void(0);') Last Year
+                .card-body
+                  ul.p-0.m-0
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        img.rounded(src='/img/icons/unicons/paypal.png' alt='User')
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          small.text-muted.d-block.mb-1 Paypal
+                          h6.mb-0 Send money
+                        .user-progress.d-flex.align-items-center.gap-1
+                          h6.mb-0 +82.6
+                          span.text-muted ГРН.
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        img.rounded(src='/img/icons/unicons/wallet.png' alt='User')
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          small.text-muted.d-block.mb-1 Wallet
+                          h6.mb-0 Mac&apos;D
+                        .user-progress.d-flex.align-items-center.gap-1
+                          h6.mb-0 +270.69
+                          span.text-muted ГРН.
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        img.rounded(src='/img/icons/unicons/chart.png' alt='User')
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          small.text-muted.d-block.mb-1 Transfer
+                          h6.mb-0 Refund
+                        .user-progress.d-flex.align-items-center.gap-1
+                          h6.mb-0 +637.91
+                          span.text-muted ГРН.
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        img.rounded(src='/img/icons/unicons/cc-success.png' alt='User')
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          small.text-muted.d-block.mb-1 Credit Card
+                          h6.mb-0 Ordered Food
+                        .user-progress.d-flex.align-items-center.gap-1
+                          h6.mb-0 -838.71
+                          span.text-muted ГРН.
+                    li.d-flex.mb-4.pb-1
+                      .avatar.flex-shrink-0.me-3
+                        img.rounded(src='/img/icons/unicons/wallet.png' alt='User')
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          small.text-muted.d-block.mb-1 Wallet
+                          h6.mb-0 Starbucks
+                        .user-progress.d-flex.align-items-center.gap-1
+                          h6.mb-0 +203.33
+                          span.text-muted ГРН.
+                    li.d-flex
+                      .avatar.flex-shrink-0.me-3
+                        img.rounded(src='/img/icons/unicons/cc-warning.png' alt='User')
+                      .d-flex.w-100.flex-wrap.align-items-center.justify-content-between.gap-2
+                        .me-2
+                          small.text-muted.d-block.mb-1 Mastercard
+                          h6.mb-0 Ordered Food
+                        .user-progress.d-flex.align-items-center.gap-1
+                          h6.mb-0 -92.45
+                          span.text-muted ГРН.
+            // / Transactions
+        // / Content
+        // Footer
+        footer.content-footer.footer.bg-footer-theme
+          .container-xxl.d-flex.flex-wrap.justify-content-between.py-2.flex-md-row.flex-column
+            .mb-2.mb-md-0
+              | &copy;
+              script.
+                document.write(new Date().getFullYear());
+              |                   , made with &#x2764;&#xFE0F; by
+              a.footer-link.fw-bolder(href='https://themeselection.com' target='_blank') ThemeSelection
+            div
+              a.footer-link.me-4(href='https://themeselection.com/license/' target='_blank') License
+              a.footer-link.me-4(href='https://themeselection.com/' target='_blank') More Themes
+              a.footer-link.me-4(href='https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/' target='_blank') Documentation
+              a.footer-link.me-4(href='https://github.com/themeselection/sneat-html-admin-template-free/issues' target='_blank') Support
+        // / Footer
+        .content-backdrop.fade
+      // Content wrapper
+    // / Layout page
+  // Overlay
+  .layout-overlay.layout-menu-toggle
+    include ../components/footer-js.pug

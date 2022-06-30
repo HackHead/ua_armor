@@ -54,34 +54,25 @@ aside#layout-menu.layout-menu.menu-vertical.menu.bg-menu-theme
         li.menu-item
           a.menu-link(href='/admin/product/new')
             div(data-i18n='Under Maintenance') Добавить
-    li.menu-item
+    li.menu-item(class = data.name === 'comments' ? 'active' : '')
       a.menu-link.menu-toggle(href='cards-basic.html')
         i.menu-icon.tf-icons.bx.bx-message-alt-dots
         div(data-i18n='Basic') Комментарии
       ul.menu-sub
-        li.menu-item
-          a.menu-link(href='pages-misc-error.html')
+        li.menu-item(class = data.name === 'comments' ? 'active' : '')
+          a.menu-link(href='/admin/products/comments')
             div(data-i18n='Error') Список комментариев
-        li.menu-item
-          a.menu-link(href='pages-misc-under-maintenance.html')
-            div(data-i18n='Under Maintenance') Добавить товар
-        li.menu-item
-          a.menu-link(href='pages-misc-under-maintenance.html')
-            div(data-i18n='Under Maintenance') Акции
-    li.menu-item
+    li.menu-item(class = data.name === 'providers' ? 'active' : '')
       a.menu-link.menu-toggle(href='cards-basic.html')
         i.menu-icon.tf-icons.bx.bx-package
         div(data-i18n='Basic') Поставщики
       ul.menu-sub
-        li.menu-item
-          a.menu-link(href='pages-misc-error.html')
-            div(data-i18n='Error') Список товаров
-        li.menu-item
-          a.menu-link(href='pages-misc-under-maintenance.html')
-            div(data-i18n='Under Maintenance') Добавить товар
+        li.menu-item(class = data.name === 'providers' ? 'active' : '')
+          a.menu-link(href='/admin/products/providers')
+            div(data-i18n='Error') Список поставщиков
         li.menu-item
           a.menu-link(href='pages-misc-under-maintenance.html')
-            div(data-i18n='Under Maintenance') Акции
+            div(data-i18n='Under Maintenance') Добавить поставщика
     li.menu-item
       a.menu-link.menu-toggle(href='cards-basic.html')
         i.menu-icon.tf-icons.bx.bxs-user

@@ -1,0 +1,101 @@
+include ../components/head.pug
+
+#canvas
+  #box_wrapper
+    include ../components/navigation.pug
+    
+    section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("/img/home/title.jpg"); background-position: 50% -3px;')
+      .container
+        .row
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+          .col-sm-12.text-center.text-sm-left
+            h1.color-main
+              | Контактні дані
+            ol.breadcrumb
+              li.breadcrumb-item.first-item
+                a(href='/') Головна
+              li.breadcrumb-item.last-item.active Контакти
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+    .fw-page-builder-content
+      .fw-divider-space.divider-60.divider-md-90.divider-xl-110.divider-xxl-150
+      section#section-3081c56.overflow-visible.s-pt-0.s-pb-0
+        .container.box-shadow
+          .row
+            .col-xs-12.col-12.col-lg-6.text-center.text-sm-left.ds.col-xl-5
+              .px-xl-80.px-lg-60.px-sm-30.ds
+                .fw-divider-space.divider-60.divider-md-90.divider-lg-130.divider-xl-150
+                h2.special-heading.text-center.text-sm-left
+                  span
+                    mark Контакти
+                .fw-divider-space.divider-0.divider-lg-20
+                ul.list-bordered.no-top-border.no-bottom-border
+                  li
+                    .icon-inline
+                      .icon-styled.icon-top
+                        i.fa.fa-map-marker.color-main.fontsize_16
+                      p
+                        | м.Київ
+                        br
+                        |  переулок катаева 2
+                  li
+                    .icon-inline
+                      .icon-styled.icon-top
+                        i.fa.fa-phone.color-main.fontsize_16
+                      p
+                        a(href='callto:0800334150') 0(800)334-150
+                  li
+                    .icon-inline
+                      .icon-styled.icon-top
+                        i.fa.fa-envelope.color-main.fontsize_16
+                      p
+                        a(href='mailto:uarmorinfo@gmail.com') uarmorinfo@gmail.com
+                span.social-icons
+                  a.fa.fa-paper-plane(href='https://web.telegram.org/' target='_blank')
+                  a.fa.fa-instagram(href='https://www.instagram.com/' target='_blank')
+                  a.fa.fa-viber(href='https://www.youtube.com/' target='_blank')
+                .fw-divider-space.divider-60.divider-md-90.divider-lg-130.divider-xl-150
+            .col-xs-12.col-12.col-lg-6.text-center.text-sm-left.ls.col-xl-7
+              .px-xl-80.px-lg-60.px-sm-30.ls
+                .fw-divider-space.divider-60.divider-md-90.divider-lg-130.divider-xl-150
+                .form-wrapper
+                  form.fw_form_fw_form(data-fw-form-id='fw_form' method='post' action='/' data-fw-ext-forms-type='contact-forms')
+                    input(type='hidden' value='fw_form')
+                    .wrap-forms
+                      .row.c-gutter-20.c-mb-30
+                        .col-12.form-title.text-center.text-sm-left.form-builder-item
+                          h4
+                            span.big
+                              mark Надіслати
+                              |  Повідомлення
+                      .row.c-gutter-20.c-mb-30
+                        .col-xs-12.col-12.col-lg-6.form-builder-item
+                          .form-group
+                            label(for='id-1' style='display: none;')
+                              | Ім'я
+                              sup *
+                            input#id-1.form-control(type='text' name='text_698d065' placeholder="Ім'я" required='required')
+                        .col-xs-12.col-12.col-lg-6.form-builder-item
+                          .form-group.has-placeholder
+                            label(for='id-2')
+                              | Email адреса
+                              sup *
+                            input#id-2.form-control(type='text' name='email_b0616c0' placeholder='Email адреса' required='required')
+                      .row.c-gutter-20.c-mb-30
+                        .mb-0.col-xs-12.col-12.form-builder-item
+                          .form-group.has-placeholder
+                            label(for='id-3')
+                              | Повідомлення
+                              sup *
+                            textarea#id-3.form-control(rows='3' name='textarea_1e90beb' placeholder='Повідомлення' required='required')
+                      .row.c-gutter-20.c-mb-30
+                    .wrap-forms
+                      .row.c-gutter-20.c-mb-30
+                        .col-12.col-sm-12.mt-lg-60.mt-30.mb-0
+                          input.btn.btn-outline-maincolor(type='submit' value='Надіслати')
+                .fw-divider-space.divider-60.divider-md-90.divider-lg-130.divider-xl-150
+      .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: -100px;')
+      section#section-c25f2b4.ls.s-pt-0.s-pb-0.container-px-xl-0(style="margin-top: 200px")
+    include ../components/footer.pug
+    include ../components/footer-js.pug

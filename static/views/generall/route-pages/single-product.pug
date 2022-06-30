@@ -1,0 +1,213 @@
+include ../components/head.pug
+// wrappers for visual page editor and boxed version of template
+#canvas
+  #box_wrapper
+    include ../components/navigation.pug
+    section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("/img/home/title.jpg"); background-position: 50% -3px;')
+      .container
+        .row
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+          .col-sm-12.text-center.text-sm-left
+            h1.color-main
+              | Перчатки тактические вентилируемые Mechanix Specialty Vent Coyote
+            ol.breadcrumb
+              li.breadcrumb-item.first-item
+                a(href='/armashop/') Головна
+              li.breadcrumb-item.0-item
+                a(href='/armashop/product-category/equipment/') Тактичне спорядження
+              li.breadcrumb-item.last-item.active Рукавиці тактичні
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+    // .page_title
+    section.ls.page_content.s-py-xl-110.s-py-md-90.s-py-60.c-gutter-60
+      .container(style="max-width: 1400px")
+        .row
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+          .woocommerce-notices-wrapper
+          #content_product.col-12.col-xs-12.col-lg-7.col-xl-8.order-lg-2.column-main
+            #product-581.has-post-thumbnail.product.type-product.post-581.status-publish.first.instock.product_cat-equipment.sale.featured.shipping-taxable.purchasable.product-type-simple
+              .woocommerce-product-gallery.woocommerce-product-gallery--with-images.woocommerce-product-gallery--columns-4.images(data-columns='4' style='opacity: 1; transition: opacity 0.25s ease-in-out 0s;')
+                figure.woocommerce-product-gallery__wrapper
+                  .woocommerce-product-gallery__image(data-thumb='/img/store/shopequipment1-100x100.png' data-thumb-alt='')
+                    a(href='/armashop/wp-content/uploads/2020/03/shopequipment1.png')
+                      img.wp-post-image(src='/img/store/shopequipment1-600x600.png' alt='' title='shopequipment1' data-caption='' width='600' height='600')
+              .summary.entry-summary
+                .product_meta
+                  span.sku_wrapper
+                    | Код товару: 
+                    span.sku 4282123
+                  span.posted_in
+                    | Категорія: 
+                    a(href='/armashop/product-category/equipment/' rel='tag') Спорядження
+                p.price
+                  del
+                    span.woocommerce-Price-amount.amount
+                      span.woocommerce-Price-currencySymbol &pound;
+                      | 18
+                      sup 00
+                  ins
+                    span.woocommerce-Price-amount.amount
+                      span.woocommerce-Price-currencySymbol &pound;
+                      | 16
+                      sup 00
+                .woocommerce-product-details__short-description
+                  p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus vitae hic cumque modi, impedit ipsam?.
+                form.cart(action='/armashop/product/champion-of-regret-gun/' method='post' enctype='multipart/form-data')
+                  .add-to-cart
+                    .quantity
+                      label.screen-reader-text(for='quantity_62bdf17eb2418' style='display: none;') Champion Of Regret Gun quantity
+                      input.plus(type='button' value='+')
+                      i.fa.fa-angle-up(aria-hidden='true')
+                      input#quantity_62bdf17eb2418.input-text.qty.text(type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' size='4' placeholder='Champion Of Regret Gun quantity' inputmode='numeric')
+                      input.minus(type='button' value='-')
+                      i.fa.fa-angle-down(aria-hidden='true')
+                    button.single_add_to_cart_button.button.alt(type='submit' name='add-to-cart' value='581') В корзину
+              .woocommerce-tabs.wc-tabs-wrapper
+                ul.tabs.wc-tabs(role='tablist')
+                  li#tab-title-description.description_tab.active(role='tab' aria-controls='tab-description' onclick="toggleTabs(event);")
+                    a(href='#tab-description' class="tab-head")
+                      | Опис
+                  li#tab-title-additional_information.additional_information_tab(role='tab' aria-controls='tab-additional_information' onclick="toggleTabs(event);")
+                    a(href='#tab-additional_information' class="tab-head")
+                      | Характеристики
+                  li#tab-title-reviews.reviews_tab(role='tab' aria-controls='tab-reviews' onclick="toggleTabs(event);")
+                    a(href='#tab-reviews' class="tab-head")
+                      | Огляди (0)
+                #tab-description.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--description.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-description' style='display: block;')
+                  h2 Опис
+                  p
+                    | Pellentesque habitant morbi tristique senectus et netus et malesuada
+                    | fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
+                    | ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+                    | egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
+                    | leo.
+                #tab-additional_information.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--additional_information.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-additional_information' style='display: none;')
+                  h2 Додаткова інформація
+                  table.woocommerce-product-attributes.shop_attributes
+                    tbody
+                      tr.woocommerce-product-attributes-item.woocommerce-product-attributes-item--attribute_pa_color
+                        th.woocommerce-product-attributes-item__label Колір
+                        td.woocommerce-product-attributes-item__value
+                          p Зелений
+                #tab-reviews.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--reviews.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style='display: none;')
+                  #reviews.woocommerce-Reviews
+                    #comments
+                      h2.woocommerce-Reviews-title
+                        | Огляди
+                      p.woocommerce-noreviews Оглядів до цього товару поки що немає
+                    #review_form_wrapper
+                      #review_form
+                        #respond.comment-respond
+                          span#reply-title.comment-reply-title
+                            | Будьте першим хто його залишить
+                            small
+                              a#cancel-comment-reply-link(rel='nofollow' href='/armashop/product/champion-of-regret-gun/#respond' style='display:none;') Cancel reply
+                          form#commentform.comment-form(action='/armashop/wp-comments-post.php' method='post' novalidate='novalidate')
+                            p.comment-notes
+                              span#email-notes Ваша e-mail адреса не буде опублікована
+                            .comment-form-rating
+                              label(for='rating') Ваша оцінка
+                              p.stars
+                                span
+                                  a.star-1(href='#') 1
+                                  a.star-2(href='#') 2
+                                  a.star-3(href='#') 3
+                                  a.star-4(href='#') 4
+                                  a.star-5(href='#') 5
+                              .select-wrap
+                                select#rating(name='rating' required='' style='display: none;')
+                                  option(value='' selected='selected') Rate&mldr;
+                                  option(value='5') Perfect
+                                  option(value='4') Good
+                                  option(value='3') Average
+                                  option(value='2') Not that bad
+                                  option(value='1') Very poor
+                            p.comment-form-comment
+                              label(for='comment' style='display: none;')
+                                | Ваш відгук &nbsp;
+                                span.required *
+                              textarea#comment(name='comment' cols='45' rows='8' required='' placeholder='Ваш відгук')
+                            p.comment-form-author
+                              label(for='author' style='display: none;')
+                                | Ім'я &nbsp;
+                                span.required *
+                              input#author(name='author' type='text' size='30' required='' placeholder="Ім'я")
+                            p.comment-form-email
+                              label(for='email' style='display: none;')
+                                | Email&nbsp;
+                                span.required *
+                              input#email(name='email' type='email' size='30' required='' placeholder='Email адреса')
+                            p.form-submit
+                              input#submit.submit(name='submit' type='submit' value='Надіслати')
+                        // #respond
+                    .clear
+              section.related.products
+                h2 Схожі товари
+                ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
+                  .owl-stage-outer
+                    .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
+                      each val in [1, 2, 3, 4, 5, 6]
+                        .owl-item(style='width: 267.667px; margin-right: 30px;')
+                          li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
+                            .product-inner
+                              .product-img
+                                a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/')
+                                  img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/img/store/shopequipment5.png' alt=''  width='900' height='900')
+                              .wrap-header
+                                h2.woocommerce-loop-product__title
+                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/') Allegiance Of The Enigma
+                                span.cat-product
+                                  a(href='/armashop/product-category/equipment/' rel='tag') Спорядження
+                              // close product-wrap
+                              .wrap-footer
+                                span.price
+                                  span.woocommerce-Price-amount.amount
+                                    span.woocommerce-Price-currencySymbol &pound;
+                                    | 90
+                                    sup 00
+                                .product-button
+                                  a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/armashop/product/champion-of-regret-gun/?add-to-cart=582' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
+                  
+                
+                  .owl-dots
+          // eof .col-
+          // main aside sidebar
+          aside.col-12.col-xs-12.col-lg-5.col-xl-4.order-lg-1.column-sidebar
+            .widget-theme-wrapper.widget_no_background
+              #search-3.widget.widget_search
+                form.search-form(role='search' method='get' action='/armashop/')
+                  .form-group
+                    label
+                      span.screen-reader-text Пошук:
+                      input.search-field.form-control(type='search' placeholder='Пошук' name='s' )
+                  button.search-submit(type='submit')
+                    span.screen-reader-text Пошук
+            .widget-theme-wrapper.widget_no_background
+              #woocommerce_product_categories-2.widget.woocommerce.widget_product_categories
+                h3.widget-title Категорії
+                ul.product-categories
+                  li.cat-item.cat-item-27.current-cat
+                    a(href='/armashop/product-category/equipment/') Тактичне спорядження
+                  li.cat-item.cat-item-15
+                    a(href='/armashop/product-category/military/') Особиста гігієна
+                  li.cat-item.cat-item-28
+                    a(href='/armashop/product-category/optics/') Взуття / Шкарпетки
+                  li.cat-item.cat-item-30
+                    a(href='/armashop/product-category/weapon/') Одяг / Рукавиці
+            .widget-theme-wrapper.widget_no_background
+              #woocommerce_recently_viewed_products-2.widget.woocommerce.widget_recently_viewed_products
+                h3.widget-title Ви також переглядали
+                ul.product_list_widget
+                  li
+                    a(href='/armashop/product/allegiance-of-the-enigma/')
+                      img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/img/store/shopequipment5.png' alt=''  width='900' height='900')
+                      span.product-title Allegiance Of The Enigma
+                    span.woocommerce-Price-amount.amount
+                      span.woocommerce-Price-currencySymbol &pound;
+                      | 90
+                      sup 00
+    include ../components/footer.pug
+    include ../components/footer-js.pug    
+    script(src="/generall/js/tabs.js")

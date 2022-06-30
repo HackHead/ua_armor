@@ -1,0 +1,296 @@
+include ../components/head.pug
+#canvas
+  #box_wrapper
+    include ../components/navigation.pug
+    .fw-page-builder-content
+      section#section-a9ffd79.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-overlay(style='background-image:url(/img/elements/forest.jpg);')
+        .container
+          .row
+            .col-xs-12.col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              .owl-carousel.shortcode-product.owl-loaded.owl-drag.owl-theme(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
+                .owl-stage-outer
+                  .owl-stage(style='transform: translate3d(-2400px, 0px, 0px); transition: all 0.25s ease 0s; width: 8400px;')
+                    each val in [1, 2, 3, 4, 5, 6, 7]
+                        .owl-item(style='width: 450px; margin-right: 30px;')
+                            .side-item.no-content-padding(data-index='0')
+                                .row.align-center.text-center.text-sm-left
+                                    .col-xs-12.col-lg-5.col-xl-7
+                                        .item-media
+                                            img.attachment-uarmor-rectangle-horizontal.size-uarmor-rectangle-horizontal(src='/img/home/gun_1-800x675.png' alt='' width='800' height='675')
+                                    .col-xs-12.col-lg-7.col-xl-5
+                                        .item-content
+                                            h3.links-maincolor
+                                                a(href='/uarmor/product/vengeance-of-moon-gun/')
+                                                    | Vengeance Of Moon Gun
+                                            .text-block
+                                                | Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+                                            .product-features
+                                                span.price
+                                                    span.price-regular &#x20B4;45
+                                            a.btn.btn-outline-maincolor.medium-btn(href='/uarmor/product/vengeance-of-moon-gun/') Придбати
+    
+                .owl-nav.disabled
+                  .owl-prev
+                    i.fa.fa-long-arrow-left(aria-hidden='true')
+                  .owl-next
+                    i.fa.fa-long-arrow-right(aria-hidden='true')
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+      section#section-044c9f1.ls.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+        .container-fluid
+          .row
+            .col-xs-12.col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              h3.special-heading.text-center
+                span.big
+                  mark Каталог
+                  |  товарів
+              .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
+              .uws-products.carousel(data-loop='true' data-nav='true' data-dots='false' data-center='true' data-autoplay='false' data-speed='5000' data-responsive-xl='6' data-responsive-lg='3' data-responsive-md='3' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
+                .columns-3(data-index='0')
+                  ul.products.columns-3.owl-carousel.owl-shadowitems.owl-theme.top-nav-arrows.owl-loaded.owl-drag.owl-center
+                    .owl-stage-outer
+                      .owl-stage(style='transition: all 0.25s ease 0s; width: 3540px; transform: translate3d(-3840px, 0px, 0px);')
+                        each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                          .owl-item.active(style='width: 354px; margin-right: 30px;')
+                            li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
+                              .product-inner
+                                .product-img
+                                  a(href='/uarmor/product/glory-of-justice-gun/')
+                                    span.onsale Sale!
+                                    img(src='/img/home/shopequipment2.png' alt='' srcset='/img/home/shopequipment2_002.png 900w, /img/home/shopequipment2-150x150.png 150w, /img/home/shopequipment2-300x300.png 300w, /img/home/shopequipment2-768x768.png 768w, /img/home/shopequipment2-600x600.png 600w, /img/home/shopequipment2-100x100.png 100w' sizes='(max-width: 900px) 100vw, 900px' width='900' height='900')
+                                .wrap-header
+                                  h2
+                                    a(href='/uarmor/product/glory-of-justice-gun/') Glory Of Justice Gun
+                                  span.cat-product
+                                    a(href='/uarmor/product-category/equipment/' rel='tag') Equipment
+                                
+                                .wrap-footer
+                                  span.price
+                                    del
+                                      span 
+                                        span 
+                                        | 65
+                                        sup 00
+                                    ins
+                                      span
+                                        span
+                                        | 55
+                                        sup 00
+                                  .product-button
+                                    a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/uarmor/?add-to-cart=580' data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') &Vcy; &kcy;&ocy;&rcy;&zcy;&icy;&ncy;&ucy;
+                          
+                    .owl-nav
+                      .owl-prev
+                        ion-icon(name='caret-back')
+                      .owl-next
+                        ion-icon(name='caret-forward')
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+            
+      section#section-4331909.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+        .cover-image.ds.s-cover-right.s-cover-small(style='background-image: url("/img/home/federico-bottos-Z3NceSeZqgI-unsplash-scaled.jpg");')
+          img(src='/img/home/federico-bottos-Z3NceSeZqgI-unsplash-scaled.jpg' alt='section-4331909')
+        .container
+          .row
+            .col-xs-12.col-12.col-lg-6.text-center.text-sm-left
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              h3.special-heading.text-center.text-sm-left
+                span.big
+                  mark Обирайте
+                  |  нас
+              .fw-divider-space.divider-20.divider-lg-30
+              .fw-divider-line-styled.cs.left-line
+              .fw-divider-space.divider-30.divider-lg-50.divider-xxl-70
+              .text-block
+                p
+                  | UArmor - надійний магазин військової амуніції  та спецспорядження
+                  | За короткий проміжок продуктивної роботи нами було реалізовано кілька десятків тисяч комплектів спеціального спорядження для військових та спецпризначенців.
+                  | За довгі роки ми знайшли ефективний підхід до виробництва спеціалізованої продукції для справжніх чоловіків, що дозволяє нам гідно представляти нашу продукцію в економічному конкурентному просторі.
+            
+            .col-xs-12.col-12
+              .fw-divider-space.divider-30.divider-lg-50.divider-xxl-70
+              .owl-carousel.owl-shadowitems.shortcode-service.bottom-left-nav.owl-loaded.owl-drag.owl-theme(data-loop='true' data-nav='true' data-dots='false' data-center='false' data-autoplay='false' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='15')
+                .owl-stage-outer
+                  .owl-stage(style='transform: translate3d(-1185px, 0px, 0px); transition: all 0s ease 0s; width: 2810;')
+                    each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='0')
+                          .icon-box.text-center.ls.box-shadow
+                            a(href='/uarmor/service/decoys/')
+                              .icon-styled.fs-52
+                                i.ico.ico-dart
+                            h5.text-uppercase
+                              a(href='/uarmor/service/decoys/')
+                                mark Decoys
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/decoys/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                    
+                .owl-nav
+                  .owl-prev
+                    ion-icon(name='caret-back')
+                  .owl-next
+                    ion-icon(name='caret-forward')
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+            
+      section#section-6237829.ls.s-pt-60.s-pb-10.s-pt-md-90.s-pb-md-10.s-pb-lg-50.s-pt-xl-110
+        .container
+          .row
+            .col-xs-12.col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              h3.special-heading.text-center
+                span.big
+                  mark &Mcy;&icy; 
+                  |  &pcy;&rcy;&ocy;&pcy;&ocy;&ncy;&ucy;&jukcy;&mcy;&ocy;
+              .fw-divider-space.divider-20.divider-lg-30
+              .fw-divider-line-styled.cs.center
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+            
+      section#section-da7b051.ls.s-pt-20.s-pb-60.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+        .cover-image.ds.s-overlay.s-cover-right.s-cover-small.d-none.d-lg-block(style='background-image: url("/img/home/emiliano-vittoriosi-CCA-snIIrgs-unsplash.jpg");')
+          img(src='/img/home/emiliano-vittoriosi-CCA-snIIrgs-unsplash.jpg' alt='section-da7b051')
+        .container-fluid
+          .row
+            .col-xs-12.col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 10px;')
+              .row.align-center.category-layout
+                
+                .col-lg-6.col-xl-6.order-2.order-lg-1
+                  .uws-products.carousel(data-index='0' data-loop='false' data-nav='false' data-dots='false' data-center='false' data-autoplay='false' data-speed='5000' data-responsive-xl='2' data-responsive-lg='2' data-responsive-md='2' data-responsive-sm='2' data-responsive-xs='1' data-margin='30')
+                    .columns-3
+                      ul.products.columns-3
+                        .owl-stage-outer
+                          .owl-stage(style='transform: translate3d(-1125px, 0px, 0px); transition: all 0s ease 0s; width: 4125px;')
+                            each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                              .owl-item.cloned(style='width: 345px !important; margin-right: 30px;')
+                                li.has-post-thumbnail.product.type-product.post-580.status-publish.last.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
+                                  .product-inner
+                                    .product-img
+                                      a(href='/product/1')
+                                        span.onsale Знижка
+                                        img(src='/img/home/shopequipment2.png' alt='' width='900' height='900')
+                                    .wrap-header
+                                      h2
+                                        a(href='/product/1') Полегшений бронежилет "Сармат"
+                                      span.cat-product
+                                        a(href='/product/1' rel='tag') Бронежилети
+                                    .wrap-footer
+                                      span.price
+                                        del
+                                          span
+                                            span
+                                            | 65
+                                            sup 00
+                                        ins
+                                          span
+                                            span
+                                            | 55
+                                            sup 00
+                                      .product-button
+                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='?add-to-cart=580' data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') &Vcy; &kcy;&ocy;&rcy;&zcy;&icy;&ncy;&ucy;
+                  
+                .col-lg-6.col-xl-5.order-1.order-lg-2
+                  .category
+                    .category-image
+                      img.attachment-uarmor-rectangle-horizontal2.size-uarmor-rectangle-horizontal2(src='/img/home/gallery2-1460x1120.jpg' alt='' width='1460' height='1120')
+                    .category-content
+                      h4.color-main
+                        | Захист
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 10px;')
+      .fw-divider-space.divider-md-0.divider-lg-70.divider-xxl-100
+      section#section-85764af.ls.s-pt-0.s-pb-60.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+        .cover-image.ds.s-overlay.s-cover-left.s-cover-small.d-none.d-lg-block(style='background-image: url("/img/home/title.jpg");')
+          img(src='/img/home/title.jpg' alt='section-85764af')
+        .container-fluid
+          .row
+            .col-xs-12.col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 10px;')
+              .row.align-center.category-layout
+                .col-xl-1.order-1
+                
+                .col-lg-6.col-xl-6.order-3
+                  .uws-products.carousel(data-index='0' data-loop='false' data-nav='false' data-dots='false' data-center='false' data-autoplay='false' data-speed='5000' data-responsive-xl='2' data-responsive-lg='2' data-responsive-md='2' data-responsive-sm='2' data-responsive-xs='1' data-margin='30')
+                    .columns-3(data-index='0')
+                      ul.products.columns-3
+                        .owl-stage-outer
+                          .owl-stage(style='transform: translate3d(-1500px, 0px, 0px); transition: all 0.25s ease 0s; width: 3000px;')
+                            each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                              .owl-item.cloned(style='width: 345px; margin-right: 30px;')
+                                li.has-post-thumbnail.product.type-product.post-586.status-publish.last.instock.product_cat-weapon.shipping-taxable.purchasable.product-type-simple
+                                  .product-inner
+                                    .product-img
+                                      a(href='/uarmor/product/hateful-golden-six-shooter/')
+                                        img(src='/img/home/gun_3.png' alt='' srcset='/img/home/gun_3_002.png 900w, /img/home/gun_3-150x150.png 150w, /img/home/gun_3-300x300.png 300w, /img/home/gun_3-768x768.png 768w, /img/home/gun_3-600x600.png 600w, /img/home/gun_3-100x100.png 100w' sizes='(max-width: 900px) 100vw, 900px' width='900' height='900')
+                                    .wrap-header
+                                      h2
+                                        a(href='/uarmor/product/hateful-golden-six-shooter/') Hateful Golden Six-Shooter
+                                      span.cat-product
+                                        a(href='/uarmor/product-category/weapon/' rel='tag') Weapon
+                                    
+                                    .wrap-footer
+                                      span.price
+                                        span
+                                          span
+                                          | 20
+                                          sup 00
+                                      .product-button
+                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/uarmor/?add-to-cart=586' data-quantity='1' data-product_id='586' data-product_sku='woo-polo' aria-label='Add “Hateful Golden Six-Shooter” to your cart' rel='nofollow') &Vcy; &kcy;&ocy;&rcy;&zcy;&icy;&ncy;&ucy;
+                              
+                        .owl-nav.disabled
+                          .owl-prev
+                            ion-icon(name='caret-back')
+                          .owl-next
+                            ion-icon(name='caret-forward')
+                .col-lg-6.col-xl-5.order-2
+                  .category
+                    .category-image
+                      img.attachment-uarmor-rectangle-horizontal2.size-uarmor-rectangle-horizontal2(src='/img/home/gallery1-1460x1120.jpg' alt='' width='1460' height='1120')
+                    .category-content
+                      h4.color-main
+                        | Шоломи
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 10px;')
+            
+      .fw-divider-space.divider-md-0.divider-xl-110.divider-xxl-150
+      section#section-b2fb9b8.overflow-visible.ds.c-mb-30.s-bordered-columns.s-pt-60.s-pb-25.s-pt-md-90.s-pt-lg-100.s-parallax.s-overlay(style='background-image:url(/img/home/counter-bg.jpg);')
+        .container
+          .row
+            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+              .py-0.py-lg-30
+                h4.special-heading.counter-heading.text-center
+                  span.color-main.big.counter(data-from='0' data-to='21' data-speed='1500') 21
+                h5.special-heading.text-center
+                  span
+                    | &Dcy;&iecy;&ncy;&softcy;
+            
+            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+              .py-0.py-lg-30
+                h4.special-heading.counter-heading.text-center
+                  span.color-main.big.counter(data-from='0' data-to='532' data-speed='1500') 17
+                h5.special-heading.text-center
+                  span &Gcy;&ocy;&dcy;&icy;&ncy;
+            
+            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+              .py-0.py-lg-30
+                h4.special-heading.counter-heading.text-center
+                  span.color-main.big.counter(data-from='0' data-to='17' data-speed='1500') 28
+                h5.special-heading.text-center
+                  span &KHcy;&vcy;&icy;&lcy;&icy;&ncy;
+            
+            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+              .py-0.py-lg-30
+                h4.special-heading.counter-heading.text-center
+                  span.color-main.big.counter(data-from='0' data-to='75' data-speed='1500') 45
+                h5.special-heading.text-center
+                  span &Scy;&iecy;&kcy;&ucy;&ncy;&dcy;
+            
+      section#section-c5b7672.overflow-visible.ds.s-pt-0.s-pb-60.s-pb-md-90.s-pb-lg-0.s-parallax.s-overlay(style='margin-bottom: 250px;')
+        .container
+          .row
+            .col-xs-12.col-12.text-center
+              .img-wrap
+                img(src='/img/home/weapon1.png')
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md(style='margin-top: -115px;')
+    include ../components/footer.pug
+    include ../components/footer-js.pug

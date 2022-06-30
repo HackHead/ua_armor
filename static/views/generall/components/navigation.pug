@@ -1,0 +1,39 @@
+.page_header_wrapper.ds.affix-top-wrapper(style='height: 90px;')
+  header.page_header.s-py-40.ds.affix-top
+    .container-fluid
+      .row.align-items-center
+        .col-xl-2.col-lg-3.col-md-7.col-9
+          a.logo.logo_image_and_text(href='/' rel='home')
+            img(src='/img/admin/logo-inv.png' alt='uarmor')
+        .col-xl-10.col-lg-9.col-md-5.col-1
+          .nav-wrap
+            nav.top-nav
+              ul#menu-main-menu.sf-menu.nav.sf-js-enabled.sf-arrows(style='touch-action: pan-y;')
+                li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
+                  a(href='/') Головна
+                li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
+                  a(href='/about') Про нас
+                li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
+                  a(href='/store') Магазин
+                li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
+                  a(href='/sales') Знижки
+                li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
+                  a(href='/contacts') Контакти
+            .d-none.d-xl-flex.align-items-center
+              .widget.widget_search
+                form(role='search' method='get' action='')
+                  label.screen-reader-text Знайти:
+                  input.search-field.form-control(type='search' placeholder='Пошук товарів…')
+                  button(type='submit' value='Пошук') Пошук
+                  input(type='hidden' name='post_type' value='product')
+              .dropdown.dropdown-shopping-cart
+                a#dropdown-cart.dropdown-toggle(href='#' role='button')
+                  span.badge.bg-maincolor.cart-count
+                  ion-icon(name='cart')
+                  | Корзина 
+                .dropdown-menu.dropdown-menu-right.p-lg-40.p-20.ls(aria-labelledby='dropdown-cart')
+                  .widget
+                    .widget_shopping_cart_content
+                      p Ваша корзина порожня
+    span.toggle_menu
+      span

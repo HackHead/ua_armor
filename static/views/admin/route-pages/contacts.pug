@@ -1,0 +1,145 @@
+include ../components/head.pug
+// Layout wrapper
+// Layout wrapper
+.layout-wrapper.layout-content-navbar
+  .layout-container
+    include ../components/navigation.pug
+    .layout-page
+      include ../components/navbar.pug
+      .content-wrapper
+        // Content
+        .container-xxl.flex-grow-1.container-p-y
+          h4.fw-bold.py-3.mb-4
+            span.text-muted.fw-light Контакты / 
+            |  Редактировать
+          .row
+            .col-md-12
+              .row
+                .col-md-6.col-12.mb-4
+                  .card
+                    h5.card-header Социальные сети
+                    .card-body
+                      p Здесь вы можете изменить ссылки на ваши социальные сети
+                      // Social Accounts
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/viber.png' alt='facebook' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 Viber
+                            small.text-muted Не подключен
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/whatsapp.png' alt='facebook' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 Whatsapp
+                            small.text-muted Не подключен
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/telegram.png' alt='facebook' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 Telegram
+                            small.text-muted Не подключен
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/facebook.png' alt='facebook' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 Facebook
+                            small.text-muted Не подключен
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/twitter.png' alt='twitter' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 Twitter
+                            a(href='https://twitter.com/Theme_Selection' target='_blank') @ThemeSelection
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/instagram.png' alt='instagram' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 instagram
+                            a(href='https://www.instagram.com/themeselection/' target='_blank') @ThemeSelection
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      // /Social Accounts
+                .col-md-6.col-12.mb-4
+                  .card
+                    h5.card-header Другое
+                    .card-body
+                      p Здесь вы можете изменить адрес, номера телефонов, email и тд.
+                      // Social Accounts
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/telephone.png' alt='facebook' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 Номер телефона
+                            small.text-muted 0800334150
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/email.png' alt='facebook' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 E-Mail
+                            small.text-muted uarmorinfo@gmail.com
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+                      .d-flex.mb-3
+                        .flex-shrink-0
+                          img.me-3(src='/img/icons/brands/map.png' alt='facebook' height='30')
+                        .flex-grow-1.row
+                          .col-8.col-sm-7.mb-sm-0.mb-2
+                            h6.mb-0 Физ-адрес
+                            small.text-muted Переулок катаева 2
+                          .col-4.col-sm-5.text-end
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                              i.bx.bxs-edit-alt
+                            button.btn.btn-icon.btn-outline-danger(type='button')
+                              i.bx.bx-trash-alt
+        .content-backdrop.fade
+      // Content wrapper
+    // / Layout page
+  // Overlay
+  .layout-overlay.layout-menu-toggle
+
+include ../components/footer-js.pug

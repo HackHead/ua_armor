@@ -1,0 +1,121 @@
+include ../components/head.pug
+#canvas
+  #box_wrapper
+    include ../components/navigation.pug
+    section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("http://webdesign-finder.com/armashop/wp-content/uploads/2020/03/title.jpg"); background-position: 50% 1px;')
+      .container
+        .row
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+          .col-sm-12.text-center.text-sm-left
+            h1.color-main
+              | Магазин
+            ol.breadcrumb
+              li.breadcrumb-item.first-item
+                a(href='/') Головна
+              li.breadcrumb-item.last-item.active Товари
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+    // .page_title
+    section.ls.page_content.s-py-xl-110.s-py-md-90.s-py-60.c-gutter-60
+      .container(style="max-width: 80%")
+        .row
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+          nav
+            a(href='https://webdesign-finder.com/armashop') Головна
+            | &nbsp;/ Магазин
+          header
+          
+          #content_products.col-12.col-xs-12.col-lg-7.col-xl-8.order-lg-2.column-main
+            .products-selection
+              p
+                | Показано 12 з 15 результатів
+              form(method='get')
+                .select-wrap
+                  select.orderby(name='orderby' aria-label='Shop order')
+                    option(value='menu_order' selected='selected') Сортувати по замовчуванню
+                    option(value='popularity') За популярність
+                    option(value='rating') За рейтингом
+                    option(value='date') За новизною
+                    option(value='price') За ціною: низька - висока
+                    option(value='price-desc') За ціною: висока - низька
+                input(type='hidden' name='paged' value='1')
+              span.toggle_view
+                | View
+                a.full(href='#')
+                  i.fa.fa-bars(aria-hidden='true')
+                a.grid.active(href='#')
+                  i.fa.fa-th(aria-hidden='true')
+            ul.products.columns-3
+              each val in [1, 2, 3, 4, 5, 6, 7, 8]
+                li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
+                  .product-inner
+                    .product-img
+                      a(href='/product')
+                        img(src='/img/store/shopequipment5.png'   width='900' height='900')
+                    .wrap-header
+                      h2
+                        a(href='/product') Allegiance Of The Enigma
+                      span.cat-product
+                        a(href='/product' rel='tag') Equipment
+                    // close product-wrap
+                    .wrap-footer
+                      span.price
+                        span
+                          span
+                          | 90
+                          sup 00
+                      .product-button
+                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='#' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
+                
+            nav.woocommerce-pagination
+              ul.page-numbers
+                li
+                  span.page-numbers.current(aria-current='page') 1
+                li
+                  a.page-numbers(href='/') 2
+                li
+                  a.next.page-numbers(href='/') &rarr;
+
+          // eof #content_products
+          // main aside sidebar
+          aside.col-12.col-xs-12.col-lg-5.col-xl-4.order-lg-1.column-sidebar
+            .widget-theme-wrapper.widget_no_background
+              #search-3.widget.widget_search
+                form.search-form(role='search' method='get' action='/')
+                  .form-group
+                    label
+                      span.screen-reader-text Search for:
+                      input.search-field.form-control(type='search' placeholder='Пошук' name='s')
+                  button.search-submit(type='submit')
+                    span.screen-reader-text Пошук
+            .widget-theme-wrapper.widget_no_background
+              #woocommerce_product_categories-2.widget
+                h3.widget-title Категорії
+                ul.product-categories
+                  li.cat-item.cat-item-27
+                    a(href='/product-category/equipment/') Шоломи
+                  li.cat-item.cat-item-15
+                    a(href='/product-category/military/') Тактичні рукавиці
+                  li.cat-item.cat-item-28
+                    a(href='/product-category/optics/') Бронежилети
+                  li.cat-item.cat-item-30
+                    a(href='/product-category/weapon/') Розгрузка
+            .widget-theme-wrapper.widget_no_background
+              #woocommerce_recently_viewed_products-2.widget.widget_recently_viewed_products
+                h3.widget-title Товари які ви переглядали
+                ul.product_list_widget
+                  each val in [1, 2, 3]
+                    li
+                      a(href='/store')
+                        img(src='/img/store/shopoptics4.png'  width='900' height='900')
+                        span.product-title Cruiser, Pistol Of The World
+                      span
+                        span
+                        | 18
+                        sup 00
+          .col-12
+            .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+    include ../components/footer.pug
+    include ../components/footer-js.pug
