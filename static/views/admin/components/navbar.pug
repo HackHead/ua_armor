@@ -1,0 +1,51 @@
+
+nav#layout-navbar.layout-navbar.container-xxl.navbar.navbar-expand-xl.navbar-detached.align-items-center.bg-navbar-theme
+    .layout-menu-toggle.navbar-nav.align-items-xl-center.me-3.me-xl-0.d-xl-none
+        a.nav-item.nav-link.px-0.me-xl-4(href='javascript:void(0)')
+            i.bx.bx-menu.bx-sm
+    #navbar-collapse.navbar-nav-right.d-flex.align-items-center
+        // Search
+        .navbar-nav.align-items-center
+            .nav-item.d-flex.align-items-center
+                i.bx.bx-search.fs-4.lh-0
+                input.form-control.border-0.shadow-none(type='text' placeholder='Поиск...' aria-label='Поиск...')
+        // /Search
+        ul.navbar-nav.flex-row.align-items-center.ms-auto
+            // User
+            li.nav-item.navbar-dropdown.dropdown-user.dropdown
+                a.nav-link.dropdown-toggle.hide-arrow(href='javascript:void(0);' data-bs-toggle='dropdown')
+                    .avatar.avatar-online
+                        img.w-px-40.h-auto.rounded-circle(src='/img/avatars/1.png' alt='')
+                ul.dropdown-menu.dropdown-menu-end
+                    li
+                        a.dropdown-item(href='#')
+                            .d-flex
+                                .flex-shrink-0.me-3
+                                    .avatar.avatar-online
+                                        img.w-px-40.h-auto.rounded-circle(src='/img/avatars/1.png' alt='')
+                                .flex-grow-1
+                                    span.fw-semibold.d-block Артур М.
+                                    small.text-muted Администратор
+                    li
+                        .dropdown-divider
+                    li
+                        a.dropdown-item(href='#')
+                            i.bx.bx-user.me-2
+                            span.align-middle Мой профиль
+                    li
+                        a.dropdown-item(href='#')
+                            i.bx.bx-cog.me-2
+                            span.align-middle Настройки
+                    li
+                        a.dropdown-item(href='#')
+                            span.d-flex.align-items-center.align-middle
+                                i.flex-shrink-0.bx.bx-credit-card.me-2
+                                span.flex-grow-1.align-middle Billing
+                                span.flex-shrink-0.badge.badge-center.rounded-pill.bg-danger.w-px-20.h-px-20 4
+                    li
+                        .dropdown-divider
+                    li
+                        a.dropdown-item(href='auth-login-basic.html')
+                            i.bx.bx-power-off.me-2
+                            span.align-middle Log Out
+            
