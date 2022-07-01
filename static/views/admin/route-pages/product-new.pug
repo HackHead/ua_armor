@@ -11,182 +11,86 @@ include ../components/head.pug
             span.text-muted.fw-light Товары /
             |  Добавить товар
           .row
-            .col-md-6
-              .card.mb-4
-                h5.card-header Заполните все поля
-                .card-body
-                  .form-floating.mb-3
-                    input#floatingInput.form-control(type='text' placeholder='Перчатки тактические вентилируемые Mechanix Specialty Vent Coyote' aria-describedby='floatingInputHelp')
-                    label(for='floatingInput') Название
-                    .form-text
-                      | Должно быть не короче 8 и не длиннее 128 символов*
-                  .input-group.mb-3
-                    label.form-label(for='exampleFormControlSelect1' style="width: 100%") Цена
-                    .input-group-text ₴
-                    input.form-control-lg(type="text" class="form-control" placeholder="Стоимость" aria-label="Стоимость")
-                    span.input-group-text .00
-                  .mb-3
-                    label.form-label(for='exampleFormControlSelect1') Процент скидки
-                    input.form-control(type='number' placeholder="0" aria-describedby='floatingInputHelp')
-                    .form-text
-                      | По умолчанию скидка 0%*
-                  .mb-3
-                    label.form-label(for='exampleFormControlSelect1') Производитель
-                    select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example')
-                      option(selected='') Выберите производителя
-                      option(value='1') Mechanix
-                      option(value='2') Uarmor 
-                      option(value='3') Blackops
-                  .mb-3
-                    label.form-label(for='exampleFormControlSelect1') Категория товара
-                    select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example')
-                      option(selected='') Выберите категорию
-                      option(value='1') Тактическое снаряжение
-                      option(value='2') Uarmor 
-                      option(value='3') Blackops
-                  .mb-3
-                    label.form-label(for='exampleFormControlTextarea1') Описание
-                    textarea#exampleFormControlTextarea1.form-control(rows='3')
-                    .form-text
-                      | Должно быть не короче 64 и не длиннее 4096 символов*
-              .card.mb-4
-                h5.card-header Дополнительно
-                .card-body
-                  .form-check.form-switch.mb-2
-                    input#flexSwitchCheckDefault.form-check-input(type='checkbox')
-                    label.form-check-label(for='flexSwitchCheckDefault') Отображать товар на сайте
-                  .form-check.form-switch.mb-2
-                    input#flexSwitchCheckChecked.form-check-input(type='checkbox' checked='')
-                    label.form-check-label(for='flexSwitchCheckChecked') Товар заканчивается
-                  .form-check.form-switch.mb-2
-                    input#flexSwitchCheckDisabled.form-check-input(type='checkbox')
-                    label.form-check-label(for='flexSwitchCheckDisabled') Новинка
-                  .form-check.form-switch
-                    input#flexSwitchCheckCheckedDisabled.form-check-input(type='checkbox' checked='' disabled='')
-                    label.form-check-label(for='flexSwitchCheckCheckedDisabled') Выбор покупателей
-            // Input Sizing
-             
-            // Default Checkboxes and radios & Default checkboxes and radios
-            .col-xl-6
-              .card.mb-4
-                h5.card-header Изображения
-                .card-body
-                    .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
-                        label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='dropzone-file' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
-                            div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
-                                svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
-                                    path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
-                                p.mb-2.text-sm(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
-                                    span(style="font-weight: 600") Нажмите чтобы загрузить
-                                p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
-                            input#dropzone-file.hidden(type='file' style="display: none;")
-                    #floatingInputHelp.form-text
-                      | Первое изображение будет выбрано в качестве превью*
+            form(method="POST" action="/product/create" enctype="multipart/form-data")
+              .col-xl-6
+                .card.mb-4
+                  h5.card-header Заполните все поля
+                  .card-body
+                    .form-floating.mb-3
+                      input#floatingInput.form-control(name="name" type='text' placeholder='Перчатки тактические вентилируемые Mechanix Specialty Vent Coyote' aria-describedby='floatingInputHelp')
+                      label(for='floatingInput') Название
+                      .form-text
+                        | Должно быть не короче 8 и не длиннее 128 символов*
+                    .input-group.mb-3
+                      label.form-label(for='exampleFormControlSelect1' style="width: 100%") Цена
+                      .input-group-text ₴
+                      input.form-control-lg(type="text" name="price" class="form-control" placeholder="Стоимость" aria-label="Стоимость")
+                      span.input-group-text .00
+                    .mb-3
+                      label.form-label(for='exampleFormControlSelect1') Процент скидки
+                      input.form-control(type='number' name="sale" value="0" placeholder="0" aria-describedby='floatingInputHelp')
+                      .form-text
+                        | По умолчанию скидка 0%*
+                    .mb-3
+                      label.form-label(for='exampleFormControlSelect1') Категория товара
+                      select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' name="category")
+                        option(selected='') Выберите категорию
+                        option(value='1') Одежда/Головые уборы/Перчатки
+                        option(value='2') Обувь/Носки 
+                        option(value='3') Тактическое снаряжение
+                        option(value='4') Личная гигиена/Тактическая медицына  
+                        option(value='5') Аксессуары
+                        
+                    .mb-3
+                      label.form-label(for='exampleFormControlTextarea1') Описание
+                      textarea#exampleFormControlTextarea1.form-control(rows='3' name="description")
+                      .form-text
+                        | Должно быть не короче 64 и не длиннее 4096 символов*
+                .card.mb-4
+                  h5.card-header Дополнительно
+                  .card-body
+                    .form-check.form-switch.mb-2
+                      input#flexSwitchShow.form-check-input(type='checkbox' name="hidden")
+                      label.form-check-label(for='flexSwitchShow') Не отображать товар на сайте
+                    .form-check.form-switch.mb-2
+                      input#flexSwitchLacking.form-check-input(type='checkbox' name="running_out")
+                      label.form-check-label(for='flexSwitchLacking') Товар заканчивается
+                    .form-check.form-switch.mb-2
+                      input#flexSwitchNew.form-check-input(type='checkbox' name="new")
+                      label.form-check-label(for='flexSwitchNew') Новинка
+                    .form-check.form-switch
+                      input#flexSwitchUsersChoice.form-check-input(type='checkbox' checked='' name="customers_choice")
+                      label.form-check-label(for='flexSwitchUsersChoice') Выбор покупателей
+                    .form-check.form-switch
+                      input#flexSwitchHomeCarousel.form-check-input(type='checkbox' checked='' name="show_in_index_slider")
+                      label.form-check-label(for='flexSwitchHomeCarousel') Показать в слайдере на главной странице
+                    .form-check.form-switch
+                      input#flexSwitchHomeCatalog.form-check-input(type='checkbox' checked='' name="show_in_index_catalog")
+                      label.form-check-label(for='flexSwitchHomeCatalog') Показать в каталоге на главной странице
 
-            //-   .card.mb-4
-            //-     h5.card-header Switches
-            //-     .card-body
-            //-       .form-check.form-switch.mb-2
-            //-         input#flexSwitchCheckDefault.form-check-input(type='checkbox')
-            //-         label.form-check-label(for='flexSwitchCheckDefault') Default switch checkbox input
-            //-       .form-check.form-switch.mb-2
-            //-         input#flexSwitchCheckChecked.form-check-input(type='checkbox' checked='')
-            //-         label.form-check-label(for='flexSwitchCheckChecked') Checked switch checkbox input
-            //-       .form-check.form-switch.mb-2
-            //-         input#flexSwitchCheckDisabled.form-check-input(type='checkbox' disabled='')
-            //-         label.form-check-label(for='flexSwitchCheckDisabled') Disabled switch checkbox input
-            //-       .form-check.form-switch
-            //-         input#flexSwitchCheckCheckedDisabled.form-check-input(type='checkbox' checked='' disabled='')
-            //-         label.form-check-label(for='flexSwitchCheckCheckedDisabled') Disabled checked switch checkbox input
-            //-   .card.mb-4.mb-xl-0
-            //-     h5.card-header Range
-            //-     .card-body
-            //-       .mb-3
-            //-         label.form-label(for='formRange1') Example range
-            //-         input#formRange1.form-range(type='range')
-            //-       .mb-3
-            //-         label.form-label(for='disabledRange') Disabled range
-            //-         input#disabledRange.form-range(type='range' disabled='')
-            //-       .mb-3
-            //-         label.form-label(for='formRange2') Min and max
-            //-         input#formRange2.form-range(type='range' min='0' max='5')
-            //-       div
-            //-         label.form-label(for='formRange3') Steps
-            //-         input#formRange3.form-range(type='range' min='0' max='5' step='0.5')
-            //- .col-xl-6
-              // HTML5 Inputs
-              .card.mb-4
-                h5.card-header HTML5 Inputs
-                .card-body
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-text-input') Text
-                    .col-md-10
-                      input#html5-text-input.form-control(type='text' value='Sneat')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-search-input') Search
-                    .col-md-10
-                      input#html5-search-input.form-control(type='search' value='Search ...')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-email-input') Email
-                    .col-md-10
-                      input#html5-email-input.form-control(type='email' value='john@example.com')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-url-input') URL
-                    .col-md-10
-                      input#html5-url-input.form-control(type='url' value='https://themeselection.com')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-tel-input') Phone
-                    .col-md-10
-                      input#html5-tel-input.form-control(type='tel' value='90-(164)-188-556')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-password-input') Password
-                    .col-md-10
-                      input#html5-password-input.form-control(type='password' value='password')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-number-input') Number
-                    .col-md-10
-                      input#html5-number-input.form-control(type='number' value='18')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-datetime-local-input') Datetime
-                    .col-md-10
-                      input#html5-datetime-local-input.form-control(type='datetime-local' value='2021-06-18T12:30:00')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-date-input') Date
-                    .col-md-10
-                      input#html5-date-input.form-control(type='date' value='2021-06-18')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-month-input') Month
-                    .col-md-10
-                      input#html5-month-input.form-control(type='month' value='2021-06')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-week-input') Week
-                    .col-md-10
-                      input#html5-week-input.form-control(type='week' value='2021-W25')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-time-input') Time
-                    .col-md-10
-                      input#html5-time-input.form-control(type='time' value='12:30:00')
-                  .mb-3.row
-                    label.col-md-2.col-form-label(for='html5-color-input') Color
-                    .col-md-10
-                      input#html5-color-input.form-control(type='color' value='#666EE8')
-                  .row
-                    label.col-md-2.col-form-label(for='html5-range') Range
-                    .col-md-10
-                      input#html5-range.form-range.mt-3(type='range')
-              // File input
-              .card
-                h5.card-header File input
-                .card-body
-                  .mb-3
-                    label.form-label(for='formFile') Default file input example
-                    input#formFile.form-control(type='file')
-                  .mb-3
-                    label.form-label(for='formFileMultiple') Multiple files input example
-                    input#formFileMultiple.form-control(type='file' multiple='')
-                  div
-                    label.form-label(for='formFileDisabled') Disabled file input example
-                    input#formFileDisabled.form-control(type='file' disabled='')
-        // / Content
+              // Input Sizing
+              
+              // Default Checkboxes and radios & Default checkboxes and radios
+              .col-xl-6
+                .card.mb-4
+                  h5.card-header Изображения
+                  .card-body
+                      .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                          label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='dropzone-file' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
+                              div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
+                                  svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
+                                      path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
+                                  p.mb-2.text-sm(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
+                                      span(style="font-weight: 600") Нажмите чтобы загрузить
+                                  p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
+                              input#dropzone-file.hidden(type='file' name="images" style="display: none;" multiple)
+                      #floatingInputHelp.form-text
+                        | Первое изображение будет выбрано в качестве превью*
+              .col-xl-12
+                .card.mb-4
+                  h5.card-header Отправить
+                  .card-body
+                      .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                          button.btn.btn-danger.mr-2(type="submit") Отправить
         .content-backdrop.fade
     include ../components/footer-js.pug

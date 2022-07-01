@@ -67,29 +67,20 @@ include ../components/head.pug
                                     .modal-dialog.modal-dialog-centered(role='document')
                                         .modal-content
                                             .modal-header
-                                                h5#modalAboutTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                                h5#modalAboutTitle.modal-title Редактирование страницы "О нас"
+                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                             .modal-body
-                                                .row
-                                                    .col.mb-3
-                                                        label.form-label(for='nameWithTitle') Name
-                                                        input#nameWithTitle.form-control(type='text' placeholder='Enter Name')
-                                                .row.g-2
-                                                    .col.mb-0
-                                                        label.form-label(for='emailWithTitle') Email
-                                                        input#emailWithTitle.form-control(type='text' placeholder='xxxx@xxx.xx')
-                                                    .col.mb-0
-                                                        label.form-label(for='dobWithTitle') DOB
-                                                        input#dobWithTitle.form-control(type='text' placeholder='DD / MM / YY')
+                                                textarea.form-control(rows='3' name="description" value="")
+                                                    |    UArmor - надійний магазин військової амуніції  та спецспорядження. За короткий проміжок продуктивної роботи нами було реалізовано кілька десятків тисяч комплектів спеціального спорядження для військових та спецпризначенців. За довгі роки ми знайшли ефективний підхід до виробницт...
                                             .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Close
-                                                button.btn.btn-primary(type='button') Save changes
+                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                                button.btn.btn-primary(type='button') Сохранить
                                 #modalScrollable.modal.fade(tabindex='-1' aria-hidden='true')
                                     .modal-dialog.modal-dialog-scrollable(role='document')
                                         .modal-content
                                             .modal-header
                                                 h5#modalScrollableTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                             .modal-body
                                                 p
                                                 | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
@@ -152,7 +143,7 @@ include ../components/head.pug
                                                 | scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
                                                 | auctor fringilla.
                                             .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Close
+                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
 
 
 
@@ -171,7 +162,7 @@ include ../components/head.pug
                                         .modal-content
                                             .modal-header
                                                 h5#modalPaymentTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                             .modal-body
                                                 .row
                                                     .col.mb-3
@@ -185,8 +176,8 @@ include ../components/head.pug
                                                         label.form-label(for='dobWithTitle') DOB
                                                         input#dobWithTitle.form-control(type='text' placeholder='DD / MM / YY')
                                             .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Close
-                                                button.btn.btn-primary(type='button') Save changes
+                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                                button.btn.btn-primary(type='button') Сохранить
                 .col-lg-6
                     .card.mb-4
                         h5.card-header Обмен и возврат
@@ -201,7 +192,7 @@ include ../components/head.pug
                                         .modal-content
                                             .modal-header
                                                 h5#modalReturnTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                             .modal-body
                                                 .row
                                                     .col.mb-3
@@ -215,8 +206,8 @@ include ../components/head.pug
                                                         label.form-label(for='dobWithTitle') DOB
                                                         input#dobWithTitle.form-control(type='text' placeholder='DD / MM / YY')
                                             .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Close
-                                                button.btn.btn-primary(type='button') Save changes
+                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                                button.btn.btn-primary(type='button') Сохранить
                 .col-lg-6
                     .card.mb-4
                         h5.card-header Политика безопасности
@@ -231,7 +222,7 @@ include ../components/head.pug
                                         .modal-content
                                             .modal-header
                                                 h5#modalAboutTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                             .modal-body
                                                 .row
                                                     .col.mb-3
@@ -245,6 +236,6 @@ include ../components/head.pug
                                                         label.form-label(for='dobWithTitle') DOB
                                                         input#dobWithTitle.form-control(type='text' placeholder='DD / MM / YY')
                                             .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Close
-                                                button.btn.btn-primary(type='button') Save changes
+                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                                button.btn.btn-primary(type='button') Сохранить
 include ../components/footer-js.pug

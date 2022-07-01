@@ -7,7 +7,5 @@ router.get('/', getIndexPageView)
 router.get('/about', getAboutPageView)
 router.get('/contacts', getContactPageView)
 router.get('/store', getStorePageView)
-router.get('/product', getProductPageView)
-
-
+router.get('/product/:id', getProductPageView)
 export default router;

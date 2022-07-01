@@ -13,8 +13,8 @@
         var loop = data.loop ? data.loop : true,
             margin = (data.margin || data.margin === 0) ? data.margin : 30,
             nav = data.nav ? data.nav : false,
-            navPrev = data.navPrev ? data.navPrev : '<i class="fa fa-long-arrow-left" aria-hidden="true"></i>',
-            navNext = data.navNext ? data.navNext : '<i class="fa fa-long-arrow-right" aria-hidden="true"></i>',
+            navPrev = data.navPrev ? data.navPrev : '<ion-icon name="caret-back-outline"></ion-icon>',
+            navNext = data.navNext ? data.navNext : '<ion-icon name="caret-forward-outline"></ion-icon>',
             dots = data.dots ? data.dots : false,
             themeClass = data.themeclass ? data.themeclass : 'owl-theme',
             center = data.center ? data.center : false,
@@ -30,7 +30,7 @@
             syncedClass = (data.syncedClass) ? data.syncedClass : false,
             filters = data.filters ? data.filters : false;
 
-        
+        console.log(nav, $carousel)
 
         $carousel.owlCarousel({
             loop: loop,
@@ -41,11 +41,11 @@
             dots: dots,
             themeClass: themeClass,
             center: center,
-            // navText: [navPrev, navNext],
+            navText: [navPrev, navNext],
             mouseDrag: draggable,
             touchDrag: draggable,
             items: items,
-       autoWidth: false,
+            autoWidth: false,
             responsive: {
                 0: {
                     items: responsiveXs
@@ -97,8 +97,8 @@ if ($().owlCarousel) {
         var loop = data.loop ? data.loop : true,
             margin = (data.margin || data.margin === 0) ? data.margin : 30,
             nav = data.nav ? data.nav : false,
-            navPrev = data.navPrev ? data.navPrev : '<i class="fa fa-long-arrow-left" aria-hidden="true"></i>',
-            navNext = data.navNext ? data.navNext : '<i class="fa fa-long-arrow-right" aria-hidden="true"></i>',
+            navPrev = data.navPrev ? data.navPrev : '<ion-icon name="caret-back-outline"></ion-icon>',
+            navNext = data.navNext ? data.navNext : '<ion-icon name="caret-forward-outline"></ion-icon>',
             dots = data.dots ? data.dots : false,
             themeClass = data.themeclass ? data.themeclass : 'owl-theme',
             center = data.center ? data.center : false,
@@ -133,6 +133,7 @@ if ($().owlCarousel) {
             mouseDrag: draggable,
             touchDrag: draggable,
             items: items,
+            autoWidth: false,
             responsive: {
                 0: {
                     items: responsiveXs

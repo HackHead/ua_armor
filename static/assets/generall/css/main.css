@@ -14346,19 +14346,19 @@ p.special-heading .big {
     opacity: 0.2;
   }
   .uws-products.carousel .products.owl-center .owl-item.active:not(.center) + .owl-item.active:not(.center) {
-    opacity: 0.6;
+    opacity: 1;
   }
   .uws-products.carousel .products.owl-center .owl-item.active.center {
     opacity: 1;
   }
   .uws-products.carousel .products.owl-center .owl-item.active.center + .owl-item.active {
-    opacity: 0.6;
+    opacity: 1;
   }
   .uws-products.carousel .products.owl-center .owl-item.active.center + .owl-item.active + .owl-item.active {
-    opacity: 0.2;
+    opacity: 1;
   }
   .uws-products.carousel .products.owl-center .owl-item.active.center + .owl-item.active + .owl-item.active + .owl-item {
-    opacity: 0.2;
+    opacity: 1;
   }
 }
 .uws-products.carousel .products .product {

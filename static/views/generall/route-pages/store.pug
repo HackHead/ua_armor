@@ -27,10 +27,10 @@ include ../components/head.pug
             | &nbsp;/ Магазин
           header
           
-          #content_products.col-12.col-xs-12.col-lg-7.col-xl-8.order-lg-2.column-main
+          #content_products.col-12.col-xs-12.col-lg-9.col-xl-9.order-lg-2.column-main
             .products-selection
               p
-                | Показано 12 з 15 результатів
+                | Показано результатів: #{data.products.length}
               form(method='get')
                 .select-wrap
                   select.orderby(name='orderby' aria-label='Shop order')
@@ -48,17 +48,17 @@ include ../components/head.pug
                 a.grid.active(href='#')
                   i.fa.fa-th(aria-hidden='true')
             ul.products.columns-3
-              each val in [1, 2, 3, 4, 5, 6, 7, 8]
+              each product in data.products
                 li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
                   .product-inner
                     .product-img
-                      a(href='/product')
-                        img(src='/img/store/shopequipment5.png'   width='900' height='900')
+                      a(href='/product/' + product._id)
+                        img(src='/' + product.images[0]   width='900' height='900')
                     .wrap-header
                       h2
-                        a(href='/product') Allegiance Of The Enigma
+                        a(href='/product/' + product._id ) #{product.name.slice(0, 15)}...
                       span.cat-product
-                        a(href='/product' rel='tag') Equipment
+                        a(href='/product/' + product._id  rel='tag') Equipment
                     // close product-wrap
                     .wrap-footer
                       span.price
@@ -67,7 +67,7 @@ include ../components/head.pug
                           | 90
                           sup 00
                       .product-button
-                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='#' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
+                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='#' data-quantity='1' data-product_id=product._id rel='nofollow') В корзину
                 
             nav.woocommerce-pagination
               ul.page-numbers
@@ -78,9 +78,7 @@ include ../components/head.pug
                 li
                   a.next.page-numbers(href='/') &rarr;
 
-          // eof #content_products
-          // main aside sidebar
-          aside.col-12.col-xs-12.col-lg-5.col-xl-4.order-lg-1.column-sidebar
+          aside.col-12.col-xs-12.col-lg-3.col-xl-3.order-lg-1.column-sidebar
             .widget-theme-wrapper.widget_no_background
               #search-3.widget.widget_search
                 form.search-form(role='search' method='get' action='/')

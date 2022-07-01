@@ -10,12 +10,12 @@ include ../components/head.pug
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
           .col-sm-12.text-center.text-sm-left
             h1.color-main
-              | Перчатки тактические вентилируемые Mechanix Specialty Vent Coyote
+              | #{data.product.name}
             ol.breadcrumb
               li.breadcrumb-item.first-item
-                a(href='/armashop/') Головна
+                a(href='/') Головна
               li.breadcrumb-item.0-item
-                a(href='/armashop/product-category/equipment/') Тактичне спорядження
+                a(href='/') Тактичне спорядження
               li.breadcrumb-item.last-item.active Рукавиці тактичні
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
@@ -30,9 +30,9 @@ include ../components/head.pug
             #product-581.has-post-thumbnail.product.type-product.post-581.status-publish.first.instock.product_cat-equipment.sale.featured.shipping-taxable.purchasable.product-type-simple
               .woocommerce-product-gallery.woocommerce-product-gallery--with-images.woocommerce-product-gallery--columns-4.images(data-columns='4' style='opacity: 1; transition: opacity 0.25s ease-in-out 0s;')
                 figure.woocommerce-product-gallery__wrapper
-                  .woocommerce-product-gallery__image(data-thumb='/img/store/shopequipment1-100x100.png' data-thumb-alt='')
+                  div(data-thumb='/img/store/shopequipment1-100x100.png' data-thumb-alt='')
                     a(href='/armashop/wp-content/uploads/2020/03/shopequipment1.png')
-                      img.wp-post-image(src='/img/store/shopequipment1-600x600.png' alt='' title='shopequipment1' data-caption='' width='600' height='600')
+                      img.wp-post-image(src='/' + data.product.images[0] alt='' title='shopequipment1' data-caption='' width='600' height='600')
               .summary.entry-summary
                 .product_meta
                   span.sku_wrapper
@@ -53,7 +53,8 @@ include ../components/head.pug
                       | 16
                       sup 00
                 .woocommerce-product-details__short-description
-                  p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus vitae hic cumque modi, impedit ipsam?.
+                  p(style="max-width: 100%; display: inline-block; space-wrap: wrap;")
+                    | #{data.product.description}
                 form.cart(action='/armashop/product/champion-of-regret-gun/' method='post' enctype='multipart/form-data')
                   .add-to-cart
                     .quantity
@@ -77,12 +78,7 @@ include ../components/head.pug
                       | Огляди (0)
                 #tab-description.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--description.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-description' style='display: block;')
                   h2 Опис
-                  p
-                    | Pellentesque habitant morbi tristique senectus et netus et malesuada
-                    | fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
-                    | ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
-                    | egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
-                    | leo.
+                  p #{data.product.description}
                 #tab-additional_information.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--additional_information.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-additional_information' style='display: none;')
                   h2 Додаткова інформація
                   table.woocommerce-product-attributes.shop_attributes
