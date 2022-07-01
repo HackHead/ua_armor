@@ -60,7 +60,7 @@ include ../components/head.pug
               .px-xl-80.px-lg-60.px-sm-30.ls
                 .fw-divider-space.divider-60.divider-md-90.divider-lg-130.divider-xl-150
                 .form-wrapper
-                  form.fw_form_fw_form(data-fw-form-id='fw_form' method='post' action='/' data-fw-ext-forms-type='contact-forms')
+                  form.fw_form_fw_form( method='post' action='/admin/mail/users/new')
                     input(type='hidden' value='fw_form')
                     .wrap-forms
                       .row.c-gutter-20.c-mb-30
@@ -75,25 +75,25 @@ include ../components/head.pug
                             label(for='id-1' style='display: none;')
                               | Ім'я
                               sup *
-                            input#id-1.form-control(type='text' name='text_698d065' placeholder="Ім'я" required='required')
+                            input#id-1.form-control(type='text' name='name' placeholder="Ім'я" required='required')
                         .col-xs-12.col-12.col-lg-6.form-builder-item
                           .form-group.has-placeholder
                             label(for='id-2')
                               | Email адреса
                               sup *
-                            input#id-2.form-control(type='text' name='email_b0616c0' placeholder='Email адреса' required='required')
+                            input#id-2.form-control(type='text' name='email' placeholder='Email адреса' required='required')
                       .row.c-gutter-20.c-mb-30
                         .mb-0.col-xs-12.col-12.form-builder-item
                           .form-group.has-placeholder
                             label(for='id-3')
                               | Повідомлення
                               sup *
-                            textarea#id-3.form-control(rows='3' name='textarea_1e90beb' placeholder='Повідомлення' required='required')
+                            textarea#id-3.form-control(rows='3' name='message' placeholder='Повідомлення' required='required')
                       .row.c-gutter-20.c-mb-30
                     .wrap-forms
                       .row.c-gutter-20.c-mb-30
                         .col-12.col-sm-12.mt-lg-60.mt-30.mb-0
-                          input.btn.btn-outline-maincolor(type='submit' value='Надіслати')
+                          button.btn.btn-outline-maincolor(type='submit') Надіслати
                 .fw-divider-space.divider-60.divider-md-90.divider-lg-130.divider-xl-150
       .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: -100px;')
       section#section-c25f2b4.ls.s-pt-0.s-pb-0.container-px-xl-0(style="margin-top: 200px")

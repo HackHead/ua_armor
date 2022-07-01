@@ -60,7 +60,8 @@ const ProductSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    
 })
 
 const Product = mongoose.model('Product', ProductSchema)

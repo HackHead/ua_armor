@@ -7,51 +7,38 @@ include ../components/head.pug
       .content-wrapper
         // Content
         .container-xxl.flex-grow-1.container-p-y
-          // Examples
-          h6.pb-1.mb-4.text-muted Список товаров
-          .row.mb-5
-            each product in data.products
-              .col-md-6.col-lg-4.mb-3
-                .card.text-center
-                  div(style='padding-top: 3em')
-                    img(src= '/' + product.images[0] alt='' style='max-width: 100%; vertical-align: middle; display: inline-block; max-height: 445px; min-height: 445px' )
-                  .card-header #{product.price} &gcy;&rcy;&ncy;
-                  .card-body
-                    h5.card-title(style="white-space: nowrap; max-width: 95%; overflow: hidden; cursor: help; position: relative;" title=product.name) #{product.name.slice(0, 30)}...
-                    p.card-text &Kcy;&ocy;&dcy; &tcy;&ocy;&vcy;&acy;&rcy;&acy;: 8187
-                    .buttons.justify-content-center.align-items-center(style="width: 100%; display: flex;")
-                      form(method="GET" action='/admin/product/' + product._id + '/delete')
-                        button.btn.btn-danger.mr-2(type="submit") Удалить
-                        a.btn.btn-primary.ml-2(href='/admin/product/' + product._id + '/edit') Редактировать
-                  .card-footer.text-muted 2 days ago
-            
-          .row.mb-5 
-            .demo-inline-spacing
-              nav(aria-label='Page navigation')
-                ul.pagination.justify-content-center
-                  li.page-item.prev
-                    a.page-link(href='javascript:void(0);')
-                      i.tf-icon.bx.bx-chevrons-left
-                  li.page-item.active
-                    a.page-link(href='javascript:void(0);') 1
-                  //- li.page-item
-                  //-   a.page-link(href='javascript:void(0);') 2
-                  //- li.page-item.active
-                  //-   a.page-link(href='javascript:void(0);') 3
-                  //- li.page-item
-                  //-   a.page-link(href='javascript:void(0);') 4
-                  //- li.page-item
-                  //-   a.page-link(href='javascript:void(0);') 5
-                  li.page-item.next
-                    a.page-link(href='javascript:void(0);')
-                      i.tf-icon.bx.bx-chevrons-right
-
-        // / Content
-        // Footer
-        // / Footer
+          if data.products.length
+            h6.pb-1.mb-4.text-muted Список товаров
+            .row.mb-5
+              each product in data.products
+                .col-md-6.col-lg-4.mb-3
+                  .card.text-center
+                    div(style='padding-top: 3em')
+                      img(src= '/' + product.images[0] alt='' style='max-width: 100%; vertical-align: middle; display: inline-block; max-height: 445px; min-height: 445px' )
+                    .card-header #{product.price} &gcy;&rcy;&ncy;
+                    .card-body
+                      h5.card-title(style="white-space: nowrap; max-width: 95%; overflow: hidden; cursor: help; position: relative;" title=product.name) #{product.name.slice(0, 30)}...
+                      p.card-text &Kcy;&ocy;&dcy; &tcy;&ocy;&vcy;&acy;&rcy;&acy;: 8187
+                      .buttons.justify-content-center.align-items-center(style="width: 100%; display: flex;")
+                        form(method="GET" action='/admin/product/' + product._id + '/delete')
+                          button.btn.btn-danger.mr-2(type="submit") Удалить
+                          a.btn.btn-primary.ml-2(href='/admin/product/' + product._id + '/edit') Редактировать
+                    .card-footer.text-muted 2 days ago
+              
+            .row.mb-5 
+              .demo-inline-spacing
+                nav(aria-label='Page navigation')
+                  ul.pagination.justify-content-center
+                    li.page-item.prev
+                      a.page-link(href='javascript:void(0);')
+                        i.tf-icon.bx.bx-chevrons-left
+                    li.page-item.active
+                      a.page-link(href='javascript:void(0);') 1
+                    li.page-item.next
+                      a.page-link(href='javascript:void(0);')
+                        i.tf-icon.bx.bx-chevrons-right
+          else 
+            h2(style="margin: 250px auto; text-align: center") У вас пока нету товара
         .content-backdrop.fade
-      // Content wrapper
-    // / Layout page
-  // Overlay
   .layout-overlay.layout-menu-toggle
 include ../components/footer-js.pug

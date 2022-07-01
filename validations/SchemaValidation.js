@@ -34,6 +34,16 @@ export const productValidation = (data) => {
          show_in_index_catalog: Joi.string(),
          images: Joi.array(),
          date: Joi.date(),
+    })
+
+    return shema.validate(data)
+}
+
+export const mailValidation = (data) => {
+    const shema = Joi.object({
+        name: Joi.string().min(6).max(128).required(),
+        message: Joi.string().min(8).max(4096).required(),
+        email: Joi.string().min(6).max(320).required().email()
          
     })
 

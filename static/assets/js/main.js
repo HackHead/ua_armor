@@ -5,7 +5,13 @@ let menu, animate;
 (function () {
   $('input[type=file]').change(function () {
     const fileCount = this.files.length;
+    // 
+    $(this).parent().parent().parent().find('.output').html('');
+        for (var i = 0; i < $(this)[0].files.length; i++) {
+          $(this).parent().parent().parent().find('.output').append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="100px" height="100px"/>');
+        }
     $('.when-files-loaded').text(fileCount + ' Зображень обрано');
+    console.log(this.files)
 })
   // Initialize menu
   //-----------------
