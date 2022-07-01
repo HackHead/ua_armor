@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createCategory, getAdminDashboardView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView } from "../controllers/AdminControllers.js";
+import { createCategory, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView } from "../controllers/AdminControllers.js";
 import multer from "multer";
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
@@ -39,6 +39,7 @@ router.get('/admin/products/comments', (req, res) => {
     res.render('admin/route-pages/comments', {data: page})
 })
 
+router.get('/admin/categories/new', getNewCategoryView)
 
 router.post('/product/create', upload.array('images', 10), createProduct);
 router.post('/product/:id/update', upload.array('images', 10), updateProduct);

@@ -57,6 +57,7 @@ export const getAdminContactsView = (req, res) => {
 export const getProductEditView = async (req, res) => {
     const id = req.params.id;
     const product = await Product.findOne({_id: id}).exec();
+    const categories = await Category.find();
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -65,7 +66,8 @@ export const getProductEditView = async (req, res) => {
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
         name: 'product-edit',
-        product: product
+        product: product,
+        categories: categories,
     };
     res.render('admin/route-pages/product-edit', {data: page})
 }
@@ -101,6 +103,20 @@ export const getAdminProductView = async (req, res) => {
     res.render('admin/route-pages/product-new.pug', {data: page})
 }
 
+export const getNewCategoryView = async(req, res) => {
+    const categories = await Category.find();
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'product-new',
+        categories: categories,
+    };
+    res.render('admin/route-pages/category-new.pug', {data: page})
+}
 //============================
 //         Endpoints         =
 //============================

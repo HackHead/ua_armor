@@ -15,8 +15,8 @@ include ../components/head.pug
               li.breadcrumb-item.first-item
                 a(href='/') Головна
               li.breadcrumb-item.0-item
-                a(href='/') Тактичне спорядження
-              li.breadcrumb-item.last-item.active Рукавиці тактичні
+                a(href='/') #{data.parentCategory.name}
+              li.breadcrumb-item.last-item.active #{data.activeCategory.name}
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
     // .page_title
@@ -40,7 +40,7 @@ include ../components/head.pug
                     span.sku 4282123
                   span.posted_in
                     | Категорія: 
-                    a(href='/armashop/product-category/equipment/' rel='tag') Спорядження
+                    a(href='/armashop/product-category/equipment/' rel='tag') #{data.activeCategory.name}
                 p.price
                   if data.product.sale
                     del
@@ -191,14 +191,10 @@ include ../components/head.pug
               #woocommerce_product_categories-2.widget.woocommerce.widget_product_categories
                 h3.widget-title Категорії
                 ul.product-categories
-                  li.cat-item.cat-item-27.current-cat
-                    a(href='/armashop/product-category/equipment/') Тактичне спорядження
-                  li.cat-item.cat-item-15
-                    a(href='/armashop/product-category/military/') Особиста гігієна
-                  li.cat-item.cat-item-28
-                    a(href='/armashop/product-category/optics/') Взуття / Шкарпетки
-                  li.cat-item.cat-item-30
-                    a(href='/armashop/product-category/weapon/') Одяг / Рукавиці
+                  each category in data.categories
+                    if category.parentId
+                      li.cat-item.cat-item-27.current-cat
+                        a(href='/store/categories/' + category.slug) #{category.name}
             .widget-theme-wrapper.widget_no_background
               #woocommerce_recently_viewed_products-2.widget.woocommerce.widget_recently_viewed_products
                 h3.widget-title Ви також переглядали

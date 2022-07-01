@@ -92,14 +92,11 @@ include ../components/head.pug
               #woocommerce_product_categories-2.widget
                 h3.widget-title Категорії
                 ul.product-categories
-                  li.cat-item.cat-item-27
-                    a(href='/product-category/equipment/') Шоломи
-                  li.cat-item.cat-item-15
-                    a(href='/product-category/military/') Тактичні рукавиці
-                  li.cat-item.cat-item-28
-                    a(href='/product-category/optics/') Бронежилети
-                  li.cat-item.cat-item-30
-                    a(href='/product-category/weapon/') Розгрузка
+                  each category in data.categories
+                    if category.parentId
+                      li.cat-item.cat-item-27
+                        a(href='/store/categories/' + category.slug) #{category.name}
+                  
             .widget-theme-wrapper.widget_no_background
               #woocommerce_recently_viewed_products-2.widget.widget_recently_viewed_products
                 h3.widget-title Товари які ви переглядали

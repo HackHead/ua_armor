@@ -12,7 +12,7 @@ include ../components/head.pug
             |  Изменить товар
           .row
             form(method="POST" action="/product/" + data.product._id + "/update"  enctype="multipart/form-data")
-              .col-xl-6
+              .col-xl-6(style="margin-left: auto; margin-right: auto;")
                 .card.mb-4
                   h5.card-header Заполните нужные вам поля
                   .card-body
@@ -32,12 +32,12 @@ include ../components/head.pug
                     .mb-3
                       label.form-label(for='exampleFormControlSelect1') Категория товара
                       select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' name="category")
-                        option(selected='') Выберите категорию
-                        option(value='1') Одежда/Головые уборы/Перчатки
-                        option(value='2') Обувь/Носки 
-                        option(value='3') Тактическое снаряжение
-                        option(value='4') Личная гигиена/Тактическая медицына  
-                        option(value='5') Аксессуары
+                        each category, index in data.categories
+                          if category.parentId
+                            if category.slug === data.product.category
+                              option(selected="" value=category.slug) #{category.name}
+                            else
+                              option(value=category.slug) #{category.name}
                     .mb-3
                       label.form-label(for='exampleFormControlTextarea1') Описание
                       textarea#exampleFormControlTextarea1.form-control(rows='8' name="description")
@@ -72,19 +72,19 @@ include ../components/head.pug
                         input#flexSwitchUsersChoice.form-check-input(type='checkbox' name="customers_choice")
                       label.form-check-label(for='flexSwitchUsersChoice') Выбор покупателей
                     .form-check.form-switch
-                      if data.product.showInIndexSlider
+                      if data.product.show_in_index_slider
                         input#flexSwitchHomeCarousel.form-check-input(type='checkbox' checked='' name="show_in_index_slider")
                       else 
                         input#flexSwitchHomeCarousel.form-check-input(type='checkbox' name="show_in_index_slider")
                       label.form-check-label(for='flexSwitchHomeCarousel') Показать в слайдере на главной странице
                     .form-check.form-switch
-                      if data.product.showInIndexCatalog
+                      if data.product.show_in_index_catalog
                         input#flexSwitchHomeCatalog.form-check-input(type='checkbox' checked='' name="show_in_index_catalog")
                       else 
                         input#flexSwitchHomeCatalog.form-check-input(type='checkbox' name="show_in_index_catalog")
 
                       label.form-check-label(for='flexSwitchHomeCatalog') Показать в каталоге на главной странице
-              .col-xl-6
+              .col-xl-6(style="margin-left: auto; margin-right: auto;")
                 .card.mb-4
                   //- .d-flex(style="width: 100%; justify-content: flex-start; padding-top: 45px")
                     each src in data.product.images
@@ -103,13 +103,11 @@ include ../components/head.pug
                               input#dropzone-file.hidden(type='file' name="images" style="display: none;" multiple)
                       #floatingInputHelp.form-text
                         | Первое изображение будет выбрано в качестве превью*
-              .col-xl-12
-                .card.mb-4
-                  h5.card-header Отправить
-                  .card-body
-                      .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+              .col-xl-12(style="margin-left: auto; margin-right: auto;")
+                .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
                           button.btn.btn-primary.mr-2(type="submit") Сохранить
                           a.btn.btn-danger.mr-2(href="/admin/products") Отменить
+                      
           // / Content
         .content-backdrop.fade
     include ../components/footer-js.pug

@@ -1,0 +1,38 @@
+include ../components/head.pug
+.layout-wrapper.layout-content-navbar
+  .layout-container
+    include ../components/navigation.pug
+    .layout-page
+      include ../components/navbar.pug
+      .content-wrapper
+        // Content
+        .container-xxl.flex-grow-1.container-p-y
+          h4.fw-bold.py-3.mb-4
+            span.text-muted.fw-light  Товары / Категории /
+            |  Создать категорию
+          .row
+            form(method="POST" action="/product/category/create")
+              .col-xl-6(style="margin-left: auto; margin-right: auto;")
+                .card.mb-4
+                  h5.card-header Заполните нужные вам поля
+                  .card-body
+                    .mb-3
+                      label.form-label(for='exampleFormControlSelect1') Родительська категория
+                      select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' name="parentId")
+                        option(value="" selected="") Выберите родительськую категорию
+                        each category, index in data.categories
+                          if !category.parentId
+                            option(value=category.id) #{category.name}
+                    .form-floating.mb-3
+                      input#floatingInput.form-control(name="name" type='text' placeholder='')
+                      label(for='floatingInput') Название новой категории
+                      .form-text
+                        | Внимание! Если вы не выбирете родительськую категорию, то указанная вами категория станет родительськой    
+              .col-xl-12(style="margin-left: auto; margin-right: auto;")
+                .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                          button.btn.btn-primary.mr-2(type="submit") Создать
+                          a.btn.btn-danger.mr-2(href="/admin/products") Отменить
+                      
+          // / Content
+        .content-backdrop.fade
+    include ../components/footer-js.pug
