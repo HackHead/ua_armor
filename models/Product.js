@@ -26,14 +26,14 @@ const ProductSchema = new mongoose.Schema({
         default: 0,
     },
     category: {
-        type: Number,
+        type: String,
         required: true,
     },
     hidden: {
         type: Boolean,
         default: false,
     },
-    runningOut: {
+    running_out: {
         type: Boolean,
         default: false,
     },

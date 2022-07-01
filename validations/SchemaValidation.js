@@ -27,7 +27,7 @@ export const productValidation = (data) => {
          sale: Joi.string().required().regex(/^[0-9]{0,9}$/),
          category: Joi.string().required(),
          hidden: Joi.string(),
-         runningOut: Joi.string(),
+         running_out: Joi.string(),
          new: Joi.string(),
          customers_choice: Joi.string(),
          show_in_index_slider: Joi.string(),
