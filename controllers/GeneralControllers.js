@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Product from '../models/Product.js'
+import Comment from '../models/Comment.js'
 import Category from "../models/Category.js";
 import { request } from 'express'
 import { productValidation } from '../validations/SchemaValidation.js'
@@ -65,9 +66,9 @@ export const getProductPageView = async (req, res) => {
     const allCategories = await Category.find();
     const activeCategory = await Category.findOne({slug: product.category});
     const parentCategory = await Category.findOne({_id: activeCategory.parentId});
-    console.log(activeCategory)
-    console.log(parentCategory)
-    console.log(activeCategory.parentId)
+
+    const allComments = await Comment.find({productId: req.params.id});
+    console.log(allComments)
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -79,7 +80,8 @@ export const getProductPageView = async (req, res) => {
         product: product,
         categories: allCategories,
         activeCategory: activeCategory,
-        parentCategory: parentCategory
+        parentCategory: parentCategory,
+        comments: allComments
     };
     res.render('generall/route-pages/single-product', {data: page})
 }

@@ -25,7 +25,7 @@ include ../components/head.pug
                                                 a(href='/product/' + product.id)
                                                     | #{product.name}
                                             .text-block
-                                                | #{product.description}
+                                                | #{product.description.slice(0, 100)}...
                                             .product-features
                                                 span.price
                                                     span.price-regular &#x20B4; #{product.price}

@@ -82,7 +82,7 @@ include ../components/head.pug
                       | Характеристики
                   li#tab-title-reviews.reviews_tab(role='tab' aria-controls='tab-reviews' onclick="toggleTabs(event);")
                     a(href='#tab-reviews' class="tab-head")
-                      | Огляди (0)
+                      | Відгуки (#{data.comments.length})
                 #tab-description.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--description.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-description' style='display: block;')
                   h2 Опис
                   p #{data.product.description}
@@ -94,20 +94,16 @@ include ../components/head.pug
                         th.woocommerce-product-attributes-item__label Колір
                         td.woocommerce-product-attributes-item__value
                           p Зелений
-                #tab-reviews.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--reviews.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style='display: none;')
-                  #reviews.woocommerce-Reviews
+                #tab-reviews.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--reviews.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style='display: none; box-shadow: none')
+                  #reviews.woocommerce-Reviews(style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em")
                     #comments
                       h2.woocommerce-Reviews-title
-                        | Огляди
-                      p.woocommerce-noreviews Оглядів до цього товару поки що немає
+                        | Відгуки
+                      if !data.comments.length
+                        p.woocommerce-noreviews Відгуків до цього товару поки що немає
                     #review_form_wrapper
                       #review_form
-                        #respond.comment-respond
-                          span#reply-title.comment-reply-title
-                            | Будьте першим хто його залишить
-                            small
-                              a#cancel-comment-reply-link(rel='nofollow' href='/armashop/product/champion-of-regret-gun/#respond' style='display:none;') Cancel reply
-                          form#commentform.comment-form(action='/armashop/wp-comments-post.php' method='post' novalidate='novalidate')
+                          form#commentform.comment-form(action='/comment/new' method='post')
                             p.comment-notes
                               span#email-notes Ваша e-mail адреса не буде опублікована
                             .comment-form-rating
@@ -120,9 +116,8 @@ include ../components/head.pug
                                   a.star-4(href='#') 4
                                   a.star-5(href='#') 5
                               .select-wrap
-                                select#rating(name='rating' required='' style='display: none;')
-                                  option(value='' selected='selected') Rate&mldr;
-                                  option(value='5') Perfect
+                                select#rating(name='rate' required='' style='display: none;')
+                                  option(value='5' selected='selected') Perfect
                                   option(value='4') Good
                                   option(value='3') Average
                                   option(value='2') Not that bad
@@ -131,21 +126,47 @@ include ../components/head.pug
                               label(for='comment' style='display: none;')
                                 | Ваш відгук &nbsp;
                                 span.required *
-                              textarea#comment(name='comment' cols='45' rows='8' required='' placeholder='Ваш відгук')
+                              textarea#comment(name='message' cols='45' rows='8' required='' placeholder='Ваш відгук')
                             p.comment-form-author
                               label(for='author' style='display: none;')
                                 | Ім'я &nbsp;
                                 span.required *
-                              input#author(name='author' type='text' size='30' required='' placeholder="Ім'я")
+                              input#author(name='name' type='text' size='30' required='' placeholder="Ім'я")
                             p.comment-form-email
                               label(for='email' style='display: none;')
                                 | Email&nbsp;
                                 span.required *
                               input#email(name='email' type='email' size='30' required='' placeholder='Email адреса')
                             p.form-submit
-                              input#submit.submit(name='submit' type='submit' value='Надіслати')
-                        // #respond
-                    .clear
+                              input(type="hidden" name="productId" value=data.product._id)
+                              button#submit.submit(type='submit' ) Надіслати
+                  each comment in data.comments
+                    .panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews')(style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); margin-top: 3em; padding: 3em; position: relative")
+                      #reviews
+                        #comments
+                          h5(style="text-transform: none") #{comment.name}
+                        #review_form_wrapper
+                          #review_form
+                              form#commentform.comment-form(action='/comment/new' method='post')
+                                p.comment-notes(style="margin-top: 1.5em")
+                                  span#email-notes #{comment.message}
+                                .comment-form-rating
+                                  label(for='rating') Ваша оцінка
+                                  p.stars
+                                    span
+                                      a.star-1(href='#').active 1
+                                      a.star-2(href='#').active 2
+                                      a.star-3(href='#').active 3
+                                      a.star-4(href='#').active 4
+                                      a.star-5(href='#').active 5
+                                  .select-wrap
+                                    select#rating(name='rate' required='' style='display: none;')
+                                      option(value='5' selected='selected') Perfect
+                                      option(value='4') Good
+                                      option(value='3') Average
+                                      option(value='2') Not that bad
+                                      option(value='1') Very poor
+                                .comment-date(style="position: absolute; right: 5%; top: 20%; font-size: 0.8em; font-weight: bold; opacity: 0.7") #{comment.date.toLocaleString('ru-RU', { timeZone: 'UTC' })}
               section.related.products
                 h2 Схожі товари
                 ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")

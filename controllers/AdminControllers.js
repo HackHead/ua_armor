@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import Product from '../models/Product.js'
 import Category from '../models/Category.js'
+import Comment from '../models/Comment.js'
 import Mail from '../models/Mail.js'
-import {productValidation, mailValidation} from '../validations/SchemaValidation.js'
+import {productValidation, mailValidation, commentValidation} from '../validations/SchemaValidation.js'
 import slugify from "slugify";
 //============================
 //          Страницы         =
@@ -218,10 +219,27 @@ export const newUserMail = async (req, res) => {
         message: req.body.message
     };
 
-    const newMail = new Mail(mailData).save();
+    const newMail = await new Mail(mailData).save();
     res.send('Повідомлення успішно надіслано')
 }
 
+export const newComment = async (req, res) => {
+    const {error} = commentValidation(req.body);
+
+    if(error){
+        return res.status(400).send(error.details[0].message)
+    };
+    const commentData = {
+        name: req.body.name,
+        email: req.body.email,
+        message: req.body.message,
+        rate: req.body.rate,
+        productId: req.body.productId
+    };
+
+    const newComment = await new Comment(commentData).save();
+    res.send('Ваш коментар успішно опублікований')
+}
 
 
 export const createCategory = async (req, res) => {
