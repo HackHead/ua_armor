@@ -1,4 +1,5 @@
 include ../components/head.pug
+<style>.catalog-item{min-width: 300px !important}</style>
 #canvas
   #box_wrapper
     include ../components/navigation.pug
@@ -8,7 +9,7 @@ include ../components/head.pug
           .row
             .col-xs-12.col-12
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-              .owl-carousel.shortcode-product.owl-loaded.owl-drag.owl-theme(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000'  data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
+              .owl-carousel.shortcode-product.owl-loaded.owl-drag.owl-theme.bottom-nav-arrows(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000'  data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
                 .owl-stage-outer
                   .owl-stage(style='transform: translate3d(-2400px, 0px, 0px); transition: all 0.25s ease 0s; width: 8400px;')
                     each product in data.slider_products
@@ -42,16 +43,16 @@ include ../components/head.pug
                   mark Каталог
                   |  товарів
               .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
-              .uws-products.carousel(data-loop='true' data-dots='false' data-nav='true' data-center='true' data-autoplay='false' data-speed='5000' data-responsive-xl='6' data-responsive-lg='3' data-responsive-md='3' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
+              .uws-products.carousel(data-loop='true' data-dots='false' data-nav='false' data-center='true' data-autoplay='false' data-speed='5000' data-responsive-xl='6' data-responsive-lg='3' data-responsive-md='3' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
                 .columns-3(data-index='0')
                   ul.products.columns-3.owl-carousel.owl-shadowitems.owl-theme.top-nav-arrows.owl-loaded.owl-drag.owl-center()
                     .owl-stage-outer
                       .owl-stage(style='transition: all 0.25s ease 0s; width: 3540px; transform: translate3d(-3840px, 0px, 0px);')
                         each product in data.slider_products
-                          .owl-item.active.center(style='width: 354px; margin-right: 30px;')
+                          .owl-item.catalog-item.active.center(style='width: 354px; margin-right: 30px;')
                             li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
                               .product-inner
-                                .product-img
+                                .product-img(style="max-width: 100%; margin: 0 auto;")
                                   a(href='/product/' + product.id)
                                     span.onsale Sale!
                                     img(src='/' + product.images[0] alt='' width='900' height='900')
@@ -220,7 +221,7 @@ include ../components/head.pug
                                       h2
                                         a(href='/uarmor/product/hateful-golden-six-shooter/') Hateful Golden Six-Shooter
                                       span.cat-product
-                                        a(href='/uarmor/product-category/weapon/' rel='tag') Weapon
+                                        a(href='/uarmor/product-category/weapon/' rel='tag') Зброя
                                     
                                     .wrap-footer
                                       span.price
@@ -242,7 +243,7 @@ include ../components/head.pug
                       img.attachment-uarmor-rectangle-horizontal2.size-uarmor-rectangle-horizontal2(src='/img/home/gallery1-1460x1120.jpg' alt='' width='1460' height='1120')
                     .category-content
                       h4.color-main
-                        | Шоломи
+                        | Зброя
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 10px;')
             
       .fw-divider-space.divider-md-0.divider-xl-110.divider-xxl-150

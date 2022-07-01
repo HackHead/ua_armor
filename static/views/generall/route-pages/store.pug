@@ -51,7 +51,7 @@ include ../components/head.pug
               each product in data.products
                 li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
                   .product-inner
-                    .product-img
+                    .product-img(style="max-width: 100%; margin: 0 auto;")
                       a(href='/product/' + product._id)
                         img(src='/' + product.images[0]   width='900' height='900')
                     .wrap-header
@@ -73,10 +73,10 @@ include ../components/head.pug
               ul.page-numbers
                 li
                   span.page-numbers.current(aria-current='page') 1
-                li
-                  a.page-numbers(href='/') 2
-                li
-                  a.next.page-numbers(href='/') &rarr;
+                //- li
+                //-   a.page-numbers(href='/') 2
+                //- li
+                //-   a.next.page-numbers(href='/') &rarr;
 
           aside.col-12.col-xs-12.col-lg-3.col-xl-3.order-lg-1.column-sidebar
             .widget-theme-wrapper.widget_no_background

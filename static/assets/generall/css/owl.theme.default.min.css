@@ -9,25 +9,22 @@
      -webkit-tap-highlight-color: transparent
  }
  
- .owl-theme .owl-nav {
-     margin-top: 10px
- }
  
  .owl-theme .owl-nav [class*=owl-] {
      color: #FFF;
      font-size: 14px;
-     margin: 10px;
+     width: 40px;
+     height: 40px;
      background: #f2c014;
      display: inline-block;
      cursor: pointer;
      border-radius: 3px;
+     position: relative;
+     display: flex;
+     align-items: center;
+     justify-content: center;
  }
- .owl-prev {
-    margin-right: 7px;
- }
- .owl-next {
-    margin-left: 7px;
- }
+
  .owl-theme .owl-nav [class*=owl-]:hover {
      background: #fff;
      color: #f2c014;
