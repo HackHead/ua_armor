@@ -1,4 +1,5 @@
   //bootstrap carousel
+  
   if ($().carousel) {
     $('.carousel').carousel();
 }

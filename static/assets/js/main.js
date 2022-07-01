@@ -3,6 +3,10 @@ import Helpers from "./helpers.js";
 let menu, animate;
 
 (function () {
+  $('input[type=file]').change(function () {
+    const fileCount = this.files.length;
+    $('.when-files-loaded').text(fileCount + ' Зображень обрано');
+})
   // Initialize menu
   //-----------------
 

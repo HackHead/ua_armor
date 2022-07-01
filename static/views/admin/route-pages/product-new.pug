@@ -80,7 +80,7 @@ include ../components/head.pug
                               div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
                                   svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
                                       path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
-                                  p.mb-2.text-sm(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
+                                  p.mb-2.text-sm.when-files-loaded(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
                                       span(style="font-weight: 600") Нажмите чтобы загрузить
                                   p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
                               input#dropzone-file.hidden(type='file' name="images" style="display: none;" multiple)
