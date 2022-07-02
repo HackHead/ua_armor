@@ -12,7 +12,9 @@ include ../components/head.pug
               .owl-carousel.shortcode-product.owl-loaded.owl-drag.owl-theme.bottom-nav-arrows(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000'  data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
                 .owl-stage-outer
                   .owl-stage(style='transform: translate3d(-2400px, 0px, 0px); transition: all 0.25s ease 0s; width: 8400px;')
+                    
                     each product in data.slider_products
+                      if !product.hidden
                         .owl-item(style='width: 450px; margin-right: 30px;')
                             .side-item.no-content-padding(data-index='0')
                                 .row.align-center.text-center.text-sm-left

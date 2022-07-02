@@ -31,20 +31,8 @@ include ../components/head.pug
                           .col-4.col-sm-5.text-end
                             button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
                               i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
-                      .d-flex.mb-3
-                        .flex-shrink-0
-                          img.me-3(src='/img/icons/brands/whatsapp.png' alt='facebook' height='30')
-                        .flex-grow-1.row
-                          .col-8.col-sm-7.mb-sm-0.mb-2
-                            h6.mb-0 Whatsapp
-                            small.text-muted Не подключен
-                          .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
-                              i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
+                      
+                            
                       .d-flex.mb-3
                         .flex-shrink-0
                           img.me-3(src='/img/icons/brands/telegram.png' alt='facebook' height='30')
@@ -55,32 +43,6 @@ include ../components/head.pug
                           .col-4.col-sm-5.text-end
                             button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
                               i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
-                      .d-flex.mb-3
-                        .flex-shrink-0
-                          img.me-3(src='/img/icons/brands/facebook.png' alt='facebook' height='30')
-                        .flex-grow-1.row
-                          .col-8.col-sm-7.mb-sm-0.mb-2
-                            h6.mb-0 Facebook
-                            small.text-muted Не подключен
-                          .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
-                              i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
-                      .d-flex.mb-3
-                        .flex-shrink-0
-                          img.me-3(src='/img/icons/brands/twitter.png' alt='twitter' height='30')
-                        .flex-grow-1.row
-                          .col-8.col-sm-7.mb-sm-0.mb-2
-                            h6.mb-0 Twitter
-                            a(href='https://twitter.com/Theme_Selection' target='_blank') @ThemeSelection
-                          .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
-                              i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
                       .d-flex.mb-3
                         .flex-shrink-0
                           img.me-3(src='/img/icons/brands/instagram.png' alt='instagram' height='30')
@@ -91,8 +53,7 @@ include ../components/head.pug
                           .col-4.col-sm-5.text-end
                             button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
                               i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
+                            
                       // /Social Accounts
                 .col-md-6.col-12.mb-4
                   .card
@@ -106,36 +67,33 @@ include ../components/head.pug
                         .flex-grow-1.row
                           .col-8.col-sm-7.mb-sm-0.mb-2
                             h6.mb-0 Номер телефона
-                            small.text-muted 0800334150
+                            small.text-muted #{data.misc.contacts.phone}
                           .col-4.col-sm-5.text-end
                             button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
                               i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
+                            
                       .d-flex.mb-3
                         .flex-shrink-0
                           img.me-3(src='/img/icons/brands/email.png' alt='facebook' height='30')
                         .flex-grow-1.row
                           .col-8.col-sm-7.mb-sm-0.mb-2
                             h6.mb-0 E-Mail
-                            small.text-muted uarmorinfo@gmail.com
+                            small.text-muted #{data.misc.contacts.email}
                           .col-4.col-sm-5.text-end
                             button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
                               i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
+                            
                       .d-flex.mb-3
                         .flex-shrink-0
                           img.me-3(src='/img/icons/brands/map.png' alt='facebook' height='30')
                         .flex-grow-1.row
                           .col-8.col-sm-7.mb-sm-0.mb-2
                             h6.mb-0 Физ-адрес
-                            small.text-muted Переулок катаева 2
+                            small.text-muted #{data.misc.contacts.city}, #{data.misc.contacts.street}
                           .col-4.col-sm-5.text-end
                             button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
                               i.bx.bxs-edit-alt
-                            button.btn.btn-icon.btn-outline-danger(type='button')
-                              i.bx.bx-trash-alt
+                            
         .content-backdrop.fade
       // Content wrapper
     // / Layout page

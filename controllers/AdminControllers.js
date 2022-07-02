@@ -3,6 +3,7 @@ import Product from '../models/Product.js'
 import Category from '../models/Category.js'
 import Comment from '../models/Comment.js'
 import Mail from '../models/Mail.js'
+import misc from "../config/misc.js";
 import {productValidation, mailValidation, commentValidation} from '../validations/SchemaValidation.js'
 import slugify from "slugify";
 //============================
@@ -18,7 +19,8 @@ export const getAdminDashboardView = (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'dashboard'
+        name: 'dashboard',
+        misc: misc
     };
     res.render('admin/route-pages/dashboard', {data: page})
 }
@@ -35,6 +37,7 @@ export const getAdminProductsView = async (req, res) => {
         author: 'Euphoria digital agency',
         name: 'products',
         products: products || null,
+        misc: misc,
     };
     res.render('admin/route-pages/products', {data: page})
 }
@@ -49,7 +52,8 @@ export const getAdminContactsView = (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'contacts'
+        name: 'contacts',
+        misc: misc
     };
     res.render('admin/route-pages/contacts', {data: page})
 }
@@ -69,6 +73,7 @@ export const getProductEditView = async (req, res) => {
         name: 'product-edit',
         product: product,
         categories: categories,
+        misc: misc
     };
     res.render('admin/route-pages/product-edit', {data: page})
 }
@@ -83,7 +88,8 @@ export const getAdminMiscView = async (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'misc'
+        name: 'misc',
+        misc: misc
     };
     res.render('admin/route-pages/misc', {data: page})
 }
@@ -100,6 +106,7 @@ export const getAdminProductView = async (req, res) => {
         author: 'Euphoria digital agency',
         name: 'product-new',
         categories: categories,
+        misc: misc,
     };
     res.render('admin/route-pages/product-new.pug', {data: page})
 }
@@ -115,6 +122,7 @@ export const getNewCategoryView = async(req, res) => {
         author: 'Euphoria digital agency',
         name: 'product-new',
         categories: categories,
+        misc: misc,
     };
     res.render('admin/route-pages/category-new.pug', {data: page})
 }

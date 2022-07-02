@@ -172,16 +172,16 @@ include ../components/head.pug
                 ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
                   .owl-stage-outer
                     .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
-                      each val in [1, 2, 3, 4, 5, 6]
+                      each relatedProduct in data.relatedProducts
                         .owl-item(style='width: 267.667px; margin-right: 30px;')
                           li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
                             .product-inner
                               .product-img(style="max-width: 100%; margin: 0 auto;")
                                 a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/')
-                                  img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/img/store/shopequipment5.png' alt=''  width='900' height='900')
+                                  img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + relatedProduct.images[0] alt=''  width='900' height='900')
                               .wrap-header
                                 h2.woocommerce-loop-product__title
-                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/') Allegiance Of The Enigma
+                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/') #{relatedProduct.name}
                                 span.cat-product
                                   a(href='/armashop/product-category/equipment/' rel='tag') Спорядження
                               // close product-wrap

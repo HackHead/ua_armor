@@ -3,7 +3,10 @@ import Product from '../models/Product.js'
 import Comment from '../models/Comment.js'
 import Category from "../models/Category.js";
 import { request } from 'express'
+import misc from "../config/misc.js";
 import { productValidation } from '../validations/SchemaValidation.js'
+
+
 export const getIndexPageView = async (req, res) => {
     const slider_products = await Product.find({show_in_index_slider: true});
     const catalog_products = await Product.find({show_in_index_catalog: true})
@@ -16,7 +19,8 @@ export const getIndexPageView = async (req, res) => {
         author: 'Euphoria digital agency',
         name: 'home',
         slider_products: slider_products,
-        catalog_products: catalog_products
+        catalog_products: catalog_products,
+        misc: misc
     };
     res.render('generall/route-pages/index', {data: page})
 }
@@ -29,7 +33,8 @@ export const getAboutPageView = (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'about'
+        name: 'about',
+        misc: misc
     };
     res.render('generall/route-pages/about', {data: page})
 }
@@ -42,14 +47,14 @@ export const getContactPageView = (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'about'
+        name: 'about',
+        misc: misc
     };
     res.render('generall/route-pages/contacts', {data: page})
 }
 export const getStorePageView = async (req, res) => {
     const products = await Product.find().limit(20)
     const categories = await Category.find();
-
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -60,6 +65,7 @@ export const getStorePageView = async (req, res) => {
         name: 'about',
         products: products,
         categories: categories,
+        misc: misc
     };
     res.render('generall/route-pages/store', {data: page})
 }
@@ -68,9 +74,9 @@ export const getProductPageView = async (req, res) => {
     const allCategories = await Category.find();
     const activeCategory = await Category.findOne({slug: product.category});
     const parentCategory = await Category.findOne({_id: activeCategory.parentId});
-
+    const relatedProducts = await Product.find({category: activeCategory.slug}).limit(6);
     const allComments = await Comment.find({productId: req.params.id});
-    console.log(allComments)
+    
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -83,7 +89,9 @@ export const getProductPageView = async (req, res) => {
         categories: allCategories,
         activeCategory: activeCategory,
         parentCategory: parentCategory,
-        comments: allComments
+        comments: allComments,
+        relatedProducts: relatedProducts,
+        misc: misc
     };
     res.render('generall/route-pages/single-product', {data: page})
 }

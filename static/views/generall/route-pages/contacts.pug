@@ -36,21 +36,21 @@ include ../components/head.pug
                       .icon-styled.icon-top
                         i.fa.fa-map-marker.color-main.fontsize_16
                       p
-                        | м.Київ
+                        | #{data.misc.contacts.city}
                         br
-                        |  переулок катаева 2
+                        | #{data.misc.contacts.street}
                   li
                     .icon-inline
                       .icon-styled.icon-top
                         i.fa.fa-phone.color-main.fontsize_16
                       p
-                        a(href='callto:0800334150') 0(800)334-150
+                        a(href='tel:'+ data.misc.contacts.phone) #{data.misc.contacts.phone}
                   li
                     .icon-inline
                       .icon-styled.icon-top
                         i.fa.fa-envelope.color-main.fontsize_16
                       p
-                        a(href='mailto:uarmorinfo@gmail.com') uarmorinfo@gmail.com
+                        a(href='mailto:' + data.misc.contacts.email) #{data.misc.contacts.email}
                 span.social-icons
                   a.fa.fa-paper-plane(href='https://web.telegram.org/' target='_blank')
                   a.fa.fa-instagram(href='https://www.instagram.com/' target='_blank')

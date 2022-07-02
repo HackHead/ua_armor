@@ -7,7 +7,7 @@ footer.page_footer.ds.ms.c-gutter-100.c-mb-30.s-pt-60.s-pb-30.s-pt-md-90.s-pb-md
             a.blog-info-logo.logo(href='/' target='_blank')
               img(src='/img/admin/logo-inv.png' alt='Logo')
             .description
-              | Надійний магазин військової амуніції  та спецспорядження
+              | #{data.misc.footerAbout}
             .icons-list
             span.social-icons
               a.fa.fa-2xp.fa-paper-plane(href='https://telegram.org/' target='_blank' )
@@ -24,22 +24,22 @@ footer.page_footer.ds.ms.c-gutter-100.c-mb-30.s-pt-60.s-pb-30.s-pt-md-90.s-pb-md
                     .icon-styled.icon-top
                       ion-icon(name='location')
                     p
-                      | Киев
+                      | #{data.misc.contacts.city}
                       br
-                      | переулок катаева 2,
+                      | #{data.misc.contacts.street}
                 li
                   .icon-inline
                     .icon-styled.icon-top
                       ion-icon(name='call')
                     p
-                      a(href='callto:+0800334150') (0800)334-150
+                      a(href='callto:+0800334150') #{data.misc.contacts.phone}
                       br
                 li
                   .icon-inline
                     .icon-styled.icon-top
                       ion-icon(name='mail')
                     p
-                      a(href='mailto:info@example.com') uarmorinfo@gmail.com
+                      a(href='mailto:info@example.com') #{data.misc.contacts.email}
       .col-xl-3.col-md-6.text-center.text-sm-left
         .widget-theme-wrapper.widget_no_background
           #nav_menu-2.widget.widget_nav_menu
