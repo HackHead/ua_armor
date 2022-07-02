@@ -49,42 +49,43 @@ include ../components/head.pug
                     .owl-stage-outer
                       .owl-stage(style='transition: all 0.25s ease 0s; width: 3540px; transform: translate3d(-3840px, 0px, 0px);')
                         each product in data.catalog_products
-                          .owl-item.catalog-item.active.center(style='width: 354px; margin-right: 30px;')
-                            li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
-                              .product-inner
-                                .product-img(style="max-width: 100%; margin: 0 auto;")
-                                  a(href='/product/' + product.id)
-                                    span.onsale Sale!
-                                    img(src='/' + product.images[0] alt='' width='900' height='900')
-                                .wrap-header
-                                  h2
-                                    a(href='/product/' + product.id) #{product.name.slice(0, 15)}...
-                                  span.cat-product
-                                    a(href='/shop/' + product.category rel='tag') Тактичне спорядження
-                                
-                                .wrap-footer
-                                  if product.sale > 0
-                                    span.price
-                                      del
-                                        span 
+                          if !product.hidden
+                            .owl-item.catalog-item.active.center(style='width: 354px; margin-right: 30px;')
+                              li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
+                                .product-inner
+                                  .product-img(style="max-width: 100%; margin: 0 auto;")
+                                    a(href='/product/' + product.id)
+                                      span.onsale Sale!
+                                      img(src='/' + product.images[0] alt='' width='900' height='900')
+                                  .wrap-header
+                                    h2
+                                      a(href='/product/' + product.id) #{product.name.slice(0, 15)}...
+                                    span.cat-product
+                                      a(href='/shop/' + product.category rel='tag') Тактичне спорядження
+                                  
+                                  .wrap-footer
+                                    if product.sale > 0
+                                      span.price
+                                        del
                                           span 
-                                          | #{product.price}
-                                          sup 00
-                                      ins
-                                        span
-                                          span
-                                          | #{(product.price / 100 * (100 - product.sale)).toFixed(0)}
-                                          sup 00
-                                  else
-                                    span.price
+                                            span 
+                                            | #{product.price}
+                                            sup 00
                                         ins
-                                        span
                                           span
-                                          | #{product.price}
-                                          sup 00
-                                  .product-button
-                                    a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/product/'+ product._id data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') В корзину
-                          
+                                            span
+                                            | #{(product.price / 100 * (100 - product.sale)).toFixed(0)}
+                                            sup 00
+                                    else
+                                      span.price
+                                          ins
+                                          span
+                                            span
+                                            | #{product.price}
+                                            sup 00
+                                    .product-button
+                                      a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/product/'+ product._id data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') В корзину
+                            
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
             
       section#section-4331909.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
