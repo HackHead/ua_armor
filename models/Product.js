@@ -45,11 +45,11 @@ const ProductSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    showInIndexSlider: {
+    show_in_index_slider: {
         type: Boolean,
         default: false,
     },
-    showInIndexCatalog: {
+    show_in_index_catalog: {
         type: Boolean,
         default: false,
     },

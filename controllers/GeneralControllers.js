@@ -5,7 +5,8 @@ import Category from "../models/Category.js";
 import { request } from 'express'
 import { productValidation } from '../validations/SchemaValidation.js'
 export const getIndexPageView = async (req, res) => {
-    const slider_products = await Product.find({show_in_index_slider: true})
+    const slider_products = await Product.find({show_in_index_slider: true});
+    const catalog_products = await Product.find({show_in_index_catalog: true})
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -14,7 +15,8 @@ export const getIndexPageView = async (req, res) => {
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
         name: 'home',
-        slider_products: slider_products
+        slider_products: slider_products,
+        catalog_products: catalog_products
     };
     res.render('generall/route-pages/index', {data: page})
 }

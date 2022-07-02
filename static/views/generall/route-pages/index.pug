@@ -18,7 +18,7 @@ include ../components/head.pug
                                 .row.align-center.text-center.text-sm-left
                                     .col-xs-12.col-lg-5.col-xl-7
                                         .item-media
-                                            img.attachment-uarmor-rectangle-horizontal.size-uarmor-rectangle-horizontal(src='/' + product.images[0] alt='' width='800' height='675')
+                                            img.attachment-uarmor-rectangle-horizontal.size-uarmor-rectangle-horizontal(src='/' + product.images[0] alt="" style="max-width: 400px")
                                     .col-xs-12.col-lg-7.col-xl-5
                                         .item-content
                                             h3.links-maincolor
@@ -48,7 +48,7 @@ include ../components/head.pug
                   ul.products.columns-3.owl-carousel.owl-shadowitems.owl-theme.top-nav-arrows.owl-loaded.owl-drag.owl-center()
                     .owl-stage-outer
                       .owl-stage(style='transition: all 0.25s ease 0s; width: 3540px; transform: translate3d(-3840px, 0px, 0px);')
-                        each product in data.slider_products
+                        each product in data.catalog_products
                           .owl-item.catalog-item.active.center(style='width: 354px; margin-right: 30px;')
                             li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
                               .product-inner
@@ -188,7 +188,7 @@ include ../components/head.pug
                 .col-lg-6.col-xl-5.order-1.order-lg-2
                   .category
                     .category-image
-                      img.attachment-uarmor-rectangle-horizontal2.size-uarmor-rectangle-horizontal2(src='/img/home/gallery2-1460x1120.jpg' alt='' width='1460' height='1120')
+                      img.attachment-uarmor-rectangle-horizontal2.size-uarmor-rectangle-horizontal2(src='/img/home/gallery2-1460x1120.jpg' alt='')
                     .category-content
                       h4.color-main
                         | Захист
