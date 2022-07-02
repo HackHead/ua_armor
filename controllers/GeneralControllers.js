@@ -9,7 +9,7 @@ import { productValidation } from '../validations/SchemaValidation.js'
 
 export const getIndexPageView = async (req, res) => {
     const slider_products = await Product.find({show_in_index_slider: true});
-    const catalog_products = await Product.find({show_in_index_catalog: true})
+    const catalog_products = await Product.find({show_in_index_catalog: true}).populate('category');
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -70,13 +70,9 @@ export const getStorePageView = async (req, res) => {
     res.render('generall/route-pages/store', {data: page})
 }
 export const getProductPageView = async (req, res) => {
-    const product = await Product.findOne({_id: req.params.id});
+    const product = await Product.findOne({_id: req.params.id}).populate('category');
     const allCategories = await Category.find();
-    const activeCategory = await Category.findOne({slug: product.category});
-    const parentCategory = await Category.findOne({_id: activeCategory.parentId});
-    const relatedProducts = await Product.find({category: activeCategory.slug}).limit(6);
     const allComments = await Comment.find({productId: req.params.id});
-    
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -87,10 +83,7 @@ export const getProductPageView = async (req, res) => {
         name: 'single-product',
         product: product,
         categories: allCategories,
-        activeCategory: activeCategory,
-        parentCategory: parentCategory,
         comments: allComments,
-        relatedProducts: relatedProducts,
         misc: misc
     };
     res.render('generall/route-pages/single-product', {data: page})

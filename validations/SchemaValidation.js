@@ -28,6 +28,7 @@ export const productValidation = (data) => {
          category: Joi.string().required(),
          hidden: Joi.string(),
          running_out: Joi.string(),
+         slug: Joi.string(),
          new: Joi.string(),
          customers_choice: Joi.string(),
          show_in_index_slider: Joi.string(),

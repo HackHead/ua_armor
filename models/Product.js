@@ -25,9 +25,9 @@ const ProductSchema = new mongoose.Schema({
         max: 99,
         default: 0,
     },
-    category: {
-        type: String,
-        required: true,
+    category: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category' 
     },
     hidden: {
         type: Boolean,
@@ -61,7 +61,11 @@ const ProductSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    
+    slug: {
+        type: String,
+        required: true,
+        unique: true,
+    }
 })
 
 const Product = mongoose.model('Product', ProductSchema)

@@ -17,124 +17,58 @@ include ../components/head.pug
             table.table.card-table
               thead
                 tr
-                  th Компания
+                  th Товар
                   th Дата
                   th Имя пользователя
-                  th Оценка
+                  th E-Mail
                   th Действия
               tbody.table-border-bottom-0
-                tr
-                  td
-                    i.fab.fa-angular.fa-lg.text-danger.me-3
-                    strong Angular Project
-                  td Albert Cook
-                  td
-                    ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
-                      li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller')
-                        img.rounded-circle(src='/img/avatars/5.png' alt='Avatar')
-                  td
-                    span.badge.bg-label-primary.me-1
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                  td
-                    .dropdown
-                      button.btn.p-0.dropdown-toggle.hide-arrow(type='button' data-bs-toggle='dropdown')
-                        i.bx.bx-dots-vertical-rounded
-                      .dropdown-menu
-                        a.dropdown-item(href='javascript:void(0);')
-                          i.bx.bx-trash.me-1
-                          |  Удалить
-                tr
-                  td
-                    i.fab.fa-react.fa-lg.text-info.me-3
-                    strong Тактический рюкзак снайпера Eberlestock ...
-                  td 30.06.2022 - 12:25:04
-                  td
-                    ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
-                      li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller') Иван
-                        
-                  td
-                    span.badge.bg-label-success.me-1
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                  td
-                    .dropdown
-                      button.btn.p-0.dropdown-toggle.hide-arrow(type='button' data-bs-toggle='dropdown')
-                        i.bx.bx-dots-vertical-rounded
-                      .dropdown-menu
-                        a.dropdown-item(href='javascript:void(0);')
-                          i.bx.bx-trash.me-1
-                          |  Удалить
-                tr
-                  td
-                    i.fab.fa-vuejs.fa-lg.text-success.me-3
-                    strong VueJs Project
-                  td Trevor Baker
-                  td
-                    ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
-                      li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller')
-                        img.rounded-circle(src='/img/avatars/5.png' alt='Avatar')
-                  td
-                    span.badge.bg-label-info.me-1
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                  td
-                    .dropdown
-                      button.btn.p-0.dropdown-toggle.hide-arrow(type='button' data-bs-toggle='dropdown')
-                        i.bx.bx-dots-vertical-rounded
-                      .dropdown-menu
-                        a.dropdown-item(href='javascript:void(0);')
-                          i.bx.bx-trash.me-1
-                          |  Удалить
-                tr
-                  td
-                    i.fab.fa-bootstrap.fa-lg.text-primary.me-3
-                    strong Bootstrap Project
-                  td Jerry Milton
-                  td
-                    ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
-                      li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller')
-                        img.rounded-circle(src='/img/avatars/5.png' alt='Avatar')
-                  td
-                    span.badge.bg-label-warning.me-1 
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-
-                  td
-                    .dropdown
-                      button.btn.p-0.dropdown-toggle.hide-arrow(type='button' data-bs-toggle='dropdown')
-                        i.bx.bx-dots-vertical-rounded
-                      .dropdown-menu
-                        a.dropdown-item(href='javascript:void(0);')
-                          i.bx.bx-trash.me-1
-                          |  Удалить
-                tr
-                  td
-                    i.fab.fa-bootstrap.fa-lg.text-primary.me-3
-                    strong Bootstrap Project
-                  td Jerry Milton
-                  td
-                    ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
-                      li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller')
-                        img.rounded-circle(src='/img/avatars/5.png' alt='Avatar')
-                  td
-                    span.badge.bg-label-danger.me-1 
-                        <i class='bx bxs-star'></i>
-
-                  td
-                    .dropdown
-                      button.btn.p-0.dropdown-toggle.hide-arrow(type='button' data-bs-toggle='dropdown')
-                        i.bx.bx-dots-vertical-rounded
-                      .dropdown-menu
-                        a.dropdown-item(href='javascript:void(0);')
-                          i.bx.bx-trash.me-1
-                          |  Удалить
+                each comment in data.comments
+                  tr
+                    td
+                      i.fab.fa-angular.fa-lg.text-danger.me-3
+                      strong 
+                        a( target="_blank" href='/product/' + comment.productId) Ссылка
+                    td #{comment.date.toLocaleString('ru-RU', { timeZone: 'UTC' })}
+                    td
+                      ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
+                        li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller') #{comment.name}
+                    //- td
+                    //-   if comment.rate === '1'
+                    //-     span.badge.bg-label-danger.me-1
+                    //-         <i class='bx bxs-star'></i>
+                    //-   else if comment.rate === '2'
+                    //-     span.badge.bg-label-danger.me-1
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-   else if comment.rate === '3'
+                    //-     span.badge.bg-label-danger.me-1
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-   if comment.rate === '4'
+                    //-     span.badge.bg-label-danger.me-1
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-   if comment.rate === '5'
+                    //-     span.badge.bg-label-success.me-1
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    //-         <i class='bx bxs-star'></i>
+                    td
+                      span #{comment.email}
+                    td
+                      .dropdown
+                        button.btn.p-0.dropdown-toggle.hide-arrow(type='button' data-bs-toggle='dropdown')
+                          i.bx.bx-dots-vertical-rounded
+                        .dropdown-menu
+                          a.dropdown-item(href='javascript:void(0);')
+                            i.bx.bx-trash.me-1
+                            |  Удалить
           .row.mb-5 
             .demo-inline-spacing
               nav(aria-label='Page navigation')

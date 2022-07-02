@@ -32,12 +32,12 @@ include ../components/head.pug
                     .mb-3
                       label.form-label(for='exampleFormControlSelect1') Категория товара
                       select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' name="category")
-                        each category, index in data.categories
+                        each category in data.categories
                           if category.parentId
-                            if category.slug === data.product.category
-                              option(selected="" value=category.slug) #{category.name}
+                            if String(category._id) == String(data.product.category._id)
+                              option(selected="" value=category._id) #{category.name}
                             else
-                              option(value=category.slug) #{category.name}
+                              option(value=category._id) #{category.name}
                     .mb-3
                       label.form-label(for='exampleFormControlTextarea1') Описание
                       textarea#exampleFormControlTextarea1.form-control(rows='8' name="description")

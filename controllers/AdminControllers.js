@@ -61,8 +61,9 @@ export const getAdminContactsView = (req, res) => {
 // Страница редактирования существуюющего товара в админке
 export const getProductEditView = async (req, res) => {
     const id = req.params.id;
-    const product = await Product.findOne({_id: id}).exec();
+    const product = await Product.findOne({_id: id}).populate('category').exec();
     const categories = await Category.find();
+    
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -93,7 +94,27 @@ export const getAdminMiscView = async (req, res) => {
     };
     res.render('admin/route-pages/misc', {data: page})
 }
+export const getAdminCommentsView = async (req, res) => {
+    const comments = await Comment.find().limit(20);
+    const commentProducts = []
+    for(let comm of comments){
+        commentProducts.push(comm._id)
+    };
+    const products = await Product.find({"$in": commentProducts});
 
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'comments',
+        misc: misc,
+        comments: comments
+    };
+    res.render('admin/route-pages/comments', {data: page})
+};
 // Страница с одним товаром в админке
 export const getAdminProductView = async (req, res) => {
     const categories = await Category.find();
@@ -160,6 +181,7 @@ export const createProduct = async (req, res) => {
          hidden: Boolean(req.body.hidden),
          running_out: Boolean(req.body.runnig_out),
          new: Boolean(req.body.new),
+         slug: slugify(req.body.name),
          customers_choice: Boolean(req.body.customers_choice),
          show_in_index_slider: Boolean(req.body.show_in_index_slider),
          show_in_index_catalog: Boolean(req.body.show_in_index_catalog),
@@ -201,6 +223,7 @@ export const updateProduct = async (req, res) => {
         hidden: Boolean(req.body.hidden),
         running_out: Boolean(req.body.runnig_out),
         new: Boolean(req.body.new),
+        slug: slugify(req.body.name),
         customers_choice: Boolean(req.body.customers_choice),
         show_in_index_slider: Boolean(req.body.show_in_index_slider),
         show_in_index_catalog: Boolean(req.body.show_in_index_catalog),
@@ -251,7 +274,6 @@ export const newComment = async (req, res) => {
 
 
 export const createCategory = async (req, res) => {
-    console.log(req.body)
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name)
@@ -264,7 +286,46 @@ export const createCategory = async (req, res) => {
     const cat = await new Category(categoryObj).save((error, category) => {
         if(error) return res.status(400).send(error);
         if(category) {
-            return res.status(200).send(category)
+            return res.status(200).redirect('/admin/categories/new')
         }
     })
+}
+
+export const updateMisc = async (req, res) => {
+    const target = req.params.target;
+    switch (target) {
+        case 'instagram': 
+            misc.contacts.instagram = req.body.link;
+            break;
+        case 'telegram': 
+            misc.contacts.telegram = req.body.link;
+            break;
+        case 'viber': 
+            misc.contacts.viber = req.body.link;
+            break;
+        case 'phone': 
+            misc.contacts.phone = req.body.phone;
+            break;
+        case 'email': 
+            misc.contacts.email = req.body.email;
+            break;
+        case 'address': 
+            misc.contacts.city = req.body.city;
+            misc.contacts.street = req.body.street;
+    };
+    res.status(200).redirect('/admin/contacts')
+}
+
+export const getLoginView = async (req, res) => {
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'comments',
+        misc: misc,
+    };
+    res.render('admin/route-pages/login', {data: page})
 }

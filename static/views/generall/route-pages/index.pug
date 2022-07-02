@@ -57,13 +57,14 @@ include ../components/head.pug
                                 .product-inner
                                   .product-img(style="max-width: 100%; margin: 0 auto;")
                                     a(href='/product/' + product.id)
-                                      span.onsale Sale!
+                                      if product.sale > 0
+                                        span.onsale(style="font-size: 1.1em") Знижка!
                                       img(src='/' + product.images[0] alt='' width='900' height='900')
                                   .wrap-header
                                     h2
                                       a(href='/product/' + product.id) #{product.name.slice(0, 15)}...
                                     span.cat-product
-                                      a(href='/shop/' + product.category rel='tag') Тактичне спорядження
+                                      a(href='/shop/' + product.category rel='tag') #{product.category.name}
                                   
                                   .wrap-footer
                                     if product.sale > 0
@@ -76,7 +77,7 @@ include ../components/head.pug
                                         ins
                                           span
                                             span
-                                            | #{(product.price / 100 * (100 - product.sale)).toFixed(0)}
+                                            | #{Math.floor((product.price / 100 * (100 - product.sale)))}
                                             sup 00
                                     else
                                       span.price

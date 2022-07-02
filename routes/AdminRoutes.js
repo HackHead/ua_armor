@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createCategory, newComment, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView } from "../controllers/AdminControllers.js";
+import { createCategory, newComment, getAdminCommentsView, updateMisc, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView, getLoginView } from "../controllers/AdminControllers.js";
 import multer from "multer";
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
@@ -26,18 +26,7 @@ router.get('/admin/products', getAdminProductsView)
 
 router.get('/admin/product/new', getAdminProductView)
 
-router.get('/admin/products/comments', (req, res) => {
-    const page = {
-        lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
-        robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
-        name: 'comments'
-    };
-    res.render('admin/route-pages/comments', {data: page})
-})
+router.get('/admin/products/comments', getAdminCommentsView)
 
 router.get('/admin/categories/new', getNewCategoryView)
 
@@ -49,4 +38,7 @@ router.post('/product/category/create', createCategory)
 
 router.post('/admin/mail/users/new', newUserMail);
 router.post('/comment/new', newComment);
+router.post('/admin/misc/update/:target', updateMisc)
+router.get('/login', getLoginView)
+
 export default router;

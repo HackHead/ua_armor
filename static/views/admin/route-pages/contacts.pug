@@ -27,9 +27,9 @@ include ../components/head.pug
                         .flex-grow-1.row
                           .col-8.col-sm-7.mb-sm-0.mb-2
                             h6.mb-0 Viber
-                            small.text-muted Не подключен
+                            small.text-muted #{data.misc.contacts.viber}
                           .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button'  data-bs-toggle='modal' data-bs-target='#modalViber')
                               i.bx.bxs-edit-alt
                       
                             
@@ -39,9 +39,9 @@ include ../components/head.pug
                         .flex-grow-1.row
                           .col-8.col-sm-7.mb-sm-0.mb-2
                             h6.mb-0 Telegram
-                            small.text-muted Не подключен
+                            small.text-muted #{data.misc.contacts.telegram}
                           .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button'  data-bs-toggle='modal' data-bs-target='#modalTelegram')
                               i.bx.bxs-edit-alt
                       .d-flex.mb-3
                         .flex-shrink-0
@@ -49,12 +49,112 @@ include ../components/head.pug
                         .flex-grow-1.row
                           .col-8.col-sm-7.mb-sm-0.mb-2
                             h6.mb-0 instagram
-                            a(href='https://www.instagram.com/themeselection/' target='_blank') @ThemeSelection
+                            a(href=data.misc.contacts.instagram target='_blank' ) #{data.misc.contacts.instagram}
                           .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button' data-bs-toggle='modal' data-bs-target='#modalInstagram')
                               i.bx.bxs-edit-alt
                             
-                      // /Social Accounts
+                      #modalInstagram.modal.fade(tabindex='-1' aria-hidden='true')
+                        form(method="POST" action="/admin/misc/update/instagram")
+                          .modal-dialog.modal-dialog-centered(role='document')
+                            .modal-content
+                                .modal-header
+                                    h5#modalInstagramTitle.modal-title Редактирование ссылки на инстаграм
+                                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
+                                .modal-body
+                                    .form-floating.mb-3
+                                      input.form-control(name="link" type='text' required placeholder='https://instagram.com' aria-describedby='floatingInputHelp' value=data.misc.contacts.instagram)
+                                      label(for='floatingInput') Ссылка
+                                      .form-text
+                                        | Должно быть не короче 8 и не длиннее 128 символов*
+                                .modal-footer
+                                    button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                    button.btn.btn-primary(type='submit') Сохранить
+                      #modalTelegram.modal.fade(tabindex='-1' aria-hidden='true')
+                        form(method="POST" action="/admin/misc/update/telegram")
+                          .modal-dialog.modal-dialog-centered(role='document')
+                              .modal-content
+                                  .modal-header
+                                      h5#modalTelegramTitle.modal-title Редактирование ссылки на телеграм
+                                      button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
+                                  .modal-body
+                                      .form-floating.mb-3
+                                        input.form-control(name="link" type='text' required placeholder='https://telegram.com' aria-describedby='floatingInputHelp' value=data.misc.contacts.telegram)
+                                        label(for='floatingInput') Ссылка
+                                        .form-text
+                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                  .modal-footer
+                                      button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                      button.btn.btn-primary(type='submit') Сохранить
+                      #modalViber.modal.fade(tabindex='-1' aria-hidden='true')
+                        form(method="POST" action="/admin/misc/update/viber")
+                          .modal-dialog.modal-dialog-centered(role='document')
+                              .modal-content
+                                  .modal-header
+                                      h5#modalViberTitle.modal-title Редактирование ссылки на Вайбер
+                                      button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
+                                  .modal-body
+                                      .form-floating.mb-3
+                                        input.form-control(name="link" type='text' required placeholder='https://viber.com' aria-describedby='floatingInputHelp' value=data.misc.contacts.viber)
+                                        label(for='floatingInput') Ссылка
+                                        .form-text
+                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                  .modal-footer
+                                      button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                      button.btn.btn-primary(type='submit') Сохранить
+                      #modalPhone.modal.fade(tabindex='-1' aria-hidden='true')
+                        form(method="POST" action="/admin/misc/update/phone")
+                          .modal-dialog.modal-dialog-centered(role='document')
+                              .modal-content
+                                  .modal-header
+                                      h5#modalPhoneTitle.modal-title Редактирование номера телефона
+                                      button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
+                                  .modal-body
+                                      .form-floating.mb-3
+                                        input.form-control(name="phone" type='text' required  aria-describedby='floatingInputHelp' value=data.misc.contacts.phone)
+                                        label(for='floatingInput') Номер телефона
+                                        .form-text
+                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                  .modal-footer
+                                      button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                      button.btn.btn-primary(type='submit') Сохранить
+                      #modalEmail.modal.fade(tabindex='-1' aria-hidden='true')
+                        form(method="POST" action="/admin/misc/update/email")
+                          .modal-dialog.modal-dialog-centered(role='document')
+                              .modal-content
+                                  .modal-header
+                                      h5#modalEmailTitle.modal-title Редактирование адреса электронной почты
+                                      button.btn-close(type='email' data-bs-dismiss='modal' aria-label='Закрыть')
+                                  .modal-body
+                                      .form-floating.mb-3
+                                        input.form-control(name="email" type='text' required aria-describedby='floatingInputHelp' value=data.misc.contacts.email)
+                                        label(for='floatingInput') Адрес
+                                        .form-text
+                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                  .modal-footer
+                                      button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                      button.btn.btn-primary(type='submit') Сохранить
+                      #modalAddress.modal.fade(tabindex='-1' aria-hidden='true')
+                        form(method="POST" action="/admin/misc/update/address")
+                          .modal-dialog.modal-dialog-centered(role='document')
+                              .modal-content
+                                  .modal-header
+                                      h5#modalAddressTitle.modal-title Редактирование физического адреса
+                                      button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
+                                  .modal-body
+                                      .form-floating.mb-3
+                                        input.form-control(name="city" type='text' required aria-describedby='floatingInputHelp' value=data.misc.contacts.city)
+                                        label(for='floatingInput') Город
+                                        .form-text
+                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                      .form-floating.mb-3
+                                        input.form-control(name="street" type='text' required aria-describedby='floatingInputHelp' value=data.misc.contacts.street)
+                                        label(for='floatingInput') Улица
+                                        .form-text
+                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                  .modal-footer
+                                      button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                      button.btn.btn-primary(type='submit') Сохранить
                 .col-md-6.col-12.mb-4
                   .card
                     h5.card-header Другое
@@ -69,7 +169,7 @@ include ../components/head.pug
                             h6.mb-0 Номер телефона
                             small.text-muted #{data.misc.contacts.phone}
                           .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button' data-bs-toggle='modal' data-bs-target='#modalPhone')
                               i.bx.bxs-edit-alt
                             
                       .d-flex.mb-3
@@ -80,7 +180,7 @@ include ../components/head.pug
                             h6.mb-0 E-Mail
                             small.text-muted #{data.misc.contacts.email}
                           .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button' data-bs-toggle='modal' data-bs-target='#modalEmail')
                               i.bx.bxs-edit-alt
                             
                       .d-flex.mb-3
@@ -91,7 +191,7 @@ include ../components/head.pug
                             h6.mb-0 Физ-адрес
                             small.text-muted #{data.misc.contacts.city}, #{data.misc.contacts.street}
                           .col-4.col-sm-5.text-end
-                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button')
+                            button.btn.btn-icon.btn-outline-secondary.mr-2(type='button' data-bs-toggle='modal' data-bs-target='#modalAddress')
                               i.bx.bxs-edit-alt
                             
         .content-backdrop.fade

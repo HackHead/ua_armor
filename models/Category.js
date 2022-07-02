@@ -10,7 +10,8 @@ const CategorySchema = new mongoose.Schema({
         trim: true, 
     },
     parentId: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
     },
     slug: {
         type: String,

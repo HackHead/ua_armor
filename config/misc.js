@@ -8,7 +8,11 @@ export default {
         phone: "(0800)334-150",
         email: "uarmorinfo@gmail.com",
         city: "Київ",
-        street: "переулок Катаєва 2,"
+        street: "переулок Катаєва 2",
+        telegram: "063 167-65-33",
+        viber: "063 167-65-33",
+        instagram: "https://www.instagram.com/uarmorshop/"
+
     },
     promotion: {
 

@@ -15,8 +15,8 @@ include ../components/head.pug
               li.breadcrumb-item.first-item
                 a(href='/') Головна
               li.breadcrumb-item.0-item
-                a(href='/') #{data.parentCategory.name}
-              li.breadcrumb-item.last-item.active #{data.activeCategory.name}
+                a(href='/') #{data.product.category.name}
+              li.breadcrumb-item.last-item.active #{data.product.name}
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
     // .page_title
@@ -40,7 +40,7 @@ include ../components/head.pug
                     span.sku 4282123
                   span.posted_in
                     | Категорія: 
-                    a(href='/armashop/product-category/equipment/' rel='tag') #{data.activeCategory.name}
+                    a(href='/armashop/product-category/equipment/' rel='tag') #{data.product.category.name}
                 p.price
                   if data.product.sale
                     del
@@ -51,7 +51,7 @@ include ../components/head.pug
                     ins
                       span.woocommerce-Price-amount.amount
                         span ₴
-                        | #{data.product.price / 100 * (100 - data.product.sale)}
+                        | #{Math.floor(data.product.price / 100 * (100 - data.product.sale))}
                         sup 00
                   else
                     ins
@@ -141,8 +141,7 @@ include ../components/head.pug
                               input(type="hidden" name="productId" value=data.product._id)
                               button#submit.submit(type='submit' ) Надіслати
                   each comment in data.comments
-                    .panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews')(style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); margin-top: 3em; padding: 3em; position: relative")
-                      #reviews
+                    .panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); margin-top: 3em; padding: 3em; position: relative")                      #reviews
                         #comments
                           h5(style="text-transform: none") #{comment.name}
                         #review_form_wrapper
@@ -169,33 +168,33 @@ include ../components/head.pug
                                 .comment-date(style="position: absolute; right: 5%; top: 20%; font-size: 0.8em; font-weight: bold; opacity: 0.7") #{comment.date.toLocaleString('ru-RU', { timeZone: 'UTC' })}
               section.related.products
                 h2 Схожі товари
-                ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
-                  .owl-stage-outer
-                    .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
-                      each relatedProduct in data.relatedProducts
-                        .owl-item(style='width: 267.667px; margin-right: 30px;')
-                          li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
-                            .product-inner
-                              .product-img(style="max-width: 100%; margin: 0 auto;")
-                                a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/')
-                                  img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + relatedProduct.images[0] alt=''  width='900' height='900')
-                              .wrap-header
-                                h2.woocommerce-loop-product__title
-                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/') #{relatedProduct.name}
-                                span.cat-product
-                                  a(href='/armashop/product-category/equipment/' rel='tag') Спорядження
-                              // close product-wrap
-                              .wrap-footer
-                                span.price
-                                  span.woocommerce-Price-amount.amount
-                                    span.woocommerce-Price-currencySymbol ₴.
-                                    | 90
-                                    sup 00
-                                .product-button
-                                  a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/armashop/product/champion-of-regret-gun/?add-to-cart=582' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
+                //- ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
+                //-   .owl-stage-outer
+                //-     .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
+                //-       each relatedProduct in data.relatedProducts
+                //-         .owl-item(style='width: 267.667px; margin-right: 30px;')
+                //-           li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
+                //-             .product-inner
+                //-               .product-img(style="max-width: 100%; margin: 0 auto;")
+                //-                 a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/')
+                //-                   img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + relatedProduct.images[0] alt=''  width='900' height='900')
+                //-               .wrap-header
+                //-                 h2.woocommerce-loop-product__title
+                //-                   a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/') #{relatedProduct.name}
+                //-                 span.cat-product
+                //-                   a(href='/armashop/product-category/equipment/' rel='tag') Спорядження
+                //-               // close product-wrap
+                //-               .wrap-footer
+                //-                 span.price
+                //-                   span.woocommerce-Price-amount.amount
+                //-                     span.woocommerce-Price-currencySymbol ₴.
+                //-                     | 90
+                //-                     sup 00
+                //-                 .product-button
+                //-                   a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/armashop/product/champion-of-regret-gun/?add-to-cart=582' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
                   
                 
-                  .owl-dots
+                //-   .owl-dots
           // eof .col-
           // main aside sidebar
           aside.col-12.col-xs-12.col-lg-5.col-xl-4.order-lg-1.column-sidebar

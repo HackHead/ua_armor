@@ -37,7 +37,7 @@ include ../components/head.pug
                         option(selected='') Выберите категорию
                         each category, index in data.categories
                           if category.parentId
-                            option(value=category.slug) #{category.name}
+                            option(value=category._id) #{category.name}
                         
                     .mb-3
                       label.form-label(for='exampleFormControlTextarea1') Описание
