@@ -23,7 +23,7 @@ include ../components/head.pug
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
           nav
-            a(href='https://webdesign-finder.com/armashop') Головна
+            a(href='/') Головна
             | &nbsp;/ Магазин
           header
           
@@ -46,20 +46,36 @@ include ../components/head.pug
                   li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
                     .product-inner
                       .product-img(style="max-width: 100%; margin: 0 auto;")
-                        a(href='/product/' + product._id)
+                        a(href='/store/' + product.slug)
+                          if product.sale > 0
+                            span.onsale(style="font-size: 1em") Знижка!
                           img(src='/' + product.images[0]   width='900' height='900')
                       .wrap-header
                         h2
-                          a(href='/product/' + product._id ) #{product.name.slice(0, 15)}...
+                          a(href='/store/' + product.slug ) #{product.name.slice(0, 15)}...
                         span.cat-product
-                          a(href='/product/' + product._id  rel='tag') Equipment
+                          a(href='/store/' + product.slug  rel='tag') #{product.category.name}
                       // close product-wrap
                       .wrap-footer
-                        span.price
-                          span
-                            span
-                            | 90
-                            sup 00
+                        if product.sale > 0
+                          span.price
+                            del
+                              span 
+                                span 
+                                | #{product.price}
+                                sup 00
+                            ins
+                              span
+                                span
+                                | #{Math.floor((product.price / 100 * (100 - product.sale)))}
+                                sup 00
+                        else
+                          span.price
+                              ins
+                              span
+                                span
+                                | #{product.price}
+                                sup 00
                         .product-button
                           a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='#' data-quantity='1' data-product_id=product._id rel='nofollow') В корзину
                   

@@ -8,11 +8,11 @@ include ../components/head.pug
         // Content
         .container-xxl.flex-grow-1.container-p-y
           h4.fw-bold.py-3.mb-4
-            span.text-muted.fw-light Комментарии /
-            |  Список комментариев
+            span.text-muted.fw-light Пользователи /
+            |  Список пользователей
           hr.my-5
           // Table within card
-          if data.comments.length
+          if data.users.length
             h5.mb-4 Список
             .table-responsive.text-nowrap
               table.table.card-table
@@ -21,50 +21,25 @@ include ../components/head.pug
                     th Название товара
                     th Дата
                     th Имя пользователя
-                    th E-Mail
+                    th Почта
                     th Действия
                 tbody.table-border-bottom-0
-                  each comment in data.comments
+                  each user in data.users
                     tr
                       td
                         i.fab.fa-angular.fa-lg.text-danger.me-3
                         strong 
-                          a( target="_blank" href='/store/' + comment.product.slug) #{comment.product.name}
-                      td #{comment.date.toLocaleString('ru-RU', { timeZone: 'UTC' })}
+                          span #{user.role.name}
+                      td 
                       td
                         ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
-                          li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller') #{comment.name}
-                      //- td
-                      //-   if comment.rate === '1'
-                      //-     span.badge.bg-label-danger.me-1
-                      //-         <i class='bx bxs-star'></i>
-                      //-   else if comment.rate === '2'
-                      //-     span.badge.bg-label-danger.me-1
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-   else if comment.rate === '3'
-                      //-     span.badge.bg-label-danger.me-1
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-   if comment.rate === '4'
-                      //-     span.badge.bg-label-danger.me-1
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-   if comment.rate === '5'
-                      //-     span.badge.bg-label-success.me-1
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
-                      //-         <i class='bx bxs-star'></i>
+                          li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller') #{user.name}
+                     
                       td
-                        span #{comment.email}
+                        span #{user.email}
                       td
                         .dropdown
-                          form(action="/comment/delete/" + comment._id method="GET") 
+                          form(action="/comment/delete/" method="GET") 
                             button.btn.p-0.dropdown-toggle.hide-arrow(type='button' data-bs-toggle='dropdown')
                               i.bx.bx-dots-vertical-rounded
                             .dropdown-menu
@@ -92,7 +67,7 @@ include ../components/head.pug
                       a.page-link(href='javascript:void(0);')
                         i.tf-icon.bx.bx-chevrons-right
           else 
-            p(style="text-align: center; margin: 200px auto") На сайте пока нет комментариев
+            p(style="text-align: center; margin: 200px auto") На сайте пока нету зарегистрированных пользователей
         .content-backdrop.fade
       // Content wrapper
     // / Layout page

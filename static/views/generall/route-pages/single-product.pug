@@ -1,5 +1,6 @@
 include ../components/head.pug
 // wrappers for visual page editor and boxed version of template
+<style>#sync1 .item,#sync2 .item{margin:5px;color:#fff;text-align:center}#sync1 .item,#sync2 .synced .item{background:transparent}#sync1 .item{padding:80px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}#sync2 .item{background:transparent;padding:10px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer}#sync2 .item h1{font-size:18px}</style>
 #canvas
   #box_wrapper
     include ../components/navigation.pug
@@ -21,18 +22,22 @@ include ../components/head.pug
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
     // .page_title
     section.ls.page_content.s-py-xl-110.s-py-md-90.s-py-60.c-gutter-60
-      .container(style="max-width: 1400px")
+      .container(style="max-width: 1200px")
         .row
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
           .woocommerce-notices-wrapper
-          #content_product.col-12.col-xs-12.col-lg-7.col-xl-8.order-lg-2.column-main
-            #product-581.has-post-thumbnail.product.type-product.post-581.status-publish.first.instock.product_cat-equipment.sale.featured.shipping-taxable.purchasable.product-type-simple
-              .woocommerce-product-gallery.woocommerce-product-gallery--with-images.woocommerce-product-gallery--columns-4.images(data-columns='4' style='opacity: 1; transition: opacity 0.25s ease-in-out 0s;')
-                figure.woocommerce-product-gallery__wrapper
-                  div(data-thumb='/img/store/shopequipment1-100x100.png' data-thumb-alt='')
-                    a(href='/armashop/wp-content/uploads/2020/03/shopequipment1.png')
-                      img.wp-post-image(src='/' + data.product.images[0] alt='' title='shopequipment1' data-caption='' width='600' height='600')
+          #content_product.col-12.col-xs-12.col-lg-7.col-xl-12.order-lg-2.column-main
+            .has-post-thumbnail.product.type-product.post-581.status-publish.first.instock.product_cat-equipment.sale.featured.shipping-taxable.purchasable.product-type-simple
+              .images(data-columns='4' style='opacity: 1; transition: opacity 0.25s ease-in-out 0s;')
+                #sync1.owl-carousel(data-loop='false' data-nav='true' data-dots='false' data-center='false' data-autoplay='false' data-speed='5000' data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='15')
+                  each img in data.product.images
+                    .item(style="display: flex; align-items: center; justify-content: center")
+                      img(src="/" + img alt=data.product.name style="max-height: 350px; width: auto")
+
+
+                // /container
+
               .summary.entry-summary
                 .product_meta
                   span.sku_wrapper
@@ -81,12 +86,16 @@ include ../components/head.pug
                     a(href='#tab-additional_information' class="tab-head")
                       | Характеристики
                   li#tab-title-reviews.reviews_tab(role='tab' aria-controls='tab-reviews' onclick="toggleTabs(event);")
-                    a(href='#tab-reviews' class="tab-head")
-                      | Відгуки (#{data.comments.length})
-                #tab-description.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--description.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-description' style='display: block;')
+                    if data.comments
+                      a(href='#tab-reviews' class="tab-head")
+                        | Відгуки (#{data.comments.length})
+                    else
+                      a(href='#tab-reviews' class="tab-head")
+                        | Відгуки (0)
+                #tab-description.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--description.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-description' style='display: block; box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin: 2.5em 0 0 2.5em')
                   h2 Опис
                   p #{data.product.description}
-                #tab-additional_information.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--additional_information.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-additional_information' style='display: none;')
+                #tab-additional_information.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--additional_information.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-additional_information' style='display: none; box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin: 2.5em 0 0 2.5em')
                   h2 Додаткова інформація
                   table.woocommerce-product-attributes.shop_attributes
                     tbody
@@ -95,11 +104,11 @@ include ../components/head.pug
                         td.woocommerce-product-attributes-item__value
                           p Зелений
                 #tab-reviews.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--reviews.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style='display: none; box-shadow: none')
-                  #reviews.woocommerce-Reviews(style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em")
+                  #reviews.woocommerce-Reviews(style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin-left:")
                     #comments
                       h2.woocommerce-Reviews-title
                         | Відгуки
-                      if !data.comments.length
+                      if !data.comments
                         p.woocommerce-noreviews Відгуків до цього товару поки що немає
                     #review_form_wrapper
                       #review_form
@@ -110,14 +119,14 @@ include ../components/head.pug
                               label(for='rating') Ваша оцінка
                               p.stars
                                 span
-                                  a.star-1(href='#') 1
-                                  a.star-2(href='#') 2
-                                  a.star-3(href='#') 3
-                                  a.star-4(href='#') 4
-                                  a.star-5(href='#') 5
+                                  a.star-1(href='javascript:void(0)' data-star="1") 1
+                                  a.star-2(href='javascript:void(0)' data-star="2") 2
+                                  a.star-3(href='javascript:void(0)' data-star="3") 3
+                                  a.star-4(href='javascript:void(0)' data-star="4") 4
+                                  a.star-5(href='javascript:void(0)' data-star="5") 5
                               .select-wrap
-                                select#rating(name='rate' required='' style='display: none;')
-                                  option(value='5' selected='selected') Perfect
+                                select#rtn(name='rate' required='' style='display: none;')
+                                  option(value='5') Perfect
                                   option(value='4') Good
                                   option(value='3') Average
                                   option(value='2') Not that bad
@@ -138,95 +147,39 @@ include ../components/head.pug
                                 span.required *
                               input#email(name='email' type='email' size='30' required='' placeholder='Email адреса')
                             p.form-submit
-                              input(type="hidden" name="productId" value=data.product._id)
+                              input(type="hidden" name="product" value=data.product._id)
                               button#submit.submit(type='submit' ) Надіслати
-                  each comment in data.comments
-                    .panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); margin-top: 3em; padding: 3em; position: relative")                      #reviews
-                        #comments
-                          h5(style="text-transform: none") #{comment.name}
-                        #review_form_wrapper
-                          #review_form
-                              form#commentform.comment-form(action='/comment/new' method='post')
-                                p.comment-notes(style="margin-top: 1.5em")
-                                  span#email-notes #{comment.message}
-                                .comment-form-rating
-                                  label(for='rating') Ваша оцінка
-                                  p.stars
-                                    span
-                                      a.star-1(href='#').active 1
-                                      a.star-2(href='#').active 2
-                                      a.star-3(href='#').active 3
-                                      a.star-4(href='#').active 4
-                                      a.star-5(href='#').active 5
-                                  .select-wrap
-                                    select#rating(name='rate' required='' style='display: none;')
-                                      option(value='5' selected='selected') Perfect
-                                      option(value='4') Good
-                                      option(value='3') Average
-                                      option(value='2') Not that bad
-                                      option(value='1') Very poor
-                                .comment-date(style="position: absolute; right: 5%; top: 20%; font-size: 0.8em; font-weight: bold; opacity: 0.7") #{comment.date.toLocaleString('ru-RU', { timeZone: 'UTC' })}
-              section.related.products
+                 
+              section.related.products()
                 h2 Схожі товари
-                //- ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
-                //-   .owl-stage-outer
-                //-     .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
-                //-       each relatedProduct in data.relatedProducts
-                //-         .owl-item(style='width: 267.667px; margin-right: 30px;')
-                //-           li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
-                //-             .product-inner
-                //-               .product-img(style="max-width: 100%; margin: 0 auto;")
-                //-                 a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/')
-                //-                   img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + relatedProduct.images[0] alt=''  width='900' height='900')
-                //-               .wrap-header
-                //-                 h2.woocommerce-loop-product__title
-                //-                   a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/armashop/product/allegiance-of-the-enigma/') #{relatedProduct.name}
-                //-                 span.cat-product
-                //-                   a(href='/armashop/product-category/equipment/' rel='tag') Спорядження
-                //-               // close product-wrap
-                //-               .wrap-footer
-                //-                 span.price
-                //-                   span.woocommerce-Price-amount.amount
-                //-                     span.woocommerce-Price-currencySymbol ₴.
-                //-                     | 90
-                //-                     sup 00
-                //-                 .product-button
-                //-                   a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/armashop/product/champion-of-regret-gun/?add-to-cart=582' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
+                ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
+                  .owl-stage-outer
+                    .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
+                      each related in data.relatedProducts
+                        .owl-item(style='width: 267.667px; margin-right: 30px;')
+                          li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
+                            .product-inner
+                              .product-img(style="max-width: 100%; margin: 0 auto;")
+                                a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/' + related.slug)
+                                  img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + related.images[0] alt=''  width='900' height='900')
+                              .wrap-header
+                                h2.woocommerce-loop-product__title
+                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/' + related.slug) #{related.name}
+                                span.cat-product
+                                  a(href='/store/' + related.slug rel='tag') #{related.category.name}
+                              // close product-wrap
+                              .wrap-footer
+                                span.price
+                                  span.woocommerce-Price-amount.amount
+                                    span.woocommerce-Price-currencySymbol ₴.
+                                    | #{related.price}
+                                    sup 00
+                                .product-button
+                                  a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
                   
                 
-                //-   .owl-dots
-          // eof .col-
-          // main aside sidebar
-          aside.col-12.col-xs-12.col-lg-5.col-xl-4.order-lg-1.column-sidebar
-            .widget-theme-wrapper.widget_no_background
-              #search-3.widget.widget_search
-                form.search-form(role='search' method='get' action='/armashop/')
-                  .form-group
-                    label
-                      span.screen-reader-text Пошук:
-                      input.search-field.form-control(type='search' placeholder='Пошук' name='s' )
-                  button.search-submit(type='submit')
-                    span.screen-reader-text Пошук
-            .widget-theme-wrapper.widget_no_background
-              #woocommerce_product_categories-2.widget.woocommerce.widget_product_categories
-                h3.widget-title Категорії
-                ul.product-categories
-                  each category in data.categories
-                    if category.parentId
-                      li.cat-item.cat-item-27.current-cat
-                        a(href='/store/categories/' + category.slug) #{category.name}
-            .widget-theme-wrapper.widget_no_background
-              #woocommerce_recently_viewed_products-2.widget.woocommerce.widget_recently_viewed_products
-                h3.widget-title Ви також переглядали
-                ul.product_list_widget
-                  li
-                    a(href='/armashop/product/allegiance-of-the-enigma/')
-                      img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/img/store/shopequipment5.png' alt=''  width='900' height='900')
-                      span.product-title Allegiance Of The Enigma
-                    span.woocommerce-Price-amount.amount
-                      span.woocommerce-Price-currencySymbol ₴.
-                      | 90
-                      sup 00
+                  .owl-dots
+          
     include ../components/footer.pug
     include ../components/footer-js.pug    
     script(src="/generall/js/tabs.js")

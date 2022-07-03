@@ -1,16 +1,25 @@
 // Importing required modules
-import express from "express";
+import express, { application } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose"
 import path from "path";
 import bodyParser from "express";
-
+import cookieParser from "cookie-parser";
+import xssClean from "xss-clean/lib/index.js";
+import helmet from "helmet";
+import ExpressMongoSanitize from "express-mongo-sanitize";
+import hpp from "hpp";
+import { rateLimit } from "express-rate-limit";
 // Importing routes
 import AdminRoutes from "./routes/AdminRoutes.js";
 import GenerallRoutes from "./routes/GeneralRoutes.js";
 // 
 dotenv.config({
     path: './config/.env',
+});
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,    // 10 minutes
+    max: 100                     // 100 requests per IP
 });
 
 const app = express();
@@ -23,6 +32,14 @@ app.set("views", path.join(path.resolve(__dirname), '/static/views'));
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser());
+
+// Security middleware
+app.use(xssClean());
+app.use(ExpressMongoSanitize())
+// app.use(helmet());
+app.use(hpp());
+// app.use(limiter);
 
 app.use("/static", express.static(path.join(__dirname, '/static')));
 app.use("/img", express.static(path.join(__dirname, '/static/assets/img')))

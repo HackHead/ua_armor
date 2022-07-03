@@ -53,7 +53,7 @@ export const getContactPageView = (req, res) => {
     res.render('generall/route-pages/contacts', {data: page})
 }
 export const getStorePageView = async (req, res) => {
-    const products = await Product.find().limit(20)
+    const products = await Product.find().populate('category').limit(20)
     const categories = await Category.find();
     const page = {
         lang: 'uk-UK',
@@ -70,9 +70,10 @@ export const getStorePageView = async (req, res) => {
     res.render('generall/route-pages/store', {data: page})
 }
 export const getProductPageView = async (req, res) => {
-    const product = await Product.findOne({_id: req.params.id}).populate('category');
+    const product = await Product.findOne({slug: req.params.slug}).populate('category');
+    const relatedProducts = await Product.find({category: product.category._id}).populate('category').limit(6);
     const allCategories = await Category.find();
-    const allComments = await Comment.find({productId: req.params.id});
+    const allComments = await Comment.find({product: product._id});
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -82,6 +83,7 @@ export const getProductPageView = async (req, res) => {
         author: 'Euphoria digital agency',
         name: 'single-product',
         product: product,
+        relatedProducts: relatedProducts,
         categories: allCategories,
         comments: allComments,
         misc: misc

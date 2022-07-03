@@ -24,8 +24,8 @@ include ../components/head.pug
                           if !category.parentId
                             option(value=category.id) #{category.name}
                     .form-floating.mb-3
-                      input#floatingInput.form-control(name="name" type='text' placeholder='')
-                      label(for='floatingInput') Название новой категории
+                      input#nameInput.form-control(name="name" required type='text' placeholder='')
+                      label(for='nameInput') Название новой категории
                       .form-text
                         | Внимание! Если вы не выбирете родительськую категорию, то указанная вами категория станет родительськой    
               .col-xl-12(style="margin-left: auto; margin-right: auto;")

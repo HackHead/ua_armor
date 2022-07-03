@@ -24,14 +24,14 @@ include ../components/head.pug
                                     .col-xs-12.col-lg-7.col-xl-5
                                         .item-content
                                             h3.links-maincolor
-                                                a(href='/product/' + product.id)
+                                                a(href='/store/' + product.slug)
                                                     | #{product.name}
                                             .text-block
                                                 | #{product.description.slice(0, 100)}...
                                             .product-features
                                                 span.price
                                                     span.price-regular &#x20B4; #{product.price}
-                                            a.btn.btn-outline-maincolor.medium-btn(href='/uarmor/product/vengeance-of-moon-gun/') Придбати
+                                            a.btn.btn-outline-maincolor.medium-btn(href='/store/product/') Придбати
     
                 
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
@@ -56,15 +56,15 @@ include ../components/head.pug
                               li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
                                 .product-inner
                                   .product-img(style="max-width: 100%; margin: 0 auto;")
-                                    a(href='/product/' + product.id)
+                                    a(href='/store/' + product.slug)
                                       if product.sale > 0
-                                        span.onsale(style="font-size: 1.1em") Знижка!
+                                        span.onsale(style="font-size: 1em") Знижка!
                                       img(src='/' + product.images[0] alt='' width='900' height='900')
                                   .wrap-header
                                     h2
-                                      a(href='/product/' + product.id) #{product.name.slice(0, 15)}...
+                                      a(href='/store/' + product.slug) #{product.name.slice(0, 15)}...
                                     span.cat-product
-                                      a(href='/shop/' + product.category rel='tag') #{product.category.name}
+                                      a(href='/store/categories' + product.category rel='tag') #{product.category.name}
                                   
                                   .wrap-footer
                                     if product.sale > 0
@@ -87,7 +87,7 @@ include ../components/head.pug
                                             | #{product.price}
                                             sup 00
                                     .product-button
-                                      a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/product/'+ product._id data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') В корзину
+                                      a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/'+ product.slug data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') В корзину
                             
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
             
@@ -166,14 +166,14 @@ include ../components/head.pug
                                 li.has-post-thumbnail.product.type-product.post-580.status-publish.last.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
                                   .product-inner
                                     .product-img
-                                      a(href='/product/1')
+                                      a(href='/product/')
                                         span.onsale Знижка
                                         img(src='/img/home/shopequipment2.png' alt='' width='900' height='900')
                                     .wrap-header
                                       h2
-                                        a(href='/product/1') Полегшений бронежилет "Сармат"
+                                        a(href='/product/') Полегшений бронежилет "Сармат"
                                       span.cat-product
-                                        a(href='/product/1' rel='tag') Бронежилети
+                                        a(href='/product/' rel='tag') Бронежилети
                                     .wrap-footer
                                       span.price
                                         del
@@ -219,13 +219,13 @@ include ../components/head.pug
                                 li.has-post-thumbnail.product.type-product.post-586.status-publish.last.instock.product_cat-weapon.shipping-taxable.purchasable.product-type-simple
                                   .product-inner
                                     .product-img
-                                      a(href='/uarmor/product/hateful-golden-six-shooter/')
+                                      a(href='/store/product/')
                                         img(src='/img/home/gun_3.png' alt='' srcset='/img/home/gun_3_002.png 900w, /img/home/gun_3-150x150.png 150w, /img/home/gun_3-300x300.png 300w, /img/home/gun_3-768x768.png 768w, /img/home/gun_3-600x600.png 600w, /img/home/gun_3-100x100.png 100w' sizes='(max-width: 900px) 100vw, 900px' width='900' height='900')
                                     .wrap-header
                                       h2
-                                        a(href='/uarmor/product/hateful-golden-six-shooter/') Hateful Golden Six-Shooter
+                                        a(href='/store/product/') Hateful Golden Six-Shooter
                                       span.cat-product
-                                        a(href='/uarmor/product-category/weapon/' rel='tag') Зброя
+                                        a(href='/store/product/' rel='tag') Зброя
                                     
                                     .wrap-footer
                                       span.price

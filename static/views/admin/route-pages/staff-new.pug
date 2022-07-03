@@ -1,0 +1,45 @@
+include ../components/head.pug
+.layout-wrapper.layout-content-navbar
+  .layout-container
+    include ../components/navigation.pug
+    .layout-page
+      include ../components/navbar.pug
+      .content-wrapper
+        // Content
+        .container-xxl.flex-grow-1.container-p-y
+          h4.fw-bold.py-3.mb-4
+            span.text-muted.fw-light  Пользователи / Создать пользователя
+          .row
+            form(method="POST" action="/admin/staff/new")
+              .col-xl-6(style="margin-left: auto; margin-right: auto;")
+                .card.mb-4
+                  h5.card-header Заполните все поля
+                  .card-body
+                    .mb-3
+                      label.form-label(for='exampleFormControlSelect1') Роль нового пользователя
+                      select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' name="role" required)
+                        option(required disabled) Выберите роль
+                        each role in data.roles
+                          if role.role !== 'developer'
+                            option(required value=role._id) #{role.name}
+
+                        
+                    .form-floating.mb-3
+                      input#userNameInput.form-control(name="name" type='text' placeholder='' required)
+                      label(for='userNameInput') Имя
+                    .form-floating.mb-3
+                      input#userEmailInput.form-control(name="email" type='email' placeholder='' required)
+                      label(for='userEmailInput') E-Mail
+                    .form-floating.mb-3
+                      input#userPassowrdInput.form-control(name="password" type='password' placeholder='' required)
+                      label(for='userPassowrdInput') Пароль
+                      .form-text
+                        | Минимальная длинна пароля - 6 символов 
+              .col-xl-12(style="margin-left: auto; margin-right: auto;")
+                .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                          button.btn.btn-primary.mr-2(type="submit") Создать
+                          a.btn.btn-danger.mr-2(href="/admin/products") Отменить
+                      
+          // / Content
+        .content-backdrop.fade
+    include ../components/footer-js.pug

@@ -20,10 +20,9 @@ const UserSchema = new mongoose.Schema({
         max: 64,
         required: true,
     },
-    status: {
-        type: String,
-        required: true,
-        default: 'user'
+    role: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role'
     },
 }, {timestamps: true})
 

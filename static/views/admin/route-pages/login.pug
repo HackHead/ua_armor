@@ -35,10 +35,10 @@ include ../components/head.pug
           // /Logo
           h4.mb-2.mt-4 Ласкаво просимо! &#x1F44B;
           p.mb-4 Будь-ласка авторизуйтесь, щоб отримати доступ до панелі керування
-          form#formAuthentication.mb-3(action='index.html' method='POST')
+          form#formAuthentication.mb-3(action='/admin/signin' method='POST')
             .mb-3
               label.form-label(for='email') Email 
-              input#email.form-control(type='text' name='email-username' placeholder='Введіть вашу Email адресу' autofocus='')
+              input#email.form-control(type='text' name='email' placeholder='Введіть вашу Email адресу' autofocus='')
             .mb-3.form-password-toggle
               .d-flex.justify-content-between
                 label.form-label(for='password') Пароль

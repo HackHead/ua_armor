@@ -3,8 +3,12 @@ import Product from '../models/Product.js'
 import Category from '../models/Category.js'
 import Comment from '../models/Comment.js'
 import Mail from '../models/Mail.js'
+import User from '../models/User.js'
+import Role from '../models/Role.js'
 import misc from "../config/misc.js";
-import {productValidation, mailValidation, commentValidation} from '../validations/SchemaValidation.js'
+import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt"
+import {productValidation, mailValidation, commentValidation, loginValidation, registrationValidatation} from '../validations/SchemaValidation.js'
 import slugify from "slugify";
 //============================
 //          Страницы         =
@@ -27,7 +31,7 @@ export const getAdminDashboardView = (req, res) => {
 
 // Страница со списком товаров в админке
 export const getAdminProductsView = async (req, res) => {
-    const products = await Product.find().limit(20)
+    const products = await Product.find().populate('category').limit(20)
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -95,12 +99,12 @@ export const getAdminMiscView = async (req, res) => {
     res.render('admin/route-pages/misc', {data: page})
 }
 export const getAdminCommentsView = async (req, res) => {
-    const comments = await Comment.find().limit(20);
+    const comments = await Comment.find().limit(20).populate('product');
     const commentProducts = []
     for(let comm of comments){
         commentProducts.push(comm._id)
     };
-    const products = await Product.find({"$in": commentProducts});
+    
 
     const page = {
         lang: 'uk-UK',
@@ -265,13 +269,18 @@ export const newComment = async (req, res) => {
         email: req.body.email,
         message: req.body.message,
         rate: req.body.rate,
-        productId: req.body.productId
+        product: req.body.product
     };
 
     const newComment = await new Comment(commentData).save();
     res.send('Ваш коментар успішно опублікований')
 }
+export const deleteComment = async(req, res) => {
+    console.log(req.params.id)
+    const comment = await Comment.findOne({_id: req.params.id}).remove();
 
+    res.redirect('/admin/products/comments')
+}
 
 export const createCategory = async (req, res) => {
     const categoryObj = {
@@ -329,3 +338,99 @@ export const getLoginView = async (req, res) => {
     };
     res.render('admin/route-pages/login', {data: page})
 }
+
+export const signInAdmin = async (req, res) => {
+    const { error } = loginValidation(req.body);
+    if(error) {
+        return res.status(400).send(error.details[0].message);
+    }
+
+    const user = await User.findOne({email: req.body.email})
+    if(!user) return res.status(400).send('Account with this email does not exist');
+    
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+    if(!validPass) return res.status(400).send('Invalid password');
+
+    // Створення і присвоєня токену
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    res.cookie('auth_token', token, { maxAge: 86400000, httpOnly: true });
+    res.status(200).redirect('/admin');
+}
+
+export const newStaff = async (req, res) => {
+    // Валідація введених користувачем даних
+    const { error } = registrationValidatation(req.body);
+    // Якщо дані введено неправильно - повернути помилку
+    if(error) {
+        return res.status(400).send(error.details[0].message);
+    }
+
+    // Перевірка чи заданий користувачем e-mail іже існує
+    const emailExists = await User.findOne({email: req.body.email})
+    if(emailExists) return res.status(400).send('Email already exists');
+
+    // Хешування пароля
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt)
+
+    // Створюємо екземпляр класу користувача
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: hashPassword,
+        role: req.body.role
+    });
+
+    // Зберігаємо дані про користувача в базі
+    try {
+        const savedUser = await user.save();
+        res.status(200).redirect('/admin')
+        
+    } catch(err){
+        res.status(400).send(err)
+    }
+}
+
+export const getNewStaffView = async (req, res) => {
+    const roles = await Role.find();
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'create-user',
+        misc: misc,
+        roles: roles
+    };
+    res.render('admin/route-pages/staff-new', {data: page})
+};
+export const getAllUsers = async(req,  res) => {
+    const users = await User.find().populate('role')
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'users',
+        misc: misc,
+        users: users
+    };
+    res.render('admin/route-pages/users', {data: page})
+}
+export const getStaffList = async (req, res) => {
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'comments',
+        misc: misc,
+    };
+    res.render('admin/route-pages/staff-new', {data: page})
+};

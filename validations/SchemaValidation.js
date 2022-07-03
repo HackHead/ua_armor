@@ -5,6 +5,7 @@ export const registrationValidatation = (data) => {
         name: Joi.string().min(2).required().max(255),
         email: Joi.string().min(6).required().max(255).email(),
         password: Joi.string().min(6).required().max(1024),
+        role: Joi.string().required()
     });
 
     return schema.validate(data)
@@ -57,7 +58,7 @@ export const commentValidation = (data) => {
         message: Joi.string().min(8).max(4096).required(),
         email: Joi.string().min(6).max(320).required().email(),
         rate: Joi.string().regex(/^[0-9]{0,9}$/),
-        productId: Joi.string().required(),
+        product: Joi.string().required(),
     })
 
     return shema.validate(data)
