@@ -9,8 +9,8 @@ export default {
         email: "uarmorinfo@gmail.com",
         city: "Київ",
         street: "переулок Катаєва 2",
-        telegram: "063 167-65-33",
-        viber: "063 167-65-33",
+        telegram: "380631676533",
+        viber: "380631676533",
         instagram: "https://www.instagram.com/uarmorshop/"
 
     },

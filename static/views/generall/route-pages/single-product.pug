@@ -22,7 +22,8 @@ include ../components/head.pug
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
     // .page_title
     section.ls.page_content.s-py-xl-110.s-py-md-90.s-py-60.c-gutter-60
-      .container(style="max-width: 1200px")
+      //- .container.mt-5.mb-5(style="max-width: 1200px; box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); box-sizing: content-box; padding: 4em")
+      .container.mt-5.mb-5(style="max-width: 1200px;")
         .row
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
@@ -105,9 +106,9 @@ include ../components/head.pug
                           p Зелений
                 #tab-reviews.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--reviews.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style='display: none; box-shadow: none')
                   #reviews.woocommerce-Reviews(style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin-left:")
-                    #comments
+                    #tab-comments
                       h2.woocommerce-Reviews-title
-                        | Відгуки
+                        | Написати відгук
                       if !data.comments
                         p.woocommerce-noreviews Відгуків до цього товару поки що немає
                     #review_form_wrapper
@@ -154,27 +155,51 @@ include ../components/head.pug
                       .panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); margin-top: 3em; padding: 3em; position: relative")
                           #comments
                             h5(style="text-transform: none") #{comment.name}
-                          #review_form_wrapper
-                            #review_form
-                                form#commentform.comment-form(action='/comment/new' method='post')
-                                  p.comment-notes(style="margin-top: 1.5em")
-                                    span#email-notes #{comment.message}
-                                  .comment-form-rating
-                                    label(for='rating') Ваша оцінка
-                                    p.stars
+                          .div
+                            .div
+                                p.comment-notes(style="margin-top: 1.5em")
+                                  span#email-notes #{comment.message}
+                                .comment-form-rating
+                                  if comment.rate == '1'
+                                    p.stars.selected.mt-3
                                       span
                                         a.star-1(href='#').active 1
+                                        a.star-2(href='#') 2
+                                        a.star-3(href='#') 3
+                                        a.star-4(href='#') 4
+                                        a.star-5(href='#') 5
+                                  else if comment.rate == '2'
+                                    p.stars.selected.mt-3
+                                      span
+                                        a.star-1(href='#') 1
                                         a.star-2(href='#').active 2
+                                        a.star-3(href='#') 3
+                                        a.star-4(href='#') 4
+                                        a.star-5(href='#') 5
+                                  else if comment.rate == '3'
+                                    p.stars.selected.mt-3
+                                      span
+                                        a.star-1(href='#') 1
+                                        a.star-2(href='#') 2
                                         a.star-3(href='#').active 3
+                                        a.star-4(href='#') 4
+                                        a.star-5(href='#') 5
+                                  else if comment.rate == '4'
+                                    p.stars.selected.mt-3
+                                      span
+                                        a.star-1(href='#') 1
+                                        a.star-2(href='#') 2
+                                        a.star-3(href='#') 3
                                         a.star-4(href='#').active 4
+                                        a.star-5(href='#') 5
+                                  else if comment.rate == '5'
+                                    p.stars.selected.mt-3
+                                      span
+                                        a.star-1(href='#') 1
+                                        a.star-2(href='#') 2
+                                        a.star-3(href='#') 3
+                                        a.star-4(href='#') 4
                                         a.star-5(href='#').active 5
-                                    .select-wrap
-                                      select#commentsRating(name='rate' required='' style='display: none;')
-                                        option(value='5' selected='selected') Perfect
-                                        option(value='4') Good
-                                        option(value='3') Average
-                                        option(value='2') Not that bad
-                                        option(value='1') Very poor
                                   .comment-date(style="position: absolute; right: 5%; top: 20%; font-size: 0.8em; font-weight: bold; opacity: 0.7") #{comment.date.toLocaleString('ru-RU', { timeZone: 'UTC' })}
               
               section.related.products()

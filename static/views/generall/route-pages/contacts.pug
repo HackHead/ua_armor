@@ -52,9 +52,9 @@ include ../components/head.pug
                       p
                         a(href='mailto:' + data.misc.contacts.email) #{data.misc.contacts.email}
                 span.social-icons
-                  a.fa.fa-paper-plane(href='https://web.telegram.org/' target='_blank')
-                  a.fa.fa-instagram(href='https://www.instagram.com/' target='_blank')
-                  a.fa.fa-viber(href='https://www.youtube.com/' target='_blank')
+                  a.fa.fa-paper-plane(href='https://t.me/+'+ data.misc.contacts.telegram target='_blank')
+                  a.fa.fa-instagram(href=data.misc.contacts.instagram target='_blank')
+                  a.fa.fa-viber(href='viber://chat?number=%2B'+ data.misc.contacts.viber target='_blank')
                 .fw-divider-space.divider-60.divider-md-90.divider-lg-130.divider-xl-150
             .col-xs-12.col-12.col-lg-6.text-center.text-sm-left.ls.col-xl-7
               .px-xl-80.px-lg-60.px-sm-30.ls
