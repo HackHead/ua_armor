@@ -20,7 +20,7 @@ export const getIndexPageView = async (req, res) => {
         name: 'home',
         slider_products: slider_products,
         catalog_products: catalog_products,
-        misc: misc
+        misc: misc,
     };
     res.render('generall/route-pages/index', {data: page})
 }
@@ -47,7 +47,7 @@ export const getContactPageView = (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'about',
+        name: 'contacts',
         misc: misc
     };
     res.render('generall/route-pages/contacts', {data: page})
@@ -62,7 +62,7 @@ export const getStorePageView = async (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'about',
+        name: 'store',
         products: products,
         categories: categories,
         misc: misc
@@ -81,7 +81,7 @@ export const getProductPageView = async (req, res) => {
         keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
-        name: 'single-product',
+        name: 'product',
         product: product,
         relatedProducts: relatedProducts,
         categories: allCategories,
