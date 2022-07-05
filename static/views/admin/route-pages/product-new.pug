@@ -52,11 +52,6 @@ include ../components/head.pug
                       textarea.form-control(rows='3' required name="description")
                       .form-text
                         | Должно быть не короче 64 и не длиннее 4096 символов*
-                    .form-floating.mb-3
-                      input#reviewInput.form-control(name="review" type='text' placeholder='https://www.youtube.com/watch?v=u6BVLLzou2k&ab_channel=avguris' aria-describedby='floatingInputHelp')
-                      label(for='reviewInput') Ссылка на обзор
-                      .form-text
-                        | Обзоры должны быть загружены на видеохостинг www.youtube.com
                 .card.mb-4
                   h5.card-header Характеристики
                   .card-body.features-wrap(style="padding-left: 0; margin-left: 0; padding: 1.5rem 0 1.5rem 0 ")

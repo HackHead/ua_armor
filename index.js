@@ -10,7 +10,8 @@ import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import { rateLimit } from "express-rate-limit";
-
+import session from "express-session";
+import MongoStore from "connect-mongo";
 // Importing routes
 import AdminRoutes from "./routes/AdminRoutes.js";
 import PublicRoutes from "./routes/PublicRoutes.js"
@@ -41,6 +42,17 @@ app.use(ExpressMongoSanitize())
 // app.use(helmet());
 app.use(hpp());
 // app.use(limiter);
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  }),
+  cookie: { maxAge: 180 * 60 * 1000, secure: false }
+}))
 
 app.use("/static", express.static(path.join(__dirname, '/static')));
 app.use("/img", express.static(path.join(__dirname, '/static/assets/img')))

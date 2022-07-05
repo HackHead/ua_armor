@@ -186,9 +186,9 @@ export const getAdminProductView = async (req, res) => {
         }
     } catch (err) {
         const data = {
-        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
-    }
-    return res.status(400).render('admin/status-pages/400', {data: data});
+            message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data});
     }
     res.render('admin/route-pages/product-new.pug', {data: page})
 }
@@ -228,9 +228,9 @@ export const deleteProduct = async (req, res) => {
         res.redirect('/admin/products')
     } catch (err) {
         const data = {
-        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
-    }
-    return res.status(400).render('admin/status-pages/400', {data: data});
+            message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data});
     }
 }
 
@@ -245,7 +245,6 @@ export const createProduct = async (req, res) => {
         hidden: req.body?.hidden,
         new: req.body?.new,
         availability: req.body?.availability,
-        review: req.body?.review,
         customers_choice: req.body?.customers_choice,
         show_in_index_catalog: req.body?.show_in_index_catalog,
     }
@@ -318,13 +317,24 @@ export const createProduct = async (req, res) => {
 
 // Endpoint для обновления товара
 export const updateProduct = async (req, res) => {
-    // const id = req.params.id;
-    const {error} = productValidation(req.body);
+    const productValidationData = {
+        name: req.body?.name,
+        description: req.body?.description,
+        price: req.body?.price,
+        sale: req.body?.sale,
+        category: req.body?.category,
+        hidden: req.body?.hidden,
+        new: req.body?.new,
+        availability: req.body?.availability,
+        customers_choice: req.body?.customers_choice,
+        show_in_index_catalog: req.body?.show_in_index_catalog,
+    }
+    const {error} = productValidation(productValidationData);
 
     if(error){
         return res.status(400).send(error.details[0].message)
     };
-    let update;
+    let update = {};
     if(req.files.length){
         const filePaths = []
         req.files.forEach((file) => {
@@ -334,23 +344,51 @@ export const updateProduct = async (req, res) => {
         update.images = filePaths
     }
     const filter = {_id: req.params?.id};
-    update = {
-         name: req.body.name,
-         description: req.body.description,
-         price: req.body.price,
-         sale: req.body.sale,
-         category: req.body.category,
-         hidden: Boolean(req.body.hidden),
-         new: Boolean(req.body.new),
-         slug: slugify(req.body.name),
-         availability: req.body.availability,
-         customers_choice: Boolean(req.body.customers_choice),
-         show_in_index_catalog: Boolean(req.body.show_in_index_catalog),
-         images: filePaths,
-   };
 
+    update.name = req.body.name;
+    update.description =  req.body.description;
+    update.price =  req.body.price;
+    update.sale =  req.body.sale;
+    update.category =  req.body.category;
+    update.hidden =  Boolean(req.body.hidden);
+    update.new =  Boolean(req.body.new);
+    update.slug =  slugify(req.body.name);
+    update.availability =  req.body.availability;
+    update.customers_choice =  Boolean(req.body.customers_choice);
+    update.show_in_index_catalog =  Boolean(req.body.show_in_index_catalog);
+    
+   const featuresValidationData = {
+        product: req.params?.id,
+        featureKeys: req.params.featureKeys,
+        featureValues: req.params.featureValues
+   }
+    const {validerror} = featureValidation(featuresValidationData);
+    if(validerror){
+        return res.status(400).send(error.details[0].message)
+    };
     try {
-        await Product.findOneAndUpdate(filter, update);
+        const product = await Product.findOneAndUpdate(filter, update);
+        if(!product) {
+            return res.status(400).send('Товара с таким идентификатором не существует');
+        }
+        await Feature.deleteMany({product: req.params.id})
+        
+        if(req.body.featureKeys.length !== req.body.featureValues.length){
+            return res.status(400).send('Количество ключей и названий характеристик не совпадает')
+        }
+        if(req.body.featureKeys.length && req.body.featureValues.length){
+            const insertData = []
+            for(let i = 0; i <= req.body.featureKeys.length - 1; i++){
+                const pushData = {
+                    product: req.params?.id,
+                    key: req.body.featureKeys[i],
+                    value: req.body.featureValues[i],
+                };
+                if(pushData.key.length === 0 || pushData.value.length === 0) continue;
+                insertData.push(pushData)
+            };
+            await Feature.insertMany(insertData)
+        }
         res.status(200).redirect('/admin/products');
     } catch(err){
         res.status(400).send(err)
