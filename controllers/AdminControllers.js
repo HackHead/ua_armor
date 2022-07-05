@@ -274,7 +274,6 @@ export const createProduct = async (req, res) => {
         if(req.body.featureKeys.length !== req.body.featureValues.length){
             return res.status(400).send('Количество ключей и названий характеристик не совпадает')
         }
-        console.log(req.body.featureKeys, req.body.featureValues)
         if(req.body.featureKeys.length && req.body.featureValues.length){
             const insertData = []
             for(let i = 0; i <= req.body.featureKeys.length - 1; i++){
@@ -283,7 +282,6 @@ export const createProduct = async (req, res) => {
                     key: req.body.featureKeys[i],
                     value: req.body.featureValues[i],
                 };
-                console.log(pushData)
                 if(pushData.key.length === 0 || pushData.value.length === 0) continue;
                 insertData.push(pushData)
             };
@@ -291,7 +289,6 @@ export const createProduct = async (req, res) => {
         }
         
     } catch(err){
-        console.log(err)
         const data = {
             message: err
         }
@@ -420,12 +417,14 @@ export const createCategory = async (req, res) => {
 
 export const updateMisc = async (req, res) => {
     const target = req.params.target;
+    
     if(!target) {
         const data = {
             message: 'Данные с клиента не были переданы.'
         }
         return res.status(400).render('admin/status-pages/400', {data: data});
     }
+    let redirect;
     switch (target) {
         case 'instagram': 
             misc.contacts.instagram = req.body.link;
@@ -445,8 +444,40 @@ export const updateMisc = async (req, res) => {
         case 'address': 
             misc.contacts.city = req.body.city;
             misc.contacts.street = req.body.street;
+        case 'about': 
+            misc.about = req.body.about;
+            break;
+        case 'footer':
+            misc.footer = req.body.footer;
+            break
+        case 'favicon':
+            misc.favicon = req.file.path;
+            redirect = '/admin/misc'
+            break
+        case 'logo':
+            misc.logo = req.file.path;
+            redirect = '/admin/misc'
+            break
+        case 'inverse':
+            misc.logoInverse = req.file.path;
+            redirect = '/admin/misc'
+            break
+        case 'promotion':
+            const body = JSON.parse(JSON.stringify(req.body))
+            misc.promotion = {};
+            misc.promotion.title = body.title;
+            misc.promotion.deadline = body.deadline;
+            misc.promotion.link = body.link;
+            misc.promotion.button = body.button;
+            misc.promotion.image = req.file.path;
+            redirect = '/admin/misc'
+            break
+        case 'promotion-deactivate':
+            misc.promotion = null;
+            redirect = '/admin/misc'
+            break;
     };
-    res.status(200).redirect('/admin/contacts')
+    res.status(200).redirect(redirect)
 }
 
 export const getLoginView = async (req, res) => {

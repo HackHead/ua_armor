@@ -2,17 +2,28 @@ import Menu from "./menu.js";
 import Helpers from "./helpers.js";
 let menu, animate;
 
-(function () {
-  $('input[type=file]').change(function () {
-    const fileCount = this.files.length;
-    // 
-    $(this).parent().parent().parent().find('.output').html('');
-        for (var i = 0; i < $(this)[0].files.length; i++) {
-          $(this).parent().parent().parent().find('.output').append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="100px" height="100px"/>');
-        }
-    $('.when-files-loaded').text(fileCount + ' Зображень обрано');
-    console.log(this.files)
-})
+(function(){
+  (function(){
+    const forms = document.querySelectorAll('form');
+    forms.forEach((form) => {
+        form.addEventListener('change', (e) => {
+            console.log(form)
+            form.querySelector('.save-wrap')?.classList.remove('hidden');
+            const inputFile = form.querySelector("input[type='file']"),
+                  output = form.querySelector('.output'),
+                  fileCount = inputFile.files.length;
+            output.innerHTML = ""
+            form.querySelector('.when-files-loaded').textContent = 'Выбрано файлов: ' + fileCount;
+
+            for (let i = 0; i < fileCount; i++) {
+              output.insertAdjacentHTML('beforeend', `<a href="javascript:void(0);">/uploads/files/${inputFile.files[i].name}</a></br>`);
+            }
+        });
+    });
+})();
+
+
+
   // Initialize menu
   //-----------------
 

@@ -15,227 +15,174 @@ include ../components/head.pug
                 .col-lg-4.mb-4
                     .card
                         h5.card-header Favicon
-                        .card-body
-                            .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
-                                label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='dropzone-file' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
-                                    div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
-                                        svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
-                                            path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
-                                        p.mb-2.text-sm(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
-                                            span(style="font-weight: 600") Нажмите чтобы загрузить
-                                        p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 2мб)
-                                    input#dropzone-file.hidden(type='file' style="display: none;")
+                        form.card-body(method="POST" action="/admin/misc/update/favicon" enctype="multipart/form-data")
+                          .output(style="width: 100%; height: auto; display: flext, flex-wrap: wrap; justify-content-space-between")
+                          .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                              input#favicon-dropzone(type="file" accept="image/png, image/webp, image/jpeg, image/ico" style="display: none" name="image")
+                              label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='favicon-dropzone' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
+                                  div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
+                                      svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
+                                          path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
+                                      p.mb-2.text-sm.when-files-loaded(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
+                                          span(style="font-weight: 600") Нажмите чтобы загрузить
+                                      p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
+                                  
+                          .form-text
+                            | Первое изображение будет выбрано в качестве превью*
+                          .mt-3.save-wrap.hidden
+                              button.btn.btn-primary.ml-2(type='submit') Сохранить
                 .col-lg-4.mb-4
                     .card
                         h5.card-header Логотип
-                        .card-body
-                            .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
-                                label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='dropzone-file' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
-                                    div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
-                                        svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
-                                            path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
-                                        p.mb-2.text-sm(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
-                                            span(style="font-weight: 600") Нажмите чтобы загрузить
-                                        p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 2мб)
-                                    input#dropzone-file.hidden(type='file' style="display: none;")
+                        form.card-body(method="POST" action="/admin/misc/update/logo" enctype="multipart/form-data")
+                          .output(style="width: 100%; height: auto; display: flext, flex-wrap: wrap; justify-content-space-between")
+                          .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                              input#logo-dropzone(type="file" accept="image/png, image/webp, image/jpeg, image/ico" style="display: none" name="image")
+                              label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='logo-dropzone' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
+                                  div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
+                                      svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
+                                          path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
+                                      p.mb-2.text-sm.when-files-loaded(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
+                                          span(style="font-weight: 600") Нажмите чтобы загрузить
+                                      p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
+                                  
+                          .form-text
+                            | Первое изображение будет выбрано в качестве превью*
+                          .mt-3.save-wrap.hidden
+                              button.btn.btn-primary.ml-2(type='submit') Сохранить
+
                 .col-lg-4.mb-4
                     .card
-                        h5.card-header Логотип (Инверсированный)
-                        .card-body
-                            .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
-                                label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='dropzone-file' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
-                                    div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
-                                        svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
-                                            path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
-                                        p.mb-2.text-sm(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
-                                            span(style="font-weight: 600") Нажмите чтобы загрузить
-                                        p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 2мб)
-                                    input#dropzone-file.hidden(type='file' style="display: none;")
+                        h5.card-header Логотип (инверсия)
+                        form.card-body(method="POST" action="/admin/misc/update/inverse" enctype="multipart/form-data")
+                          .output(style="width: 100%; height: auto; display: flext, flex-wrap: wrap; justify-content-space-between")
+                          .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                              input#inverse-dropzone(type="file" accept="image/png, image/webp, image/jpeg, image/ico" style="display: none" name="image")
+                              label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='inverse-dropzone' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
+                                  div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
+                                      svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
+                                          path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
+                                      p.mb-2.text-sm.when-files-loaded(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
+                                          span(style="font-weight: 600") Нажмите чтобы загрузить
+                                      p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
+                                  
+                          .form-text
+                            | Первое изображение будет выбрано в качестве превью*
+                          .mt-3.save-wrap.hidden
+                              button.btn.btn-primary.ml-2(type='submit') Сохранить               
+                        
                 .col-lg-6
-                    .card.mb-4
-                        h5.card-header О нас
-                        .card-body
-                            p.has-blur UArmor - надійний магазин військової амуніції  та спецспорядження. За короткий проміжок продуктивної роботи нами було реалізовано кілька десятків тисяч комплектів спеціального спорядження для військових та спецпризначенців. За довгі роки ми знайшли ефективний підхід до виробницт...
-                            .mt-3
-                                // Button trigger modal
-                                button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#modalScrollable') Посмотреть
-                                button.btn.btn-primary.ml-2(type='button' data-bs-toggle='modal' data-bs-target='#modalAbout') Редактировать
-                                
+                  .card.mb-4
+                      h5.card-header О нас
+                      .card-body
+                          p #{data.misc.about}
+                          .mt-3
+                              // Button trigger modal
+                              button.btn.btn-primary.ml-2(type='button' data-bs-toggle='modal' data-bs-target='#modalAbout') Редактировать
+                              
 
-                                // Modal
-                                #modalAbout.modal.fade(tabindex='-1' aria-hidden='true')
-                                    .modal-dialog.modal-dialog-centered(role='document')
+                              // Modal
+                              #modalAbout.modal.fade(tabindex='-1' aria-hidden='true')
+                                  form(method="POST" action="/admin/misc/update/about")
+                                    .modal-dialog.modal-dialog-centered
                                         .modal-content
                                             .modal-header
                                                 h5#modalAboutTitle.modal-title Редактирование страницы "О нас"
                                                 button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                             .modal-body
-                                                textarea.form-control(rows='3' name="description" value="")
-                                                    |    UArmor - надійний магазин військової амуніції  та спецспорядження. За короткий проміжок продуктивної роботи нами було реалізовано кілька десятків тисяч комплектів спеціального спорядження для військових та спецпризначенців. За довгі роки ми знайшли ефективний підхід до виробницт...
+                                                textarea.form-control(rows='8' name="about" value="")
+                                                    | #{data.misc.about}
                                             .modal-footer
                                                 button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
-                                                button.btn.btn-primary(type='button') Сохранить
-                                #modalScrollable.modal.fade(tabindex='-1' aria-hidden='true')
-                                    .modal-dialog.modal-dialog-scrollable(role='document')
-                                        .modal-content
-                                            .modal-header
-                                                h5#modalScrollableTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
-                                            .modal-body
-                                                p
-                                                | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                                                | in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                                p
-                                                | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                                                | lacus vel augue laoreet rutrum faucibus dolor auctor.
-                                                p
-                                                | Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                                                | scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                                                | auctor fringilla.
-                                                p
-                                                | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                                                | in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                                p
-                                                | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                                                | lacus vel augue laoreet rutrum faucibus dolor auctor.
-                                                p
-                                                | Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                                                | scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                                                | auctor fringilla.
-                                                p
-                                                | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                                                | in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                                p
-                                                | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                                                | lacus vel augue laoreet rutrum faucibus dolor auctor.
-                                                p
-                                                | Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                                                | scelerisque nisl consectetur et. Donec sed odio dui.&iukcy; Donec ullamcorper nulla non metus
-                                                | auctor fringilla.
-                                                p
-                                                | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                                                | in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                                p
-                                                | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                                                | lacus vel augue laoreet rutrum faucibus dolor auctor.
-                                                p
-                                                | Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                                                | scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                                                | auctor fringilla.
-                                                p
-                                                | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                                                | in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                                p
-                                                | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                                                | lacus vel augue laoreet rutrum faucibus dolor auctor.
-                                                p
-                                                | Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                                                | scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                                                | auctor fringilla.
-                                                p
-                                                | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                                                | in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                                p
-                                                | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                                                | lacus vel augue laoreet rutrum faucibus dolor auctor.
-                                                p
-                                                | Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                                                | scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                                                | auctor fringilla.
-                                            .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
-
-
-
-
+                                                button.btn.btn-primary(type='submit') Сохранить
                 .col-lg-6
-                    .card.mb-4
-                        h5.card-header Оплата и доставка
-                        .card-body
-                            p.has-blur Совершая покупку в интернет-магазине Abrams, Вы имеете возможность выбрать, каким способом получить заказанный Вами товар. Наша компания осуществляет доставку продукции по Украине и за границу. Доставка по территории Украины осуществляется грузоперевозчиком Новая Почта. Оплатить товар Вы можете непосредственно в отделении Новой Почты в момент получения, воспользовавшись услугой наложенного платежа (согласно тарифов Новой Почты) или совершить предоплату на карту банка (возможна комиссия согласно тарифов Вашего банка)...
-                            .mt-3
-                                // Button trigger modal
-                                button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#modalPayment') Редактировать
-                                // Modal
-                                #modalPayment.modal.fade(tabindex='-1' aria-hidden='true')
-                                    .modal-dialog.modal-dialog-centered(role='document')
-                                        .modal-content
-                                            .modal-header
-                                                h5#modalPaymentTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
-                                            .modal-body
-                                                .row
-                                                    .col.mb-3
-                                                        label.form-label(for='nameWithTitle') Name
-                                                        input#nameWithTitle.form-control(type='text' placeholder='Enter Name')
-                                                .row.g-2
-                                                    .col.mb-0
-                                                        label.form-label(for='emailWithTitle') Email
-                                                        input#emailWithTitle.form-control(type='text' placeholder='xxxx@xxx.xx')
-                                                    .col.mb-0
-                                                        label.form-label(for='dobWithTitle') DOB
-                                                        input#dobWithTitle.form-control(type='text' placeholder='DD / MM / YY')
-                                            .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
-                                                button.btn.btn-primary(type='button') Сохранить
-                .col-lg-6
-                    .card.mb-4
-                        h5.card-header Обмен и возврат
-                        .card-body
-                            p.has-blur Выбрав понравившийся товар Вы отправляете его в Корзину, далее заполняете необходимые поля по форме обязательно указав...
-                            .mt-3
-                                // Button trigger modal
-                                button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#modalReturn') Редактировать
-                                // Modal
-                                #modalReturn.modal.fade(tabindex='-1' aria-hidden='true')
-                                    .modal-dialog.modal-dialog-centered(role='document')
-                                        .modal-content
-                                            .modal-header
-                                                h5#modalReturnTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
-                                            .modal-body
-                                                .row
-                                                    .col.mb-3
-                                                        label.form-label(for='nameWithTitle') Name
-                                                        input#nameWithTitle.form-control(type='text' placeholder='Enter Name')
-                                                .row.g-2
-                                                    .col.mb-0
-                                                        label.form-label(for='emailWithTitle') Email
-                                                        input#emailWithTitle.form-control(type='text' placeholder='xxxx@xxx.xx')
-                                                    .col.mb-0
-                                                        label.form-label(for='dobWithTitle') DOB
-                                                        input#dobWithTitle.form-control(type='text' placeholder='DD / MM / YY')
-                                            .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
-                                                button.btn.btn-primary(type='button') Сохранить
-                .col-lg-6
-                    .card.mb-4
-                        h5.card-header Политика безопасности
-                        .card-body
-                            p.has-blur Администрация интернет-магазина ABRAMS гарантирует обеспечение полной конфиденциальности информации, полученной нашим интернет-магазином от зарегистрированных в нем пользователей, а также тех, кто вносит свою информацию при оформлении заказа...
-                            .mt-3
-                                // Button trigger modal
-                                button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#modalAbout') Редактировать
-                                // Modal
-                                #modalAbout.modal.fade(tabindex='-1' aria-hidden='true')
-                                    .modal-dialog.modal-dialog-centered(role='document')
-                                        .modal-content
-                                            .modal-header
-                                                h5#modalAboutTitle.modal-title Modal title
-                                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
-                                            .modal-body
-                                                .row
-                                                    .col.mb-3
-                                                        label.form-label(for='nameWithTitle') Name
-                                                        input#nameWithTitle.form-control(type='text' placeholder='Enter Name')
-                                                .row.g-2
-                                                    .col.mb-0
-                                                        label.form-label(for='emailWithTitle') Email
-                                                        input#emailWithTitle.form-control(type='text' placeholder='xxxx@xxx.xx')
-                                                    .col.mb-0
-                                                        label.form-label(for='dobWithTitle') DOB
-                                                        input#dobWithTitle.form-control(type='text' placeholder='DD / MM / YY')
-                                            .modal-footer
-                                                button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
-                                                button.btn.btn-primary(type='button') Сохранить
+                  .card.mb-4
+                      h5.card-header Акция
+                      .card-body
+                        if !data.misc.promotion
+                          .mt-3.mb-4.d-flex(style="justify-content: center")
+                              button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#modalPromotion') Активировать
+                              
+
+                              #modalPromotion.modal.fade(tabindex='-1' aria-hidden='true')
+                                form(method="POST" action="/admin/misc/update/promotion" enctype="multipart/form-data")
+                                  .modal-dialog.modal-dialog-centered
+                                      .modal-content
+                                          .modal-header
+                                              h5.modal-title Добавить акцию на главную страницу сайта
+                                              button.btn-close(type='button' required  data-bs-dismiss='modal' aria-label='Закрыть')
+                                          .modal-body
+                                              .form-group.mb-3
+                                                label.form-label(for="promotion-datetime") Заголовок
+                                                input.form-control(type="text" required  name="title" placeholder="Текст заголовка")
+                                              .form-group.mb-3
+                                                label.form-label(for="promotion-datetime") Ссылка
+                                                input.form-control(type="text" required  name="link" placeholder="Ссылка на товар или страницу")
+                                              .form-group.mb-3
+                                                label.form-label(for="promotion-datetime") Текст
+                                                input.form-control(type="text"  required name="button" placeholder="Текст кнопки")
+                                              .form-group.mb-3
+                                                label.form-label(for="promotion-datetime") Окончание акции
+                                                input.form-control(type="datetime-local"  required name="deadline" id="promotion-datetime")
+                                              .output(style="width: 100%; height: auto; display: flext, flex-wrap: wrap; justify-content-space-between")
+                                              .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                                                input#promotion-dropzone(type="file" accept="image/png, image/webp, image/jpeg, image/ico" style="display: none" name="image")
+                                                label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='promotion-dropzone' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
+                                                    div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
+                                                        svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
+                                                            path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
+                                                        p.mb-2.text-sm.when-files-loaded(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
+                                                            span(style="font-weight: 600") Нажмите чтобы загрузить
+                                                        p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
+                                          .modal-footer
+                                              button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                                              button.btn.btn-primary(type='submit') Сохранить       
+                        else
+                            .mt-3.mb-4.d-flex(style="justify-content: center")
+                              form(method="POST" action="/admin/misc/update/promotion-deactivate")
+                                button.btn.btn-primary(type='submit') Деактивировать
+                              
+
+                             
+                //- .col-lg-6
+                //-   .card.mb-4
+                //-       h5.card-header Слайдер
+                //-       .card-body
+                //-           .mt-3.mb-4.d-flex(style="justify-content: center")
+                //-               // Button trigger modal
+                //-               button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#modalSlider') Добавить слайд
+                //-                // Modal
+                             
+                //-               // Modal
+                //-               #modalSlider.modal.fade(tabindex='-1' aria-hidden='true')
+                //-                 form(method="POST" action="/admin/misc/update/about")
+                //-                   .modal-dialog.modal-dialog-centered
+                //-                       .modal-content
+                //-                           .modal-header
+                //-                               h5#modalAboutTitle.modal-title Добавить слайд на главную страницу
+                //-                               button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
+                //-                           .modal-body
+                //-                               .form-group.mb-3
+                //-                                 label.form-label(for="promotion-datetime") Заголовок
+                //-                                 input.form-control(type="text" placeholder="Текст заголовка")
+                //-                               .form-group.mb-3
+                //-                                 label.form-label(for="promotion-datetime") Ссылка
+                //-                                 input.form-control(type="text" placeholder="Ссылка на товар или страницу")
+                //-                               .form-group.mb-3
+                //-                                 label.form-label(for="promotion-datetime") Текст
+                //-                                 input.form-control(type="text" placeholder="Текст кнопки")
+                                              
+                //-                               .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                //-                                 label.cursor-pointer(style="height: 250px; border: dashed 2px #D1D5DB; border-radius: 0.5rem; background-color: rgb(249 250 251); width: 100%; height: 10rem display: flex; align-items: center; justify-content: center" for='dropzone-file' class='dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600')
+                //-                                     div(style="justify-content: center; align-items: center; display: flex; height: 100%; flex-wrap: wrap;")
+                //-                                         svg.mb-3(fill='none' stroke='currentColor' viewbox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' style="width: 2.5rem; height: 2.5rem; color: #9CA3AF; display:  block")
+                //-                                             path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
+                //-                                         p.mb-2.text-sm(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
+                //-                                             span(style="font-weight: 600") Нажмите чтобы загрузить
+                //-                                         p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") WEBP, PNG, JPG (До 2мб)
+                //-                                     input#dropzone-file.hidden(type='file' style="display: none;")
+                //-                           .modal-footer
+                //-                               button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
+                //-                               button.btn.btn-primary(type='submit') Сохранить  
+                                                         
 include ../components/footer-js.pug

@@ -41,9 +41,9 @@ include ../components/head.pug
                     option(value='price') За ціною: низька - висока
                     option(value='price-desc') За ціною: висока - низька
             ul.products.columns-3
-              each product in data.products
+              each product,indx in data.products
                 if !product.hidden
-                  li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
+                  li.has-post-thumbnail.product.type-product.status-publish.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple(style="position: relative")
                     .product-inner
                       .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
                         a(href='/store/' + product.slug)
@@ -59,12 +59,12 @@ include ../components/head.pug
                       .wrap-footer
                         if product.sale > 0
                           span.price
-                            del
+                            del(style="margin: 0 10px 0")
                               span 
                                 span 
                                 | #{product.price}
                                 sup 00
-                            ins
+                            ins(style="margin: 0 10px 0")
                               span
                                 span
                                 | #{Math.floor((product.price / 100 * (100 - product.sale)))}
@@ -88,8 +88,8 @@ include ../components/head.pug
                 //- li
                 //-   a.next.page-numbers(href='/') &rarr;
 
-          aside.col-12.col-xs-12.col-lg-3.col-xl-3.order-lg-1.column-sidebar
-            form(methods="GET" action="/store")
+          aside.col-12.col-xs-12.col-lg-3.col-xl-3.order-lg-1.column-sidebar(style="position: relative;")
+            form(methods="GET" action="/store" style="position: sticky; top: 20px;")
               .widget-theme-wrapper.widget_no_background
                 #search-3.widget.widget_search
                     .form-group
@@ -122,10 +122,10 @@ include ../components/head.pug
                     label(for="#filters-sales")
                       span Акція
                   .form-check.mt-2
-                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    input.form-check-input#fitlers-status-sale(type="checkbox")
                     label.form-check-label(for="#fitlers-status-users-choice") Зі знижкою
                   .form-check.mt-2
-                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    input.form-check-input#fitlers-status-nosale(type="checkbox")
                     label.form-check-label(for="#fitlers-status-users-choice") Без знижки
               .widget-theme-wrapper.widget_no_background
                 #filters-stock.widget.widget_search
@@ -133,10 +133,10 @@ include ../components/head.pug
                     label(for="#filters-stock")
                       span Наявність
                   .form-check.mt-2
-                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    input.form-check-input#fitlers-status-available(type="checkbox")
                     label.form-check-label(for="#fitlers-status-users-choice") В наявності
                   .form-check.mt-2
-                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    input.form-check-input#fitlers-status-out(type="checkbox")
                     label.form-check-label(for="#fitlers-status-users-choice") Закінчується
                   .form-check.mt-2
                     input.form-check-input#fitlers-status-users-choice(type="checkbox")
@@ -150,7 +150,7 @@ include ../components/head.pug
                     input.form-check-input#fitlers-status-users-choice(type="checkbox")
                     label.form-check-label(for="#fitlers-status-users-choice") Вибір покупців
                   .form-check.mt-2
-                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    input.form-check-input#fitlers-status-new(type="checkbox")
                     label.form-check-label(for="#fitlers-status-users-choice") Новинка
               .widget-theme-wrapper.widget_no_background
                 #filters-reviews.widget.widget_search

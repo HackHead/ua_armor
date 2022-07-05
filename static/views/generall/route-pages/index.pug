@@ -251,44 +251,49 @@ include ../components/head.pug
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 10px;')
             
       .fw-divider-space.divider-md-0.divider-xl-110.divider-xxl-150
-      section#section-b2fb9b8.overflow-visible.ds.c-mb-30.s-bordered-columns.s-pt-60.s-pb-25.s-pt-md-90.s-pt-lg-100.s-parallax.s-overlay(style='background-image:url(/img/home/counter-bg.webp);')
-        .container
-          .row
-            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
-              .py-0.py-lg-30
-                h4.special-heading.counter-heading.text-center
-                  span.color-main.big.counter(data-from='0' data-to='21' data-speed='1500') 21
-                h5.special-heading.text-center
-                  span
-                    | &Dcy;&iecy;&ncy;&softcy;
-            
-            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
-              .py-0.py-lg-30
-                h4.special-heading.counter-heading.text-center
-                  span.color-main.big.counter(data-from='0' data-to='532' data-speed='1500') 17
-                h5.special-heading.text-center
-                  span &Gcy;&ocy;&dcy;&icy;&ncy;
-            
-            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
-              .py-0.py-lg-30
-                h4.special-heading.counter-heading.text-center
-                  span.color-main.big.counter(data-from='0' data-to='17' data-speed='1500') 28
-                h5.special-heading.text-center
-                  span &KHcy;&vcy;&icy;&lcy;&icy;&ncy;
-            
-            .col-xs-12.col-12.col-lg-3.text-center.col-md-6
-              .py-0.py-lg-30
-                h4.special-heading.counter-heading.text-center
-                  span.color-main.big.counter(data-from='0' data-to='75' data-speed='1500') 45
-                h5.special-heading.text-center
-                  span &Scy;&iecy;&kcy;&ucy;&ncy;&dcy;
-            
-      section#section-c5b7672.overflow-visible.ds.s-pt-0.s-pb-60.s-pb-md-90.s-pb-lg-0.s-parallax.s-overlay(style='margin-bottom: 250px;')
-        .container
-          .row
-            .col-xs-12.col-12.text-center
-              .img-wrap
-                img(src='/img/home/weapon1.webp')
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md(style='margin-top: -115px;')
+      if data.misc.promotion
+        section.overflow-visible.ds.c-mb-30.s-bordered-columns.s-pt-60.s-pb-25.s-pt-md-90.s-pt-lg-100.s-parallax.s-overlay(style='background-image:url(/img/home/counter-bg.webp)' data-promotion-container="" data-promotion-deadline=data.misc.promotion.deadline)
+          .container
+            .row.d-flex.mb-5(style="justify-content: center")
+              .col-xs-12.col-12.col-lg-6.text-center.col-md-6
+                h4.mb-4(style="text-align: center; text-transform: none") #{data.misc.promotion.title}
+            .row
+              .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+                .py-0.py-lg-30
+                  h4.special-heading.counter-heading.text-center
+                    span.color-main.big.counter(data-promotion-days) 0
+                  h5.special-heading.text-center
+                    span
+                      | Днів
+              
+              .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+                .py-0.py-lg-30
+                  h4.special-heading.counter-heading.text-center
+                    span.color-main.big.counter(data-promotion-hours) 0
+                  h5.special-heading.text-center
+                    span Годин
+              
+              .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+                .py-0.py-lg-30
+                  h4.special-heading.counter-heading.text-center
+                    span.color-main.big.counter(data-promotion-minutes) 0
+                  h5.special-heading.text-center
+                    span Хвилин
+              
+              .col-xs-12.col-12.col-lg-3.text-center.col-md-6
+                .py-0.py-lg-30
+                  h4.special-heading.counter-heading.text-center
+                    span.color-main.big.counter(data-promotion-seconds) 0
+                  h5.special-heading.text-center
+                    span Секунд
+            .row
+              .col-xs-12.col-12.text-center
+                
+                .img-wrap(style="position: relative;")
+                  img(src='/' + data.misc.promotion.image)
+                .d-flex(style="justify-content: center")
+                  a.btn.btn-outline-maincolor.medium-btn.mt-5(href= data.misc.promotion.link) #{data.misc.promotion.button}
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md()
+      script(src="/generall/js/timer.js")
     include ../components/footer.pug
     include ../components/footer-js.pug

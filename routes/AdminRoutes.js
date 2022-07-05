@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads/');
     },
     filename: function(req, file, cb) {
-        cb(null, new Date().toISOString() + file.originalname.replace(/\$\s\@\#\%\^\&\*\(\)\*/, ""));
+        cb(null, uuidv4() + '.' +file.originalname.split('.').pop());
     }
 });
 
@@ -29,7 +29,7 @@ router.get('/admin/products/comments',isStaff, getAdminCommentsView)
 router.get('/admin/categories/new',isStaff, getNewCategoryView)
 router.get('/admin/product/:id/delete',isStaff, deleteProduct);
 router.get('/admin/product/:id/edit',isStaff, getProductEditView);
-router.post('/admin/misc/update/:target',isStaff, updateMisc)
+router.post('/admin/misc/update/:target',isStaff, upload.single('image'), updateMisc)
 router.post('/admin/signin', signInAdmin)
 router.post('/admin/staff/new',isStaff, newStaff)
 
