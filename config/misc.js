@@ -3,13 +3,6 @@ export default {
     logo: "uploads/img/misc/logo.png",
     logoInverse: "uploads/img/misc/logob.png",
     footerAbout: "Надійний магазин військової амуніції та спецспорядження",
-    promotion: {
-        image: '',
-        deadline: '',
-        title: '',
-        link: '',
-        button: '',
-    },
     contacts: {
         address: "",
         phone: "(0800)334-150",

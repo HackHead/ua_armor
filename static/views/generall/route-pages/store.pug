@@ -40,54 +40,55 @@ include ../components/head.pug
                     option(value='date') За новизною
                     option(value='price') За ціною: низька - висока
                     option(value='price-desc') За ціною: висока - низька
-            ul.products.columns-3
-              each product,indx in data.products
-                if !product.hidden
-                  li.has-post-thumbnail.product.type-product.status-publish.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple(style="position: relative")
-                    .product-inner
-                      .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
-                        a(href='/store/' + product.slug)
+            if data.products.length
+              ul.products.columns-3
+                each product,indx in data.products
+                  if !product.hidden
+                    li.has-post-thumbnail.product.type-product.status-publish.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple(style="position: relative")
+                      .product-inner
+                        .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
+                          a(href='/store/' + product.slug)
+                            if product.sale > 0
+                              span.onsale(style="font-size: 1em") Знижка!
+                            img(src='/' + product.images[0] style="max-width: 100%; max-height: 100%")
+                        .wrap-header
+                          h2
+                            a(href='/store/' + product.slug ) #{product.name.slice(0, 15)}...
+                          span.cat-product
+                            a(href='/store/' + product.slug  rel='tag') #{product.category.name}
+                        // close product-wrap
+                        .wrap-footer
                           if product.sale > 0
-                            span.onsale(style="font-size: 1em") Знижка!
-                          img(src='/' + product.images[0] style="max-width: 100%; max-height: 100%")
-                      .wrap-header
-                        h2
-                          a(href='/store/' + product.slug ) #{product.name.slice(0, 15)}...
-                        span.cat-product
-                          a(href='/store/' + product.slug  rel='tag') #{product.category.name}
-                      // close product-wrap
-                      .wrap-footer
-                        if product.sale > 0
-                          span.price
-                            del(style="margin: 0 10px 0")
-                              span 
+                            span.price
+                              del(style="margin: 0 10px 0")
                                 span 
-                                | #{product.price}
-                                sup 00
-                            ins(style="margin: 0 10px 0")
-                              span
+                                  span 
+                                  | #{product.price}
+                                  sup 00
+                              ins(style="margin: 0 10px 0")
                                 span
-                                | #{Math.floor((product.price / 100 * (100 - product.sale)))}
-                                sup 00
-                        else
-                          span.price
-                              ins
-                              span
+                                  span
+                                  | #{Math.floor((product.price / 100 * (100 - product.sale)))}
+                                  sup 00
+                          else
+                            span.price
+                                ins
                                 span
-                                | #{product.price}
-                                sup 00
-                        .product-button
-                          a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='#' data-quantity='1' data-product_id=product._id rel='nofollow') В корзину
-                  
-            nav.woocommerce-pagination
-              ul.page-numbers
-                li
-                  span.page-numbers.current(aria-current='page') 1
-                //- li
-                //-   a.page-numbers(href='/') 2
-                //- li
-                //-   a.next.page-numbers(href='/') &rarr;
-
+                                  span
+                                  | #{product.price}
+                                  sup 00
+                          .product-button
+                            a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='#' data-quantity='1' data-product_id=product._id rel='nofollow') В корзину                
+              nav.woocommerce-pagination
+                ul.page-numbers
+                  li
+                    span.page-numbers.current(aria-current='page') 1
+                  //- li
+                  //-   a.page-numbers(href='/') 2
+                  //- li
+                  //-   a.next.page-numbers(href='/') &rarr;
+            else 
+              .d-flex.mt-5(style="justify-content: center") Товарів зі вказаними параметрами не знайдено
           aside.col-12.col-xs-12.col-lg-3.col-xl-3.order-lg-1.column-sidebar(style="position: relative;")
             form(methods="GET" action="/store" style="position: sticky; top: 20px;")
               .widget-theme-wrapper.widget_no_background
@@ -105,14 +106,14 @@ include ../components/head.pug
                   .form-group.d-flex.mt-2
                     input(type="number" placeholder="від"  name="priceFrom" style="margin-right: 10px")
                     input(type="number" placeholder="до" name="priceTo"  style="margin-left: 10px")
-              .widget-theme-wrapper.widget_no_background
-                #filters-category.widget.widget_search
-                  .form-group
-                    label(for="#filters-category")
-                      span Категорія
-                    select.mt-2(name="")
-                      option(value="") Всі категорії
-                      if data.categories 
+              if data.categories 
+                .widget-theme-wrapper.widget_no_background
+                  #filters-category.widget.widget_search
+                    .form-group
+                      label(for="#filters-category")
+                        span Категорія
+                      select.mt-2(name="")
+                        option(value="") Всі категорії
                         each category in data.categories
                           if category.parentId
                             option(value=category._id) #{category.name}

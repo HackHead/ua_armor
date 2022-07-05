@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signInAdmin, newStaff, getNewStaffView,getAllUsers, createCategory, newComment, getAdminCommentsView, updateMisc, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView, getLoginView, deleteComment } from "../controllers/AdminControllers.js";
+import { signInAdmin, createSlide, newStaff, getNewStaffView,getAllUsers, createCategory, newComment, getAdminCommentsView, updateMisc, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView, getLoginView, deleteComment } from "../controllers/AdminControllers.js";
 import { isStaff } from "../middleware/Auth.js";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,8 +16,21 @@ const storage = multer.diskStorage({
         cb(null, uuidv4() + '.' +file.originalname.split('.').pop());
     }
 });
-
-const upload = multer({storage: storage});
+const fileFilter =  (req, file, callback) => {
+    var ext = path.extname(file.originalname);
+    if(ext !== '.png' && ext !== '.jpg' && ext !== '.webp' && ext !== '.jpeg' && ext !== '.svg') {
+        return callback(new Error('Only images are allowed'))
+    }
+    callback(null, true)
+};
+const limits = {
+    fileSize: 1024 * 1024
+};
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter,
+    limits: limits
+});
 const router = Router();
 
 router.get('/admin',isStaff, getAdminDashboardView);
@@ -32,7 +45,7 @@ router.get('/admin/product/:id/edit',isStaff, getProductEditView);
 router.post('/admin/misc/update/:target',isStaff, upload.single('image'), updateMisc)
 router.post('/admin/signin', signInAdmin)
 router.post('/admin/staff/new',isStaff, newStaff)
-
+router.post('/admin/misc/slide/new', isStaff, upload.single('image'), createSlide)
 router.get('/login', getLoginView)
 router.get('/comment/delete/:id',isStaff, deleteComment)
 router.get('/admin/staff/new',isStaff, getNewStaffView)

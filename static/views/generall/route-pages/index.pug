@@ -4,93 +4,94 @@ include ../components/head.pug
   #box_wrapper
     include ../components/navigation.pug
     .fw-page-builder-content
-      section#section-a9ffd79.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-overlay(style='background-image:url(/img/elements/forest.webp);')
-        .container
-          .row
-            .col-xs-12.col-12
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-              .owl-carousel.shortcode-product.owl-loaded.owl-drag.owl-theme.bottom-nav-arrows(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000'  data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
-                .owl-stage-outer
-                  .owl-stage(style='transform: translate3d(-2400px, 0px, 0px); transition: all 0.25s ease 0s; width: 8400px;')
-                    
-                    each product in data.slider_products
-                      if !product.hidden
+      if data.slides.length
+        section#section-a9ffd79.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-overlay(style='background-image:url(/img/elements/forest.webp);')
+          .container
+            .row
+              .col-xs-12.col-12
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+                .owl-carousel.shortcode-product.owl-loaded.owl-drag.owl-theme.bottom-nav-arrows(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000'  data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
+                  .owl-stage-outer
+                    .owl-stage(style='transform: translate3d(-2400px, 0px, 0px); transition: all 0.25s ease 0s; width: 8400px;')
+                      
+                      each slide in data.slides
                         .owl-item(style='width: 450px; margin-right: 30px;')
                             .side-item.no-content-padding(data-index='0')
                                 .row.align-center.text-center.text-sm-left
                                     .col-xs-12.col-lg-5.col-xl-7
                                         .item-media
-                                            img.attachment-uarmor-rectangle-horizontal.size-uarmor-rectangle-horizontal(src='/' + product.images[0] alt="" style="max-width: 400px")
+                                            img.attachment-uarmor-rectangle-horizontal.size-uarmor-rectangle-horizontal(src='/' + slide.image alt="" style="max-width: 400px")
                                     .col-xs-12.col-lg-7.col-xl-5
                                         .item-content
                                             h3.links-maincolor
-                                                a(href='/store/' + product.slug)
-                                                    | #{product.name}
+                                                a(href=slide.link)
+                                                    | #{slide.title}
                                             .text-block
-                                                | #{product.description.slice(0, 100)}...
+                                                | #{slide.description}...
                                             .product-features
-                                                span.price
+                                                //- span.price
                                                     span.price-regular &#x20B4; #{product.price}
-                                            a.btn.btn-outline-maincolor.medium-btn(href='/store/product/') Придбати
-    
-                
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-      section#section-044c9f1.ls.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
-        .container-fluid
-          .row
-            .col-xs-12.col-12
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-              h3.special-heading.text-center
-                span.big
-                  mark Каталог
-                  |  товарів
-              .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
-              .uws-products.carousel(data-loop='true' data-dots='false' data-nav='false' data-center='true' data-autoplay='false' data-speed='5000' data-responsive-xl='6' data-responsive-lg='3' data-responsive-md='3' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
-                .columns-3(data-index='0')
-                  ul.products.columns-3.owl-carousel.owl-shadowitems.owl-theme.top-nav-arrows.owl-loaded.owl-drag.owl-center()
-                    .owl-stage-outer
-                      .owl-stage(style='transition: all 0.25s ease 0s; width: 3540px; transform: translate3d(-3840px, 0px, 0px);')
-                        each product in data.catalog_products
-                          if !product.hidden
-                            .owl-item.catalog-item.active.center(style='width: 354px; margin-right: 30px;')
-                              li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
-                                .product-inner
-                                  .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
-                                    a(href='/store/' + product.slug)
+                                            a.btn.btn-outline-maincolor.medium-btn(href=slide.link) #{slide.button}
+      
+                  
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+      if data.catalog_products.length
+        section#section-044c9f1.ls.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+          .container-fluid
+            .row
+              .col-xs-12.col-12
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+                h3.special-heading.text-center
+                  span.big
+                    mark Каталог
+                    |  товарів
+                .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
+                .uws-products.carousel(data-loop='true' data-dots='false' data-nav='false' data-center='true' data-autoplay='false' data-speed='5000' data-responsive-xl='6' data-responsive-lg='3' data-responsive-md='3' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
+                  .columns-3(data-index='0')
+                    ul.products.columns-3.owl-carousel.owl-shadowitems.owl-theme.top-nav-arrows.owl-loaded.owl-drag.owl-center()
+                      .owl-stage-outer
+                        .owl-stage(style='transition: all 0.25s ease 0s; width: 3540px; transform: translate3d(-3840px, 0px, 0px);')
+                          each product in data.catalog_products
+                            if !product.hidden
+                              .owl-item.catalog-item.active.center(style='width: 354px; margin-right: 30px;')
+                                li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
+                                  .product-inner
+                                    .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
+                                      a(href='/store/' + product.slug)
+                                        if product.sale > 0
+                                          span.onsale(style="font-size: 1em") Знижка!
+                                        img(src='/' + product.images[0] alt=product.name style="max-width: 100%; max-height: 271px")
+                                    .wrap-header
+                                      h2
+                                        a(href='/store/' + product.slug) #{product.name.slice(0, 15)}...
+                                      span.cat-product
+                                        a(href='/store/categories' + product.category rel='tag') #{product.category.name}
+                                    
+                                    .wrap-footer
                                       if product.sale > 0
-                                        span.onsale(style="font-size: 1em") Знижка!
-                                      img(src='/' + product.images[0] alt=product.name style="max-width: 100%; max-height: 271px")
-                                  .wrap-header
-                                    h2
-                                      a(href='/store/' + product.slug) #{product.name.slice(0, 15)}...
-                                    span.cat-product
-                                      a(href='/store/categories' + product.category rel='tag') #{product.category.name}
-                                  
-                                  .wrap-footer
-                                    if product.sale > 0
-                                      span.price
-                                        del
-                                          span 
+                                        span.price
+                                          del
                                             span 
-                                            | #{product.price}
-                                            sup 00
-                                        ins
-                                          span
-                                            span
-                                            | #{Math.floor((product.price / 100 * (100 - product.sale)))}
-                                            sup 00
-                                    else
-                                      span.price
+                                              span 
+                                              | #{product.price}
+                                              sup 00
                                           ins
-                                          span
                                             span
-                                            | #{product.price}
-                                            sup 00
-                                    .product-button
-                                      a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/'+ product.slug data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') В корзину
-                            
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-            
+                                              span
+                                              | #{Math.floor((product.price / 100 * (100 - product.sale)))}
+                                              sup 00
+                                      else
+                                        span.price
+                                            ins
+                                            span
+                                              span
+                                              | #{product.price}
+                                              sup 00
+                                      .product-button
+                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/'+ product.slug data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') В корзину
+                              
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              
       section#section-4331909.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
         .cover-image.ds.s-cover-right.s-cover-small(style='background-image: url("/img/home/federico-bottos-Z3NceSeZqgI-unsplash-scaled.webp");')
           img(src='/img/home/federico-bottos-Z3NceSeZqgI-unsplash-scaled.webp' alt='section-4331909')

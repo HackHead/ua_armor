@@ -4,18 +4,23 @@ const SlideSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
+        max: 64
     },
-    img: {
+    image: {
         type: String,
         required: true,
     },
-    body: {
+    button: {
         type: String,
         required: true,
-        max: 128
+        max: 16
     },
     link: {
         type: String
+    },
+    description: {
+        type: String,
+        max: 128,
     }
 })
 

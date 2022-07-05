@@ -7,12 +7,11 @@ include ../components/head.pug
       .content-wrapper
         // Content
         .container-xxl.flex-grow-1.container-p-y
-          h4.fw-bold.py-3.mb-4
-            span.text-muted.fw-light Комментарии /
-            |  Список комментариев
-          hr.my-5
-          // Table within card
           if data.comments.length
+            h4.fw-bold.py-3.mb-4
+              span.text-muted.fw-light Комментарии /
+              |  Список комментариев
+            hr.my-5
             h5.mb-4 Список
             .table-responsive.text-nowrap
               table.table.card-table

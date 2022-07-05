@@ -39,6 +39,19 @@ export const productValidation = (data) => {
     return shema.validate(data)
 }
 
+export const slideValidation = (data) => {
+    const shema = Joi.object({
+        title: Joi.string().required().max(64),
+        image: Joi.string().required(),
+        button: Joi.string().required().max(16),
+        description: Joi.string().required().max(128),
+        link: Joi.string().required(),
+    })
+
+    return shema.validate(data)
+}
+
+
 export const featureValidation = (data) => {
     const shema = Joi.object({
         product: objectId(Joi),

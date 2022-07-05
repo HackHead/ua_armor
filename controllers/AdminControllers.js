@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 import Product from '../models/Product.js'
 import Category from '../models/Category.js'
 import Comment from '../models/Comment.js'
@@ -6,21 +7,17 @@ import Mail from '../models/Mail.js'
 import User from '../models/User.js'
 import Role from '../models/Role.js'
 import Feature from '../models/Feature.js'
+import Slide from '../models/Slide.js'
 
 import misc from "../config/misc.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
-import {productValidation, mailValidation, commentValidation, loginValidation, registrationValidatation, categoryValidation, featureValidation} from '../validations/SchemaValidation.js'
+import {productValidation,slideValidation, mailValidation, commentValidation, loginValidation, registrationValidatation, categoryValidation, featureValidation} from '../validations/SchemaValidation.js'
 import slugify from "slugify";
 //============================
 //          Страницы         =
 //============================
-const showError = () => {
-    const data = {
-        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
-    }
-    return res.status(400).render('admin/status-pages/400', {data: data});
-}
+
 // Главная страница админки
 export const getAdminDashboardView = (req, res) => {
     const page = {
@@ -52,7 +49,10 @@ export const getAdminProductsView = async (req, res) => {
             page.products = products
         }
     } catch (err) {
-        showError()
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data});
     }
     res.render('admin/route-pages/products', {data: page})
 }
@@ -114,13 +114,19 @@ export const getProductEditView = async (req, res) => {
         };
         page.categories = categories;
     } catch(err) {
-        showError();
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});;
     }
     try {
         const features = await Feature.find({product: product._id});
         if(features) page.features = features;
     } catch(err) {
-        showError();
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});;
     }
     res.render('admin/route-pages/product-edit', {data: page});
 }
@@ -154,7 +160,10 @@ export const getAdminCommentsView = async (req, res) => {
         page.comments = comments;
         
     } catch (err) {
-        showError()
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});
     }
     
     res.render('admin/route-pages/comments', {data: page})
@@ -176,7 +185,10 @@ export const getAdminProductView = async (req, res) => {
             page.categories = categories;
         }
     } catch (err) {
-        showError()
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});
     }
     res.render('admin/route-pages/product-new.pug', {data: page})
 }
@@ -197,7 +209,10 @@ export const getNewCategoryView = async(req, res) => {
             page.categories = categories;
         }
     } catch (err) {
-        showError()
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});
     }
     res.render('admin/route-pages/category-new.pug', {data: page})
 }
@@ -212,7 +227,10 @@ export const deleteProduct = async (req, res) => {
         await Product.deleteOne({_id: id}).exec();
         res.redirect('/admin/products')
     } catch (err) {
-        showError()
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});
     }
 }
 
@@ -376,7 +394,10 @@ export const newComment = async (req, res) => {
     try {
         await new Comment(commentData).save();
     } catch (err) {
-        showError();
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});;
     }
     res.send('Ваш коментар успішно опублікований')
 }
@@ -385,7 +406,10 @@ export const deleteComment = async(req, res) => {
     try {
         Comment.findOne({_id: req.params?.id}).remove();
     } catch(err){
-        showError();
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});;
     }
     res.redirect('/admin/products/comments')
 }
@@ -411,13 +435,37 @@ export const createCategory = async (req, res) => {
         return res.status(200).redirect('/admin/categories/new')
        }
     } catch (err) {
-        showError();
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});;
     }
 }
+export const createSlide = async (req, res) => {
+    const slideValidationData = {
+        title: req.body.title,
+        image: req.file.path,
+        button: req.body.button,
+        description: req.body.description,
+        link: req.body.link,
+    }
+    const {error} = slideValidation(slideValidationData);
 
+    if(error){
+        return res.status(400).send(error.details[0].message)
+    };
+    try {
+        await new Slide(slideValidationData).save();
+    } catch (err) {
+        const data = {
+            message: err
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data})
+    }
+    res.redirect('/admin/misc')
+}
 export const updateMisc = async (req, res) => {
     const target = req.params.target;
-    
     if(!target) {
         const data = {
             message: 'Данные с клиента не были переданы.'
@@ -428,27 +476,35 @@ export const updateMisc = async (req, res) => {
     switch (target) {
         case 'instagram': 
             misc.contacts.instagram = req.body.link;
+            redirect = '/admin/contacts'
             break;
         case 'telegram': 
             misc.contacts.telegram = req.body.link;
+            redirect = '/admin/contacts'
             break;
         case 'viber': 
             misc.contacts.viber = req.body.link;
+            redirect = '/admin/contacts'
             break;
         case 'phone': 
             misc.contacts.phone = req.body.phone;
+            redirect = '/admin/contacts'
             break;
         case 'email': 
             misc.contacts.email = req.body.email;
+            redirect = '/admin/contacts'
             break;
         case 'address': 
             misc.contacts.city = req.body.city;
             misc.contacts.street = req.body.street;
+            redirect = '/admin/contacts'
         case 'about': 
             misc.about = req.body.about;
+            redirect = '/admin/misc'
             break;
         case 'footer':
             misc.footer = req.body.footer;
+            redirect = '/admin/misc'
             break
         case 'favicon':
             misc.favicon = req.file.path;
@@ -576,7 +632,10 @@ export const getAllUsers = async(req,  res) => {
             page.users = users
         }
     } catch (err) {
-        showError()
+        const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});
     }
     
     res.render('admin/route-pages/users', {data: page})

@@ -10,10 +10,11 @@ import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import { rateLimit } from "express-rate-limit";
+
 // Importing routes
 import AdminRoutes from "./routes/AdminRoutes.js";
-import GenerallRoutes from "./routes/GeneralRoutes.js";
-// 
+import PublicRoutes from "./routes/PublicRoutes.js"
+
 dotenv.config({
     path: './config/.env',
 });
@@ -51,7 +52,7 @@ app.use("/generall", express.static(path.join(__dirname, '/static/assets/general
 app.use('/uploads',express.static(path.join(__dirname, '/uploads')));
 
 app.use(AdminRoutes)
-app.use(GenerallRoutes)
+app.use(PublicRoutes)
 
 
 app.listen(PORT, async () => {
