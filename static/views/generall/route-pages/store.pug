@@ -22,10 +22,10 @@ include ../components/head.pug
         .row
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-          nav
-            a(href='/') Головна
-            | &nbsp;/ Магазин
-          header
+            nav
+              a(href='/') Головна
+              | &nbsp;/ Магазин
+            header
           
           #content_products.col-12.col-xs-12.col-lg-9.col-xl-9.order-lg-2.column-main
             .products-selection
@@ -45,11 +45,11 @@ include ../components/head.pug
                 if !product.hidden
                   li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
                     .product-inner
-                      .product-img(style="max-width: 100%; margin: 0 auto;")
+                      .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
                         a(href='/store/' + product.slug)
                           if product.sale > 0
                             span.onsale(style="font-size: 1em") Знижка!
-                          img(src='/' + product.images[0]   width='900' height='900')
+                          img(src='/' + product.images[0] style="max-width: 100%; max-height: 100%")
                       .wrap-header
                         h2
                           a(href='/store/' + product.slug ) #{product.name.slice(0, 15)}...
@@ -89,37 +89,84 @@ include ../components/head.pug
                 //-   a.next.page-numbers(href='/') &rarr;
 
           aside.col-12.col-xs-12.col-lg-3.col-xl-3.order-lg-1.column-sidebar
-            .widget-theme-wrapper.widget_no_background
-              #search-3.widget.widget_search
-                form.search-form(role='search' method='get' action='/')
+            form(methods="GET" action="/store")
+              .widget-theme-wrapper.widget_no_background
+                #search-3.widget.widget_search
+                    .form-group
+                      label
+                        span.screen-reader-text Search for:
+                        input.search-field.form-control(type='text' placeholder='Пошук')
+                    button.search-submit(type='submit')
+                      span.screen-reader-text Пошук
+              .widget-theme-wrapper.widget_no_background
+                #filters-price.widget.widget_search
+                  label(for="#filters-category")
+                      span Ціна
+                  .form-group.d-flex.mt-2
+                    input(type="number" placeholder="від"  name="priceFrom" style="margin-right: 10px")
+                    input(type="number" placeholder="до" name="priceTo"  style="margin-left: 10px")
+              .widget-theme-wrapper.widget_no_background
+                #filters-category.widget.widget_search
                   .form-group
-                    label
-                      span.screen-reader-text Search for:
-                      input.search-field.form-control(type='search' placeholder='Пошук' name='s')
-                  button.search-submit(type='submit')
-                    span.screen-reader-text Пошук
-            .widget-theme-wrapper.widget_no_background
-              #woocommerce_product_categories-2.widget
-                h3.widget-title Категорії
-                ul.product-categories
-                  each category in data.categories
-                    if category.parentId
-                      li.cat-item.cat-item-27
-                        a(href='/store/categories/' + category.slug) #{category.name}
-                  
-            //- .widget-theme-wrapper.widget_no_background
-            //-   #woocommerce_recently_viewed_products-2.widget.widget_recently_viewed_products
-            //-     h3.widget-title Товари які ви переглядали
-            //-     ul.product_list_widget
-            //-       each val in [1, 2, 3]
-            //-         li
-            //-           a(href='/store')
-            //-             img(src='/img/store/shopoptics4.png'  width='900' height='900')
-            //-             span.product-title Cruiser, Pistol Of The World
-            //-           span
-            //-             span
-            //-             | 18
-            //-             sup 00
+                    label(for="#filters-category")
+                      span Категорія
+                    select.mt-2(name="")
+                      option(value="") Всі категорії
+                      if data.categories 
+                        each category in data.categories
+                          if category.parentId
+                            option(value=category._id) #{category.name}
+              .widget-theme-wrapper.widget_no_background
+                #filters-sales.widget.widget_search
+                  .form-group
+                    label(for="#filters-sales")
+                      span Акція
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") Зі знижкою
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") Без знижки
+              .widget-theme-wrapper.widget_no_background
+                #filters-stock.widget.widget_search
+                  .form-group
+                    label(for="#filters-stock")
+                      span Наявність
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") В наявності
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") Закінчується
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") Відсутній
+              .widget-theme-wrapper.widget_no_background
+                #filters-add.widget.widget_search
+                  .form-group
+                    label(for="#filters-add")
+                      span Додатково
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") Вибір покупців
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") Новинка
+              .widget-theme-wrapper.widget_no_background
+                #filters-reviews.widget.widget_search
+                  .form-group
+                    label(for="#filters-reviews")
+                      span Відгуки
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") З відгуками
+                  .form-check.mt-2
+                    input.form-check-input#fitlers-status-users-choice(type="checkbox")
+                    label.form-check-label(for="#fitlers-status-users-choice") Без відгуків
+              .widget-theme-wrapper.widget_no_background
+                .product-button.d-flex.justify-content-center
+                  button.button.product_type_simple(type="submit") Знайти
+            
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
     include ../components/footer.pug

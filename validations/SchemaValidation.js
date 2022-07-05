@@ -1,4 +1,5 @@
 import Joi from "@hapi/joi";
+import objectId from "joi-objectid/index.js";
 
 export const registrationValidatation = (data) => {
     const schema = Joi.object({
@@ -28,19 +29,34 @@ export const productValidation = (data) => {
          sale: Joi.string().required().regex(/^[0-9]{0,9}$/),
          category: Joi.string().required(),
          hidden: Joi.string(),
-         running_out: Joi.string(),
-         slug: Joi.string(),
          new: Joi.string(),
          customers_choice: Joi.string(),
-         show_in_index_slider: Joi.string(),
          show_in_index_catalog: Joi.string(),
          images: Joi.array(),
-         date: Joi.date(),
+         availability: Joi.string().valid('available', 'running', 'out', 'waiting').required().default('available')
     })
 
     return shema.validate(data)
 }
 
+export const featureValidation = (data) => {
+    const shema = Joi.object({
+        product: objectId(Joi),
+        featureKeys: Joi.array().items(Joi.string()),
+        featureValues: Joi.array().items(Joi.string()),
+    });
+
+    return shema.validate(data)
+}
+
+export const categoryValidation = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().min(6).required().max(64),
+        parentId: objectId(Joi, 'Категории с таким идентификатором не существует')
+    });
+
+    return schema.validate(data)
+}
 export const mailValidation = (data) => {
     const shema = Joi.object({
         name: Joi.string().min(6).max(128).required(),

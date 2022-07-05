@@ -33,19 +33,11 @@ const ProductSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    running_out: {
-        type: Boolean,
-        default: false,
-    },
     new: {
         type: Boolean,
         default: true,
     },
     customers_choice: {
-        type: Boolean,
-        default: false,
-    },
-    show_in_index_slider: {
         type: Boolean,
         default: false,
     },
@@ -65,6 +57,10 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+    },
+    availability: {
+        type: String,
+        required: true,
     }
 })
 

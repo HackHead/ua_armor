@@ -33,17 +33,36 @@ include ../components/head.pug
                         | По умолчанию скидка 0%*
                     .mb-3
                       label.form-label(for='exampleFormControlSelect1') Категория товара
-                      select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' required name="category")
+                      select.form-select.form-select-lg(aria-label='Default select example' required name="category")
                         option(selected='') Выберите категорию
-                        each category, index in data.categories
-                          if category.parentId
-                            option(value=category._id) #{category.name}
-                        
+                        if data.categories.length
+                          each category, index in data.categories
+                            if category.parentId
+                              option(value=category._id) #{category.name}
+                    .mb-3
+                      label.form-label(for='exampleFormControlSelect1') Наличие
+                      select.form-select.form-select-lg(aria-label='Default select example' required name="availability")
+                        option(selected='' value="available") В наличии
+                        option(value="running") Заканчивается
+                        option(value="out") Нет в наличии
+                        option(value="waiting") Ожидается
+
                     .mb-3
                       label.form-label(for='exampleFormControlTextarea1') Описание
-                      textarea#exampleFormControlTextarea1.form-control(rows='3' required name="description")
+                      textarea.form-control(rows='3' required name="description")
                       .form-text
                         | Должно быть не короче 64 и не длиннее 4096 символов*
+                    .form-floating.mb-3
+                      input#reviewInput.form-control(name="review" type='text' placeholder='https://www.youtube.com/watch?v=u6BVLLzou2k&ab_channel=avguris' aria-describedby='floatingInputHelp')
+                      label(for='reviewInput') Ссылка на обзор
+                      .form-text
+                        | Обзоры должны быть загружены на видеохостинг www.youtube.com
+                .card.mb-4
+                  h5.card-header Характеристики
+                  .card-body.features-wrap(style="padding-left: 0; margin-left: 0; padding: 1.5rem 0 1.5rem 0 ")
+                    .features-container(data-features-container="" style="padding: 0 1.5rem 0 1.5rem")
+                    .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex; ")
+                      button.btn.btn-primary.mr-2(type="button" data-add-feature="") Добавить
                 .card.mb-4
                   h5.card-header Дополнительно
                   .card-body
@@ -51,20 +70,15 @@ include ../components/head.pug
                       input#flexSwitchShow.form-check-input(type='checkbox' name="hidden")
                       label.form-check-label(for='flexSwitchShow') Не отображать товар на сайте
                     .form-check.form-switch.mb-2
-                      input#flexSwitchLacking.form-check-input(type='checkbox' name="running_out")
-                      label.form-check-label(for='flexSwitchLacking') Товар заканчивается
-                    .form-check.form-switch.mb-2
                       input#flexSwitchNew.form-check-input(type='checkbox' name="new")
                       label.form-check-label(for='flexSwitchNew') Новинка
                     .form-check.form-switch
                       input#flexSwitchUsersChoice.form-check-input(type='checkbox' checked='' name="customers_choice")
                       label.form-check-label(for='flexSwitchUsersChoice') Выбор покупателей
                     .form-check.form-switch
-                      input#flexSwitchHomeCarousel.form-check-input(type='checkbox' checked='' name="show_in_index_slider")
-                      label.form-check-label(for='flexSwitchHomeCarousel') Показать в слайдере на главной странице
-                    .form-check.form-switch
                       input#flexSwitchHomeCatalog.form-check-input(type='checkbox' checked='' name="show_in_index_catalog")
                       label.form-check-label(for='flexSwitchHomeCatalog') Показать в каталоге на главной странице
+                      input#dropzone-file.hidden(type='file' name="images" style="display: none;" required multiple)
               .col-xl-6(style="margin-left: auto; margin-right: auto;")
                 .card.mb-4
                   h5.card-header Изображения
@@ -78,7 +92,7 @@ include ../components/head.pug
                                   p.mb-2.text-sm.when-files-loaded(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
                                       span(style="font-weight: 600") Нажмите чтобы загрузить
                                   p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
-                              input#dropzone-file.hidden(type='file' name="images" style="display: none;" required multiple)
+                              
                       #floatingInputHelp.form-text
                         | Первое изображение будет выбрано в качестве превью*
               .col-xl-6(style="margin-left: auto; margin-right: auto;")
@@ -86,4 +100,5 @@ include ../components/head.pug
                   button.btn.btn-primary.mr-2(type="submit") Создать
                       
         .content-backdrop.fade
+    script(src="/js/features.js")
     include ../components/footer-js.pug

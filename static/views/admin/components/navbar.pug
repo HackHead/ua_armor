@@ -15,17 +15,17 @@ nav#layout-navbar.layout-navbar.container-xxl.navbar.navbar-expand-xl.navbar-det
             li.nav-item.navbar-dropdown.dropdown-user.dropdown
                 a.nav-link.dropdown-toggle.hide-arrow(href='javascript:void(0);' data-bs-toggle='dropdown')
                     .avatar.avatar-online
-                        img.w-px-40.h-auto.rounded-circle(src='/img/avatars/1.png' alt='')
+                        img.w-px-40.h-auto.rounded-circle(src='https://avatars.dicebear.com/api/initials/' + data.user.name + '.svg' alt='')
                 ul.dropdown-menu.dropdown-menu-end
                     li
                         a.dropdown-item(href='#')
                             .d-flex
                                 .flex-shrink-0.me-3
                                     .avatar.avatar-online
-                                        img.w-px-40.h-auto.rounded-circle(src='/img/avatars/1.png' alt='')
+                                        img.w-px-40.h-auto.rounded-circle(src='https://avatars.dicebear.com/api/initials/' + data.user.name + '.svg' alt='')
                                 .flex-grow-1
-                                    span.fw-semibold.d-block Артур М.
-                                    small.text-muted Администратор
+                                    span.fw-semibold.d-block #{data.user.name}
+                                    small.text-muted #{data.user.role.name}
                     li
                         .dropdown-divider
                     li
@@ -40,12 +40,12 @@ nav#layout-navbar.layout-navbar.container-xxl.navbar.navbar-expand-xl.navbar-det
                         a.dropdown-item(href='#')
                             span.d-flex.align-items-center.align-middle
                                 i.flex-shrink-0.bx.bx-credit-card.me-2
-                                span.flex-grow-1.align-middle Billing
+                                span.flex-grow-1.align-middle Новости
                                 span.flex-shrink-0.badge.badge-center.rounded-pill.bg-danger.w-px-20.h-px-20 4
                     li
                         .dropdown-divider
                     li
-                        a.dropdown-item(href='auth-login-basic.html')
+                        a.dropdown-item(href='/logout')
                             i.bx.bx-power-off.me-2
-                            span.align-middle Log Out
+                            span.align-middle Выйти
             

@@ -2,10 +2,11 @@ import mongoose from "mongoose";
 import Product from '../models/Product.js'
 import Comment from '../models/Comment.js'
 import Category from "../models/Category.js";
-import { request } from 'express'
+import Feature from "../models/Feature.js";
+import { query, request } from 'express'
 import misc from "../config/misc.js";
 import { productValidation } from '../validations/SchemaValidation.js'
-
+import { storeQueryValidation } from '../validations/Store.js'
 
 export const getIndexPageView = async (req, res) => {
     const slider_products = await Product.find({show_in_index_slider: true});
@@ -18,7 +19,16 @@ export const getIndexPageView = async (req, res) => {
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
         name: 'home',
-        slider_products: slider_products,
+        slider_products: [
+            {
+                hidden: false,
+                images: [],
+                slug: '2222',
+                price: 100,
+                name: 'Product',
+                description: 'Lorem'
+            }
+        ],
         catalog_products: catalog_products,
         misc: misc,
     };
@@ -53,15 +63,14 @@ export const getContactPageView = (req, res) => {
     res.render('generall/route-pages/contacts', {data: page})
 }
 export const getStorePageView = async (req, res) => {
-    const products = await Product.find().populate('category').limit(20)
+    const products = await Product.find().populate('category').skip(0).limit(20).sort('name');
+    const results = {};
     const categories = await Category.find();
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'store',
         products: products,
         categories: categories,
@@ -71,6 +80,8 @@ export const getStorePageView = async (req, res) => {
 }
 export const getProductPageView = async (req, res) => {
     const product = await Product.findOne({slug: req.params.slug}).populate('category');
+    const features = await Feature.find({product: product._id});
+    if(!product) res.status(404).render('generall/status-pages/404')
     const relatedProducts = await Product.find({category: product.category._id}).populate('category').limit(6);
     const allCategories = await Category.find();
     const allComments = await Comment.find({product: product._id});
@@ -86,7 +97,8 @@ export const getProductPageView = async (req, res) => {
         relatedProducts: relatedProducts,
         categories: allCategories,
         comments: allComments,
-        misc: misc
+        misc: misc,
+        features: features
     };
     res.render('generall/route-pages/single-product', {data: page})
 }

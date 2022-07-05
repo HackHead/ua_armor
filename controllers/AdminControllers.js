@@ -5,44 +5,55 @@ import Comment from '../models/Comment.js'
 import Mail from '../models/Mail.js'
 import User from '../models/User.js'
 import Role from '../models/Role.js'
+import Feature from '../models/Feature.js'
+
 import misc from "../config/misc.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
-import {productValidation, mailValidation, commentValidation, loginValidation, registrationValidatation} from '../validations/SchemaValidation.js'
+import {productValidation, mailValidation, commentValidation, loginValidation, registrationValidatation, categoryValidation, featureValidation} from '../validations/SchemaValidation.js'
 import slugify from "slugify";
 //============================
 //          Страницы         =
 //============================
-
+const showError = () => {
+    const data = {
+        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+    }
+    return res.status(400).render('admin/status-pages/400', {data: data});
+}
 // Главная страница админки
 export const getAdminDashboardView = (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'dashboard',
-        misc: misc
+        misc: misc,
+        user: req.user,
     };
     res.render('admin/route-pages/dashboard', {data: page})
 }
 
 // Страница со списком товаров в админке
 export const getAdminProductsView = async (req, res) => {
-    const products = await Product.find().populate('category').limit(20)
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'products',
-        products: products || null,
         misc: misc,
+        user: req.user,
     };
+    try {
+        const products = await Product.find().populate('category').limit(20)
+        if(products) {
+            page.products = products
+        }
+    } catch (err) {
+        showError()
+    }
     res.render('admin/route-pages/products', {data: page})
 }
 
@@ -51,36 +62,67 @@ export const getAdminProductsView = async (req, res) => {
 export const getAdminContactsView = (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
-        name: 'contacts',
-        misc: misc
+        name: 'contacts-edit',
+        misc: misc,
+        user: req.user,
     };
     res.render('admin/route-pages/contacts', {data: page})
 }
 
 // Страница редактирования существуюющего товара в админке
 export const getProductEditView = async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.findOne({_id: id}).populate('category').exec();
-    const categories = await Category.find();
-    
+    const id = req.params?.id;
+    let product;
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'product-edit',
-        product: product,
-        categories: categories,
-        misc: misc
+        misc: misc,
+        user: req.user,
+        
     };
-    res.render('admin/route-pages/product-edit', {data: page})
+    try {
+        product = await Product.findOne({_id: id}).populate('category');
+        if(!product) {
+            const data = {
+                message: 'Продукта с таким идентификатором не найдено, попробуйте изменить параметры поиска'
+            };
+            
+            return res.status(404).render('admin/status-pages/404', {data: data});
+        };
+        page.product = product;
+        
+    } catch (err) {
+        const data = {
+            message: 'Продукта с таким идентификатором не найдено, попробуйте изменить параметры поиска'
+        }
+        return res.status(404).render('admin/status-pages/404', {data: data});
+    };
+
+    try {
+        const categories = await Category.find();
+        if(!categories){
+            const data = {
+                message: 'На сайте пока не создано ни одной категории, перейдите во вкладку Товары / Создать категорию'
+            };
+            return res.status(400).render('admin/status-pages/400', {data: data});
+        };
+        page.categories = categories;
+    } catch(err) {
+        showError();
+    }
+    try {
+        const features = await Feature.find({product: product._id});
+        if(features) page.features = features;
+    } catch(err) {
+        showError();
+    }
+    res.render('admin/route-pages/product-edit', {data: page});
 }
 
 
@@ -88,67 +130,75 @@ export const getProductEditView = async (req, res) => {
 export const getAdminMiscView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'misc',
-        misc: misc
+        misc: misc,
+        user: req.user,
     };
     res.render('admin/route-pages/misc', {data: page})
 }
 export const getAdminCommentsView = async (req, res) => {
-    const comments = await Comment.find().limit(20).populate('product');
-    const commentProducts = []
-    for(let comm of comments){
-        commentProducts.push(comm._id)
-    };
-    
-
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'comments',
         misc: misc,
-        comments: comments
+        user: req.user,
     };
+    try {
+        const comments = await Comment.find().limit(20).populate('product');
+        page.comments = comments;
+        
+    } catch (err) {
+        showError()
+    }
+    
     res.render('admin/route-pages/comments', {data: page})
 };
 // Страница с одним товаром в админке
 export const getAdminProductView = async (req, res) => {
-    const categories = await Category.find();
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'product-new',
-        categories: categories,
         misc: misc,
+        user: req.user,
     };
+    try {
+        const categories = await Category.find();
+        if(categories){
+            page.categories = categories;
+        }
+    } catch (err) {
+        showError()
+    }
     res.render('admin/route-pages/product-new.pug', {data: page})
 }
 
 export const getNewCategoryView = async(req, res) => {
-    const categories = await Category.find();
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
-        name: 'product-new',
-        categories: categories,
+        name: 'category-new',
         misc: misc,
+        user: req.user,
     };
+    try {
+        const categories = await Category.find();
+        if(categories){
+            page.categories = categories;
+        }
+    } catch (err) {
+        showError()
+    }
     res.render('admin/route-pages/category-new.pug', {data: page})
 }
 //============================
@@ -157,14 +207,31 @@ export const getNewCategoryView = async(req, res) => {
 
 // Endpoint для удаления товара
 export const deleteProduct = async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.deleteOne({_id: id}).exec();
-    res.redirect('/admin/products')
+    try {
+        const id = req.params?.id;
+        await Product.deleteOne({_id: id}).exec();
+        res.redirect('/admin/products')
+    } catch (err) {
+        showError()
+    }
 }
 
 // Enpoint для создания товара
 export const createProduct = async (req, res) => {
-    const {error} = productValidation(req.body);
+    const productValidationData = {
+        name: req.body?.name,
+        description: req.body?.description,
+        price: req.body?.price,
+        sale: req.body?.sale,
+        category: req.body?.category,
+        hidden: req.body?.hidden,
+        new: req.body?.new,
+        availability: req.body?.availability,
+        review: req.body?.review,
+        customers_choice: req.body?.customers_choice,
+        show_in_index_catalog: req.body?.show_in_index_catalog,
+    }
+    const {error} = productValidation(productValidationData);
 
     if(error){
         return res.status(400).send(error.details[0].message)
@@ -183,21 +250,55 @@ export const createProduct = async (req, res) => {
          sale: req.body.sale,
          category: req.body.category,
          hidden: Boolean(req.body.hidden),
-         running_out: Boolean(req.body.runnig_out),
          new: Boolean(req.body.new),
          slug: slugify(req.body.name),
+         availability: req.body.availability,
          customers_choice: Boolean(req.body.customers_choice),
-         show_in_index_slider: Boolean(req.body.show_in_index_slider),
          show_in_index_catalog: Boolean(req.body.show_in_index_catalog),
          images: filePaths,
     });
     
     try {
         const savedProduct = await product.save(); // Зберігаємо оголошення в БД
-        res.status(200).redirect('/admin/products');
+        const productId = savedProduct._id;
+        const featureValidationData = {
+            product: productId,
+            featureKeys: req.body.featureKeys,
+            featureValues: req.body.featureValues
+        }
+        const {error} = featureValidation(featureValidationData);
+
+        if(error){
+            return res.status(400).send(error.details[0].message)
+        };
+        if(req.body.featureKeys.length !== req.body.featureValues.length){
+            return res.status(400).send('Количество ключей и названий характеристик не совпадает')
+        }
+        console.log(req.body.featureKeys, req.body.featureValues)
+        if(req.body.featureKeys.length && req.body.featureValues.length){
+            const insertData = []
+            for(let i = 0; i <= req.body.featureKeys.length - 1; i++){
+                const pushData = {
+                    product: productId,
+                    key: req.body.featureKeys[i],
+                    value: req.body.featureValues[i],
+                };
+                console.log(pushData)
+                if(pushData.key.length === 0 || pushData.value.length === 0) continue;
+                insertData.push(pushData)
+            };
+            await Feature.insertMany(insertData)
+        }
+        
     } catch(err){
-        res.status(400).send(err)
+        console.log(err)
+        const data = {
+            message: err
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data});
     }
+    
+    res.status(200).redirect('/admin/products');
 }
 
 // Endpoint для обновления товара
@@ -217,20 +318,20 @@ export const updateProduct = async (req, res) => {
         });
         update.images = filePaths
     }
-    const filter = {_id: req.params.id};
+    const filter = {_id: req.params?.id};
     update = {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        sale: req.body.sale,
-        category: req.body.category,
-        hidden: Boolean(req.body.hidden),
-        running_out: Boolean(req.body.runnig_out),
-        new: Boolean(req.body.new),
-        slug: slugify(req.body.name),
-        customers_choice: Boolean(req.body.customers_choice),
-        show_in_index_slider: Boolean(req.body.show_in_index_slider),
-        show_in_index_catalog: Boolean(req.body.show_in_index_catalog),
+         name: req.body.name,
+         description: req.body.description,
+         price: req.body.price,
+         sale: req.body.sale,
+         category: req.body.category,
+         hidden: Boolean(req.body.hidden),
+         new: Boolean(req.body.new),
+         slug: slugify(req.body.name),
+         availability: req.body.availability,
+         customers_choice: Boolean(req.body.customers_choice),
+         show_in_index_catalog: Boolean(req.body.show_in_index_catalog),
+         images: filePaths,
    };
 
     try {
@@ -254,7 +355,11 @@ export const newUserMail = async (req, res) => {
         message: req.body.message
     };
 
-    const newMail = await new Mail(mailData).save();
+    try {
+        const newMail = await new Mail(mailData).save();
+    } catch (error) {
+        sendError()
+    }
     res.send('Повідомлення успішно надіслано')
 }
 
@@ -271,18 +376,30 @@ export const newComment = async (req, res) => {
         rate: req.body.rate,
         product: req.body.product
     };
-
-    const newComment = await new Comment(commentData).save();
+    try {
+        await new Comment(commentData).save();
+    } catch (err) {
+        showError();
+    }
     res.send('Ваш коментар успішно опублікований')
 }
 export const deleteComment = async(req, res) => {
-    console.log(req.params.id)
-    const comment = await Comment.findOne({_id: req.params.id}).remove();
-
+    
+    try {
+        Comment.findOne({_id: req.params?.id}).remove();
+    } catch(err){
+        showError();
+    }
     res.redirect('/admin/products/comments')
 }
 
 export const createCategory = async (req, res) => {
+    const {error} = categoryValidation(req.body);
+
+    if(error){
+        return res.status(400).send(error.details[0].message)
+    };
+
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name)
@@ -291,17 +408,24 @@ export const createCategory = async (req, res) => {
     if(req.body.parentId){
         categoryObj.parentId = req.body.parentId
     };
-
-    const cat = await new Category(categoryObj).save((error, category) => {
-        if(error) return res.status(400).send(error);
-        if(category) {
-            return res.status(200).redirect('/admin/categories/new')
-        }
-    })
+    try {
+       const category = await new Category(categoryObj).save();
+       if(category){
+        return res.status(200).redirect('/admin/categories/new')
+       }
+    } catch (err) {
+        showError();
+    }
 }
 
 export const updateMisc = async (req, res) => {
     const target = req.params.target;
+    if(!target) {
+        const data = {
+            message: 'Данные с клиента не были переданы.'
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data});
+    }
     switch (target) {
         case 'instagram': 
             misc.contacts.instagram = req.body.link;
@@ -328,13 +452,12 @@ export const updateMisc = async (req, res) => {
 export const getLoginView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
-        name: 'comments',
+        name: 'login',
         misc: misc,
+        user: req.user,
     };
     res.render('admin/route-pages/login', {data: page})
 }
@@ -344,36 +467,37 @@ export const signInAdmin = async (req, res) => {
     if(error) {
         return res.status(400).send(error.details[0].message);
     }
+    try {
+        const user = await User.findOne({email: req.body.email})
+        if(!user) return res.status(400).send('Account with this email does not exist');
+        
+        const validPass = await bcrypt.compare(req.body.password, user.password);
+        if(!validPass) return res.status(400).send('Invalid password');
 
-    const user = await User.findOne({email: req.body.email})
-    if(!user) return res.status(400).send('Account with this email does not exist');
-    
-    const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.status(400).send('Invalid password');
-
-    // Створення і присвоєня токену
-    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
-    res.cookie('auth_token', token, { maxAge: 86400000, httpOnly: true });
-    res.status(200).redirect('/admin');
+        // Створення і присвоєня токену
+        const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+        res.cookie('auth_token', token, { maxAge: 86400000, httpOnly: true });
+        res.status(200).redirect('/admin');
+    } catch (err) {
+        const data = {
+            message: err
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data}); 
+    }
 }
 
 export const newStaff = async (req, res) => {
-    // Валідація введених користувачем даних
     const { error } = registrationValidatation(req.body);
-    // Якщо дані введено неправильно - повернути помилку
     if(error) {
         return res.status(400).send(error.details[0].message);
     }
 
-    // Перевірка чи заданий користувачем e-mail іже існує
     const emailExists = await User.findOne({email: req.body.email})
     if(emailExists) return res.status(400).send('Email already exists');
 
-    // Хешування пароля
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt)
 
-    // Створюємо екземпляр класу користувача
     const user = new User({
         name: req.body.name,
         email: req.body.email,
@@ -395,30 +519,35 @@ export const getNewStaffView = async (req, res) => {
     const roles = await Role.find();
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
-        name: 'create-user',
+        name: 'staff-new',
         misc: misc,
+        user: req.user,
         roles: roles
     };
     res.render('admin/route-pages/staff-new', {data: page})
 };
 export const getAllUsers = async(req,  res) => {
-    const users = await User.find().populate('role')
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
         name: 'users',
         misc: misc,
-        users: users
+        user: req.user,
     };
+    try {
+        const users = await User.find().populate('role')
+        if(users) {
+            page.users = users
+        }
+    } catch (err) {
+        showError()
+    }
+    
     res.render('admin/route-pages/users', {data: page})
 }
 export const getStaffList = async (req, res) => {
@@ -431,6 +560,7 @@ export const getStaffList = async (req, res) => {
         author: 'Euphoria digital agency',
         name: 'comments',
         misc: misc,
+        user: req.user,
     };
     res.render('admin/route-pages/staff-new', {data: page})
 };

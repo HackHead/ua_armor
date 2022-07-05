@@ -4,7 +4,7 @@ include ../components/head.pug
 #canvas
   #box_wrapper
     include ../components/navigation.pug
-    section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("/img/home/title.jpg"); background-position: 50% -3px;')
+    section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("/img/home/title.webp"); background-position: 50% -3px;')
       .container
         .row
           .col-12
@@ -68,6 +68,7 @@ include ../components/head.pug
                 .woocommerce-product-details__short-description
                   p(style="max-width: 100%; display: inline-block; space-wrap: wrap;")
                     | #{data.product.description}
+                  
                 form.cart(action='/armashop/product/champion-of-regret-gun/' method='post' enctype='multipart/form-data')
                   .add-to-cart
                     .quantity
@@ -83,9 +84,10 @@ include ../components/head.pug
                   li#tab-title-description.description_tab.active(role='tab' aria-controls='tab-description' onclick="toggleTabs(event);")
                     a(href='#tab-description' class="tab-head")
                       | Опис
-                  li#tab-title-additional_information.additional_information_tab(role='tab' aria-controls='tab-additional_information' onclick="toggleTabs(event);")
-                    a(href='#tab-additional_information' class="tab-head")
-                      | Характеристики
+                  if data.features.length
+                    li#tab-title-additional_information.additional_information_tab(role='tab' aria-controls='tab-additional_information' onclick="toggleTabs(event);")
+                      a(href='#tab-additional_information' class="tab-head")
+                        | Характеристики
                   li#tab-title-reviews.reviews_tab(role='tab' aria-controls='tab-reviews' onclick="toggleTabs(event);")
                     if data.comments
                       a(href='#tab-reviews' class="tab-head")
@@ -96,14 +98,16 @@ include ../components/head.pug
                 #tab-description.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--description.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-description' style='display: block; box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin: 2.5em 0 0 2.5em')
                   h2 Опис
                   p #{data.product.description}
-                #tab-additional_information.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--additional_information.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-additional_information' style='display: none; box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin: 2.5em 0 0 2.5em')
-                  h2 Додаткова інформація
-                  table.woocommerce-product-attributes.shop_attributes
-                    tbody
-                      tr.woocommerce-product-attributes-item.woocommerce-product-attributes-item--attribute_pa_color
-                        th.woocommerce-product-attributes-item__label Колір
-                        td.woocommerce-product-attributes-item__value
-                          p Зелений
+                if data.features.length
+                  #tab-additional_information.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--additional_information.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-additional_information' style='display: none; box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin: 2.5em 0 0 2.5em')
+                    h2 Додаткова інформація
+                    table.woocommerce-product-attributes.shop_attributes
+                      tbody
+                        each feature in data.features
+                          tr.woocommerce-product-attributes-item.woocommerce-product-attributes-item--attribute_pa_color
+                            th.woocommerce-product-attributes-item__label #{feature.key}
+                            td.woocommerce-product-attributes-item__value
+                              p #{feature.value}
                 #tab-reviews.tab-body.woocommerce-Tabs-panel.woocommerce-Tabs-panel--reviews.panel.entry-content.wc-tab(role='tabpanel' aria-labelledby='tab-title-reviews' style='display: none; box-shadow: none')
                   #reviews.woocommerce-Reviews(style="box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.09); padding: 3em; margin-left:")
                     #tab-comments
@@ -132,21 +136,23 @@ include ../components/head.pug
                                   option(value='3') Average
                                   option(value='2') Not that bad
                                   option(value='1') Very poor
+                            .inpts
+                              p.comment-form-author
+                                label(for='author' style='display: none;')
+                                  | Ім'я &nbsp;
+                                  span.required *
+                                input#author(name='name' type='text' size='30' required='' placeholder="Ім'я")
+                              p.comment-form-email
+                                label(for='email' style='display: none;')
+                                  | Email&nbsp;
+                                  span.required *
+                                input#email(name='email' type='email' size='30' required='' placeholder='Email адреса')
                             p.comment-form-comment
                               label(for='comment' style='display: none;')
                                 | Ваш відгук &nbsp;
                                 span.required *
                               textarea#comment(name='message' cols='45' rows='8' required='' placeholder='Ваш відгук')
-                            p.comment-form-author
-                              label(for='author' style='display: none;')
-                                | Ім'я &nbsp;
-                                span.required *
-                              input#author(name='name' type='text' size='30' required='' placeholder="Ім'я")
-                            p.comment-form-email
-                              label(for='email' style='display: none;')
-                                | Email&nbsp;
-                                span.required *
-                              input#email(name='email' type='email' size='30' required='' placeholder='Email адреса')
+                            
                             p.form-submit
                               input(type="hidden" name="product" value=data.product._id)
                               button#submit.submit(type='submit' ) Надіслати
@@ -231,8 +237,6 @@ include ../components/head.pug
                   
                 
                   .owl-dots
-    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
-    script(src="/generall/js/validation.js" type="module")
     include ../components/footer.pug
     include ../components/footer-js.pug    
     script(src="/generall/js/tabs.js")

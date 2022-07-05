@@ -79,14 +79,14 @@ include ../components/head.pug
                                       button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                   .modal-body
                                       .form-floating.mb-3
-                                        input.form-control(name="link" type='text' required placeholder='https://telegram.com' aria-describedby='floatingInputHelp' value=data.misc.contacts.telegram)
+                                        input.form-control(name="link" type='text' required placeholder='https://telegram.com' data-validate="" data-validate-type="phone" aria-describedby='floatingInputHelp' value=data.misc.contacts.telegram)
                                         label(for='floatingInput') Ссылка
                                         .form-text
-                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                          | Номер телефона должен быть записан без знака плюса и скобок
                                   .modal-footer
                                       button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
                                       button.btn.btn-primary(type='submit') Сохранить
-                      #modalViber.modal.fade(tabindex='-1' aria-hidden='true')
+                      #modalViber.modal.modal-center.fade(tabindex='-1' aria-hidden='true')
                         form(method="POST" action="/admin/misc/update/viber")
                           .modal-dialog.modal-dialog-centered(role='document')
                               .modal-content
@@ -95,10 +95,10 @@ include ../components/head.pug
                                       button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Закрыть')
                                   .modal-body
                                       .form-floating.mb-3
-                                        input.form-control(name="link" type='text' required placeholder='https://viber.com' aria-describedby='floatingInputHelp' value=data.misc.contacts.viber)
-                                        label(for='floatingInput') Ссылка
+                                        input.form-control(name="link" type='text' required placeholder='https://viber.com' data-validate="" data-validate-type="phone" aria-describedby='floatingInputHelp' value=data.misc.contacts.viber)
+                                        label(for='floatingInput') Номер телефона
                                         .form-text
-                                          | Должно быть не короче 8 и не длиннее 128 символов*
+                                          | Номер телефона должен быть записан без знака плюса и скобок
                                   .modal-footer
                                       button.btn.btn-outline-secondary(type='button' data-bs-dismiss='modal') Закрыть
                                       button.btn.btn-primary(type='submit') Сохранить
