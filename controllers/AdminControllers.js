@@ -8,12 +8,14 @@ import User from '../models/User.js'
 import Role from '../models/Role.js'
 import Feature from '../models/Feature.js'
 import Slide from '../models/Slide.js'
+import Cart from '../models/Cart.js'
 
 import misc from "../config/misc.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import {productValidation,slideValidation, mailValidation, commentValidation, loginValidation, registrationValidatation, categoryValidation, featureValidation} from '../validations/SchemaValidation.js'
 import slugify from "slugify";
+import session from "express-session";
 //============================
 //          Страницы         =
 //============================
@@ -601,6 +603,8 @@ export const signInAdmin = async (req, res) => {
 
         // Створення і присвоєня токену
         const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+        req.session.user = user._id;
+        console.log(req.session.user)
         res.cookie('auth_token', token, { maxAge: 86400000, httpOnly: true });
         res.status(200).redirect('/admin');
     } catch (err) {
@@ -692,3 +696,6 @@ export const getStaffList = async (req, res) => {
     };
     res.render('admin/route-pages/staff-new', {data: page})
 };
+
+
+ 

@@ -70,12 +70,12 @@ include ../components/head.pug
                                     .wrap-footer
                                       if product.sale > 0
                                         span.price
-                                          del
+                                          del(style="margin: 0 10px 0")
                                             span 
                                               span 
                                               | #{product.price}
                                               sup 00
-                                          ins
+                                          ins(style="margin: 0 10px 0")
                                             span
                                               span
                                               | #{Math.floor((product.price / 100 * (100 - product.sale)))}
@@ -88,7 +88,7 @@ include ../components/head.pug
                                               | #{product.price}
                                               sup 00
                                       .product-button
-                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/'+ product.slug data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') В корзину
+                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/' + product.slug rel='nofollow') Придбати
                               
                 .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
               
@@ -177,18 +177,18 @@ include ../components/head.pug
                                         a(href='/product/' rel='tag') Бронежилети
                                     .wrap-footer
                                       span.price
-                                        del
+                                        del(style="margin: 0 10px 0")
                                           span
                                             span
                                             | 65
                                             sup 00
-                                        ins
+                                        ins(style="margin: 0 10px 0")
                                           span
                                             span
                                             | 55
                                             sup 00
                                       .product-button
-                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='?add-to-cart=580' data-quantity='1' data-product_id='580' data-product_sku='woo-belt' aria-label='Add “Glory Of Justice Gun” to your cart' rel='nofollow') &Vcy; &kcy;&ocy;&rcy;&zcy;&icy;&ncy;&ucy;
+                                        button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-quantity='1' data-product-id='580' data-cart-action="add" rel='nofollow') Придбати
                   
                 .col-lg-6.col-xl-5.order-1.order-lg-2
                   .category
@@ -235,7 +235,7 @@ include ../components/head.pug
                                           | 20
                                           sup 00
                                       .product-button
-                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/uarmor/?add-to-cart=586' data-quantity='1' data-product_id='586' data-product_sku='woo-polo' aria-label='Add “Hateful Golden Six-Shooter” to your cart' rel='nofollow') &Vcy; &kcy;&ocy;&rcy;&zcy;&icy;&ncy;&ucy;
+                                        button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-quantity='1' data-product-id='580' data-cart-action="add" rel='nofollow') Придбати
                               
                         .owl-nav.disabled
                           .owl-prev

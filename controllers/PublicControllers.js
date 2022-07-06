@@ -5,6 +5,7 @@ import Comment from '../models/Comment.js'
 import Category from "../models/Category.js";
 import Feature from "../models/Feature.js";
 import Slide from "../models/Slide.js";
+import Cart from "../models/Cart.js";
 
 import misc from "../config/misc.js";
 
@@ -18,6 +19,7 @@ export const getIndexPageView = async (req, res) => {
         author: 'Euphoria digital agency',
         name: 'home',
         misc: misc,
+        
     };
     try {
         const slides = await Slide.find();
@@ -25,6 +27,13 @@ export const getIndexPageView = async (req, res) => {
 
         const catalog_products = await Product.find({show_in_index_catalog: true}).populate('category');
         if(catalog_products) page.catalog_products = catalog_products;
+
+        if(req.session.cart){
+            const cart = await Cart.findOne({session: req.sessionID});
+            page.cart = cart
+            console.log(cart)
+        }
+        
     } catch (err) {
         const data = {
             message: err
@@ -37,7 +46,7 @@ export const getIndexPageView = async (req, res) => {
     res.render('generall/route-pages/index', {data: page})
 }
 
-export const getAboutPageView = (req, res) => {
+export const getAboutPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -46,12 +55,24 @@ export const getAboutPageView = (req, res) => {
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
         name: 'about',
-        misc: misc
+        misc: misc,
+        
     };
+    try {
+        if(req.session.cart){
+            const cart = await Cart.findOne({session: req.sessionID});
+            page.cart = cart
+        }
+    } catch (err) {
+        const data = {
+            message: err
+        };
+        res.status(400).send(err)
+    }
     res.render('generall/route-pages/about', {data: page})
 }
 
-export const getContactPageView = (req, res) => {
+export const getContactPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
         description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
@@ -60,8 +81,21 @@ export const getContactPageView = (req, res) => {
         title: 'UArmor | Система керування контентом',
         author: 'Euphoria digital agency',
         name: 'contacts',
-        misc: misc
+        misc: misc,
+        
     };
+    try {
+        if(req.session.cart){
+            const cart = await Cart.findOne({session: req.sessionID});
+            page.cart = cart
+            console.log(cart)
+        }
+    } catch (err) {
+        const data = {
+            message: err
+        };
+        res.status(400).send(err)
+    }
     res.render('generall/route-pages/contacts', {data: page})
 }
 
@@ -87,18 +121,25 @@ export const getStorePageView = async (req, res) => {
         title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         robots: 'index',
         name: 'store',
-        misc: misc
+        misc: misc,
+        
     };
 
     try {
         const products = await Product.find().populate('category').skip(0).limit(20).sort('name');
         if(products) page.products = products;
 
+        console.log(products)
         const categories = await Category.find();
         if(categories) page.categories = categories;
         
+        if(req.session.cart){
+            const cart = await Cart.findOne({session: req.sessionID});
+            page.cart = cart
+            console.log(cart)
+        }
     } catch (err) {
-        res.status(400).render('generall/status-pages/400')
+        res.status(400).render('generall/status-pages/400', {data: err})
     }
 
     res.render('generall/route-pages/store', {data: page})
@@ -114,6 +155,7 @@ export const getProductPageView = async (req, res) => {
         author: 'Euphoria digital agency',
         name: 'product',
         misc: misc,
+        
     };
     try {
         const product = await Product.findOne({slug: req.params.slug}).populate('category');
@@ -124,6 +166,13 @@ export const getProductPageView = async (req, res) => {
             res.status(404).render('generall/status-pages/404')
         };
 
+        if(req.session.cart){
+            const cart = await Cart.findOne({session: req.sessionID});
+            page.cart = cart
+            console.log(cart)
+        }
+
+        
         const features = await Feature.find({product: product._id});
         if(features) page.features = features;
 
@@ -140,3 +189,72 @@ export const getProductPageView = async (req, res) => {
     res.render('generall/route-pages/single-product', {data: page})
 }
 
+
+export const addToCart = async (req, res) => {
+    console.log(req.sessionID)
+
+   if(!req.session) return res.status(400).send({message: 'Session required'});
+   const user = req.session?.user,
+         ssid = req.sessionID;
+   if(user){
+    const cartExists = await Cart.findOne({user: user})
+    if(!cartExists){
+        const savedCart = await new Cart({
+            user: user,
+            session: ssid,
+            products: [
+                {productId: req.body.product, quantity: req.body.quantity || 1}
+            ],
+        }).save()
+
+        req.session.cart = savedCart._id
+        return res.json({cart: savedCart})
+
+    } else {
+        const updatedCart = await Cart.findOneAndUpdate(
+            {user: user},
+            {"$push": {
+                products: {
+                    productId: req.body.product,
+                    quantity: req.body.quantity || 1
+                }
+            }}
+        );
+        req.session.cart = updatedCart._id
+        return res.json({cart: updatedCart})
+    }
+   } else {
+    console.log('s')
+    const cartExists = await Cart.findOne({session: ssid});
+    if(!cartExists){
+        const savedCart = await new Cart({
+            session: ssid,
+            products: [
+                {productId: req.body.product, quantity: req.body.quantity || 1}
+            ],
+        }).save()
+        req.session.cart = savedCart._id
+        return res.json({cart: savedCart})
+    } else {
+        const updatedCart = await Cart.findOneAndUpdate(
+            {session: ssid},
+            {"$push": {
+                products: {
+                    productId: req.body.product,
+                    quantity: req.body.quantity || 1
+                }
+            }}
+        );
+        req.session.cart = updatedCart._id
+        return res.json({cart: updatedCart})
+    }
+   }
+
+   
+   return res.send({data: user});
+
+} 
+
+export const removeFromCart = async (req, res) => {
+    res.send(JSON.stringify(req.session))
+ }

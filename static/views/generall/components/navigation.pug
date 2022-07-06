@@ -27,8 +27,11 @@
               .dropdown.dropdown-shopping-cart
                 a#dropdown-cart.dropdown-toggle(href='#' role='button')
                   span.badge.bg-maincolor.cart-count
-                  ion-icon(name='cart')
-                  | Корзина 
+                  ion-icon(name='cart' style="vertical-align: middle")
+                  if data.cart
+                    span(style="font-weight: bold; padding-left: 0.3em") (#{data.cart.products.length})
+                  else
+                    span(style="font-weight: bold; padding-left: 0.3em") (0)
                 .dropdown-menu.dropdown-menu-right.p-lg-40.p-20.ls(aria-labelledby='dropdown-cart')
                   .widget
                     .widget_shopping_cart_content

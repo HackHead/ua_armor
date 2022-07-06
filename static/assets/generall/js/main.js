@@ -14,3 +14,29 @@ const rate=$(e.currentTarget).attr('data-star');
 $('.stars').addClass('selected');
 $('[data-star]').each(function(){$(this).removeClass('active')});$(e.currentTarget).addClass('active');
 $('#rtn').val(rate);console.log($('#rtn').value)});
+
+const initCartButtons = () => {
+  const cartBtn = document.querySelectorAll('[data-cart-action]');
+  if(cartBtn.length){
+    cartBtn.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-cart-action'),
+              pid = btn.getAttribute('data-product-id'),
+              quantity = btn.getAttribute('data-quantity');
+
+        if(action === 'add'){
+          axios.post('/cart/add', {
+            productId: pid,
+            quantity: quantity
+          }).then((data) => {
+            btn.removeAttribute("disabled", "")
+            btn.textContent = "Видалити"
+          }).catch((err) => {
+            console.log(err)
+          }) 
+        }
+      })
+    })
+  }
+}
+initCartButtons();

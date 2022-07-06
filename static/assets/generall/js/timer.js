@@ -37,6 +37,6 @@ function getTimeRemaining(endtime) {
     const timeinterval = setInterval(updateClock, 1000);
   }
   
-  const deadline = new Date(Date.parse(document.querySelector("[data-promotion-deadline]").getAttribute('data-promotion-deadline')));
+  const deadline = new Date(Date.parse(document.querySelector("[data-promotion-deadline]")?.getAttribute('data-promotion-deadline')));
   if(document.querySelector('[data-promotion-container]')) initializeClock(deadline);;
   

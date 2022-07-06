@@ -19469,3 +19469,7 @@ dl#attachment_612 {
 .partners .owl-carousel img {
   max-width: 55%;
 }
+.add_to_cart_button {
+  cursor: pointer;
+  position: relative;
+}

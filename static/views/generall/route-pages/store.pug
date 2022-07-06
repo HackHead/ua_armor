@@ -44,7 +44,7 @@ include ../components/head.pug
               ul.products.columns-3
                 each product,indx in data.products
                   if !product.hidden
-                    li.has-post-thumbnail.product.type-product.status-publish.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple(style="position: relative")
+                    li.has-post-thumbnail.product.type-product.status-publish.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple(style="position: relative" data-product-card)
                       .product-inner
                         .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
                           a(href='/store/' + product.slug)
@@ -78,7 +78,15 @@ include ../components/head.pug
                                   | #{product.price}
                                   sup 00
                           .product-button
-                            a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='#' data-quantity='1' data-product_id=product._id rel='nofollow') В корзину                
+                            each item in data.cart.products 
+                              | #{item._id}
+                              | #{product._id}
+                              if String(item._id) === String(product._id)
+                                button.button.d-none.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-cart-product=product._id data-cart-action="add" data-cart-quantity="1"  rel='nofollow') В корзину    
+                                button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-cart-product=product._id data-cart-action="remove" data-cart-quantity="1"  rel='nofollow') Видалити                
+                              else
+                                button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-cart-product=product._id data-cart-action="add" data-cart-quantity="1"  rel='nofollow') В корзину    
+                                button.button.d-none.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-cart-product=product._id data-cart-action="remove" data-cart-quantity="1"  rel='nofollow') Видалити      
               nav.woocommerce-pagination
                 ul.page-numbers
                   li

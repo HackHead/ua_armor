@@ -1,15 +1,22 @@
 import mongoose from "mongoose";
 
 const CartSchema = new mongoose.Schema({
-    userId: {
+    session: {
         type: String,
         required: true,
+        unique: true,
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        unique: true,
     },
     products: [
         {
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'Product'
+                ref: 'Product',
+                unique: true,
             },
             quantity: {
                 type: Number,
@@ -17,8 +24,8 @@ const CartSchema = new mongoose.Schema({
             }
         }
     ]
-})
-
+}, {timestamps: true})
+CartSchema.index({createdAt: 1},{expireAfterSeconds: 3600 * 24});
 const Cart = mongoose.model('Cart', CartSchema)
 
-export default Product;
+export default Cart;

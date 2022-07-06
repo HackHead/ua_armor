@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signInAdmin, createSlide, newStaff, getNewStaffView,getAllUsers, createCategory, newComment, getAdminCommentsView, updateMisc, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView, getLoginView, deleteComment } from "../controllers/AdminControllers.js";
+import {signInAdmin, createSlide, newStaff, getNewStaffView,getAllUsers, createCategory, newComment, getAdminCommentsView, updateMisc, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView, getLoginView, deleteComment } from "../controllers/AdminControllers.js";
 import { isStaff } from "../middleware/Auth.js";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -56,6 +56,8 @@ router.post('/product/:id/update',isStaff, upload.array('images', 10), updatePro
 router.post('/product/category/create',isStaff, createCategory)
 router.post('/admin/mail/users/new',isStaff, newUserMail);
 router.post('/comment/new', newComment);
+
+
 
 // router.post('/role/create', async(req, res) => {
 //     const role = {
