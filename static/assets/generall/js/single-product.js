@@ -15,6 +15,23 @@ window.addEventListener('load', () => {
             qtyInput.value = counter;
         }, 100)
         
+        const initModal = (type, text) => {
+            const popup = document.querySelector('.product-added-popup');
+            switch (type) {
+                case 'danger':
+                    popup.classList.add('danger');
+                    break;
+                case 'success':
+                    popup.classList.add('success');
+                    break;
+            }
+            popup.textContent = text
+            popup.classList.remove('hidden');
+            setTimeout(() => {
+                popup.classList.add('hidden')
+            }, 4000)
+        }
+
         itemAdd.addEventListener('click', (e) => {
             if(counter >= max) return;
             counter++
@@ -28,7 +45,6 @@ window.addEventListener('load', () => {
             const renderCart = (data) => {
                 const totalItems = document.querySelector('[data-navigation-cart-total-items]');
                 totalItems.textContent = `(${data.cart.products.length})`;
-                content.innerHTML = `<p style="text-align: center> Оновіть сторінку щоб побачити внесені зміни </p>`
                 console.log(content)
             }
             cartBtn.setAttribute("disabled", "")
@@ -47,13 +63,13 @@ window.addEventListener('load', () => {
                 cartBtn.innerHTML = ``
                 cartBtn.textContent = `В корзину`
                 counter = min;
+                initModal('success', 'Товар додано в корзину')
                 renderCart(res.data)
             }).catch((err) => {
                 cartBtn.removeAttribute("disabled")
                 cartBtn.classList.remove("waiting")
                 cartBtn.innerHTML = ``
                 cartBtn.textContent = `В корзину`
-
                 throw new Error(err)
             });
         })

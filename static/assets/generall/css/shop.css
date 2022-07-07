@@ -50,7 +50,7 @@
 }
 .woocommerce-error .restore-item, .woocommerce-info .restore-item, .woocommerce-message .restore-item, .woocommerce-error .showcoupon, .woocommerce-info .showcoupon, .woocommerce-message .showcoupon {
   font-size: 16px;
-  text-transform: capitalize;
+  
   border-radius: 0;
   line-height: 1;
   padding: 10px 35px;
@@ -81,7 +81,7 @@ ul.woocommerce-error, ul.woocommerce-info, ul.woocommerce-message {
   margin-bottom: 0;
   float: left;
   color: #131e25;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Montserrat';
   text-transform: uppercase;
 }
 .woocommerce-result-count + form {
@@ -128,7 +128,7 @@ ul.woocommerce-error, ul.woocommerce-info, ul.woocommerce-message {
 }
 .products-selection .toggle_view {
   color: #131e25;
-  font-family: 'Anton';
+  font-family: 'Montserrat';
   text-transform: uppercase;
 }
 .products-selection .toggle_view a {
@@ -267,7 +267,7 @@ ul.woocommerce-error, ul.woocommerce-info, ul.woocommerce-message {
 .products .product h2 {
   font-size: 24px;
   margin: 0;
-  text-transform: capitalize;
+  
 }
 .products .product .onsale {
   position: absolute;
@@ -984,7 +984,7 @@ del .amount {
   text-align: center;
   font-size: 16px;
   line-height: 1;
-  text-transform: capitalize;
+  
   background: #f1f1f1;
   color: #131e25;
   border-bottom: none;
@@ -1071,7 +1071,7 @@ del .amount {
 .comment_container .meta {
   font-size: 14px;
   font-weight: 500;
-  text-transform: capitalize;
+  
   font-weight: 700;
   line-height: 1.3;
   margin-right: 90px;
@@ -1169,7 +1169,7 @@ del .amount {
 }
 .related .cart_totals h2, .upsells .cart_totals h2, .cross-sells .cart_totals h2 {
   font-size: 30px;
-  text-transform: capitalize;
+  
   letter-spacing: -0.3px;
 }
 .related .cart_totals td[data-title='Total'], .upsells .cart_totals td[data-title='Total'], .cross-sells .cart_totals td[data-title='Total'], .related .cart_totals td[data-title='Subtotal'], .upsells .cart_totals td[data-title='Subtotal'], .cross-sells .cart_totals td[data-title='Subtotal'] {
@@ -1208,12 +1208,18 @@ del .amount {
   margin: 0;
   margin-top: -40px;
 }
+.widget_shopping_cart ul {
+  padding-top: 40px;
+}
 .widget_shopping_cart ul li, .widget_products ul li, .widget_recently_viewed_products ul li, .widget_recent_reviews ul li, .widget_top_rated_products ul li {
   position: relative;
   padding: 40px 40px 40px 85px !important;
   min-height: 160px;
   white-space: normal;
   border-bottom: 1px solid #d0d2d3;
+}
+.widget_shopping_cart ul li:nth-of-type(1){
+  border-top: 1px solid #d0d2d3;
 }
 .widget_shopping_cart ul li a > img, .widget_products ul li a > img, .widget_recently_viewed_products ul li a > img, .widget_recent_reviews ul li a > img, .widget_top_rated_products ul li a > img {
   position: absolute;
@@ -1225,7 +1231,7 @@ del .amount {
 .widget_shopping_cart .product-title, .widget_products .product-title, .widget_recently_viewed_products .product-title, .widget_recent_reviews .product-title, .widget_top_rated_products .product-title, .widget_shopping_cart .minicart-product-meta a, .widget_products .minicart-product-meta a, .widget_recently_viewed_products .minicart-product-meta a, .widget_recent_reviews .minicart-product-meta a, .widget_top_rated_products .minicart-product-meta a {
   display: block;
   font-size: 16px;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Montserrat';
   margin-bottom: 10px;
 }
 .widget_shopping_cart .amount, .widget_products .amount, .widget_recently_viewed_products .amount, .widget_recent_reviews .amount, .widget_top_rated_products .amount {
@@ -1384,7 +1390,7 @@ del .amount {
   text-align: center;
   display: inline-block;
   letter-spacing: 0;
-  text-transform: capitalize;
+  
   font-weight: 400;
   font-size: 16px !important;
   color: #6d7a82;
@@ -1478,7 +1484,7 @@ del .amount {
   border: none;
   border-bottom: 1px solid #d0d2d3;
   text-align: left;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Montserrat';
 }
 .shop_table tr, .shop_table td {
   border: none;

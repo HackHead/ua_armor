@@ -13,4 +13,8 @@ router.get('/store/product/:slug', ctrl.getProductPageView)
 
 router.post('/cart/add', addToCart)
 router.post('/cart/remove', removeFromCart)
+
+router.get('/cart', ctrl.getCartPageView)
+router.get('/order', ctrl.getOrderPageView)
+
 export default router;

@@ -704,7 +704,7 @@ a>img {
 	padding: 0;
 	background-color: transparent;
 	border-radius: 0;
-	text-transform: capitalize;
+	
 	font-size: 20px
 }
 
@@ -763,7 +763,7 @@ button[type="submit"],
 	display: inline-block;
 	cursor: pointer;
 	font-size: 16px;
-	text-transform: capitalize;
+	
 	border-radius: 0;
 	line-height: 1;
 	padding: 10px 35px;
@@ -800,7 +800,7 @@ select.form-control {
 	font-size: 16px;
 	font-weight: 300;
 	line-height: 2.4rem;
-	text-transform: capitalize;
+	
 	color: #131e25
 }
 
@@ -815,7 +815,7 @@ select option,
 	font-weight: 300;
 	font-size: 16px;
 	line-height: 2.4rem;
-	text-transform: capitalize;
+	
 	color: #131e25;
 	opacity: 1
 }
@@ -1257,7 +1257,7 @@ aside>*+*,
 .page_footer .widget .widget-title {
 	margin-bottom: 30px;
 	font-size: 24px;
-	text-transform: capitalize;
+	
 	color: #f2c014
 }
 
@@ -1488,7 +1488,7 @@ a.fa {
 		font-size: 16px;
 		line-height: 1.1em;
 		font-weight: 300;
-		text-transform: capitalize;
+		
 		letter-spacing: 0
 	}
 }
@@ -1763,7 +1763,7 @@ body:after,
 
 .page_copyright {
 	font-size: 14px;
-	text-transform: capitalize;
+	
 	font-weight: 500
 }
 
@@ -1908,7 +1908,7 @@ body:after,
 .products .product h2 {
 	font-size: 24px;
 	margin: 0;
-	text-transform: capitalize
+	text-transform: none
 }
 
 .products .product .onsale {

@@ -1,5 +1,5 @@
 // Importing required modules
-import express, { application } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import mongoose from 'mongoose'
 import path from "path";
@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 import session from "express-session";
 import AdminRoutes from "./routes/AdminRoutes.js";
 import PublicRoutes from "./routes/PublicRoutes.js"
+import ApiRoutes from "./routes/Api.js"
 import { default as MongoStore } from "connect-mongo"
 
 
@@ -86,7 +87,7 @@ app.use('/uploads',express.static(path.join(__dirname, '/uploads')));
 
 app.use(AdminRoutes)
 app.use(PublicRoutes)
-
+app.use(ApiRoutes)
 
 app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}`);

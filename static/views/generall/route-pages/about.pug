@@ -1,262 +1,267 @@
 include ../components/head.pug
-
-#canvas
-  #box_wrapper
-    include ../components/navigation.pug
-    .fw-page-builder-content
-      section#section-7f5004f.ls.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
-        h6.d-none section-7f5004f
-        .container
-          .row.align-center
-            .col-xs-12.col-12
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-            // .col-*
-            .col-xs-12.col-12.col-lg-6
-              .img-wrap.round
-                img.round(src='/img/about/girl_with_gun-530x530.webp' alt='/img/about/girl_with_gun-530x530.webp' width='530' height='530')
-              .fw-divider-space.divider-30.divider-lg-0
-            // .col-*
-            .col-xs-12.col-12.col-lg-6.text-center.text-sm-left
-              h3.special-heading.text-center.text-sm-left
-                span.big
-                  mark Ласкаво просимо
-                  br
-                  |  до UArmor 
-              .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
-              .text-block
-                p #{data.misc.about}
-                blockquote
-                  p.excerpt
-                    | For over 30 years, has been at the forefront of cultural change, accelerating acceptance.
-                  footer
-                    h5
-                      mark Володими Зеленський
-                
-              .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
-            // .col-*
-            .col-xs-12.col-12
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-            // .col-*
-      section#section-4331909.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
-        h6.d-none section-4331909
-        .cover-image.ds.s-cover-right.s-cover-small(style='background-image: url("/img/about/federico-bottos-Z3NceSeZqgI-unsplash-scaled.webp");')
-          img(src='/img/about/federico-bottos-Z3NceSeZqgI-unsplash-scaled.webp' alt='section-4331909')
-        .container
-          .row
-            .col-xs-12.col-12.col-lg-6.text-center.text-sm-left
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-              h3.special-heading.text-center.text-sm-left
-                span.big
-                  mark Чому варто
-                  |  обрати нас
-              .fw-divider-space.divider-20.divider-lg-30
-              .fw-divider-line-styled.cs.left-line
-              .fw-divider-space.divider-30.divider-lg-50.divider-xxl-70
-              .text-block
-                p #{data.misc.about}
-            // .col-*
-            .col-xs-12.col-12
-              .fw-divider-space.divider-30.divider-lg-50.divider-xxl-70
-              .owl-carousel.owl-shadowitems.shortcode-service.bottom-left-nav.owl-loaded.owl-drag.owl-theme(data-loop='false' data-nav='true' data-dots='false' data-center='false' data-autoplay='false' data-speed='5000' data-responsive-xl='4' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='15')
-                .owl-stage-outer
-                  .owl-stage(style='transform: translate3d(-1185px, 0px, 0px); transition: all 0s ease 0s; width: 4148px;')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='2')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/decoys/')
-                            .icon-styled.fs-52
-                              i.ico.ico-dart
-                          h5.text-uppercase
+style().
+  body * {
+    font-family:'Montserrat';
+  }
+.app#app
+  #canvas
+    #box_wrapper
+      include ../components/navigation.pug
+      .fw-page-builder-content
+        section#section-7f5004f.ls.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+          h6.d-none section-7f5004f
+          .container
+            .row.align-center
+              .col-xs-12.col-12
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              // .col-*
+              .col-xs-12.col-12.col-lg-6
+                .img-wrap.round
+                  img.round(src='/img/about/girl_with_gun-530x530.webp' alt='/img/about/girl_with_gun-530x530.webp' width='530' height='530')
+                .fw-divider-space.divider-30.divider-lg-0
+              // .col-*
+              .col-xs-12.col-12.col-lg-6.text-center.text-sm-left
+                h3.special-heading.text-center.text-sm-left
+                  span.big
+                    mark Ласкаво просимо
+                    br
+                    |  до UArmor 
+                .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
+                .text-block
+                  p #{data.misc.about}
+                  blockquote
+                    p.excerpt
+                      | For over 30 years, has been at the forefront of cultural change, accelerating acceptance.
+                    footer
+                      h5
+                        mark Володими Зеленський
+                  
+                .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
+              // .col-*
+              .col-xs-12.col-12
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              // .col-*
+        section#section-4331909.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+          h6.d-none section-4331909
+          .cover-image.ds.s-cover-right.s-cover-small(style='background-image: url("/img/about/federico-bottos-Z3NceSeZqgI-unsplash-scaled.webp");')
+            img(src='/img/about/federico-bottos-Z3NceSeZqgI-unsplash-scaled.webp' alt='section-4331909')
+          .container
+            .row
+              .col-xs-12.col-12.col-lg-6.text-center.text-sm-left
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+                h3.special-heading.text-center.text-sm-left
+                  span.big
+                    mark Чому варто
+                    |  обрати нас
+                .fw-divider-space.divider-20.divider-lg-30
+                .fw-divider-line-styled.cs.left-line
+                .fw-divider-space.divider-30.divider-lg-50.divider-xxl-70
+                .text-block
+                  p #{data.misc.about}
+              // .col-*
+              .col-xs-12.col-12
+                .fw-divider-space.divider-30.divider-lg-50.divider-xxl-70
+                .owl-carousel.owl-shadowitems.shortcode-service.bottom-left-nav.owl-loaded.owl-drag.owl-theme(data-loop='false' data-nav='true' data-dots='false' data-center='false' data-autoplay='false' data-speed='5000' data-responsive-xl='4' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='15')
+                  .owl-stage-outer
+                    .owl-stage(style='transform: translate3d(-1185px, 0px, 0px); transition: all 0s ease 0s; width: 4148px;')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='2')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/decoys/')
-                              mark Decoys
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/decoys/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='3')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/game-calls/')
-                            .icon-styled.fs-52
-                              i.ico.ico-granade
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-dart
+                            h5.text-uppercase
+                              a(href='/uarmor/service/decoys/')
+                                mark Decoys
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/decoys/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='3')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/game-calls/')
-                              mark Game calls
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/game-calls/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='4')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/guns/')
-                            .icon-styled.fs-52
-                              i.ico.ico-dog-tag
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-granade
+                            h5.text-uppercase
+                              a(href='/uarmor/service/game-calls/')
+                                mark Game calls
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/game-calls/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='4')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/guns/')
-                              mark Guns
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/guns/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='5')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/military/')
-                            .icon-styled.fs-52
-                              i.ico.ico-forma1
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-dog-tag
+                            h5.text-uppercase
+                              a(href='/uarmor/service/guns/')
+                                mark Guns
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/guns/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='5')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/military/')
-                              mark Military
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/military/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.active(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='0')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/archery/')
-                            .icon-styled.fs-52
-                              i.ico.ico-bow-and-arrow
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-forma1
+                            h5.text-uppercase
+                              a(href='/uarmor/service/military/')
+                                mark Military
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/military/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.active(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='0')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/archery/')
-                              mark Archery
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/archery/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.active(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='1')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/blinds/')
-                            .icon-styled.fs-52
-                              i.ico.ico-icon2
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-bow-and-arrow
+                            h5.text-uppercase
+                              a(href='/uarmor/service/archery/')
+                                mark Archery
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/archery/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.active(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='1')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/blinds/')
-                              mark Blinds
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/blinds/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.active(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='2')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/decoys/')
-                            .icon-styled.fs-52
-                              i.ico.ico-dart
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-icon2
+                            h5.text-uppercase
+                              a(href='/uarmor/service/blinds/')
+                                mark Blinds
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/blinds/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.active(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='2')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/decoys/')
-                              mark Decoys
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/decoys/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.active(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='3')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/game-calls/')
-                            .icon-styled.fs-52
-                              i.ico.ico-granade
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-dart
+                            h5.text-uppercase
+                              a(href='/uarmor/service/decoys/')
+                                mark Decoys
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/decoys/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.active(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='3')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/game-calls/')
-                              mark Game calls
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/game-calls/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='4')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/guns/')
-                            .icon-styled.fs-52
-                              i.ico.ico-dog-tag
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-granade
+                            h5.text-uppercase
+                              a(href='/uarmor/service/game-calls/')
+                                mark Game calls
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/game-calls/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='4')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/guns/')
-                              mark Guns
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/guns/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='5')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/military/')
-                            .icon-styled.fs-52
-                              i.ico.ico-forma1
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-dog-tag
+                            h5.text-uppercase
+                              a(href='/uarmor/service/guns/')
+                                mark Guns
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/guns/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='5')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/military/')
-                              mark Military
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/military/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='0')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/archery/')
-                            .icon-styled.fs-52
-                              i.ico.ico-bow-and-arrow
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-forma1
+                            h5.text-uppercase
+                              a(href='/uarmor/service/military/')
+                                mark Military
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/military/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='0')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/archery/')
-                              mark Archery
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/archery/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='1')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/blinds/')
-                            .icon-styled.fs-52
-                              i.ico.ico-icon2
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-bow-and-arrow
+                            h5.text-uppercase
+                              a(href='/uarmor/service/archery/')
+                                mark Archery
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/archery/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='1')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/blinds/')
-                              mark Blinds
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/blinds/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='2')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/decoys/')
-                            .icon-styled.fs-52
-                              i.ico.ico-dart
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-icon2
+                            h5.text-uppercase
+                              a(href='/uarmor/service/blinds/')
+                                mark Blinds
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/blinds/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='2')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/decoys/')
-                              mark Decoys
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/decoys/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-                    .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
-                      .owl-carousel-item.shortcode.text-center(data-index='3')
-                        .icon-box.text-center.ls.box-shadow
-                          a(href='/uarmor/service/game-calls/')
-                            .icon-styled.fs-52
-                              i.ico.ico-granade
-                          h5.text-uppercase
+                              .icon-styled.fs-52
+                                i.ico.ico-dart
+                            h5.text-uppercase
+                              a(href='/uarmor/service/decoys/')
+                                mark Decoys
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/decoys/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                      .owl-item.cloned(style='width: 281.25px; margin-right: 15px;')
+                        .owl-carousel-item.shortcode.text-center(data-index='3')
+                          .icon-box.text-center.ls.box-shadow
                             a(href='/uarmor/service/game-calls/')
-                              mark Game calls
-                          p The contents of this Web site may be browsed .
-                          .btn-service
-                            a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/game-calls/')
-                              | Learn More 
-                              i.fa.fa-long-arrow-right(aria-hidden='true')
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-            // .col-*
-    include ../components/footer.pug
-    include ../components/footer-js.pug
+                              .icon-styled.fs-52
+                                i.ico.ico-granade
+                            h5.text-uppercase
+                              a(href='/uarmor/service/game-calls/')
+                                mark Game calls
+                            p The contents of this Web site may be browsed .
+                            .btn-service
+                              a.btn.btn-outline-darkgrey.only-link(href='/uarmor/service/game-calls/')
+                                | Learn More 
+                                i.fa.fa-long-arrow-right(aria-hidden='true')
+                .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              // .col-*
+include ../components/footer.pug
+include ../components/footer-js.pug
+script(type="module" src="/generall/js/app.js")

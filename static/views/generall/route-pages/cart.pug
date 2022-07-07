@@ -1,0 +1,107 @@
+include ../components/head.pug
+style().
+  body * {
+    font-family:'Montserrat';
+  }
+  [v-cloak] {
+    display: none;
+  }
+.app#app(v-cloak)
+  #canvas
+    #box_wrapper
+      include ../components/navigation.pug
+      section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image:url(http://webdesign-finder.com/armashop/wp-content/uploads/2020/03/title.jpg);')
+        .container
+          .row
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+            .col-sm-12.text-center.text-sm-left
+              h1.color-main
+                | Корзина
+              ol.breadcrumb
+                li.breadcrumb-item.first-item
+                  a(href='/') Головна
+                li.breadcrumb-item.last-item.active Корзина
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+      // .page_title
+      section.ls.page_content.s-py-xl-110.s-py-md-90.s-py-60.c-gutter-60
+        .container(v-if="cartLen")
+          .row
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+                
+                #content.col-12.column-main
+                  article#post-623.post-623.page.type-page.status-publish.hentry
+                    .item-content.entry-content
+                      .woocommerce
+                        .woocommerce-notices-wrapper
+                        form.woocommerce-cart-form(action='http://webdesign-finder.com/armashop/cart/' method='post')
+                          table.shop_table.shop_table_responsive.cart.woocommerce-cart-form__contents(cellspacing='0')
+                            thead
+                              tr
+                                th.product-remove &nbsp;
+                                th.product-thumbnail &nbsp;
+                                th.product-name Товар
+                                th.product-price Ціна
+                                th.product-quantity Кількість
+                                th.product-subtotal Вартість
+                            tbody
+                                tr.woocommerce-cart-form__cart-item.cart_item(v-for="item in cart.products")
+                                  td.product-remove
+                                    a.remove(href='javascript:void(0);' aria-label='Remove this item' @click="removeFromCart($event)" :data-product-id="item.productId._id" ) &times;
+                                  td.product-thumbnail
+                                    a(:href="'/store/product/' + item.productId.slug")
+                                      img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(:src="'/' + item.productId.images[0]")
+                                    .minicart-product-meta
+                                      a(:href="'/store/product/' + item.productId.slug")
+                                  td.product-name(data-title='Product')
+                                    a(:href="'/store/product/' + item.productId.slug") {{item.productId.name}}
+                                  td.product-price(data-title='Price')
+                                    span.woocommerce-Price-amount.amount
+                                      span.woocommerce-Price-currencySymbol &pound;
+                                      | {{item.productId.price}}
+                                      sup 00
+                                  td.product-quantity(data-title='Quantity')
+                                    .quantity
+                                     
+                                      input.input-text.qty.text(type='number' step='1' min='0' max='' disabled :value="item.quantity" title='Qty' size='4' placeholder='' inputmode='numeric')
+                                  td.product-subtotal(data-title='Subtotal')
+                                    span.woocommerce-Price-amount.amount
+                                      span.woocommerce-Price-currencySymbol &pound;
+                                      | {{item.productId.price * item.quantity}}
+                                      sup 00
+                                
+                            
+                        .cart-collaterals
+                          .cart_totals
+                            h2 Загальна ціна
+                            table.shop_table.shop_table_responsive(cellspacing='0')
+                              tbody
+                                tr.cart-subtotal
+                                  th Вартість
+                                  td(data-title='Subtotal')
+                                    span.woocommerce-Price-amount.amount
+                                      span.woocommerce-Price-currencySymbol &pound;
+                                      | #{data.cart.total}
+                                      sup 00
+                                tr.order-total
+                                  th Вартість зі знижкою
+                                  td(data-title='Total')
+                                    strong
+                                      span.woocommerce-Price-amount.amount
+                                        span.woocommerce-Price-currencySymbol &pound;
+                                        | 
+                                        sup 00
+                            .wc-proceed-to-checkout
+                              a.checkout-button.button.alt.wc-forward(href='/order')
+                                | Сформувати замовлення
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+          // eof .row
+        .d-flex(v-else)(style="text-align:center; min-height:  80vh; justify-content: center; align-items: center")
+          p Ваша корзина порожня
+
+include ../components/footer.pug
+include ../components/footer-js.pug
+script(type="module" src="/generall/js/app.js")

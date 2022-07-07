@@ -1,0 +1,138 @@
+include ../components/head.pug
+style().
+  body * {
+    font-family:'Montserrat';
+  }
+.app#app
+  #canvas
+    #box_wrapper
+      include ../components/navigation.pug
+      section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("http://webdesign-finder.com/armashop/wp-content/uploads/2020/03/title.jpg"); background-position: 50% -3px;')
+        .container
+          .row
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+            .col-sm-12.text-center.text-sm-left
+              h1.color-main
+                | Оформити замовлення
+              ol.breadcrumb
+                li.breadcrumb-item.first-item
+                  a(href='http://webdesign-finder.com/armashop/') Головна
+                li.breadcrumb-item.last-item.active Замовлення
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+      section.ls.page_content.s-py-xl-110.s-py-md-90.s-py-60.c-gutter-60
+        .container(v-if="cartLen")
+          .row
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+            #content.col-12.column-main
+              article#post-624.post-624.page.type-page.status-publish.hentry
+                .item-content.entry-content
+                  .woocommerce
+                    .woocommerce-notices-wrapper
+                    .woocommerce-form-coupon-toggle
+                      .woocommerce-info
+                        | Маєте купон на знижку? 
+                        a.showcoupon(href='#') Натисніть сюди
+                    form.checkout_coupon.woocommerce-form-coupon(method='post' style='display:none')
+                      p If you have a coupon code, please apply it below.
+                      p.form-row.form-row-first
+                        input#coupon_code.input-text(type='text' name='coupon_code' placeholder='Coupon code')
+                      p.form-row.form-row-last
+                        button.button(type='submit' name='apply_coupon' value='Apply coupon') Apply coupon
+                      .clear
+                    .woocommerce-notices-wrapper
+                    form.checkout.woocommerce-checkout(name='checkout' method='post' action='http://webdesign-finder.com/armashop/checkout/' enctype='multipart/form-data' novalidate='novalidate')
+                      #customer_details.col2-set
+                        .col-1
+                          .woocommerce-billing-fields
+                            h3 Деталі доставки
+                            .woocommerce-billing-fields__field-wrapper
+                              p#billing_first_name_field.form-row.form-row-first.validate-required(data-priority='10')
+                                label(for='billing_first_name' style='display: none;')
+                                  | Ім'я &nbsp;
+                                  abbr.required(title='required') *
+                                span.woocommerce-input-wrapper
+                                  input#billing_first_name.input-text(type='text' name='billing_first_name' placeholder="Ім'я" autocomplete='given-name' style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;')
+                              p#billing_company_field.form-row.form-row-wide(data-priority='30')
+                                label(for='billing_company')
+                                  | Email &nbsp;
+                                  span.optional (optional)
+                                span.woocommerce-input-wrapper
+                                  input#billing_company.input-text(type='email' name='billing_company' placeholder='Email' autocomplete='organization')
+                              p#billing_company_field.form-row.form-row-wide(data-priority='30')
+                                label(for='billing_company')
+                                  | Номер телефону &nbsp;
+                                  span.optional (optional)
+                                span.woocommerce-input-wrapper
+                                  input#billing_company.input-text(type='tel' name='billing_company' placeholder='Номер телефону' autocomplete='organization')
+                              p#billing_country_field.form-row.form-row-wide.address-field.update_totals_on_change.validate-required(data-priority='40')
+                                label(for='billing_country')
+                                  | Місто доставки;
+                                  abbr.required(title='required') *
+                                span.woocommerce-input-wrapper
+                                  .select-wrap
+                                    select#billing_country.country_to_state.country_select.select2-hidden-accessible(name='billing_country' autocomplete='country' tabindex='-1' aria-hidden='true')
+                                      option(value='') Оберіть зі списку &mldr;
+                                      option(value='AX') &angst;land Islands
+                                      option(value='AF') Afghanistan
+                                      option(value='AL') Albania
+                                      option(value='DZ') Algeria
+                                      option(value='AS') American Samoa
+                                      option(value='AD') Andorra
+                                      option(value='AO') Angola
+                                      option(value='AI') Anguilla
+                                      option(value='AQ') Antarctica
+                              
+                        .col-2
+                          .woocommerce-shipping-fields
+                          .woocommerce-additional-fields
+                            h3 Додаткова інформація
+                            .woocommerce-additional-fields__field-wrapper
+                              p#order_comments_field.form-row.notes(data-priority='')
+                                label(for='order_comments')
+                                  | Order notes&nbsp;
+                                  span.optional (optional)
+                                span.woocommerce-input-wrapper
+                                  textarea#order_comments.input-text(name='order_comments' placeholder='Будь-яка інформація, що стосується замовлення, яку ви хочете нам повідомити' rows='5' cols='10')
+                      h3#order_review_heading Ваше замовлення
+                      #order_review.woocommerce-checkout-review-order
+                        table.shop_table.woocommerce-checkout-review-order-table(style='position: relative;')
+                          thead
+                            tr
+                              th.product-name Товар
+                              th.product-total Вартість
+                          tbody
+                            tr.cart_item
+                              td.product-name
+                                | Тактичний рюкзак армор-м; 
+                                strong.product-quantity &times;&nbsp;2
+                              td.product-total
+                                span.woocommerce-Price-amount.amount
+                                  span.woocommerce-Price-currencySymbol &pound;
+                                  | 36
+                                  sup 00
+                          tfoot
+                            tr.cart-subtotal
+                              th Вартість
+                              td
+                                span.woocommerce-Price-amount.amount
+                                  span.woocommerce-Price-currencySymbol &pound;
+                                  | 36
+                                  sup 00
+                            tr.order-total
+                              th Загальна
+                              td
+                                strong
+                                  span.woocommerce-Price-amount.amount
+                                    span.woocommerce-Price-currencySymbol &pound;
+                                    | 36
+                                    sup 00
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+        .d-flex(v-else)(style="text-align:center; min-height:  80vh; justify-content: center; align-items: center")
+          p Щоб оформити замовлення потрібно мати хоча б один товар у корзині
+include ../components/footer.pug
+include ../components/footer-js.pug
+script(type="module" src="/generall/js/app.js")

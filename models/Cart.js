@@ -4,14 +4,12 @@ const CartSchema = new mongoose.Schema({
     session: {
         type: String,
         required: true,
-        unique: true,
     },
     products: [
         {
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Product',
-                unique: true,
             },
             quantity: {
                 type: Number,

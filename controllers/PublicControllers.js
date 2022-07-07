@@ -9,6 +9,64 @@ import Cart from "../models/Cart.js";
 
 import misc from "../config/misc.js";
 import mongoose from 'mongoose';
+
+
+export const getCartPageView = async (req, res) => {
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'cart',
+        misc: misc,
+        
+    };
+    try {
+        if(req.session.cart){
+            const cart = await Cart.findOne({session: req.sessionID}).populate({
+                path: 'products.productId'
+            });
+            page.cart = cart || null
+        }
+    } catch (err) {
+        const data = {
+            message: err
+        };
+        res.status(400).send(err)
+    }
+    res.render('generall/route-pages/cart', {data: page})
+}
+
+export const getOrderPageView = async (req, res) => {
+    const page = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'cart',
+        misc: misc,
+        
+    };
+    try {
+        if(req.session.cart){
+            const cart = await Cart.findOne({session: req.sessionID}).populate({
+                path: 'products.productId'
+            });
+            page.cart = cart || null
+        }
+    } catch (err) {
+        const data = {
+            message: err
+        };
+        res.status(400).send(err)
+    }
+    res.render('generall/route-pages/order', {data: page})
+}
+
 export const getIndexPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
@@ -211,7 +269,7 @@ export const getProductPageView = async (req, res) => {
         if(relatedProducts) page.relatedProducts = relatedProducts;
 
         const allComments = await Comment.find({product: product._id});
-        if(allComments) page.allComments = allComments;
+        if(allComments) page.comments = allComments;
 
     } catch (err) {
         res.status(400).send(err)

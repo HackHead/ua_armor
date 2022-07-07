@@ -1,17 +1,3 @@
-style().
-  .page_header_wrapper {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 999
-  }
-  body {
-    padding-top: 90px
-  }
-  .button.checkout.wc-forward:hover {
-    background: gray;
-  }
 .page_header_wrapper.ds.affix-top-wrapper(style='height: 90px;')
   header.page_header.s-py-40.ds.affix-top
     .container-fluid
@@ -34,29 +20,46 @@ style().
             .d-none.d-xl-flex.align-items-center
               .widget.widget_search
                 form(role='search' method='get' action='')
-                  label.screen-reader-text Знайти:
                   input.search-field.form-control.search(type='search' placeholder='Пошук товарів…')
                   button(type='submit' value='Пошук') <ion-icon name="search"></ion-icon>
                   input(type='hidden' name='post_type' value='product')
                 
               .dropdown.dropdown-shopping-cart.show(data-dropdown-cart="")      
                   
-                  a#dropdown-cart(href='#' role='button' data-dropdown-toggle="")
+                  a#dropdown-cart(href='javascript:void(0);' role='button' data-dropdown-toggle="" @click="navShow = !navShow")
                     span.badge.bg-maincolor.cart-count
-                    ion-icon(name='cart' style="vertical-align: middle")
-                    if data.cart 
-                      if data.cart.products.length
-                        span.cart-total(style="font-weight: bold; padding-left: 0.3em" data-navigation-cart-total-items="") #{data.cart.products.length}
-                      else
-                        span.cart-total(style="font-weight: bold; padding-left: 0.3em" data-navigation-cart-total-items="") (0)
-                    else
-                      span.cart-total(style="font-weight: bold; padding-left: 0.3em" data-navigation-cart-total-items="") (0)
-
+                    ion-icon(name='cart' style="vertical-align: middle; display:inline-block; font-size: 1.5em; transform: translateY(-10%)")
+                    span.cart-total(style="font-weight: bold; padding-left: 0.3em; color: #f2c014; " v-if="cartLen") ({{cartLen}})
+                    span.cart-total(style="font-weight: bold; padding-left: 0.3em; color: #f2c014; " v-else) (0)
+                  .dropdown-menu.dropdown-menu-right.p-lg-40.p-20.ls(aria-labelledby='dropdown-cart' :class="{ show: navShow }" x-placement='bottom-end'  style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-258px, 24px, 0px); max-height: 620px; overflow-y: scroll;' data-dropdown-menu="")
+                    .widget.woocommerce.widget_shopping_cart(v-if="cartLen")
+                      .widget_shopping_cart_content
+                          ul.woocommerce-mini-cart.cart_list.product_list_widget(v-if="cart?.products")
+                            li.woocommerce-mini-cart-item.mini_cart_item(v-for="item in cart.products")
+                              a(:href="'/store/product/' + item.productId.slug")
+                                img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(:src="'/' + item.productId.images[0]" alt='')
+                              .minicart-product-meta
+                                a(:href="'/store/product/' + item.productId.slug") {{item.productId.name}}
+                                span.quantity
+                                  | {{item.quantity}} &times; 
+                                  span.woocommerce-Price-amount.amount
+                                    span.woocommerce-Price-currencySymbol &pound;
+                                    | {{item.productId.price}}
+                                    sup 00
+                            
+                          p.woocommerce-mini-cart__total.total
+                            strong Загалом:
+                            span.woocommerce-Price-amount.amount()
+                              span &pound;
+                              | {{ cart.total }}
+                              sup 00
+                          div.woocommerce-mini-cart__buttons.buttons.d-flex
+                            a.button.wc-forward(href='/cart/') Переглянути
+                            a.button.checkout.wc-forward(href='/order/') Придбати
+                    .widget.woocommerce.widget_shopping_cart(v-else)
+                      .widget_shopping_cart_content
+                        p(style="width: 100%; text-align: center") Ваша корзина порожня
     span.toggle_menu
       span
-script(defer src="/generall/js/navigation-cart.js")
-style().
-  ion-icon, .cart-total {
-    pointer-events: none !important;
-  }
+  
     

@@ -108,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   line-height: 1.2em;
   word-break: break-word;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Montserrat';
   text-transform: uppercase;
   font-variant-numeric: lining-nums;
   font-feature-settings: "lnum" 1;
@@ -307,7 +307,7 @@ blockquote footer, [class*='-block-quote'] footer {
   font-style: normal;
 }
 blockquote footer h5, [class*='-block-quote'] footer h5 {
-  text-transform: capitalize;
+  text-transform: none;
   margin-bottom: 0.1rem;
 }
 blockquote cite, [class*='-block-quote'] cite {
@@ -377,7 +377,7 @@ pre {
   font-size: 16px;
   line-height: 1.1em;
   font-weight: 300;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: 0;
 }
 dt {
@@ -462,7 +462,7 @@ ol.list-styled li::before {
   padding: 0;
   background-color: transparent;
   border-radius: 0;
-  text-transform: capitalize;
+  text-transform: none;
   font-size: 20px;
 }
 @media (max-width: 575px) {
@@ -648,7 +648,7 @@ input[type="submit"], button[type="submit"], .wc-backward {
   display: inline-block;
   cursor: pointer;
   font-size: 16px;
-  text-transform: capitalize;
+  text-transform: none;
   border-radius: 0;
   line-height: 1;
   padding: 10px 35px;
@@ -699,7 +699,7 @@ select, select.form-control {
   font-size: 16px;
   font-weight: 300;
   line-height: 2.4rem;
-  text-transform: capitalize;
+  text-transform: none;
   color: #131e25;
 }
 select option, .form-control option {
@@ -724,7 +724,7 @@ select option, .form-control option {
   font-weight: 300;
   font-size: 16px;
   line-height: 2.4rem;
-  text-transform: capitalize;
+  text-transform: none;
   color: #131e25;
   opacity: 1;
   transition: all 0.6s;
@@ -734,7 +734,7 @@ select option, .form-control option {
   font-weight: 300;
   font-size: 16px;
   line-height: 2.4rem;
-  text-transform: capitalize;
+  text-transform: none;
   color: #131e25;
   opacity: 1;
   transition: all 0.6s;
@@ -744,7 +744,7 @@ select option, .form-control option {
   font-weight: 300;
   font-size: 16px;
   line-height: 2.4rem;
-  text-transform: capitalize;
+  text-transform: none;
   color: #131e25;
   opacity: 1;
   transition: all 0.6s;
@@ -754,7 +754,7 @@ select option, .form-control option {
   font-weight: 300;
   font-size: 16px;
   line-height: 2.4rem;
-  text-transform: capitalize;
+  text-transform: none;
   color: #131e25;
   opacity: 1;
 }
@@ -792,7 +792,7 @@ label {
   margin-bottom: 12px;
   letter-spacing: 0;
   font-size: 20px;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Montserrat';
   color: #131e25;
   line-height: 1;
 }
@@ -920,7 +920,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   text-align: center;
   font-size: 16px;
   line-height: 1;
-  text-transform: capitalize;
+  text-transform: none;
   background: #f1f1f1;
   color: #131e25;
   font-weight: 500;
@@ -1246,7 +1246,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 /* bootstrap buttons */
 .btn {
   font-size: 16px;
-  text-transform: capitalize;
+  text-transform: none;
   line-height: 1;
   padding: 10px 35px;
   text-align: center;
@@ -1354,7 +1354,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   line-height: 1;
   margin-top: 0;
   margin-bottom: 0.3em;
-  text-transform: capitalize;
+  text-transform: none;
 }
 @media (max-width: 575px) {
   .media-body h1, .media-body h2, .media-body h3, .media-body h4, .media-body h5, .media-body h6 {
@@ -1505,7 +1505,7 @@ p + .progress {
 .progress-title {
   font-size: 16px;
   color: #131e25;
-  text-transform: capitalize;
+  text-transform: none;
   margin-bottom: 26px !important;
   padding-right: 45px;
   line-height: 1.6;
@@ -2060,7 +2060,7 @@ p + .progress {
   display: block;
 }
 .flex-pauseplay span {
-  text-transform: capitalize;
+  text-transform: none;
 }
 /* Clearfix for the .slides element */
 .slides:after {
@@ -2915,11 +2915,11 @@ a.pswp__share--download:hover {
   margin-top: 4px;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  text-transform: capitalize;
+  text-transform: none;
   color: #6d7a82;
 }
 .percent {
-  font-family: 'Anton', sans-serif;
+  font-family: 'Montserrat';
   display: inline-block;
   font-size: 40px;
   z-index: 2;
@@ -14588,7 +14588,7 @@ aside > * + *, .page_footer .widget + .widget, .widget-theme-wrapper + .widget-t
 .page_footer .widget h3, .page_footer .widget .widget-title {
   margin-bottom: 30px;
   font-size: 24px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #f2c014;
 }
 @media (max-width: 768px) {
@@ -15111,7 +15111,7 @@ select.form-control:not([size]):not([multiple]) {
   font-size: 16px;
   line-height: 1.1em;
   font-weight: 300;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: 0;
   color: #131e25;
 }
@@ -15124,7 +15124,7 @@ select.form-control:not([size]):not([multiple]) {
   text-align: center;
   display: inline-block;
   letter-spacing: 0;
-  text-transform: capitalize;
+  text-transform: none;
   line-height: 1;
   font-size: 16px !important;
   color: #131e25 !important;
@@ -15381,7 +15381,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .widget_post_tabs .vertical-item .item-content p {
   line-height: 1.4;
-  text-transform: capitalize;
+  text-transform: none;
   font-size: 16px;
   color: #6d7a82;
 }
@@ -16740,7 +16740,7 @@ a img.aligncenter {
   font-size: 16px;
   line-height: 1.1em;
   font-weight: 300;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: 0;
   text-align: center;
   min-width: 8em;
@@ -16848,7 +16848,7 @@ a img.aligncenter {
     font-size: 16px;
     line-height: 1.1em;
     font-weight: 300;
-    text-transform: capitalize;
+    text-transform: none;
     letter-spacing: 0;
   }
   .sf-menu li {
@@ -17157,7 +17157,7 @@ a img.aligncenter {
     font-size: 16px;
     line-height: 1.1em;
     font-weight: 300;
-    text-transform: capitalize;
+    text-transform: none;
     letter-spacing: 0;
     opacity: 0;
     transition: all 0.4s ease-in-out;
@@ -17348,7 +17348,7 @@ a img.aligncenter {
   font-size: 16px;
   line-height: 1.1em;
   font-weight: 300;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: 0;
 }
 .menu-click a:hover {
@@ -17648,7 +17648,7 @@ a.logo .flex-column.text-center, a.logo.flex-column.text-center {
   font-size: 16px;
   line-height: 1.1em;
   font-weight: 300;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: 0;
   color: #fff;
 }
@@ -18284,7 +18284,7 @@ body.active-side-header.slide-right .page_header_side {
   color: #f2c014;
 }
 .post-navigation a h5 {
-  text-transform: capitalize;
+  text-transform: none;
   margin-top: 10px;
   margin-bottom: 0;
 }
@@ -18799,7 +18799,7 @@ h6.entry-title, h6.entry-title:last-child {
   font-size: 16px;
   line-height: 1.1em;
   font-weight: 300;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: 0;
 }
 .no-comments, .comment-awaiting-moderation {
@@ -19326,7 +19326,7 @@ dl#attachment_612 {
 }
 .page_copyright {
   font-size: 14px;
-  text-transform: capitalize;
+  text-transform: none;
   font-weight: 500;
 }
 .content-absolute.ls .item-content {
