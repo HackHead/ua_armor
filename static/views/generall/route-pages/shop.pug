@@ -1,0 +1,277 @@
+doctype html
+head
+  meta(http-equiv='content-type' content='text/html; charset=UTF-8')
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title Products Archive | IMI Defense
+  link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css")
+  
+  link#wp-block-library-css(rel='stylesheet' href='/generall/css/style.min.css' media='all')
+  link#oceanwp-style-css(rel='stylesheet' href='/generall/css/style.min_002.css' media='all')
+  link#oceanwp-woo-quick-view-css(rel='stylesheet' href='/generall/css/woo-quick-view.min.css' media='all')
+  link#oceanwp-woocommerce-css(rel='stylesheet' href='/generall/css/woocommerce.min.css' media='all')
+    //- link(rel='stylesheet' href='/generall/css/style.css' type='text/css')
+  //- link(rel='stylesheet' href='/generall/css/style_003.css' type='text/css')
+  //- link(rel='stylesheet' href='/generall/css/css.css' type='text/css')
+  
+  link(rel='stylesheet' href='/generall/css/bootstrap.css' type='text/css')
+  link(rel='stylesheet' href='/generall/css/main.css' type='text/css')
+  //- link(rel='stylesheet' href='/generall/css/style_002.css' type='text/css')
+  //- link(rel='stylesheet' href='/generall/css/styles.css' type='text/css')
+
+  link(rel="stylesheet", href="/generall/css/catalog.css")
+  link#oceanwp-woo-hover-style-css(rel='stylesheet' href='/generall/css/hover-style.min.css' media='all')
+  
+  script(src="/generall/js/jquery.min.js")
+  script(src="/generall/js/jquery-migrate.min.js")
+body(class="archive post-type-archive post-type-archive-product wp-custom-logo wp-embed-responsive theme-oceanwp woocommerce-shop woocommerce woocommerce-page woocommerce-js tinvwl-theme-style oceanwp-theme sidebar-mobile default-breakpoint has-sidebar sidebar-content content-left-sidebar has-topbar has-breadcrumbs has-blog-grid pagination-center has-grid-list account-side-style elementor-default elementor-kit-9354 trigger-position-right quick-links-position-left trigger-size-small trigger-color-blue e--ua-firefox owp-qv-open")
+  #canvas
+    #box_wrapper
+      include ../components/navigation.pug
+      section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("http://webdesign-finder.com/armashop/wp-content/uploads/2020/03/title.jpg"); background-position: 50% 1px;')
+        .container
+          .row
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+            .col-sm-12.text-center.text-sm-left
+              h1.color-main
+                | Магазин
+              ol.breadcrumb
+                li.breadcrumb-item.first-item
+                  a(href='/') Головна
+                li.breadcrumb-item.last-item.active Товари
+            .col-12
+              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
+      #cartModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog.modal-lg.modal-dialog-centered(role='document')
+          .modal-content
+            .modal-header.border-bottom-0
+              h5#exampleModalLabel.modal-title
+                | Your Shopping Cart
+              button.close(type='button' data-dismiss='modal' aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              table.table.table-image
+                thead
+                  tr
+                    th(scope='col')
+                    th(scope='col') Product
+                    th(scope='col') Price
+                    th(scope='col') Qty
+                    th(scope='col') Total
+                    th(scope='col') Actions
+                tbody
+                  tr
+                    td.w-25
+                      img.img-fluid.img-thumbnail(src='https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png' alt='Sheep')
+                    td Vans Sk8-Hi MTE Shoes
+                    td 89$
+                    td.qty
+                      input#input1.form-control(type='text' value='2')
+                    td 178$
+                    td
+                      a.btn.btn-danger.btn-sm(href='#')
+                        i.fa.fa-times
+              .d-flex.justify-content-end
+                h5
+                  | Total: 
+                  span.price.text-success 89$
+            .modal-footer.border-top-0.d-flex.justify-content-between
+              button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+              button.btn.btn-success(type='button') Checkout
+
+  #outer-wrap.site.clr(style="margin-top: 80px")
+    #wrap.clr
+      main#main.site-main.clr(role='main')
+        #content-wrap.container.clr(style='position: relative;')
+          aside#right-sidebar.sidebar-container.widget-area.sidebar-primary
+            #right-sidebar-inner.clr
+              #woocommerce_price_filter-2.sidebar-box.woocommerce.widget_price_filter.clr
+                h4.widget-title &TScy;&iukcy;&ncy;&acy;
+                form(method='get' action='/store')
+                  .price_slider_wrapper
+                    .price_slider.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content
+                      .ui-slider-range.ui-corner-all.ui-widget-header(style='left: 0%; width: 100%;')
+                      span.ui-slider-handle.ui-corner-all.ui-state-default(tabindex='0' style='left: 0%;')
+                      span.ui-slider-handle.ui-corner-all.ui-state-default(tabindex='0' style='left: 100%;')
+                    .price_slider_amount(data-step='10')
+                      input#min_price(type='text' name='min_price' value='0' data-min='0' placeholder='Min price' style='display: none;')
+                      input#max_price(type='text' name='max_price' value='700' data-max='700' placeholder='Max price' style='display: none;')
+                      .price_label(style='')
+                        | Ціна: 
+                        span.from $0
+                        |  &mdash; 
+                        span.to $700
+                      .clear
+              if data.categories
+                .sidebar-box.woocommerce.widget_product_categories.clr
+                  h4.widget-title Категорії
+                  ul.product-categories
+                    if data.category
+                      li.cat-item.cat-item-8
+                          a(href='/store/category/') Всі
+                          span.count.cat-item-all
+                      each cat,indx in data.categories
+                        if cat.slug === data.category
+                          li.cat-item.cat-item-8.current-cat
+                            a(href='/store/category/' + cat.slug) #{cat.name}
+                            span.count #{cat.productsCount}
+                        else
+                          li.cat-item.cat-item-8
+                            a(href='/store/category/' + cat.slug) #{cat.name}
+                            span.count #{cat.productsCount}
+                    else 
+                      li.cat-item.cat-item-8.current-cat
+                          a(href='/store/category/') Всі
+                          span.count #{data.products.length}
+                      each cat,indx in data.categories
+                        li.cat-item.cat-item-8
+                          a(href='/store/category/' + cat.slug) #{cat.name}
+                          span.count #{cat.productsCount}
+              .sidebar-box.woocommerce.widget_product_categories.clr
+                h4.widget-title Наявність
+                ul.product-categories
+                  if !data.query.availability
+                    li.cat-item.cat-item-8.current-cat
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="") Всі
+                  else
+                     li.cat-item.cat-item-8
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="") Всі 
+                  if data.query.availability === 'available'
+                    li.cat-item.cat-item-8.current-cat
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="available") В наявності
+                  else
+                    li.cat-item.cat-item-8 
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="available") В наявності
+                  
+
+
+                  if data.query.availability === 'running'
+                    li.cat-item.cat-item-8.current-cat
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="running") Закінчується
+                  else
+                    li.cat-item.cat-item-8
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="running") Закінчується
+
+
+                  if data.query.availability === 'out'
+                    li.cat-item.cat-item-8.current-cat
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="out") Немає в наявності
+                  else
+                    li.cat-item.cat-item-8
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="out") Немає в наявності
+
+
+                  if data.query.availability === 'waiting'
+                    li.cat-item.cat-item-8.current-cat
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="waiting") Очікується
+                  else
+                    li.cat-item.cat-item-8
+                      a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="waiting") Очікується
+
+
+                    
+          #primary.content-area.clr
+            #content.clr.site-content
+              article.entry-content.entry.clr
+                header.woocommerce-products-header
+                .woocommerce-notices-wrapper
+                .oceanwp-toolbar.clr
+                  form.woocommerce-ordering(method='get')
+                    select.orderby.hasCustomSelect(name='orderby' aria-label='Shop order' style='opacity: 1; position: absolute; height: 34px; font-size: 13px; appearance: menulist-button; width: 228px;' data-filter-option="")
+                      if data.query.sort === '-date'
+                        option(value='-date' selected='selected' data-filter-key="sort" data-filter-value="-date" ) Сортувати за датою
+                      else
+                        option(value='-date' data-filter-key="sort" data-filter-value="-date" ) Сортувати за датою
+
+                      if data.query.sort === 'name'
+                        option(value='name' selected="" data-filter-key="sort" data-filter-value="name" ) Сортувати за назвою
+                      else
+                        option(value='name' data-filter-key="sort" data-filter-value="name" ) Сортувати за назвою
+
+                      if data.query.sort === 'price'
+                        option(value='price' selected="selected" data-filter-key="sort" data-filter-value="price" ) Сортувати за ціною: від низької до високої
+                      else
+                        option(value='price' data-filter-key="sort" data-filter-value="price" ) Сортувати за ціною: від низької до високої
+
+                      if data.query.sort === '-price'
+                        option(value='-price' selected="selected" data-filter-key="sort" data-filter-value="-price" ) Сортувати за ціною: від високої до низької
+                      else
+                        option(value='-price' data-filter-key="sort" data-filter-value="-price" ) Сортувати за ціною: від високої до низької
+                      
+                    input(type='hidden' name='paged' value='1')
+                  ul.result-count
+                    li.view-title Товарів на сторінці:
+                    li
+                      if data.query.limit == 2
+                        a.view-first.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="2") 2
+                      else
+                        a.view-first(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="2") 2
+                    li
+                      if data.query.limit == 4
+                        a.view-second.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="4") 4
+                      else
+                        a.view-second(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="4") 4
+                    li
+                      if data.query.limit == 6
+                        a.view-all.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="6") 6
+                      else
+                        a.view-all(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="6") 6
+                if data.products.length
+                  ul.products.oceanwp-row.clr.grid.tablet-col.tablet-2-col.mobile-col.mobile-2-col.infinite-scroll-wrap
+                    each product, indx in data.products
+                      if !product.hidden
+                        span.total_products.d-none #{indx}
+                        span.min-price.d-none
+                        span.max-price.d-none
+                        if product.category
+                          li.entry.has-media.col.span_1_of_3.owp-content-center.item-entry.owp-thumbs-layout-horizontal.owp-btn-big.owp-tabs-layout-vertical.circle-sale.product.type-product.post-12596.status-publish.instock.product_cat-foregrips.product_cat-grips.product_tag-ar15.product_tag-m16.product_tag-pistol-grip.product_tag-rifle-accessories.product_tag-vertical-grip.has-post-thumbnail.taxable.shipping-taxable.purchasable.product-type-variable
+                            .product-inner.clr
+                              ul.woo-entry-inner.clr
+                                li.image-wrap(style="height: 350px; max-height: 350px")
+                                  .woo-entry-image.clr
+                                    a.woocommerce-LoopProduct-link.no-lightbox(href='/store/product/' + product.slug)
+                                      img.woo-entry-image-main(src='/' + product.images[0] alt=product.name loading='lazy' itemprop='image' width='480' height='480')
+                                  // .woo-entry-image
+                                  a.button.product_type_variable.add_to_cart_button(href='/store/product/' + product.slug rel='nofollow') Деталі
+                                  ul.woo-entry-buttons
+                                    li.woo-quickview-btn
+                                      a#product_id_12596.owp-quick-view(href='#')
+                                        ion-icon(name='cart' style="vertical-align: middle")
+                                    li.woo-quickview-btn
+                                      a#product_id_12596.owp-quick-view(href='#')
+                                        ion-icon(name='trash' style="vertical-align: middle")
+                                ul.woo-product-info
+                                  li.category
+                                    a(href='#' data-filter-link="" data-filter-key="category" data-filter-value=product.category._id) #{product.category.name}
+                                  li.title
+                                    h2
+                                      a(href="/store/product/" + product.slug) #{product.name}
+                                  li.price-wrap
+                                    span.price
+                                      span.woocommerce-Price-amount.amount
+                                        if product.sale > 0
+                                          bdi.mr-2
+                                            span.woocommerce-Price-currencySymbol(style="text-decoration: line-through; color: silver") $ #{product.price}
+                                          bdi.ml-4
+                                            span.woocommerce-Price-currencySymbol $
+                                            | #{Math.floor((product.price / 100 * (100 - product.sale)))}
+                                        else
+                                          bdi
+                                            span.woocommerce-Price-currencySymbol $
+                                            | #{product.price}
+                                  li.woo-desc
+                                    | #{product.description}
+                                ul.woo-product-gallery
+                                  if product.images.length 
+                                    each img in product.images
+                                      li.active
+                                        a.woo-product-gallery-link.no-lightbox(href='/' + img)
+                                          img.attachment-thumbnail.size-thumbnail(src='/' + img alt='MTG – M-Lok® Tactical Grip' width='150' height='150' style="height: 60px; width: auto;" )
+  #canvas
+    #box_wrapper
+      include ../components/footer.pug                             
+
+  include ../components/footer-js.pug
+script#oceanwp-woo-hover-style-js(src='/generall/js/woo-hover-style.min.js')
+script#oceanwp-woo-quick-view-js(src='/generall/js/woo-quick-view.min.js')

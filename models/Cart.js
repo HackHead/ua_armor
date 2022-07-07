@@ -6,11 +6,6 @@ const CartSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        unique: true,
-    },
     products: [
         {
             productId: {
@@ -23,7 +18,12 @@ const CartSchema = new mongoose.Schema({
                 default: 1
             }
         }
-    ]
+    ],
+    total: {
+        type: Number,
+        required: true,
+        default: 0
+    }
 }, {timestamps: true})
 CartSchema.index({createdAt: 1},{expireAfterSeconds: 3600 * 24});
 const Cart = mongoose.model('Cart', CartSchema)

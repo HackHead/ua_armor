@@ -226,7 +226,10 @@ export const getNewCategoryView = async(req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         const id = req.params?.id;
-        await Product.deleteOne({_id: id}).exec();
+        const deleted = await Product.findOneAndDelete({_id: id}).populate('category').exec();
+        if(!deleted) return res.status(400).send('Такого товара не существует')
+        const cat = deleted.category._id;
+        await Category.findOneAndUpdate({_id: cat}, {"$inc": {productsCount: -1}})
         res.redirect('/admin/products')
     } catch (err) {
         const data = {
@@ -285,15 +288,17 @@ export const createProduct = async (req, res) => {
             featureKeys: req.body.featureKeys,
             featureValues: req.body.featureValues
         }
+        await Category.findOneAndUpdate({_id: req.body.category}, {"$inc": {productsCount: 1}})
         const {error} = featureValidation(featureValidationData);
 
         if(error){
             return res.status(400).send(error.details[0].message)
         };
-        if(req.body.featureKeys.length !== req.body.featureValues.length){
-            return res.status(400).send('Количество ключей и названий характеристик не совпадает')
-        }
-        if(req.body.featureKeys.length && req.body.featureValues.length){
+        
+        if(req.body?.featureKeys?.length && req.body?.featureValues?.length){
+            if(req.body?.featureKeys?.length !== req.body?.featureValues?.length){
+                return res.status(400).send('Количество ключей и названий характеристик не совпадает')
+            }
             const insertData = []
             for(let i = 0; i <= req.body.featureKeys.length - 1; i++){
                 const pushData = {
@@ -604,7 +609,6 @@ export const signInAdmin = async (req, res) => {
         // Створення і присвоєня токену
         const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
         req.session.user = user._id;
-        console.log(req.session.user)
         res.cookie('auth_token', token, { maxAge: 86400000, httpOnly: true });
         res.status(200).redirect('/admin');
     } catch (err) {

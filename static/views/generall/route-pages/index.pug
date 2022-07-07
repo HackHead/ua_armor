@@ -57,15 +57,15 @@ include ../components/head.pug
                                 li.has-post-thumbnail.product.type-product.post-580.status-publish.first.instock.product_cat-equipment.sale.shipping-taxable.purchasable.product-type-simple
                                   .product-inner
                                     .product-img(style="max-width: 100%; margin: 0 auto; max-height: 271px")
-                                      a(href='/store/' + product.slug)
+                                      a(href="/store/product/" + product.slug)
                                         if product.sale > 0
                                           span.onsale(style="font-size: 1em") Знижка!
                                         img(src='/' + product.images[0] alt=product.name style="max-width: 100%; max-height: 271px")
                                     .wrap-header
                                       h2
-                                        a(href='/store/' + product.slug) #{product.name.slice(0, 15)}...
+                                        a(href="/store/product/" + product.slug) #{product.name.slice(0, 15)}...
                                       span.cat-product
-                                        a(href='/store/categories' + product.category rel='tag') #{product.category.name}
+                                        a(href='/store/category/' + product.category.slug rel='tag') #{product.category.name}
                                     
                                     .wrap-footer
                                       if product.sale > 0
@@ -88,7 +88,7 @@ include ../components/head.pug
                                               | #{product.price}
                                               sup 00
                                       .product-button
-                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/' + product.slug rel='nofollow') Придбати
+                                        a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/product/' + product.slug rel='nofollow') Детальніше
                               
                 .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
               
@@ -188,7 +188,7 @@ include ../components/head.pug
                                             | 55
                                             sup 00
                                       .product-button
-                                        button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-quantity='1' data-product-id='580' data-cart-action="add" rel='nofollow') Придбати
+                                        button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-quantity='1' data-product-id='580' data-cart-action="add" rel='nofollow') Детальніше
                   
                 .col-lg-6.col-xl-5.order-1.order-lg-2
                   .category
@@ -235,7 +235,7 @@ include ../components/head.pug
                                           | 20
                                           sup 00
                                       .product-button
-                                        button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-quantity='1' data-product-id='580' data-cart-action="add" rel='nofollow') Придбати
+                                        button.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(data-quantity='1' data-product-id='580' data-cart-action="add" rel='nofollow') Детальніше
                               
                         .owl-nav.disabled
                           .owl-prev

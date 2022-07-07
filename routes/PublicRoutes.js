@@ -6,8 +6,10 @@ const router = Router();
 router.get('/', ctrl.getIndexPageView)
 router.get('/about', ctrl.getAboutPageView)
 router.get('/contacts', ctrl.getContactPageView)
-router.get('/store', ctrl.getStorePageView)
-router.get('/store/:slug', ctrl.getProductPageView)
+router.get('/store/category/', ctrl.getStorePageView)
+router.get('/store/category/:slug', ctrl.getStorePageView)
+
+router.get('/store/product/:slug', ctrl.getProductPageView)
 
 router.post('/cart/add', addToCart)
 router.post('/cart/remove', removeFromCart)

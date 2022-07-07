@@ -1,3 +1,17 @@
+style().
+  .page_header_wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 999
+  }
+  body {
+    padding-top: 90px
+  }
+  .button.checkout.wc-forward:hover {
+    background: gray;
+  }
 .page_header_wrapper.ds.affix-top-wrapper(style='height: 90px;')
   header.page_header.s-py-40.ds.affix-top
     .container-fluid
@@ -14,27 +28,35 @@
                 li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
                   a(href='/about') Про нас
                 li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
-                  a(href='/store') Магазин
+                  a(href='/store/category') Магазин
                 li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
                   a(href='/contacts') Контакти
             .d-none.d-xl-flex.align-items-center
               .widget.widget_search
                 form(role='search' method='get' action='')
                   label.screen-reader-text Знайти:
-                  input.search-field.form-control(type='search' placeholder='Пошук товарів…')
-                  button(type='submit' value='Пошук') Пошук
+                  input.search-field.form-control.search(type='search' placeholder='Пошук товарів…')
+                  button(type='submit' value='Пошук') <ion-icon name="search"></ion-icon>
                   input(type='hidden' name='post_type' value='product')
-              .dropdown.dropdown-shopping-cart
-                a#dropdown-cart.dropdown-toggle(href='#' role='button')
-                  span.badge.bg-maincolor.cart-count
-                  ion-icon(name='cart' style="vertical-align: middle")
-                  if data.cart
-                    span(style="font-weight: bold; padding-left: 0.3em") (#{data.cart.products.length})
-                  else
-                    span(style="font-weight: bold; padding-left: 0.3em") (0)
-                .dropdown-menu.dropdown-menu-right.p-lg-40.p-20.ls(aria-labelledby='dropdown-cart')
-                  .widget
-                    .widget_shopping_cart_content
-                      p Ваша корзина порожня
+                
+              .dropdown.dropdown-shopping-cart.show(data-dropdown-cart="")      
+                  
+                  a#dropdown-cart(href='#' role='button' data-dropdown-toggle="")
+                    span.badge.bg-maincolor.cart-count
+                    ion-icon(name='cart' style="vertical-align: middle")
+                    if data.cart 
+                      if data.cart.products.length
+                        span.cart-total(style="font-weight: bold; padding-left: 0.3em" data-navigation-cart-total-items="") #{data.cart.products.length}
+                      else
+                        span.cart-total(style="font-weight: bold; padding-left: 0.3em" data-navigation-cart-total-items="") (0)
+                    else
+                      span.cart-total(style="font-weight: bold; padding-left: 0.3em" data-navigation-cart-total-items="") (0)
+
     span.toggle_menu
       span
+script(defer src="/generall/js/navigation-cart.js")
+style().
+  ion-icon, .cart-total {
+    pointer-events: none !important;
+  }
+    

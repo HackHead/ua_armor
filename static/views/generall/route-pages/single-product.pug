@@ -1,6 +1,80 @@
 include ../components/head.pug
 // wrappers for visual page editor and boxed version of template
-<style>#sync1 .item,#sync2 .item{margin:5px;color:#fff;text-align:center}#sync1 .item,#sync2 .synced .item{background:transparent}#sync1 .item{padding:80px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}#sync2 .item{background:transparent;padding:10px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer}#sync2 .item h1{font-size:18px}</style>
+style.
+  #sync1 .item,
+  #sync2 .item {
+    margin: 5px;
+    color: #fff;
+    text-align: center
+  }
+
+  #sync1 .item,
+  #sync2 .synced .item {
+    background: transparent
+  }
+
+  #sync1 .item {
+    padding: 80px 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px
+  }
+
+  #sync2 .item {
+    background: transparent;
+    padding: 10px 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer
+  }
+
+  #sync2 .item h1 {
+    font-size: 18px
+  }
+  @keyframes slidein {
+    0% {
+      transform: translateY(0%);
+    }
+    25% {
+      transform: translateY(-50%);
+    }
+    50% {
+      transform: translateY(0%);
+    }
+    75% {
+      transform: translateY(50%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+    
+  }
+  .waiting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2c014 !important;
+  }
+
+  .waiting .loading-block {
+    display: inline-block;
+    height: 10px;
+    width: 4px;
+    background: #fff;
+    margin: 0 4px 0;
+    animation: slidein 1s linear infinite
+  }
+  .waiting .loading-block:nth-of-type(2){
+    animation: slidein 1s linear infinite .2s
+  }
+  .waiting .loading-block:nth-of-type(3){
+    animation: slidein 1s linear infinite .4s
+  }
+  ['data-single-product-cart-button'] {
+    cursor: pointer !important;
+  }
+  
 #canvas
   #box_wrapper
     include ../components/navigation.pug
@@ -28,7 +102,7 @@ include ../components/head.pug
           .col-12
             .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
           .woocommerce-notices-wrapper
-          #content_product.col-12.col-xs-12.col-lg-7.col-xl-12.order-lg-2.column-main
+          #content_product.col-12.col-xs-12.col-lg-7.col-xl-12.order-lg-2.column-main()
             .has-post-thumbnail.product.type-product.post-581.status-publish.first.instock.product_cat-equipment.sale.featured.shipping-taxable.purchasable.product-type-simple
               .images(data-columns='4' style='opacity: 1; transition: opacity 0.25s ease-in-out 0s;')
                 #sync1.owl-carousel(data-loop='false' data-nav='true' data-dots='false' data-center='false' data-autoplay='false' data-speed='5000' data-responsive-xl='1' data-responsive-lg='1' data-responsive-md='1' data-responsive-sm='1' data-responsive-xs='1' data-margin='15')
@@ -46,7 +120,7 @@ include ../components/head.pug
                     span.sku 4282123
                   span.posted_in
                     | Категорія: 
-                    a(href='/armashop/product-category/equipment/' rel='tag') #{data.product.category.name}
+                    a(href='/store/category/'+data.product.category.slug rel='tag') #{data.product.category.name}
                 p.price
                   if data.product.sale
                     del
@@ -69,16 +143,15 @@ include ../components/head.pug
                   p(style="max-width: 100%; display: inline-block; space-wrap: wrap;")
                     | #{data.product.description}
                   
-                form.cart(action='/armashop/product/champion-of-regret-gun/' method='post' enctype='multipart/form-data')
+                form.cart
                   .add-to-cart
                     .quantity
-                      label.screen-reader-text(for='quantity_62bdf17eb2418' style='display: none;') Champion Of Regret Gun quantity
-                      input.plus(type='button' value='+')
-                      i.fa.fa-angle-up(aria-hidden='true')
-                      input#quantity_62bdf17eb2418.input-text.qty.text(type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' size='4' placeholder='Champion Of Regret Gun quantity' inputmode='numeric')
-                      input.minus(type='button' value='-')
-                      i.fa.fa-angle-down(aria-hidden='true')
-                    button.single_add_to_cart_button.button.alt(type='submit' name='add-to-cart' value='581') В корзину
+                      input.plus(type='button' value='+' style="height: 100%; cursor: pointer;" data-single-product-add-item="")
+                      i.fa.fa-angle-up(aria-hidden='true' style="pointer-events: none;")
+                      input.input-text.qty.text(type='number' disabled="" step='1' min='1' max='10' name='quantity' value='1'  data-single-product-qty-input="")
+                      input.minus(type='button' value='-' style="height: 100%; cursor: pointer;" data-single-product-remove-item="")
+                      i.fa.fa-angle-down(aria-hidden='true' style="pointer-events: none;")
+                    button.single_add_to_cart_button.button.alt(type='button' name='add-to-cart' data-single-product-cart-button="" data-cart-action="add" data-single-product-id=data.product._id style="cursor: pointer") В корзину
               .woocommerce-tabs.wc-tabs-wrapper
                 ul.tabs.wc-tabs(role='tablist')
                   li#tab-title-description.description_tab.active(role='tab' aria-controls='tab-description' onclick="toggleTabs(event);")
@@ -218,13 +291,13 @@ include ../components/head.pug
                           li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
                             .product-inner
                               .product-img(style="max-width: 100%; margin: 0 auto;")
-                                a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/' + related.slug)
+                                a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/product/' + related.slug)
                                   img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + related.images[0] alt=''  width='900' height='900')
                               .wrap-header
                                 h2.woocommerce-loop-product__title
-                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/' + related.slug) #{related.name}
+                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/product/' + related.slug) #{related.name}
                                 span.cat-product
-                                  a(href='/store/' + related.slug rel='tag') #{related.category.name}
+                                  a(href='/store/category/' + related.slug rel='tag') #{related.category.name}
                               // close product-wrap
                               .wrap-footer
                                 span.price
@@ -233,10 +306,12 @@ include ../components/head.pug
                                     | #{related.price}
                                     sup 00
                                 .product-button
-                                  a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/' data-quantity='1' data-product_id='582' data-product_sku='woo-sunglasses' aria-label='Add “Allegiance Of The Enigma” to your cart' rel='nofollow') В корзину
+                                  a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/' data-single-product-cart-button rel='nofollow') В корзину
                   
                 
                   .owl-dots
+    
     include ../components/footer.pug
     include ../components/footer-js.pug    
+    script(src="/generall/js/single-product.js")
     script(src="/generall/js/tabs.js")

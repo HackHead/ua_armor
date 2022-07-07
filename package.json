@@ -49,5 +49,8 @@
     "slugify": "^1.6.5",
     "uuid": "^8.3.2",
     "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "mongoose-execution-time": "^1.0.2"
   }
 }

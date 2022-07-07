@@ -8,7 +8,7 @@ import Slide from "../models/Slide.js";
 import Cart from "../models/Cart.js";
 
 import misc from "../config/misc.js";
-
+import mongoose from 'mongoose';
 export const getIndexPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
@@ -29,9 +29,10 @@ export const getIndexPageView = async (req, res) => {
         if(catalog_products) page.catalog_products = catalog_products;
 
         if(req.session.cart){
-            const cart = await Cart.findOne({session: req.sessionID});
-            page.cart = cart
-            console.log(cart)
+            const cart = await Cart.findOne({session: req.sessionID}).populate({
+                path: 'products.productId'
+            });
+            page.cart = cart || null;
         }
         
     } catch (err) {
@@ -60,8 +61,10 @@ export const getAboutPageView = async (req, res) => {
     };
     try {
         if(req.session.cart){
-            const cart = await Cart.findOne({session: req.sessionID});
-            page.cart = cart
+            const cart = await Cart.findOne({session: req.sessionID}).populate({
+                path: 'products.productId'
+            });
+            page.cart = cart || null
         }
     } catch (err) {
         const data = {
@@ -86,9 +89,10 @@ export const getContactPageView = async (req, res) => {
     };
     try {
         if(req.session.cart){
-            const cart = await Cart.findOne({session: req.sessionID});
-            page.cart = cart
-            console.log(cart)
+            const cart = await Cart.findOne({session: req.sessionID}).populate({
+                path: 'products.productId'
+            });
+            page.cart = cart || null
         }
     } catch (err) {
         const data = {
@@ -124,25 +128,51 @@ export const getStorePageView = async (req, res) => {
         misc: misc,
         
     };
-
     try {
-        const products = await Product.find().populate('category').skip(0).limit(20).sort('name');
+        const sort = req.query.sort || '-date',
+              limit = req.query.limit || 6,
+              skip = req.query.skip || 0,
+              query = {},
+              params = {};
+        if(req.query.availability) params.availability = req.query.availability;
+        if(req.params.slug) page.category = req.params.slug
+
+        query.sort = sort;
+        query.limit = limit;
+        query.skip = skip;
+        query.availability = params.availability;
+        page.query = query;
+
+        let products;
+        if(req.params.slug){
+            products = await Product.find(params).populate('category', 'slug', {slug: req.params.slug }).skip(skip).limit(limit).sort(sort);
+            if(req.session.cart) {
+                const cart = await Cart.findOne().populate('products.productId');
+            }
+        } else {
+            products = await Product.find(params).populate('category').skip(skip).limit(limit).sort(sort);
+        }
+        
+        
+        
+
+
         if(products) page.products = products;
 
-        console.log(products)
         const categories = await Category.find();
         if(categories) page.categories = categories;
         
         if(req.session.cart){
-            const cart = await Cart.findOne({session: req.sessionID});
-            page.cart = cart
-            console.log(cart)
+            const cart = await Cart.findOne({session: req.sessionID}).populate({
+                path: 'products.productId'
+            });
+            page.cart = cart || null
         }
     } catch (err) {
         res.status(400).render('generall/status-pages/400', {data: err})
     }
 
-    res.render('generall/route-pages/store', {data: page})
+    res.render('generall/route-pages/shop', {data: page})
 }
 
 export const getProductPageView = async (req, res) => {
@@ -167,9 +197,10 @@ export const getProductPageView = async (req, res) => {
         };
 
         if(req.session.cart){
-            const cart = await Cart.findOne({session: req.sessionID});
-            page.cart = cart
-            console.log(cart)
+            const cart = await Cart.findOne({session: req.sessionID}).populate({
+                path: 'products.productId'
+            });
+            page.cart = cart || null
         }
 
         
@@ -191,70 +222,126 @@ export const getProductPageView = async (req, res) => {
 
 
 export const addToCart = async (req, res) => {
-    console.log(req.sessionID)
 
    if(!req.session) return res.status(400).send({message: 'Session required'});
-   const user = req.session?.user,
-         ssid = req.sessionID;
-   if(user){
-    const cartExists = await Cart.findOne({user: user})
-    if(!cartExists){
-        const savedCart = await new Cart({
-            user: user,
-            session: ssid,
-            products: [
-                {productId: req.body.product, quantity: req.body.quantity || 1}
-            ],
-        }).save()
-
-        req.session.cart = savedCart._id
-        return res.json({cart: savedCart})
-
-    } else {
-        const updatedCart = await Cart.findOneAndUpdate(
-            {user: user},
-            {"$push": {
-                products: {
-                    productId: req.body.product,
-                    quantity: req.body.quantity || 1
-                }
-            }}
-        );
-        req.session.cart = updatedCart._id
-        return res.json({cart: updatedCart})
+   const ssid = req.sessionID;
+   const ObjectIdRegexp =  /^[a-fA-F0-9]{24}$/,
+         quantityRegexp = /^[0-9]{1,3}$/;
+    
+    if(!String(req.body.quantity).match(quantityRegexp)) {
+       return res.status(400).json({error: 'Wrong product quantity value'});
     }
-   } else {
-    console.log('s')
-    const cartExists = await Cart.findOne({session: ssid});
-    if(!cartExists){
-        const savedCart = await new Cart({
-            session: ssid,
-            products: [
-                {productId: req.body.product, quantity: req.body.quantity || 1}
-            ],
-        }).save()
-        req.session.cart = savedCart._id
-        return res.json({cart: savedCart})
-    } else {
-        const updatedCart = await Cart.findOneAndUpdate(
-            {session: ssid},
-            {"$push": {
-                products: {
-                    productId: req.body.product,
-                    quantity: req.body.quantity || 1
-                }
-            }}
-        );
-        req.session.cart = updatedCart._id
-        return res.json({cart: updatedCart})
+    if(!req.body.product.match(ObjectIdRegexp)) {
+        return res.status(400).json({error: 'This product does not exist'});
     }
+   try {
+        const cartExists = await Cart.findOne({session: ssid})
+        const product = await Product.findOne({_id: req.body.product});
+
+        if(!cartExists){
+            const savedCart = await new Cart({
+                session: ssid,
+                products: [
+                    {productId: req.body.product, quantity: req.body.quantity || 1}
+                ],
+                total: product.price * parseInt(req.body.quantity),
+            }).save().then((data) => {
+                req.session.cart = data._id;
+                return res.json({cart: data});
+            });
+
+            
+            
+    
+        } else {
+            const inCart = await Cart.findOne({
+                "products.productId": {"$eq": req.body.product}
+            });
+            
+            if(inCart) {
+                
+                const updatedCart = await Cart.findOneAndUpdate(
+                    { _id: inCart.id, "products.productId": req.body.product },
+                    {
+                        "$inc": {
+                            "products.$.quantity": req.body.quantity,
+                            total: product.price * parseInt(req.body.quantity)
+                        },
+                    },
+                    {new: true}
+                ).then((data) => {
+                    req.session.cart = data._id
+                    return res.json({cart: data})
+                })
+
+                
+            } else {
+                const updatedCart = await Cart.findOneAndUpdate(
+                    {session: ssid},
+                    {
+                        "$push": {
+                            products: {
+                                productId: req.body.product,
+                                quantity: req.body.quantity || 1
+                            }
+                        },
+                        "$inc": {total: product.price * parseInt(req.body.quantity)}
+                    },
+                    {new: true}
+                ).then((data) => {
+                    req.session.cart = data._id
+                    return res.json({cart: data})
+                });
+            }            
+        }
+   } catch (err) {
+        throw new Error(err)
    }
-
-   
-   return res.send({data: user});
-
 } 
 
 export const removeFromCart = async (req, res) => {
-    res.send(JSON.stringify(req.session))
- }
+    if(!req.session) {
+        return res.status(400).json({error: 'Session required'});
+    }
+
+    const ssid = req.sessionID;
+    const ObjectIdRegexp =  /^[a-fA-F0-9]{24}$/;
+          
+    if(!req.body.product.match(ObjectIdRegexp)) {
+       return res.status(400).json({error: 'This product does not exist'});
+    }
+
+    const product = await Product.findOne({_id: req.body.product});
+
+    if(!product) res.status(400).json({error: 'This product does not exist'})
+    let quantity;
+    const cartItems = await Cart.findOne({
+        "products.productId": {"$eq": req.body.product},
+        session: ssid
+    }, 'products').then((data) => {
+        data.products.forEach((item) => {
+            if(item.productId = req.body.product) {
+                quantity = item.quantity;
+                return;
+            };
+        })
+    })
+    // if(!cartItems) return res.status(400).json({message: 'Такого товара нет в корзине находиться в корзине'});
+    
+    
+    const updatedCart = await Cart.findOneAndUpdate(
+        {session: ssid},
+        {
+            "$pull": {
+                "products": {productId: req.body.product}
+            },
+            "$inc": {total: -product.price * quantity}
+        },
+    );
+
+    req.session.cart = updatedCart._id
+    return res.json({cart: updatedCart})
+ };
+
+
+

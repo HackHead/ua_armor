@@ -1,5 +1,6 @@
+
 if($().carousel){$('.carousel').carousel()}
-if($().owlCarousel){$('.owl-carousel').each(function(){var $carousel=$(this);$carousel.find('> *').each(function(i){$(this).attr('data-index',i)});var data=$carousel.data();var loop=data.loop?data.loop:!0,margin=(data.margin||data.margin===0)?data.margin:30,nav=data.nav?data.nav:!1,navPrev=data.navPrev?data.navPrev:'<ion-icon name="caret-back-outline"></ion-icon>',navNext=data.navNext?data.navNext:'<ion-icon name="caret-forward-outline"></ion-icon>',dots=data.dots?data.dots:!1,themeClass=data.themeclass?data.themeclass:'owl-theme',center=data.center?data.center:!1,items=data.items?data.items:4,autoplay=data.autoplay?data.autoplay:!1,speed=data.speed?data.speed:5000,responsiveXs=data.responsiveXs?data.responsiveXs:1,responsiveSm=data.responsiveSm?data.responsiveSm:2,responsiveMd=data.responsiveMd?data.responsiveMd:3,responsiveLg=data.responsiveLg?data.responsiveLg:4,responsiveXl=data.responsiveXl?data.responsiveXl:5,draggable=(data.draggable===!1)?data.draggable:!0,syncedClass=(data.syncedClass)?data.syncedClass:!1,filters=data.filters?data.filters:!1;console.log(nav,$carousel)
+if($().owlCarousel){$('.owl-carousel').each(function(){var $carousel=$(this);$carousel.find('> *').each(function(i){$(this).attr('data-index',i)});var data=$carousel.data();var loop=data.loop?data.loop:!0,margin=(data.margin||data.margin===0)?data.margin:30,nav=data.nav?data.nav:!1,navPrev=data.navPrev?data.navPrev:'<ion-icon name="caret-back-outline"></ion-icon>',navNext=data.navNext?data.navNext:'<ion-icon name="caret-forward-outline"></ion-icon>',dots=data.dots?data.dots:!1,themeClass=data.themeclass?data.themeclass:'owl-theme',center=data.center?data.center:!1,items=data.items?data.items:4,autoplay=data.autoplay?data.autoplay:!1,speed=data.speed?data.speed:5000,responsiveXs=data.responsiveXs?data.responsiveXs:1,responsiveSm=data.responsiveSm?data.responsiveSm:2,responsiveMd=data.responsiveMd?data.responsiveMd:3,responsiveLg=data.responsiveLg?data.responsiveLg:4,responsiveXl=data.responsiveXl?data.responsiveXl:5,draggable=(data.draggable===!1)?data.draggable:!0,syncedClass=(data.syncedClass)?data.syncedClass:!1,filters=data.filters?data.filters:!1;
 $carousel.owlCarousel({loop:loop,margin:margin,nav:nav,autoplay:autoplay,autoplayTimeout:speed,dots:dots,themeClass:themeClass,center:center,navText:[navPrev,navNext],mouseDrag:draggable,touchDrag:draggable,items:items,autoWidth:!1,responsive:{0:{items:responsiveXs},575:{items:responsiveSm},767:{items:responsiveMd},992:{items:responsiveLg},1200:{items:responsiveXl}},}).addClass(themeClass);if(center){$carousel.addClass('owl-center')}
 $(window).on('resize',function(){$carousel.trigger('refresh.owl.carousel')});if($carousel.hasClass('owl-news-slider-items')&&syncedClass){$carousel.on('changed.owl.carousel',function(e){var indexTo=loop?e.item.index+1:e.item.index;$(syncedClass).trigger('to.owl.carousel',[indexTo])})}})}
 if($().owlCarousel){$('.uws-products.carousel').each(function(){var $carousel=$(this);$carousel.find('> *').each(function(i){$(this).attr('data-index',i)});var data=$carousel.data();var loop=data.loop?data.loop:!0,margin=(data.margin||data.margin===0)?data.margin:30,nav=data.nav?data.nav:!1,navPrev=data.navPrev?data.navPrev:'<ion-icon name="caret-back-outline"></ion-icon>',navNext=data.navNext?data.navNext:'<ion-icon name="caret-forward-outline"></ion-icon>',dots=data.dots?data.dots:!1,themeClass=data.themeclass?data.themeclass:'owl-theme',center=data.center?data.center:!1,items=data.items?data.items:4,autoplay=data.autoplay?data.autoplay:!1,speed=data.speed?data.speed:5000,responsiveXs=data.responsiveXs?data.responsiveXs:1,responsiveSm=data.responsiveSm?data.responsiveSm:2,responsiveMd=data.responsiveMd?data.responsiveMd:3,responsiveLg=data.responsiveLg?data.responsiveLg:4,responsiveXl=data.responsiveXl?data.responsiveXl:5,draggable=(data.draggable===!1)?data.draggable:!0,syncedClass=(data.syncedClass)?data.syncedClass:!1;var $products=$carousel.find('ul').addClass('owl-carousel owl-shadowitems owl-theme');if($carousel.hasClass('top-nav-arrows')){var $classNname='top-nav-arrows';$carousel.removeClass($classNname);$products.addClass($classNname)}
@@ -13,30 +14,51 @@ sync2.trigger("owl.goTo",num)}}else if(num===sync2visible[sync2visible.length-1]
 const rate=$(e.currentTarget).attr('data-star');
 $('.stars').addClass('selected');
 $('[data-star]').each(function(){$(this).removeClass('active')});$(e.currentTarget).addClass('active');
-$('#rtn').val(rate);console.log($('#rtn').value)});
+$('#rtn').val(rate)});
 
-const initCartButtons = () => {
-  const cartBtn = document.querySelectorAll('[data-cart-action]');
-  if(cartBtn.length){
-    cartBtn.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const action = btn.getAttribute('data-cart-action'),
-              pid = btn.getAttribute('data-product-id'),
-              quantity = btn.getAttribute('data-quantity');
 
-        if(action === 'add'){
-          axios.post('/cart/add', {
-            productId: pid,
-            quantity: quantity
-          }).then((data) => {
-            btn.removeAttribute("disabled", "")
-            btn.textContent = "Видалити"
-          }).catch((err) => {
-            console.log(err)
-          }) 
-        }
-      })
-    })
+(function(){
+  const filterLinks = document.querySelectorAll('[data-filter-link]');
+  const filterOption = document.querySelector('[data-filter-option]');
+  const handleFilterLink = (e) => {
+    e.preventDefault();
+    if ('URLSearchParams' in window) {
+      var searchParams = new URLSearchParams(window.location.search);
+      const key = e.target.getAttribute('data-filter-key'),
+            value = e.target.getAttribute('data-filter-value');
+
+      searchParams.set(key, value);
+      
+      window.location.search = searchParams.toString();
   }
-}
-initCartButtons();
+  }
+
+  document.addEventListener('click', (e) => {
+    if(e.target.hasAttribute('data-filter-link')) {
+      handleFilterLink(e)
+    }
+  });
+
+  
+  if(filterOption) {
+    filterOption.addEventListener('change', (e) => {
+      if ('URLSearchParams' in window) {
+        var searchParams = new URLSearchParams(window.location.search);
+        const key = e.target.querySelector(`[value="${e.target.value}"]`).getAttribute('data-filter-key'),
+            value = e.target.querySelector(`[value="${e.target.value}"]`).getAttribute('data-filter-value');
+  
+        searchParams.set(key, value);
+        
+        window.location.search = searchParams.toString();
+    }
+      
+    })
+
+  }
+  
+  document.addEventListener('load', () => {
+    document.querySelector('.cat-item-all').textContent = document?.querySelectorAll('.total_products')?.length;
+  })
+})();
+
+
