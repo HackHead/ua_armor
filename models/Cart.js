@@ -21,6 +21,11 @@ const CartSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    totalPromotion: {
+        type: Number,
+        required: true,
+        default: 0
     }
 }, {timestamps: true})
 CartSchema.index({createdAt: 1},{expireAfterSeconds: 3600 * 24});

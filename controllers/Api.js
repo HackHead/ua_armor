@@ -45,7 +45,11 @@ export const addToCart = async (req, res) => {
     try {
          const cartExists = await Cart.findOne({session: ssid})
          const product = await Product.findOne({_id: req.body.product});
- 
+        
+         let productPromotion = product.price;
+         if(product.sale > 0){
+            productPromotion = Math.floor((product.price / 100 * (100 - product.sale)))
+         }
          if(!cartExists){
              const savedCart = await new Cart({
                  session: ssid,
@@ -53,6 +57,7 @@ export const addToCart = async (req, res) => {
                      {productId: req.body.product, quantity: req.body.quantity || 1}
                  ],
                  total: product.price * parseInt(req.body.quantity),
+                 totalPromotion: productPromotion * parseInt(req.body.quantity),
              }).save()
              savedCart.populate('products.productId').then((data) => {
                 console.log(data);
@@ -72,7 +77,8 @@ export const addToCart = async (req, res) => {
                      {
                          "$inc": {
                              "products.$.quantity": req.body.quantity,
-                             total: product.price * parseInt(req.body.quantity)
+                             total: product.price * parseInt(req.body.quantity),
+                             totalPromotion: productPromotion * parseInt(req.body.quantity),
                          },
                      },
                      {new: true}
@@ -93,7 +99,10 @@ export const addToCart = async (req, res) => {
                                  quantity: req.body.quantity || 1
                              }
                          },
-                         "$inc": {total: product.price * parseInt(req.body.quantity)}
+                         "$inc": {
+                            total: product.price * parseInt(req.body.quantity),
+                            totalPromotion: productPromotion * parseInt(req.body.quantity),
+                        }
                      },
                      {new: true}
                  ).populate({path:'products.productId' })
@@ -144,7 +153,10 @@ export const addToCart = async (req, res) => {
              "$pull": {
                  "products": {productId: req.body.product}
              },
-             "$inc": {total: -product.price * quantity}
+             "$inc": {
+                total: -product.price * quantity,
+                totalPromotion: -productPromotion * quantity,
+            }
          },
          {new: true}
      ).populate({path:'products.productId' })

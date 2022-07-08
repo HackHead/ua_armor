@@ -195,14 +195,15 @@ export const getStorePageView = async (req, res) => {
               params = {};
         if(req.query.availability) params.availability = req.query.availability;
         if(req.params.slug) page.category = req.params.slug;
-        if(req.params.min) params.price = {$gte: Number(min)};
-        if(req.params.max) params.price = {$lte: Number(max)};
+        if(req.query.min) params.price = query.min = {"$gte": Number(req.query.min)};
+        if(req.query.max) params.price = query.max = {"$lte": Number(req.query.max)};
         
         query.sort = sort;
         query.limit = limit;
         query.skip = skip;
-        query.availability = params.availability;
         page.query = query;
+        query.availability = params.availability;
+
         const nameRegexp = new RegExp('^.{0,}' + search + '.{0,}$', 'i');
         if(search) params.name = {$regex:  nameRegexp};
         let products;

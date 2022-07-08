@@ -7,7 +7,7 @@ head
   link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css")
   link(href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet")
   
-  link#wp-block-library-css(rel='stylesheet' href='/generall/css/style.min.css' media='all')
+  //- link#wp-block-library-css(rel='stylesheet' href='/generall/css/style.min.css' media='all')
   link#oceanwp-style-css(rel='stylesheet' href='/generall/css/style.min_002.css' media='all')
   link#oceanwp-woo-quick-view-css(rel='stylesheet' href='/generall/css/woo-quick-view.min.css' media='all')
   //- link#oceanwp-woocommerce-css(rel='stylesheet' href='/generall/css/woocommerce.min.css' media='all')
@@ -20,7 +20,8 @@ head
 
   link(rel="stylesheet", href="/generall/css/catalog.css")
   link#oceanwp-woo-hover-style-css(rel='stylesheet' href='/generall/css/hover-style.min.css' media='all')
-  
+  //- <style>.cart-collaterals{clear:both;margin-top:3em;display:flex;flex-direction:column;box-shadow:0 0 25px 0 rgba(0,0,0,.09);padding:60px}.cart-collaterals h2{font-size:30px}.cart-collaterals .cart_totals{order:-1}.cart-collaterals .cart_totals table{display:table}@media (max-width:575px){.cart-collaterals{padding:30px}.cart-collaterals .cart_totals{width:100%}}.cart-collaterals .cart_totals .wc-forward{border:2px solid #f2c014;padding:15px 35px;margin-top:30px;display:inline-block;font-weight:500;color:#131e25;line-height:1}.cart-collaterals .cart_totals .wc-forward:hover{background:#f2c014}.cart-collaterals .cart_totals .shipping-calculator-button{padding:10px 35px;border:2px solid #f2c014;line-height:1!important;display:inline-block;color:#131e25;font-weight:400}.cart-collaterals .cart_totals .shipping-calculator-button:hover{background-color:#f2c014}.cart-collaterals .cart_totals .select2-container--default .select2-selection--single{border:none;line-height:30px;padding:11px 13px;background-color:#f1f1f1;height:52px;-webkit-appearance:none;background-image:url(../img/select-arrow.png);background-position:97% 50%;background-repeat:no-repeat}.cart-collaterals .cart_totals .select2-container--default .select2-selection--single .select2-selection__arrow{display:none}.cart-collaterals .cart_totals .shipping-calculator-form{margin-top:30px}.cart-collaterals .cart_totals .woocommerce-shipping-methods{padding-left:0}.cart-collaterals .cart_totals .woocommerce-shipping-methods label{display:inline-block!important}.cart-collaterals .cart_totals .woocommerce-shipping-methods li{list-style-type:none;padding-left:0}.cart-collaterals .wc-proceed-to-checkout{margin-top:2em}</style>
+  <style>.widget_products ul,.widget_recent_reviews ul,.widget_recently_viewed_products ul,.widget_shopping_cart ul,.widget_top_rated_products ul{list-style:none;padding:0;margin:-40px 0 0}.widget_shopping_cart ul{padding-top:40px}.widget_products ul li,.widget_recent_reviews ul li,.widget_recently_viewed_products ul li,.widget_shopping_cart ul li,.widget_top_rated_products ul li{position:relative;padding:40px 40px 40px 85px!important;min-height:160px;white-space:normal;border-bottom:1px solid #d0d2d3}.widget_shopping_cart ul li:first-of-type{border-top:1px solid #d0d2d3}.widget_products ul li a>img,.widget_recent_reviews ul li a>img,.widget_recently_viewed_products ul li a>img,.widget_shopping_cart ul li a>img,.widget_top_rated_products ul li a>img{position:absolute;left:0;max-width:70px;top:50%;transform:translateY(-50%)}.widget_products .minicart-product-meta a,.widget_products .product-title,.widget_recent_reviews .minicart-product-meta a,.widget_recent_reviews .product-title,.widget_recently_viewed_products .minicart-product-meta a,.widget_recently_viewed_products .product-title,.widget_shopping_cart .minicart-product-meta a,.widget_shopping_cart .product-title,.widget_top_rated_products .minicart-product-meta a,.widget_top_rated_products .product-title{display:block;font-size:16px;font-family:Montserrat;margin-bottom:10px}.widget_products .amount,.widget_recent_reviews .amount,.widget_recently_viewed_products .amount,.widget_shopping_cart .amount,.widget_top_rated_products .amount{font-size:16px}.widget_products .woocommerce-mini-cart__buttons a.button,.widget_recent_reviews .woocommerce-mini-cart__buttons a.button,.widget_recently_viewed_products .woocommerce-mini-cart__buttons a.button,.widget_shopping_cart .woocommerce-mini-cart__buttons a.button,.widget_top_rated_products .woocommerce-mini-cart__buttons a.button{padding:15px 20px;line-height:1;font-weight:500;border:2px solid #f2c014;display:inline-block}.widget_products .woocommerce-mini-cart__buttons a.button:hover,.widget_recent_reviews .woocommerce-mini-cart__buttons a.button:hover,.widget_recently_viewed_products .woocommerce-mini-cart__buttons a.button:hover,.widget_shopping_cart .woocommerce-mini-cart__buttons a.button:hover,.widget_top_rated_products .woocommerce-mini-cart__buttons a.button:hover{color:#131e25!important}.widget_products .woocommerce-mini-cart__buttons a.button:last-child:hover,.widget_recent_reviews .woocommerce-mini-cart__buttons a.button:last-child:hover,.widget_recently_viewed_products .woocommerce-mini-cart__buttons a.button:last-child:hover,.widget_shopping_cart .woocommerce-mini-cart__buttons a.button:last-child:hover,.widget_top_rated_products .woocommerce-mini-cart__buttons a.button:last-child:hover{background-color:#f2c014;color:#131e25}</style>
   script(src="/generall/js/jquery.min.js")
   script(src="/generall/js/jquery-migrate.min.js")
   style().
@@ -112,8 +113,14 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                   h4.widget-title &TScy;&iukcy;&ncy;&acy;
                   form(method='get' action='/store/category' @submit.prevent="filterPrice($event)")
                     .price_slider_wrapper
-                      input(style="max-width: 45%; margin-right: 5%; color: rgba(0, 0, 0, .6); " name="min" placeholder="Від" type="number")
-                      input(style="max-width: 45%; margin-left: 5%; color: rgba(0, 0, 0, .6); " name="max" placeholder="До" type="number")
+                      if data.query.min
+                        input(style="max-width: 45%; margin-right: 5%; color: rgba(0, 0, 0, .6); " name="min" placeholder="Від" value=data.query.min type="number")
+                      else 
+                        input(style="max-width: 45%; margin-right: 5%; color: rgba(0, 0, 0, .6); " name="min" placeholder="Від" type="number")
+                      if data.query.max
+                        input(style="max-width: 45%; margin-left: 5%; color: rgba(0, 0, 0, .6); " name="max" placeholder="До" value=data.query.min type="number")
+                      else 
+                        input(style="max-width: 45%; margin-left: 5%; color: rgba(0, 0, 0, .6); " name="max" placeholder="До" type="number")
                       button.btn.btn-primary(type="submit" style="font-size: 14px; margin: 1em auto;") Фільтрувати
                       .d-none.price_slider_amount(data-step='10')
                         .price_label(style='')
@@ -152,41 +159,41 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                   ul.product-categories
                     if !data.query.availability
                       li.cat-item.cat-item-8.current-cat
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="") Всі
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="" @click.prevent="initFilter('availability', '')") Всі
                     else
                       li.cat-item.cat-item-8
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="") Всі 
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="" @click.prevent="initFilter('availability', '')") Всі 
                     if data.query.availability === 'available'
                       li.cat-item.cat-item-8.current-cat
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="available") В наявності
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="available" @click.prevent="initFilter('availability', 'available')") В наявності
                     else
                       li.cat-item.cat-item-8 
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="available") В наявності
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="available" @click.prevent="initFilter('availability', 'available')") В наявності
                     
 
 
                     if data.query.availability === 'running'
                       li.cat-item.cat-item-8.current-cat
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="running") Закінчується
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="running" @click.prevent="initFilter('availability', 'running')") Закінчується
                     else
                       li.cat-item.cat-item-8
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="running") Закінчується
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="running" @click.prevent="initFilter('availability', 'running')") Закінчується
 
 
                     if data.query.availability === 'out'
                       li.cat-item.cat-item-8.current-cat
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="out") Немає в наявності
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="out" @click.prevent="initFilter('availability', 'out')") Немає в наявності
                     else
                       li.cat-item.cat-item-8
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="out") Немає в наявності
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="out" @click.prevent="initFilter('availability', 'out')") Немає в наявності
 
 
                     if data.query.availability === 'waiting'
                       li.cat-item.cat-item-8.current-cat
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="waiting") Очікується
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="waiting" @click.prevent="initFilter('availability', 'waiting')") Очікується
                     else
                       li.cat-item.cat-item-8
-                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="waiting") Очікується
+                        a(rel='nofollow' href='#' data-filter-link="" data-filter-key="availability" data-filter-value="waiting" @click.prevent="initFilter('availability', 'waiting')") Очікується
 
 
                       
@@ -197,7 +204,7 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                   .woocommerce-notices-wrapper
                   .oceanwp-toolbar.clr
                     form.woocommerce-ordering(method='get')
-                      select.orderby.hasCustomSelect(name='orderby' aria-label='Shop order' style='opacity: 1; position: absolute; height: 34px; font-size: 13px; appearance: menulist-button; width: 228px;' data-filter-option="")
+                      select.orderby.hasCustomSelect(name='orderby' aria-label='Shop order' style='opacity: 1; position: absolute; height: 34px; font-size: 13px; appearance: menulist-button; width: 228px;' data-filter-option="" @change.prevent="initFilter('sort', $event.target.value)")
                         if data.query.sort === '-date'
                           option(value='-date' selected='selected' data-filter-key="sort" data-filter-value="-date" ) Сортувати за датою
                         else
@@ -223,19 +230,19 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                       li.view-title Товарів на сторінці:
                       li
                         if data.query.limit == 2
-                          a.view-first.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="2") 2
+                          a.view-first.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="2" @click.prevent="initFilter('limit', 2)") 2
                         else
-                          a.view-first(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="2") 2
+                          a.view-first(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="2" @click.prevent="initFilter('limit', 2)") 2
                       li
                         if data.query.limit == 4
-                          a.view-second.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="4") 4
+                          a.view-second.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="4" @click.prevent="initFilter('limit', 4)") 4
                         else
-                          a.view-second(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="4") 4
+                          a.view-second(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="4" @click.prevent="initFilter('limit', 4)") 4
                       li
                         if data.query.limit == 6
-                          a.view-all.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="6") 6
+                          a.view-all.active(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="6" @click.prevent="initFilter('limit', 6)") 6
                         else
-                          a.view-all(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="6") 6
+                          a.view-all(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="6" @click.prevent="initFilter('limit', 6)") 6
                   if data.products.length
                     ul.products.oceanwp-row.clr.grid.tablet-col.tablet-2-col.mobile-col.mobile-2-col.infinite-scroll-wrap
                       each product, indx in data.products
@@ -285,7 +292,7 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
       #box_wrapper
         include ../components/footer.pug                             
 
-include ../components/footer-js.pug
-script#oceanwp-woo-hover-style-js(src='/generall/js/woo-hover-style.min.js')
-script#oceanwp-woo-quick-view-js(src='/generall/js/woo-quick-view.min.js')
-script(type="module" src="/generall/js/app.js")
+  include ../components/footer-js.pug
+  script#oceanwp-woo-hover-style-js(src='/generall/js/woo-hover-style.min.js')
+  script#oceanwp-woo-quick-view-js(src='/generall/js/woo-quick-view.min.js')
+  script(type="module" src="/generall/js/app.js")

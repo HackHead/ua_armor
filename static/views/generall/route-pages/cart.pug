@@ -1,12 +1,6 @@
 include ../components/head.pug
-style().
-  body * {
-    font-family:'Montserrat';
-  }
-  [v-cloak] {
-    display: none;
-  }
-.app#app(v-cloak)
+<style>body * {font-family:'Montserrat';}[v-cloak]{display: none;}</style>
+.app#app
   #canvas
     #box_wrapper
       include ../components/navigation.pug
@@ -83,7 +77,7 @@ style().
                                   td(data-title='Subtotal')
                                     span.woocommerce-Price-amount.amount
                                       span.woocommerce-Price-currencySymbol &pound;
-                                      | #{data.cart.total}
+                                      | {{cart.total}}
                                       sup 00
                                 tr.order-total
                                   th Вартість зі знижкою
@@ -91,16 +85,17 @@ style().
                                     strong
                                       span.woocommerce-Price-amount.amount
                                         span.woocommerce-Price-currencySymbol &pound;
-                                        | 
+                                        | {{cart.totalPromotion}}
                                         sup 00
                             .wc-proceed-to-checkout
                               a.checkout-button.button.alt.wc-forward(href='/order')
                                 | Сформувати замовлення
             .col-12
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-        .d-flex(v-else)(style="text-align:center; min-height:  80vh; justify-content: center; align-items: center")
+        .d-flex(v-else)( style="text-align:center; min-height:  80vh; justify-content: center; align-items: center")
           p Ваша корзина порожня
 
 include ../components/footer.pug
 include ../components/footer-js.pug
 script(type="module" src="/generall/js/app.js")
+
