@@ -19,8 +19,8 @@
                   a(href='/contacts') Контакти
             .d-none.d-xl-flex.align-items-center
               .widget.widget_search
-                form(role='search' method='get' action='')
-                  input.search-field.form-control.search(type='search' placeholder='Пошук товарів…')
+                form(role='search' method='get' action='/store/category/')
+                  input.search-field.form-control.search(name="search" placeholder='Пошук товарів…')
                   button(type='submit' value='Пошук') <ion-icon name="search"></ion-icon>
                   input(type='hidden' name='post_type' value='product')
                 

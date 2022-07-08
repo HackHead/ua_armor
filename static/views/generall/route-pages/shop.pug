@@ -27,6 +27,24 @@ head
     body * {
       font-family:'Montserrat';
     }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    input[type=number]::placeholder {
+      color: rgba(0, 0, 0, .4);
+      font-size: 0.9em
+    }
+    .woocommerce .widget_product_categories li.current-cat a::before {
+      background: #ffd34f;
+      box-shadow: 
+    }
 body(class="archive post-type-archive post-type-archive-product wp-custom-logo wp-embed-responsive theme-oceanwp woocommerce-shop woocommerce woocommerce-page woocommerce-js tinvwl-theme-style oceanwp-theme sidebar-mobile default-breakpoint has-sidebar sidebar-content content-left-sidebar has-topbar has-breadcrumbs has-blog-grid pagination-center has-grid-list account-side-style elementor-default elementor-kit-9354 trigger-position-right quick-links-position-left trigger-size-small trigger-color-blue e--ua-firefox owp-qv-open")
   .app#app 
     #canvas
@@ -92,15 +110,12 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
               #right-sidebar-inner.clr
                 #woocommerce_price_filter-2.sidebar-box.woocommerce.widget_price_filter.clr
                   h4.widget-title &TScy;&iukcy;&ncy;&acy;
-                  form(method='get' action='/store')
+                  form(method='get' action='/store/category' @submit.prevent="filterPrice($event)")
                     .price_slider_wrapper
-                      .price_slider.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content
-                        .ui-slider-range.ui-corner-all.ui-widget-header(style='left: 0%; width: 100%;')
-                        span.ui-slider-handle.ui-corner-all.ui-state-default(tabindex='0' style='left: 0%;')
-                        span.ui-slider-handle.ui-corner-all.ui-state-default(tabindex='0' style='left: 100%;')
-                      .price_slider_amount(data-step='10')
-                        input#min_price(type='text' name='min_price' value='0' data-min='0' placeholder='Min price' style='display: none;')
-                        input#max_price(type='text' name='max_price' value='700' data-max='700' placeholder='Max price' style='display: none;')
+                      input(style="max-width: 45%; margin-right: 5%; color: rgba(0, 0, 0, .6); " name="min" placeholder="Від" type="number")
+                      input(style="max-width: 45%; margin-left: 5%; color: rgba(0, 0, 0, .6); " name="max" placeholder="До" type="number")
+                      button.btn.btn-primary(type="submit" style="font-size: 14px; margin: 1em auto;") Фільтрувати
+                      .d-none.price_slider_amount(data-step='10')
                         .price_label(style='')
                           | Ціна: 
                           span.from $0

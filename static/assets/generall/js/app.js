@@ -70,6 +70,17 @@
           if(this.singleProductQuantity > min) this.singleProductQuantity--;
         };
       },
-      
+      filterPrice(e){
+        if ('URLSearchParams' in window) {
+          var searchParams = new URLSearchParams(window.location.search);
+          const min = e.target.elements[0].value,
+                max = e.target.elements[1].value;
+          if(min) searchParams.set('min', min);
+          if(max) searchParams.set('max', max);
+          
+          window.location.search = searchParams.toString();
+          
+      }
+      }
     },
   }).mount('#app')
