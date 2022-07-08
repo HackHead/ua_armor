@@ -46,7 +46,6 @@ export const orderValidation = (data) => {
         name: Joi.string().required(),
         phone: Joi.string().required(),
         address: Joi.string().required(),
-        description: Joi.string().max(4096),
         status: Joi.string().valid('pending', 'delivering', 'failed', 'submitted').required().default('available')
 
     })

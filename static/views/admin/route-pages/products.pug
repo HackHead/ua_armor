@@ -30,14 +30,24 @@ include ../components/head.pug
               .demo-inline-spacing
                 nav(aria-label='Page navigation')
                   ul.pagination.justify-content-center
-                    li.page-item.prev
-                      a.page-link(href='javascript:void(0);')
-                        i.tf-icon.bx.bx-chevrons-left
-                    li.page-item.active
-                      a.page-link(href='javascript:void(0);') 1
-                    li.page-item.next
-                      a.page-link(href='javascript:void(0);')
-                        i.tf-icon.bx.bx-chevrons-right
+                    if data.pageNum !== 1
+                      li.page-item.prev
+                        a.page-link(href='?page=' + parseInt(data.pageNum - 1))
+                          i.tf-icon.bx.bx-chevrons-left
+                    -var n = 1;
+                    while n <= data.paginationItems
+                      if n - 1 === data.pageNum || n === data.pageNum || n + 1 === data.pageNum
+                        if n === data.pageNum
+                          li.page-item.active
+                            a.page-link(href='#') #{n}
+                        else
+                          li.page-item
+                            a.page-link(href='?page=' + n) #{n}
+                      - n++;
+                    if parseInt(data.pageNum) != parseInt(data.paginationItems)
+                      li.page-item.next
+                        a.page-link(href='?page=' + parseInt(data.pageNum + 1))
+                          i.tf-icon.bx.bx-chevrons-right
           else 
             p(style="text-align: center; margin: 200px auto") Вы еще не добавили ни одного товара
         .content-backdrop.fade

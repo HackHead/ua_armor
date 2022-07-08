@@ -31,12 +31,13 @@ export const getAdminDashboardView = (req, res) => {
         misc: misc,
         user: req.user,
     };
+    console.log(req.user)
     res.render('admin/route-pages/dashboard', {data: page})
 }
 
 // Страница со списком товаров в админке
 export const getAdminProductsView = async (req, res) => {
-    const page = {
+    const render = {
         lang: 'uk-UK',
         description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
@@ -46,17 +47,22 @@ export const getAdminProductsView = async (req, res) => {
         user: req.user,
     };
     try {
-        const products = await Product.find().populate('category').limit(20)
+        const {page = 1, limit = 25} = req.query;
+        const products = await Product.find().populate('category').skip((page - 1) * limit).limit(limit * 1).sort('-date');
         if(products) {
-            page.products = products
+            render.products = products
+            const count = await Product.count({});
+            const paginationItems = Math.ceil(count / limit)
+            render.paginationItems = paginationItems;
+            render.pageNum = parseInt(page)
         }
     } catch (err) {
         const data = {
-        message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+            message: 'Во время выполнения запроса произошла непредвиденная ошибка'
         }
         return res.status(400).render('admin/status-pages/400', {data: data});
     }
-    res.render('admin/route-pages/products', {data: page})
+    res.render('admin/route-pages/products', {data: render})
 }
 
 
@@ -148,7 +154,7 @@ export const getAdminMiscView = async (req, res) => {
     res.render('admin/route-pages/misc', {data: page})
 }
 export const getAdminCommentsView = async (req, res) => {
-    const page = {
+    const render = {
         lang: 'uk-UK',
         description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
         title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
@@ -158,9 +164,13 @@ export const getAdminCommentsView = async (req, res) => {
         user: req.user,
     };
     try {
-        const comments = await Comment.find().limit(20).populate('product');
-        page.comments = comments;
-        
+        const {page = 1, limit = 25} = req.query;
+        const comments = await Comment.find().populate('product').skip((page - 1) * limit).limit(limit * 1).sort('-date');;
+        render.comments = comments;
+        const count = await Comment.count({});
+            const paginationItems = Math.ceil(count / limit)
+            render.paginationItems = paginationItems;
+            render.pageNum = parseInt(page)
     } catch (err) {
         const data = {
         message: 'Во время выполнения запроса произошла непредвиденная ошибка'
@@ -168,7 +178,7 @@ export const getAdminCommentsView = async (req, res) => {
     return res.status(400).render('admin/status-pages/400', {data: data});
     }
     
-    res.render('admin/route-pages/comments', {data: page})
+    res.render('admin/route-pages/comments', {data: render})
 };
 // Страница с одним товаром в админке
 export const getAdminProductView = async (req, res) => {
@@ -511,7 +521,7 @@ export const createSlide = async (req, res) => {
         }
         return res.status(400).render('admin/status-pages/400', {data: data})
     }
-    res.redirect('/admin/misc')
+    res.redirect('/admin/slides/all')
 }
 export const updateMisc = async (req, res) => {
     const target = req.params.target;
@@ -595,6 +605,7 @@ export const getLoginView = async (req, res) => {
         misc: misc,
         user: req.user,
     };
+    if(req.user) res.redirect('/admin')
     res.render('admin/route-pages/login', {data: page})
 }
 
@@ -702,6 +713,7 @@ export const getStaffList = async (req, res) => {
         misc: misc,
         user: req.user,
     };
+    console.log(req.user)
     res.render('admin/route-pages/staff-new', {data: page})
 };
 

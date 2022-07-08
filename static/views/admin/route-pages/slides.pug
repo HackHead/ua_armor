@@ -1,0 +1,31 @@
+include ../components/head.pug
+.layout-wrapper.layout-content-navbar
+  .layout-container
+    include ../components/navigation.pug
+    .layout-page
+      include ../components/navbar.pug
+      .content-wrapper
+        // Content
+        if data.slides.length
+          .container-xxl.flex-grow-1.container-p-y
+            h6.pb-1.mb-4.text-muted Список слайдов на главной странице
+            .row.mb-5
+              each slide in data.slides
+                .col-md-6.col-lg-4.mb-3
+                    .card.text-center
+                      div(style='padding-top: 3em')
+                          img(src= '/' + slide.image alt='' style='max-width: 100%; vertical-align: middle; display: inline-block; max-height: 445px; min-height: 445px' )
+                      .card-header
+                      .card-body
+                          h5.card-title(style="white-space: nowrap; max-width: 95%; overflow: hidden; cursor: help; position: relative;" )
+                            a(href="/" + slide.link target="_blank") #{slide.title}
+                          p.card-text #{slide.description.slice(0, 30)}
+                          .buttons.justify-content-center.align-items-center(style="width: 100%; display: flex;")
+                          form(method="GET" action='/admin/slide/delete/' + slide._id)
+                              button.btn.btn-danger.mr-2(type="submit") Удалить
+                
+        else
+            p(style="text-align: center; margin: 200px auto") Вы еще не добавили ни одного товара
+        .content-backdrop.fade
+  .layout-overlay.layout-menu-toggle
+include ../components/footer-js.pug

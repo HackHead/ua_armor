@@ -30,7 +30,7 @@ include ../components/head.pug
                         i.fab.fa-angular.fa-lg.text-danger.me-3
                         strong 
                           span #{user.role.name}
-                      td #{user.createdAt}
+                      td #{user.createdAt.toLocaleTimeString('ru-RU', {day: '2-digit',month: '2-digit', year: 'numeric',})}
                       td
                         ul.list-unstyled.users-list.m-0.avatar-group.d-flex.align-items-center
                           li.avatar.avatar-xs.pull-up(data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' title='Lilian Fuller') #{user.name}

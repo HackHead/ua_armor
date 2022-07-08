@@ -27,13 +27,18 @@ aside#layout-menu.layout-menu.menu-vertical.menu.bg-menu-theme
           a.menu-link(href='/admin/contacts')
             div Редактировать
     li.menu-item(class = data.name === 'misc' ? 'active' : '')
-      a.menu-link(href='/admin/misc')
+      a.menu-link.menu-toggle(href='javascript:void(0);')
         i.menu-icon.tf-icons.bx.bx-cube-alt
         div(data-i18n='Tables') Разное
-    // Components
+      ul.menu-sub
+        li.menu-item
+          a.menu-link(href='/admin/misc')
+            div(data-i18n='Error') Настройки
+        li.menu-item
+          a.menu-link(href='/admin/slides/all')
+            div(data-i18n='Error') Слайды
     li.menu-header.small.text-uppercase
       span.menu-header-text Базы данных
-    // Cards
     li.menu-item(class = data.name === 'products' ? 'active' : '')
       a.menu-link.menu-toggle(href='javascript:void(0);')
         i.menu-icon.tf-icons.bx.bx-store-alt
@@ -59,7 +64,7 @@ aside#layout-menu.layout-menu.menu-vertical.menu.bg-menu-theme
         div(data-i18n='Misc') Заказы
       ul.menu-sub
         li.menu-item
-          a.menu-link(href='/admin/products')
+          a.menu-link(href='/admin/orders/all')
             div(data-i18n='Error') Список заказов
         
 
@@ -83,33 +88,9 @@ aside#layout-menu.layout-menu.menu-vertical.menu.bg-menu-theme
         li.menu-item(class = data.name === 'create-user' ? 'active' : '')
           a.menu-link(href='/admin/staff/new')
             div(data-i18n='Under Maintenance') Создать пользователя
-    //- li.menu-header.small.text-uppercase
-    //-   span.menu-header-text Администрирование
-    //- li.menu-item(class = data.name === 'dash' ? 'active' : '')
-    //-   a.menu-link.menu-toggle(href='javascript:void(0);')
-    //-     i.menu-icon.tf-icons.bx.bx-globe
-    //-     div Сайт
-    //-   ul.menu-sub
-    //-     li.menu-item
-    //-       a.menu-link(href='/contacts')
-    //-         div Посмотреть
-    //-     li.menu-item(class = data.name === 'dash' ? 'active' : '')
-    //-       a.menu-link(href='/admin/contacts')
-    //-         div Редактировать
-    //- li.menu-item(class = data.name === 'dash' ? 'active' : '')
-    //-   a.menu-link.menu-toggle(href='javascript:void(0);')
-    //-     i.menu-icon.tf-icons.bx.bxs-key
-    //-     div Панель
-    //-   ul.menu-sub
-    //-     li.menu-item
-    //-       a.menu-link(href='/contacts')
-    //-         div Права доступа
-    //-     li.menu-item(class = data.name === 'dash' ? 'active' : '')
-    //-       a.menu-link(href='/admin/contacts')
-    //-         div Формы
     li.menu-header.small.text-uppercase
       span.menu-header-text Другое
     li.menu-item(class = data.name === 'dash' ? 'active' : '')
-      a.menu-link(href='javascript:void(0);')
+      a.menu-link(href='https://t.me/the_solomon' target="_blank")
         i.menu-icon.tf-icons.bx.bx-help-circle
         div Поддержка

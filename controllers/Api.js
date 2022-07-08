@@ -126,15 +126,21 @@ export const removeFromCart = async (req, res) => {
  
      const ssid = req.sessionID;
      const ObjectIdRegexp =  /^[a-fA-F0-9]{24}$/;
-           
+    
      if(!req.body.product.match(ObjectIdRegexp)) {
         return res.status(400).json({error: 'This product does not exist'});
      }
  
      const product = await Product.findOne({_id: req.body.product});
- 
+        
      if(!product) res.status(400).json({error: 'This product does not exist'})
      let quantity;
+     let productPromotion = product.price;
+
+     if(product.sale > 0){
+        productPromotion = Math.floor((product.price / 100 * (100 - product.sale)))
+     }
+
      const cartItems = await Cart.findOne({
          "products.productId": {"$eq": req.body.product},
          session: ssid
@@ -198,13 +204,6 @@ export const getDeleteCategoryView = async (req, res) => {
 export const deleteCategory = async (req, res) => {
     if(!req.body.category) throw new Error('Нужно указать категорию');
 
-
-    // await User.updateMany(
-    //     { "notifications._id": {$in: notificationIDs} },
-    //     { $set: { "notifications.$.seen": true } }
-    //   );
-
-
     try {
       
         const category = await Category.findOneAndDelete(
@@ -227,6 +226,9 @@ export const deleteCategory = async (req, res) => {
         await Product.deleteMany(
             { "_id": {$in: productsIDs} },
         );
+        await Order.deleteMany({
+            "products.productId": {$in: productsIDs}
+        }).populate({path: 'products.productId'});
         return res.json({data: 'success'})
     } catch (err) {
         return res.json({data: err})
@@ -235,10 +237,10 @@ export const deleteCategory = async (req, res) => {
     return res.json({data: 'End'})
 }
 export const createOrder = async(req, res) => {
-    const cart = await Cart.findOne({session: req.sessionID}).populate({path:'products.productId' });
+    const cart = await Cart.findOneAndDelete({session: req.sessionID}, {new: true}).populate({path:'products.productId' });
     if(!cart) return res.status(400).send('Нет товаров в корзине')
     if(!req.sessionID) return res.status(400).send('Session required');
-
+    
     const orderValidationData = {
     
         session: req.sessionID,
@@ -246,7 +248,6 @@ export const createOrder = async(req, res) => {
         email: req.body?.email,
         phone: req.body?.phone,
         address: req.body?.address,
-        description: req.body?.description,
         status: 'pending',
     }
     const {error} = orderValidation(orderValidationData);
@@ -268,8 +269,75 @@ export const createOrder = async(req, res) => {
 
        }).save()
 
-       console.log(createdOrder)
+       return res.send(`Замовлення успішно створене, очікуйте на дзвінок`)
     } catch (err) {
         throw new Error(err)
     }
+}
+
+export const getOrdersPageView = async(req, res) => {
+    if(!req.sessionID) return res.status(400).send('Session required')
+
+
+    const render = {
+        lang: 'uk-UK',
+        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
+        robots: 'index',
+        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
+        title: 'UArmor | Система керування контентом',
+        author: 'Euphoria digital agency',
+        name: 'cart',
+        misc: misc,
+        user: req.user,
+        
+    };
+    try {
+        const {page = 1, limit = 50} = req.query;
+        // if(req.query.page) page = req.query.page;
+        const orders = await Order.find().populate({
+                path: 'products.productId'
+            }).skip((page - 1) * limit).limit(limit * 1).sort('-createdAt');
+            render.orders = orders
+            const count = await Order.count({});
+            const paginationItems = Math.ceil(count / limit)
+            render.paginationItems = paginationItems;
+            render.pageNum = parseInt(page)
+            res.render('admin/route-pages/orders', {data: render})
+    } catch (err) {
+        const data = {
+            message: err
+        };
+        res.status(400).send(err)
+    }
+    
+}
+
+export const getSlidesPagesView = async(req, res) => {
+    const render = {
+        lang: 'uk-UK',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        robots: 'index',
+        name: 'comments',
+        misc: misc,
+    };
+        try {
+            const slides = await Slide.find()
+            if(slides){
+                render.slides = slides
+            }
+            res.render('admin/route-pages/slides', {data: render})
+        } catch (err) {
+            const data = {
+                message: err
+            }
+        return res.status(400).render('admin/status-pages/400', {data: data});
+    }
+}
+
+export const deleteSlide = async(req, res) => {
+    const id = req.params.id
+
+    await Slide.findOneAndDelete({id: id});
+    res.redirect('/admin/slides/all')
 }

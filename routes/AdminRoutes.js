@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {signInAdmin, createSlide, newStaff, getNewStaffView,getAllUsers, createCategory, newComment, getAdminCommentsView, updateMisc, getAdminDashboardView,getNewCategoryView, getAdminProductsView, createProduct, getProductEditView, deleteProduct, updateProduct, newUserMail, getAdminContactsView, getAdminMiscView, getAdminProductView, getLoginView, deleteComment } from "../controllers/AdminControllers.js";
-import { isStaff } from "../middleware/Auth.js";
+import { isStaff, isAuth} from "../middleware/Auth.js";
 import { v4 as uuidv4 } from 'uuid';
 
 import multer from "multer";
@@ -46,7 +46,7 @@ router.post('/admin/misc/update/:target',isStaff, upload.single('image'), update
 router.post('/admin/signin', signInAdmin)
 router.post('/admin/staff/new',isStaff, newStaff)
 router.post('/admin/misc/slide/new', isStaff, upload.single('image'), createSlide)
-router.get('/login', getLoginView)
+router.get('/login',isAuth, getLoginView)
 router.get('/comment/delete/:id',isStaff, deleteComment)
 router.get('/admin/staff/new',isStaff, getNewStaffView)
 router.get('/admin/users',isStaff, getAllUsers)

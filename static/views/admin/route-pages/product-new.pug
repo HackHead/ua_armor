@@ -20,7 +20,8 @@ include ../components/head.pug
                       input#nameInput.form-control(name="name" type='text' required placeholder='Перчатки тактические вентилируемые Mechanix Specialty Vent Coyote' aria-describedby='floatingInputHelp')
                       label(for='nameInput') Название
                       .form-text
-                        | Должно быть не короче 8 и не длиннее 128 символов*
+                        | Должно быть не короче 6 и не длиннее 128 символов*
+                        | Должно быть уникальным *
                     .input-group.mb-3
                       label.form-label(for='exampleFormControlSelect1' style="width: 100%") Цена
                       .input-group-text ₴
@@ -86,10 +87,10 @@ include ../components/head.pug
                                       path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12')
                                   p.mb-2.text-sm.when-files-loaded(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center")
                                       span(style="font-weight: 600") Нажмите чтобы загрузить
-                                  p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") SVG, PNG, JPG or GIF (До 5мб)
+                                  p.text-xs(style="color: #6B7280; font-size: 0.9rem; line-height: 1rem; display: inline-block; width: 100%; text-align: center") WEBp, PNG, JPG (До 10 штук)
                               
                       .form-text
-                        | Первое изображение будет выбрано в качестве превью*
+                        | Обязательно выбрать хотябы одно изображение
               .col-xl-6(style="margin-left: auto; margin-right: auto;")
                 .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
                   button.btn.btn-primary.mr-2(type="submit") Создать
