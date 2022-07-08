@@ -39,6 +39,22 @@ export const productValidation = (data) => {
     return shema.validate(data)
 }
 
+export const orderValidation = (data) => {
+    const shema = Joi.object({
+        session: Joi.string().required(),
+        email: Joi.string().email().required(),
+        name: Joi.string().required(),
+        phone: Joi.string().required(),
+        address: Joi.string().required(),
+        description: Joi.string().max(4096),
+        status: Joi.string().valid('pending', 'delivering', 'failed', 'submitted').required().default('available')
+
+    })
+
+    return shema.validate(data)
+}
+
+
 export const slideValidation = (data) => {
     const shema = Joi.object({
         title: Joi.string().required().max(64),

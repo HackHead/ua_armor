@@ -4,10 +4,12 @@ import Category from "../models/Category.js";
 import Feature from "../models/Feature.js";
 import Slide from "../models/Slide.js";
 import Cart from "../models/Cart.js";
+import Order from "../models/Order.js";
 
 import misc from "../config/misc.js";
 import mongoose from 'mongoose';
 
+import {orderValidation} from '../validations/SchemaValidation.js'
 
 export const getCart = async (req, res) => {
     if(!req.sessionID) {
@@ -115,9 +117,9 @@ export const addToCart = async (req, res) => {
     } catch (err) {
          throw new Error(err)
     }
- } 
+} 
  
- export const removeFromCart = async (req, res) => {
+export const removeFromCart = async (req, res) => {
      if(!req.session) {
          return res.status(400).json({error: 'Session required'});
      }
@@ -166,6 +168,108 @@ export const addToCart = async (req, res) => {
        return res.json({cart: data})
    })
 
-  };
- 
- 
+};
+
+export const getDeleteCategoryView = async (req, res) => {
+    const page = {
+        lang: 'uk-UK',
+        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
+        robots: 'index',
+        name: 'category-delete',
+        misc: misc,
+        user: req.user,
+    };
+    try {
+        const categories = await Category.find().populate({
+            path: 'parentId.category'
+        });
+        if(categories) {
+            page.categories = categories
+        }
+    } catch (err) {
+        const data = {
+            message: err
+        }
+        return res.status(400).render('admin/status-pages/400', {data: data});
+    }
+    res.render('admin/route-pages/category-delete.pug', {data: page})
+}
+export const deleteCategory = async (req, res) => {
+    if(!req.body.category) throw new Error('Нужно указать категорию');
+
+
+    // await User.updateMany(
+    //     { "notifications._id": {$in: notificationIDs} },
+    //     { $set: { "notifications.$.seen": true } }
+    //   );
+
+
+    try {
+      
+        const category = await Category.findOneAndDelete(
+            {_id: req.body.category},
+            {new: true}
+        );
+        const products = await Product.find({category: category._id}).populate('category');
+        await Cart.deleteMany({}); // Delete this
+
+
+        const productsIDs = []
+        products.forEach((product) => {
+            productsIDs.push(product._id)
+            
+        })
+
+        await Comment.deleteMany(
+            { "product": {$in: productsIDs} },
+        ).populate('product');
+        await Product.deleteMany(
+            { "_id": {$in: productsIDs} },
+        );
+        return res.json({data: 'success'})
+    } catch (err) {
+        return res.json({data: err})
+    }
+
+    return res.json({data: 'End'})
+}
+export const createOrder = async(req, res) => {
+    const cart = await Cart.findOne({session: req.sessionID}).populate({path:'products.productId' });
+    if(!cart) return res.status(400).send('Нет товаров в корзине')
+    if(!req.sessionID) return res.status(400).send('Session required');
+
+    const orderValidationData = {
+    
+        session: req.sessionID,
+        name: req.body?.name,
+        email: req.body?.email,
+        phone: req.body?.phone,
+        address: req.body?.address,
+        description: req.body?.description,
+        status: 'pending',
+    }
+    const {error} = orderValidation(orderValidationData);
+    if(error){
+        return res.status(400).send(error.details[0].message)
+    }; 
+    try {
+       const createdOrder =  await new Order({
+            session: req.sessionID,
+            name: req.body?.name,
+            email: req.body?.email,
+            phone: req.body?.phone,
+            address: req.body?.address,
+            description: req.body?.description,
+            status: 'pending',
+            total: cart.total,
+            totalPromotion: cart.totalPromotion,
+            products: cart.products,
+
+       }).save()
+
+       console.log(createdOrder)
+    } catch (err) {
+        throw new Error(err)
+    }
+}

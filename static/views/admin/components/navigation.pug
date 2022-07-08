@@ -48,7 +48,20 @@ aside#layout-menu.layout-menu.menu-vertical.menu.bg-menu-theme
         li.menu-item
           a.menu-link(href='/admin/categories/new')
             div(data-i18n='Under Maintenance') Создать категорию
+        li.menu-item
+          a.menu-link(href='/admin/category/delete')
+            div(data-i18n='Under Maintenance') Удалить категорию
 
+
+    li.menu-item(class = data.name === 'orders' ? 'active' : '')
+      a.menu-link.menu-toggle(href='javascript:void(0);')
+        i.menu-icon.tf-icons.bx.bx-notepad
+        div(data-i18n='Misc') Заказы
+      ul.menu-sub
+        li.menu-item
+          a.menu-link(href='/admin/products')
+            div(data-i18n='Error') Список заказов
+        
 
             
     li.menu-item(class = data.name === 'comments' ? 'active' : '')

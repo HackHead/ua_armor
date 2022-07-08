@@ -1,0 +1,36 @@
+include ../components/head.pug
+.layout-wrapper.layout-content-navbar
+  .layout-container
+    include ../components/navigation.pug
+    .layout-page
+      include ../components/navbar.pug
+      .content-wrapper
+        // Content
+        .container-xxl.flex-grow-1.container-p-y
+          h4.fw-bold.py-3.mb-4
+            span.text-muted.fw-light  Товары / Категории /
+            |  Удалить категорию
+          if data.categories
+            .row
+              form(method="POST" action="/api/category/delete")
+                .col-xl-6(style="margin-left: auto; margin-right: auto;")
+                  .card.mb-4
+                    h5.card-header Заполните нужные вам поля
+                    .card-body
+                      .mb-3
+                        label.form-label(for='exampleFormControlSelect1') Категория которую нужно удалить
+                        select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' name="category")
+                          option(value="" selected="" disabled) Выберите категорию
+                          each category, index in data.categories
+                            if category.parentId
+                              option(value=category.id) #{category.name}
+                          | Внимание! Если вы не выбирете родительськую категорию, то указанная вами категория станет родительськой    
+                .col-xl-12(style="margin-left: auto; margin-right: auto;")
+                  .d-flex(style="width: 100%; max-height: 250px; align-items: center; justify-content: center; display: flex")
+                            button.btn.btn-primary.mr-2(type="submit") Удалить
+                            a.btn.btn-danger.mr-2(href="/admin/products") Отменить
+                        
+          else 
+            p(style="text-align: center; margin: 200px auto") Вы еще не добавили ни одного товара
+        .content-backdrop.fade
+    include ../components/footer-js.pug

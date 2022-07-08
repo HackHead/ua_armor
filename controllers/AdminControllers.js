@@ -227,6 +227,10 @@ export const deleteProduct = async (req, res) => {
     try {
         const id = req.params?.id;
         const deleted = await Product.findOneAndDelete({_id: id}).populate('category').exec();
+        await Cart.deleteMany({}); // Delete this
+        await Comment.deleteMany(
+            { "product": {$eq: id} },
+        ).populate('product');
         if(!deleted) return res.status(400).send('Такого товара не существует')
         const cat = deleted.category._id;
         await Category.findOneAndUpdate({_id: cat}, {"$inc": {productsCount: -1}})
@@ -319,7 +323,7 @@ export const createProduct = async (req, res) => {
         return res.status(400).render('admin/status-pages/400', {data: data});
     }
     
-    res.status(200).redirect('/admin/products');
+    res.status(200).redirect('/admin/product/new');
 }
 
 // Endpoint для обновления товара

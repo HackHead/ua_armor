@@ -8,7 +8,6 @@ import Slide from "../models/Slide.js";
 import Cart from "../models/Cart.js";
 
 import misc from "../config/misc.js";
-import mongoose from 'mongoose';
 
 
 export const getCartPageView = async (req, res) => {
@@ -195,13 +194,25 @@ export const getStorePageView = async (req, res) => {
               params = {};
         if(req.query.availability) params.availability = req.query.availability;
         if(req.params.slug) page.category = req.params.slug;
-        if(req.query.min) params.price = query.min = {"$gte": Number(req.query.min)};
-        if(req.query.max) params.price = query.max = {"$lte": Number(req.query.max)};
+        if(req.query.min || req.query.max){
+            params.price = {}
+            if(req.query.min) {
+                query.min = req.query.min
+                params.price.$gte = Number(req.query.min);
+            };
+            if(req.query.max) {
+                query.max = req.query.max
+                params.price.$lte = Number(req.query.max);
+            };
+        }
+        
         
         query.sort = sort;
         query.limit = limit;
         query.skip = skip;
         page.query = query;
+        
+        console.log(params)
         query.availability = params.availability;
 
         const nameRegexp = new RegExp('^.{0,}' + search + '.{0,}$', 'i');
@@ -405,6 +416,4 @@ export const removeFromCart = async (req, res) => {
     req.session.cart = updatedCart._id
     return res.json({cart: updatedCart})
  };
-
-
 

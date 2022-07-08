@@ -20,7 +20,7 @@ style().
                 | Оформити замовлення
               ol.breadcrumb
                 li.breadcrumb-item.first-item
-                  a(href='http://webdesign-finder.com/armashop/') Головна
+                  a(href='/') Головна
                 li.breadcrumb-item.last-item.active Замовлення
             .col-12
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
@@ -46,47 +46,36 @@ style().
                         button.button(type='submit' name='apply_coupon' value='Apply coupon') Apply coupon
                       .clear
                     .woocommerce-notices-wrapper
-                    form.checkout.woocommerce-checkout(name='checkout' method='post' action='http://webdesign-finder.com/armashop/checkout/' enctype='multipart/form-data' novalidate='novalidate')
+                    form.checkout.woocommerce-checkout(name='checkout' method='post' action='/api/order/create')
                       #customer_details.col2-set
                         .col-1
                           .woocommerce-billing-fields
                             h3 Деталі доставки
                             .woocommerce-billing-fields__field-wrapper
-                              p#billing_first_name_field.form-row.form-row-first.validate-required(data-priority='10')
+                              p.form-row.form-row-first.validate-required(data-priority='10')
                                 label(for='billing_first_name' style='display: none;')
                                   | Ім'я &nbsp;
                                   abbr.required(title='required') *
                                 span.woocommerce-input-wrapper
-                                  input#billing_first_name.input-text(type='text' name='billing_first_name' placeholder="Ім'я" required autocomplete='given-name' style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;')
-                              p#billing_company_field.form-row.form-row-wide(data-priority='30')
+                                  input#billing_first_name.input-text(type='text' name='name' placeholder="Ім'я" required style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;')
+                              p.form-row.form-row-wide(data-priority='30')
                                 label(for='billing_company')
                                   | Email &nbsp;
                                   span.optional (optional)
                                 span.woocommerce-input-wrapper
-                                  input#billing_company.input-text(type='email' name='billing_company' placeholder='Email' autocomplete='organization')
-                              p#billing_company_field.form-row.form-row-wide(data-priority='30')
+                                  input#billing_company.input-text(type='email' name='email' required placeholder='Email' )
+                              p.form-row.form-row-wide(data-priority='30')
                                 label(for='billing_company')
                                   | Номер телефону &nbsp;
                                   span.optional (optional)
                                 span.woocommerce-input-wrapper
-                                  input#billing_company.input-text(type='tel' name='billing_company' placeholder='Номер телефону' required autocomplete='organization')
-                              p#billing_country_field.form-row.form-row-wide.address-field.update_totals_on_change.validate-required(data-priority='40')
-                                label(for='billing_country')
-                                  | Місто доставки;
-                                  abbr.required(title='required') *
+                                  input#billing_company.input-text(type='tel' name='phone' placeholder='Номер телефону' required )
+                              p.form-row.form-row-wide(data-priority='30')
+                                label(for='billing_company')
+                                  | Адреса доставки &nbsp;
+                                  span.optional (optional)
                                 span.woocommerce-input-wrapper
-                                  .select-wrap
-                                    select#billing_country.country_to_state.country_select.select2-hidden-accessible(name='billing_country' autocomplete='country' required tabindex='-1' aria-hidden='true')
-                                      option(value='') Оберіть зі списку &mldr;
-                                      option(value='AX') &angst;land Islands
-                                      option(value='AF') Afghanistan
-                                      option(value='AL') Albania
-                                      option(value='DZ') Algeria
-                                      option(value='AS') American Samoa
-                                      option(value='AD') Andorra
-                                      option(value='AO') Angola
-                                      option(value='AI') Anguilla
-                                      option(value='AQ') Antarctica
+                                  input.input-text(type='tel' name='address' placeholder='Ваша повна адреса' required )
                               
                         .col-2
                           .woocommerce-shipping-fields

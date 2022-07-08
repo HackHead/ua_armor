@@ -31,7 +31,7 @@
                     ion-icon(name='cart' style="vertical-align: middle; display:inline-block; font-size: 1.5em; transform: translateY(-10%)")
                     span.cart-total(style="font-weight: bold; padding-left: 0.3em; color: #f2c014; " v-if="cartLen") ({{cartLen}})
                     span.cart-total(style="font-weight: bold; padding-left: 0.3em; color: #f2c014; " v-else) (0)
-                  .dropdown-menu.dropdown-menu-right.p-lg-40.p-20.ls(aria-labelledby='dropdown-cart' :class="{ show: navShow }" x-placement='bottom-end'  style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-258px, 24px, 0px); max-height: 620px; overflow-y: scroll;' data-dropdown-menu="")
+                  .dropdown-menu.dropdown-menu-right.p-lg-40.p-20.ls(aria-labelledby='dropdown-cart' :class="{ show: navShow }" x-placement='bottom-end'  style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-258px, 24px, 0px); max-height: 620px; overflow-y: scroll; min-width: 10em' data-dropdown-menu="")
                     .widget.woocommerce.widget_shopping_cart(v-if="cartLen")
                       .widget_shopping_cart_content
                           ul.woocommerce-mini-cart.cart_list.product_list_widget(v-if="cart?.products")
