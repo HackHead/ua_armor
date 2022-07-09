@@ -58,7 +58,7 @@ export const slideValidation = (data) => {
     const shema = Joi.object({
         title: Joi.string().required().max(64),
         button: Joi.string().required().max(16),
-        description: Joi.string().required().max(128),
+        description: Joi.string().required().max(256),
         link: Joi.string().required(),
     })
 
