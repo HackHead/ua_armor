@@ -4,7 +4,7 @@ include ../components/head.pug
   #canvas
     #box_wrapper
       include ../components/navigation.pug
-      section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image:url(http://webdesign-finder.com/armashop/wp-content/uploads/2020/03/title.jpg);')
+      section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image:url(/img/home/title.jpg);')
         .container
           .row
             .col-12
@@ -30,7 +30,7 @@ include ../components/head.pug
                     .item-content.entry-content
                       .woocommerce
                         .woocommerce-notices-wrapper
-                        form.woocommerce-cart-form(action='http://webdesign-finder.com/armashop/cart/' method='post')
+                        form.woocommerce-cart-form(action='' method='post')
                           table.shop_table.shop_table_responsive.cart.woocommerce-cart-form__contents(cellspacing='0')
                             thead
                               tr
@@ -53,18 +53,16 @@ include ../components/head.pug
                                     a(:href="'/store/product/' + item.productId.slug" v-cloak) {{item.productId.name}}
                                   td.product-price(data-title='Price')
                                     span.woocommerce-Price-amount.amount
-                                      span.woocommerce-Price-currencySymbol(v-cloak) грн
-                                      | {{item.productId.price}}
-                                      sup 00
+                                      span.woocommerce-Price-currencySymbol(v-cloak)
+                                      | {{item.productId.price}}грн.
                                   td.product-quantity(data-title='Quantity')
                                     .quantity
                                      
                                       input.input-text.qty.text(type='number' step='1' min='0' max='' disabled :value="item.quantity" title='Qty' size='4' placeholder='' inputmode='numeric')
                                   td.product-subtotal(data-title='Subtotal')
                                     span.woocommerce-Price-amount.amount
-                                      span.woocommerce-Price-currencySymbol(v-cloak) грн
-                                      | {{item.productId.price * item.quantity}}
-                                      sup 00
+                                      span.woocommerce-Price-currencySymbol(v-cloak)
+                                      | {{item.productId.price * item.quantity}}грн.
                                 
                             
                         .cart-collaterals
@@ -77,16 +75,14 @@ include ../components/head.pug
                                   td(data-title='Subtotal')
                                     span.woocommerce-Price-amount.amount
                                       span.woocommerce-Price-currencySymbol &pound;
-                                      | {{cart.total}}
-                                      sup 00
+                                      | {{cart.total}}грн.
                                 tr.order-total
                                   th Вартість зі знижкою
                                   td(data-title='Total')
                                     strong
                                       span.woocommerce-Price-amount.amount
                                         span.woocommerce-Price-currencySymbol &pound;
-                                        | {{cart.totalPromotion}}
-                                        sup 00
+                                        | {{cart.totalPromotion}}грн.
                             .wc-proceed-to-checkout
                               a.checkout-button.button.alt.wc-forward(href='/order')
                                 | Сформувати замовлення

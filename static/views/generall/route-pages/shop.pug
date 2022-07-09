@@ -48,12 +48,35 @@ head
       box-shadow: 
     }
     [v-cloak]{display: none;}
+    p.woocommerce-mini-cart__total.total {
+      font-size: 1.2em;
+      font-weight: 500;
+      padding: 2em 0 2em 0
+    }
+    a.button.wc-forward, a.button.checkout.wc-forward {
+      color: black !important;
+      padding: 15px 20px !important;
+      line-height: 1 !important;
+      font-weight: 500 !important;
+      border: 2px solid #f2c014 !important;
+      display: inline-block !important;
+    }
+    a.button.wc-forward {
+      margin: 0 5px 0 0
+    }
+    a.button.checkout.wc-forward {
+      margin: 0 0 0 5px
+    }
+    a.button.wc-forward:hover, a.button.checkout.wc-forward:hover {
+      background: #fff !important;
+      color: #000 !important;
+    }
 body(class="archive post-type-archive post-type-archive-product wp-custom-logo wp-embed-responsive theme-oceanwp woocommerce-shop woocommerce woocommerce-page woocommerce-js tinvwl-theme-style oceanwp-theme sidebar-mobile default-breakpoint has-sidebar sidebar-content content-left-sidebar has-topbar has-breadcrumbs has-blog-grid pagination-center has-grid-list account-side-style elementor-default elementor-kit-9354 trigger-position-right quick-links-position-left trigger-size-small trigger-color-blue e--ua-firefox owp-qv-open")
   .app#app 
     #canvas
       #box_wrapper
         include ../components/navigation.pug
-        section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("http://webdesign-finder.com/armashop/wp-content/uploads/2020/03/title.jpg"); background-position: 50% 1px;')
+        section.page_title.ds.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110.s-parallax.s-overlay(style='background-image: url("/img/home/title.jpg"); background-position: 50% 1px;')
           .container
             .row
               .col-12
@@ -67,44 +90,7 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                   li.breadcrumb-item.last-item.active Товари
               .col-12
                 .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
-        #cartModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-          .modal-dialog.modal-lg.modal-dialog-centered(role='document')
-            .modal-content
-              .modal-header.border-bottom-0
-                h5#exampleModalLabel.modal-title
-                  | Your Shopping Cart
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                  span(aria-hidden='true') &times;
-              .modal-body
-                table.table.table-image
-                  thead
-                    tr
-                      th(scope='col')
-                      th(scope='col') Product
-                      th(scope='col') Price
-                      th(scope='col') Qty
-                      th(scope='col') Total
-                      th(scope='col') Actions
-                  tbody
-                    tr
-                      td.w-25
-                        img.img-fluid.img-thumbnail(src='https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png' alt='Sheep')
-                      td Vans Sk8-Hi MTE Shoes
-                      td 89$
-                      td.qty
-                        input#input1.form-control(type='text' value='2')
-                      td 178$
-                      td
-                        a.btn.btn-danger.btn-sm(href='#')
-                          i.fa.fa-times
-                .d-flex.justify-content-end
-                  h5
-                    | Total: 
-                    span.price.text-success 89$
-              .modal-footer.border-top-0.d-flex.justify-content-between
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-success(type='button') Checkout
-
+       
     #outer-wrap.site.clr(style="margin-top: 80px")
       #wrap.clr
         main#main.site-main.clr(role='main')
@@ -259,7 +245,7 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                                   li.image-wrap(style="height: 350px; max-height: 350px")
                                     .woo-entry-image.clr
                                       a.woocommerce-LoopProduct-link.no-lightbox(href='/store/product/' + product.slug)
-                                        img.woo-entry-image-main(src='/' + product.images[0] alt=product.name loading='lazy' itemprop='image' width='480' height='480')
+                                        img.woo-entry-image-main(src='/' + product.images[0] alt=product.name loading='lazy' itemprop='image' width='480' height='480' style="max-height: 100%")
                                     // .woo-entry-image
                                     a.button.product_type_variable(href='/store/product/' + product.slug rel='nofollow') Деталі
                                   ul.woo-product-info

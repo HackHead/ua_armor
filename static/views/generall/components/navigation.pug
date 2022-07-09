@@ -47,11 +47,10 @@
                                     | {{item.productId.price}}грн.
                             
                           p.woocommerce-mini-cart__total.total
-                            strong Загалом:
+                            strong Загалом: 
                             span.woocommerce-Price-amount.amount()
-                              span(v-cloak) грн;
-                              | {{ cart.total }}
-                              sup 00
+                              span(v-cloak)
+                              | {{ cart.total }}грн.
                           div.woocommerce-mini-cart__buttons.buttons.d-flex
                             a.button.wc-forward(href='/cart/') Переглянути
                             a.button.checkout.wc-forward(href='/order/') Придбати
