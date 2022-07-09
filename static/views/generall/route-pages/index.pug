@@ -27,6 +27,7 @@ style().
                                   .row.align-center.text-center.text-sm-left
                                       .col-xs-12.col-lg-5.col-xl-7
                                           .item-media
+                                            if slide.image
                                               img.attachment-uarmor-rectangle-horizontal.size-uarmor-rectangle-horizontal(src='/' + slide.image alt="" style="max-width: 400px")
                                       .col-xs-12.col-lg-7.col-xl-5
                                           .item-content
@@ -34,7 +35,7 @@ style().
                                                   a(href=slide.link)
                                                       | #{slide.title}
                                               .text-block
-                                                  | #{slide.description}...
+                                                  | #{slide.description}
                                               .product-features
                                                   //- span.price
                                                       span.price-regular &#x20B4; #{product.price}

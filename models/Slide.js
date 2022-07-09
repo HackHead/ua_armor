@@ -8,7 +8,6 @@ const SlideSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true,
     },
     button: {
         type: String,

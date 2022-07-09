@@ -501,9 +501,9 @@ export const createCategory = async (req, res) => {
     }
 }
 export const createSlide = async (req, res) => {
+    console.log(req.file)
     const slideValidationData = {
         title: req.body.title,
-        image: req.file.path,
         button: req.body.button,
         description: req.body.description,
         link: req.body.link,
@@ -514,7 +514,13 @@ export const createSlide = async (req, res) => {
         return res.status(400).send(error.details[0].message)
     };
     try {
-        await new Slide(slideValidationData).save();
+        await new Slide({
+            title: req.body.title,
+            image: req.file?.path,
+            button: req.body.button,
+            description: req.body.description,
+            link: req.body.link,
+        }).save();
     } catch (err) {
         const data = {
             message: err
