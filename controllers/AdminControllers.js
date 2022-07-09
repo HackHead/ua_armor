@@ -9,6 +9,7 @@ import Role from '../models/Role.js'
 import Feature from '../models/Feature.js'
 import Slide from '../models/Slide.js'
 import Cart from '../models/Cart.js'
+import Order from '../models/Cart.js'
 
 import misc from "../config/misc.js";
 import jwt from "jsonwebtoken"
@@ -241,6 +242,10 @@ export const deleteProduct = async (req, res) => {
         await Comment.deleteMany(
             { "product": {$eq: id} },
         ).populate('product');
+        await Order.deleteMany({
+            "products.productId": {$eq: id}
+        }).populate({path: 'products.productId'});
+
         if(!deleted) return res.status(400).send('Такого товара не существует')
         const cat = deleted.category._id;
         await Category.findOneAndUpdate({_id: cat}, {"$inc": {productsCount: -1}})

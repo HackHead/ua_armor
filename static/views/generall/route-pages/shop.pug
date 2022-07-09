@@ -275,12 +275,12 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                                             bdi.mr-2
                                               span.woocommerce-Price-currencySymbol(style="text-decoration: line-through; color: silver") $ #{product.price}
                                             bdi.ml-4
-                                              span.woocommerce-Price-currencySymbol $
-                                              | #{Math.floor((product.price / 100 * (100 - product.sale)))}
+                                              span.woocommerce-Price-currencySymbol
+                                              | #{Math.floor((product.price / 100 * (100 - product.sale)))}грн.
                                           else
                                             bdi
-                                              span.woocommerce-Price-currencySymbol $
-                                              | #{product.price}
+                                              span.woocommerce-Price-currencySymbol
+                                              | #{product.price}грн.
                                     li.woo-desc
                                       | #{product.description}
                                   ul.woo-product-gallery
