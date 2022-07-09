@@ -3,7 +3,8 @@ head
   meta(http-equiv='content-type' content='text/html; charset=UTF-8')
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1')
-  title Products Archive | IMI Defense
+  title #{data.title}
+  meta(name='descriptiion' content=data.description)
   link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css")
   link(href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet")
   
@@ -46,6 +47,7 @@ head
       background: #ffd34f;
       box-shadow: 
     }
+    [v-cloak]{display: none;}
 body(class="archive post-type-archive post-type-archive-product wp-custom-logo wp-embed-responsive theme-oceanwp woocommerce-shop woocommerce woocommerce-page woocommerce-js tinvwl-theme-style oceanwp-theme sidebar-mobile default-breakpoint has-sidebar sidebar-content content-left-sidebar has-topbar has-breadcrumbs has-blog-grid pagination-center has-grid-list account-side-style elementor-default elementor-kit-9354 trigger-position-right quick-links-position-left trigger-size-small trigger-color-blue e--ua-firefox owp-qv-open")
   .app#app 
     #canvas

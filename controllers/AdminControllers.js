@@ -532,66 +532,70 @@ export const updateMisc = async (req, res) => {
         return res.status(400).render('admin/status-pages/400', {data: data});
     }
     let redirect;
-    switch (target) {
-        case 'instagram': 
-            misc.contacts.instagram = req.body.link;
-            redirect = '/admin/contacts'
-            break;
-        case 'telegram': 
-            misc.contacts.telegram = req.body.link;
-            redirect = '/admin/contacts'
-            break;
-        case 'viber': 
-            misc.contacts.viber = req.body.link;
-            redirect = '/admin/contacts'
-            break;
-        case 'phone': 
-            misc.contacts.phone = req.body.phone;
-            redirect = '/admin/contacts'
-            break;
-        case 'email': 
-            misc.contacts.email = req.body.email;
-            redirect = '/admin/contacts'
-            break;
-        case 'address': 
-            misc.contacts.city = req.body.city;
-            misc.contacts.street = req.body.street;
-            redirect = '/admin/contacts'
-        case 'about': 
-            misc.about = req.body.about;
-            redirect = '/admin/misc'
-            break;
-        case 'footer':
-            misc.footer = req.body.footer;
-            redirect = '/admin/misc'
-            break
-        case 'favicon':
-            misc.favicon = req.file.path;
-            redirect = '/admin/misc'
-            break
-        case 'logo':
-            misc.logo = req.file.path;
-            redirect = '/admin/misc'
-            break
-        case 'inverse':
-            misc.logoInverse = req.file.path;
-            redirect = '/admin/misc'
-            break
-        case 'promotion':
-            const body = JSON.parse(JSON.stringify(req.body))
-            misc.promotion = {};
-            misc.promotion.title = body.title;
-            misc.promotion.deadline = body.deadline;
-            misc.promotion.link = body.link;
-            misc.promotion.button = body.button;
-            misc.promotion.image = req.file.path;
-            redirect = '/admin/misc'
-            break
-        case 'promotion-deactivate':
-            misc.promotion = null;
-            redirect = '/admin/misc'
-            break;
-    };
+    try {
+        switch (target) {
+            case 'instagram': 
+                misc.contacts.instagram = req.body.link;
+                redirect = '/admin/contacts'
+                break;
+            case 'telegram': 
+                misc.contacts.telegram = req.body.link;
+                redirect = '/admin/contacts'
+                break;
+            case 'viber': 
+                misc.contacts.viber = req.body.link;
+                redirect = '/admin/contacts'
+                break;
+            case 'phone': 
+                misc.contacts.phone = req.body.phone;
+                redirect = '/admin/contacts'
+                break;
+            case 'email': 
+                misc.contacts.email = req.body.email;
+                redirect = '/admin/contacts'
+                break;
+            case 'address': 
+                misc.contacts.city = req.body.city;
+                misc.contacts.street = req.body.street;
+                redirect = '/admin/contacts'
+            case 'about': 
+                misc.about = req.body.about;
+                redirect = '/admin/misc'
+                break;
+            case 'footer':
+                misc.footer = req.body.footer;
+                redirect = '/admin/misc'
+                break
+            case 'favicon':
+                misc.favicon = req.file.path;
+                redirect = '/admin/misc'
+                break
+            case 'logo':
+                misc.logo = req.file.path;
+                redirect = '/admin/misc'
+                break
+            case 'inverse':
+                misc.logoInverse = req.file.path;
+                redirect = '/admin/misc'
+                break
+            case 'promotion':
+                const body = JSON.parse(JSON.stringify(req.body))
+                misc.promotion = {};
+                misc.promotion.title = body.title;
+                misc.promotion.deadline = body.deadline;
+                misc.promotion.link = body.link;
+                misc.promotion.button = body.button;
+                misc.promotion.image = req.file.path;
+                redirect = '/admin/misc'
+                break
+            case 'promotion-deactivate':
+                misc.promotion = null;
+                redirect = '/admin/misc'
+                break;
+        };
+    } catch (err) {
+        res.send(err)
+    }
     res.status(200).redirect(redirect)
 }
 

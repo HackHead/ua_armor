@@ -76,6 +76,8 @@ app.use(session({
   cookie: { maxAge: 3600 * 1000 * 24, secure: false }
 }))
 
+
+
 app.use("/static", express.static(path.join(__dirname, '/static')));
 app.use("/img", express.static(path.join(__dirname, '/static/assets/img')))
 app.use("/css", express.static(path.join(__dirname, '/static/assets/css')))
@@ -88,7 +90,12 @@ app.use('/uploads',express.static(path.join(__dirname, '/uploads')));
 app.use(AdminRoutes)
 app.use(PublicRoutes)
 app.use(ApiRoutes)
-
+app.use((req, res, next) => {
+  const data = {
+    message: 'Такої сторінки не існує'
+  }
+  res.status(404).render('admin/status-pages/404', {data: data})
+})
 app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}`);
 })

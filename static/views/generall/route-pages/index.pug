@@ -4,6 +4,8 @@ style().
   body * {
     font-family:'Montserrat';
   }
+  [v-cloak]{opacity : 0; transition: all .4s linear}
+
 .app#app
   #canvas
     #box_wrapper
@@ -198,7 +200,7 @@ style().
                   .col-lg-6.col-xl-5.order-1.order-lg-2
                     .category
                       .category-image
-                        img.attachment-uarmor-rectangle-horizontal2.size-uarmor-rectangle-horizontal2(src='/img/home/gallery2-1460x1120.webp' alt='')
+                        //- img.attachment-uarmor-rectangle-horizontal2.size-uarmor-rectangle-horizontal2(src='/img/home/gallery2-1460x1120.webp' alt='')
                       .category-content
                         h4.color-main
                           | Товари зі <br>
@@ -253,7 +255,7 @@ style().
                       .category-image
                       .category-content
                         h4.color-main
-                          | Вибір покупців
+                          | Вибір <br> покупців
                 .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 10px;')
               
         .fw-divider-space.divider-md-0.divider-xl-110.divider-xxl-150
@@ -267,7 +269,7 @@ style().
                 .col-xs-12.col-12.col-lg-3.text-center.col-md-6
                   .py-0.py-lg-30
                     h4.special-heading.counter-heading.text-center
-                      span.color-main.big.counter(data-promotion-days) 0
+                      span.color-main.big.counter(data-promotion-days="") 0
                     h5.special-heading.text-center
                       span
                         | Днів
@@ -275,21 +277,21 @@ style().
                 .col-xs-12.col-12.col-lg-3.text-center.col-md-6
                   .py-0.py-lg-30
                     h4.special-heading.counter-heading.text-center
-                      span.color-main.big.counter(data-promotion-hours) 0
+                      span.color-main.big.counter(data-promotion-hours="") 0
                     h5.special-heading.text-center
                       span Годин
                 
                 .col-xs-12.col-12.col-lg-3.text-center.col-md-6
                   .py-0.py-lg-30
                     h4.special-heading.counter-heading.text-center
-                      span.color-main.big.counter(data-promotion-minutes) 0
+                      span.color-main.big.counter(data-promotion-minutes="") 0
                     h5.special-heading.text-center
                       span Хвилин
                 
                 .col-xs-12.col-12.col-lg-3.text-center.col-md-6
                   .py-0.py-lg-30
                     h4.special-heading.counter-heading.text-center
-                      span.color-main.big.counter(data-promotion-seconds) 0
+                      span.color-main.big.counter(data-promotion-seconds="") 0
                     h5.special-heading.text-center
                       span Секунд
               .row
@@ -300,7 +302,6 @@ style().
                   .d-flex(style="justify-content: center")
                     a.btn.btn-outline-maincolor.medium-btn.mt-5(href= data.misc.promotion.link) #{data.misc.promotion.button}
                   .fw-divider-space.hidden-xs.hidden-sm.hidden-md()
-script(src="/generall/js/timer.js")
 include ../components/footer.pug
 include ../components/footer-js.pug
 script(type="module" src="/generall/js/app.js")

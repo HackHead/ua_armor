@@ -1,6 +1,6 @@
 include ../components/head.pug
 // wrappers for visual page editor and boxed version of template
-<style>#sync1 .item,#sync2 .item,#sync2 .synced .item{background:0 0}#sync1 .item,#sync2 .item{margin:5px;color:#fff;text-align:center}#sync1 .item{padding:80px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}#sync2 .item{padding:10px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer}#sync2 .item h1{font-size:18px}@keyframes slidein{0%,100%,50%{transform:translateY(0)}25%{transform:translateY(-50%)}75%{transform:translateY(50%)}}.waiting{display:flex;align-items:center;justify-content:center;background:#f2c014!important}.waiting .loading-block{display:inline-block;height:10px;width:4px;background:#fff;margin:0 4px;animation:1s linear infinite slidein}.waiting .loading-block:nth-of-type(2){animation:1s linear .2s infinite slidein}.waiting .loading-block:nth-of-type(3){animation:1s linear .4s infinite slidein}['data-single-product-cart-button']{cursor:pointer!important}.product-added-popup{position:fixed;right:5%;bottom:10%;width:auto;height:auto;padding:.9em 2.2em;color:#f8f8f8;z-index:10001;font-weight:500;transition:.4s linear;pointer-events:none}.product-added-popup.danger{background:#dc143c}.product-added-popup.success{background:#f2c014}.product-added-popup.hidden{opacity:0}</style>
+<style>[v-cloak]{display: none;}#sync1 .item,#sync2 .item,#sync2 .synced .item{background:0 0}#sync1 .item,#sync2 .item{margin:5px;color:#fff;text-align:center}#sync1 .item{padding:80px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}#sync2 .item{padding:10px 0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer}#sync2 .item h1{font-size:18px}@keyframes slidein{0%,100%,50%{transform:translateY(0)}25%{transform:translateY(-50%)}75%{transform:translateY(50%)}}.waiting{display:flex;align-items:center;justify-content:center;background:#f2c014!important}.waiting .loading-block{display:inline-block;height:10px;width:4px;background:#fff;margin:0 4px;animation:1s linear infinite slidein}.waiting .loading-block:nth-of-type(2){animation:1s linear .2s infinite slidein}.waiting .loading-block:nth-of-type(3){animation:1s linear .4s infinite slidein}['data-single-product-cart-button']{cursor:pointer!important}.product-added-popup{position:fixed;right:5%;bottom:10%;width:auto;height:auto;padding:.9em 2.2em;color:#f8f8f8;z-index:10001;font-weight:500;transition:.4s linear;pointer-events:none}.product-added-popup.danger{background:#dc143c}.product-added-popup.success{background:#f2c014}.product-added-popup.hidden{opacity:0}</style>
 .app#app
   #canvas
     #box_wrapper
@@ -236,11 +236,9 @@ include ../components/head.pug
                                 .wrap-footer
                                   span.price
                                     span.woocommerce-Price-amount.amount
-                                      span.woocommerce-Price-currencySymbol ₴.
+                                      span.woocommerce-Price-currencySymbol
                                       | #{related.price}
-                                      sup 00
                                   .product-button
-                                    a.button.product_type_simple.add_to_button.ajax_add_to_cart(href='/' data-single-product-cart-button rel='nofollow') В корзину
                     
                   
                     .owl-dots

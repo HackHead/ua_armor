@@ -13,11 +13,8 @@ import misc from "../config/misc.js";
 export const getCartPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
-        robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
+        title: 'Військова амуніція в Україні, UArmor військторг',
+        description: 'Військова амуніція від uarmor.net.ua, великий асортимент військового і туристичного спорядження в Києві, Харкові, Одесі, Дніпрі, Львові та по всій Україні',
         name: 'cart',
         misc: misc,
         
@@ -41,11 +38,8 @@ export const getCartPageView = async (req, res) => {
 export const getOrderPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
-        robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
+        title: 'Військова амуніція в Україні, UArmor військторг',
+        description: 'Військова амуніція від uarmor.net.ua, великий асортимент військового і туристичного спорядження в Києві, Харкові, Одесі, Дніпрі, Львові та по всій Україні',
         name: 'cart',
         misc: misc,
         
@@ -69,11 +63,8 @@ export const getOrderPageView = async (req, res) => {
 export const getIndexPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
-        robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
+        title: 'Військова амуніція в Україні, UArmor військторг',
+        description: 'Військова амуніція від uarmor.net.ua, великий асортимент військового і туристичного спорядження в Києві, Харкові, Одесі, Дніпрі, Львові та по всій Україні',
         name: 'home',
         misc: misc,
         
@@ -107,11 +98,8 @@ export const getIndexPageView = async (req, res) => {
 export const getAboutPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
-        robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
+        title: 'Військова амуніція в Україні, UArmor військторг',
+        description: 'Військова амуніція від uarmor.net.ua, великий асортимент військового і туристичного спорядження в Києві, Харкові, Одесі, Дніпрі, Львові та по всій Україні',
         name: 'about',
         misc: misc,
         
@@ -135,11 +123,8 @@ export const getAboutPageView = async (req, res) => {
 export const getContactPageView = async (req, res) => {
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
-        robots: 'index',
-        keywords: 'CMS, Ейфорія, Система керуваня контентом, NodeJs CMS',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
+        title: 'Військовий магазин одягу, спорядження - UArmor',
+        description: 'Надійний виробник військового одягу, амуніції, туристичних товарів і засобів захисту за доступними цінами В одесі та Україні',
         name: 'contacts',
         misc: misc,
         
@@ -178,9 +163,8 @@ export const getStorePageView = async (req, res) => {
     
     const page = {
         lang: 'uk-UK',
-        description: 'UArmor - надійний магазин військової амуніції та спецспорядження',
-        title: 'UArmor - надійний магазин військової амуніції та спецспорядження',
-        robots: 'index',
+        title: 'Військова амуніція в Україні, UArmor військторг',
+        description: 'Військова амуніція від uarmor.net.ua, великий асортимент військового і туристичного спорядження в Києві, Харкові, Одесі, Дніпрі, Львові та по всій Україні',
         name: 'store',
         misc: misc,
         
@@ -253,10 +237,8 @@ export const getProductPageView = async (req, res) => {
     
     const page = {
         lang: 'uk-UK',
-        description: 'Система керування контентом Ейфорія від одноіменної веб-студії, створена з допомогою NodeJs',
-        robots: 'index',
-        title: 'UArmor | Система керування контентом',
-        author: 'Euphoria digital agency',
+        title: 'Військова амуніція в Україні, UArmor військторг',
+        description: 'Військова амуніція від uarmor.net.ua, великий асортимент військового і туристичного спорядження в Києві, Харкові, Одесі, Дніпрі, Львові та по всій Україні',
         name: 'product',
         misc: misc,
         

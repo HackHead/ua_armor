@@ -1,6 +1,6 @@
 include ../components/head.pug
-<style>body * {font-family:'Montserrat';}[v-cloak]{display: none;}</style>
-.app#app
+<style>body * {font-family:'Montserrat';}[v-cloak]{opacity : 0; transition: all .4s linear}</style>
+.app#app(v-cloak)
   #canvas
     #box_wrapper
       include ../components/navigation.pug
@@ -50,10 +50,10 @@ include ../components/head.pug
                                     .minicart-product-meta
                                       a(:href="'/store/product/' + item.productId.slug")
                                   td.product-name(data-title='Product')
-                                    a(:href="'/store/product/' + item.productId.slug") {{item.productId.name}}
+                                    a(:href="'/store/product/' + item.productId.slug" v-cloak) {{item.productId.name}}
                                   td.product-price(data-title='Price')
                                     span.woocommerce-Price-amount.amount
-                                      span.woocommerce-Price-currencySymbol &pound;
+                                      span.woocommerce-Price-currencySymbol(v-cloak) грн
                                       | {{item.productId.price}}
                                       sup 00
                                   td.product-quantity(data-title='Quantity')
@@ -62,7 +62,7 @@ include ../components/head.pug
                                       input.input-text.qty.text(type='number' step='1' min='0' max='' disabled :value="item.quantity" title='Qty' size='4' placeholder='' inputmode='numeric')
                                   td.product-subtotal(data-title='Subtotal')
                                     span.woocommerce-Price-amount.amount
-                                      span.woocommerce-Price-currencySymbol &pound;
+                                      span.woocommerce-Price-currencySymbol(v-cloak) грн
                                       | {{item.productId.price * item.quantity}}
                                       sup 00
                                 

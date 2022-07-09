@@ -29,7 +29,7 @@
                   a#dropdown-cart(href='javascript:void(0);' role='button' data-dropdown-toggle="" @click="navShow = !navShow")
                     span.badge.bg-maincolor.cart-count
                     ion-icon(name='cart' style="vertical-align: middle; display:inline-block; font-size: 1.5em; transform: translateY(-10%)")
-                    span.cart-total(style="font-weight: bold; padding-left: 0.3em; color: #f2c014; " v-if="cartLen") ({{cartLen}})
+                    span.cart-total(style="font-weight: bold; padding-left: 0.3em; color: #f2c014; " v-if="cartLen" v-cloak) ({{cartLen}})
                     span.cart-total(style="font-weight: bold; padding-left: 0.3em; color: #f2c014; " v-else) (0)
                   .dropdown-menu.dropdown-menu-right.p-lg-40.p-20.ls(aria-labelledby='dropdown-cart' :class="{ show: navShow }" x-placement='bottom-end'  style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-258px, 24px, 0px); max-height: 620px; overflow-y: scroll; min-width: 10em' data-dropdown-menu="")
                     .widget.woocommerce.widget_shopping_cart(v-if="cartLen")
@@ -39,18 +39,18 @@
                               a(:href="'/store/product/' + item.productId.slug")
                                 img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(:src="'/' + item.productId.images[0]" alt='')
                               .minicart-product-meta
-                                a(:href="'/store/product/' + item.productId.slug") {{item.productId.name}}
-                                span.quantity
+                                a(:href="'/store/product/' + item.productId.slug" v-cloak) {{item.productId.name}}
+                                span.quantity(v-cloak)
                                   | {{item.quantity}} &times; 
                                   span.woocommerce-Price-amount.amount
-                                    span.woocommerce-Price-currencySymbol &pound;
+                                    span.woocommerce-Price-currencySymbol(v-cloak) грн;
                                     | {{item.productId.price}}
                                     sup 00
                             
                           p.woocommerce-mini-cart__total.total
                             strong Загалом:
                             span.woocommerce-Price-amount.amount()
-                              span &pound;
+                              span(v-cloak) грн;
                               | {{ cart.total }}
                               sup 00
                           div.woocommerce-mini-cart__buttons.buttons.d-flex
