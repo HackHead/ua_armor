@@ -46,7 +46,7 @@ router.post('/admin/misc/update/:target',isStaff, upload.single('image'), update
 router.post('/admin/signin', signInAdmin)
 router.post('/admin/staff/new',isStaff, newStaff)
 router.post('/admin/misc/slide/new', isStaff, upload.single('image'), createSlide)
-router.get('/login',isAuth, getLoginView)
+router.get('/login', getLoginView)
 router.get('/comment/delete/:id',isStaff, deleteComment)
 router.get('/admin/staff/new',isStaff, getNewStaffView)
 router.get('/admin/users',isStaff, getAllUsers)
