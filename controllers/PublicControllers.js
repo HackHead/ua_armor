@@ -170,16 +170,21 @@ export const getStorePageView = async (req, res) => {
         
     };
     try {
-        const {sort = '-date', limit = 6, skip = 0, availability = null, min = 0, max = 9999999} = req.query;
+        const minPrice = await Product.findOne().limit(1).sort('price');
+        const maxPrice = await Product.findOne().limit(1).sort('-price');
+
+        const {sort = '-date', limit = 6, skip = 1, availability = null, min = minPrice.price, max = maxPrice.price} = req.query;
         const slug = req.params.slug || /.*/;
 
         const products = await Product.find({
-            max: req.query.max,
-            min: req.query.min,
             availability: (req.query.availability) ? req.query.availability: /.*/,
-        }).populate('category', 'slug', {slug: slug}).skip((page - 1) * limit).limit(limit * 1).sort(req.query.sort);;
+            price: {
+                $gte: min,
+                $lte: max,
+            }
+        }).populate('category', 'slug', {slug: slug}).skip((skip - 1) * limit).limit(limit * 1).sort(req.query.sort);;
         
-        page.query = req.query;
+
         const pageQuery = {
             sort: sort,
             limit: limit,
@@ -187,19 +192,22 @@ export const getStorePageView = async (req, res) => {
             availability: availability,
             min: min,
             max: max,
+            category: String(slug)
         }
         page.query = pageQuery
+        console.log(pageQuery)
 
-
-
-
-
-
-
-
-
-
-
+        const count = await Product.find({
+            availability: (req.query.availability) ? req.query.availability: /.*/,
+            price: {
+                $gte: min,
+                $lte: max,
+            }
+        }).count();
+        const paginationItems = Math.ceil(count / limit)
+        page.paginationItems = paginationItems;
+        page.pageNum = parseInt(skip)
+        page.count = count;
         if(products) page.products = products;
 
         const categories = await Category.find()

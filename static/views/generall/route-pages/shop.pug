@@ -127,13 +127,22 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                   .sidebar-box.woocommerce.widget_product_categories.clr
                     h4.widget-title Категорії
                     ul.product-categories
-                      if data.category
-                        li.cat-item.cat-item-8
-                            a(href='/store/category/') Всі
-                            span.count.cat-item-all
+                      if data.query.category == '/.*/'
+                        li.cat-item.cat-item-8.current-cat
+                          a(href='/store/category/') Всі
+                          span.count #{data.count}
                         each cat,indx in data.categories
                           if cat.parentId
-                            if cat.slug === data.category
+                            li.cat-item.cat-item-8
+                              a(href='/store/category/' + cat.slug) #{cat.name}
+                              span.count #{cat.productsCount}
+                      else 
+                        li.cat-item.cat-item-8
+                            a(href='/store/category/') Всі
+                            span.count.cat-item-all #{data.count}
+                        each cat,indx in data.categories
+                          if cat.parentId
+                            if cat.slug === data.query.category
                               li.cat-item.cat-item-8.current-cat
                                 a(href='/store/category/' + cat.slug) #{cat.name}
                                 span.count #{cat.productsCount}
@@ -141,15 +150,6 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                               li.cat-item.cat-item-8
                                 a(href='/store/category/' + cat.slug) #{cat.name}
                                 span.count #{cat.productsCount}
-                      else 
-                        li.cat-item.cat-item-8.current-cat
-                            a(href='/store/category/') Всі
-                            span.count #{data.products.length}
-                        each cat,indx in data.categories
-                          if cat.parentId
-                            li.cat-item.cat-item-8
-                              a(href='/store/category/' + cat.slug) #{cat.name}
-                              span.count #{cat.productsCount}
                 .sidebar-box.woocommerce.widget_product_categories.clr
                   h4.widget-title Наявність
                   ul.product-categories
@@ -243,17 +243,17 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                     ul.products.oceanwp-row.clr.grid.tablet-col.tablet-2-col.mobile-col.mobile-2-col.infinite-scroll-wrap
                       each product, indx in data.products
                         if !product.hidden
-                          span.total_products.d-none #{indx}
+                          span.total_products.d-none Категорії
                           span.min-price.d-none
                           span.max-price.d-none
                           if product.category
-                            li.entry.has-media.col.span_1_of_3.owp-content-center.item-entry.owp-thumbs-layout-horizontal.owp-btn-big.owp-tabs-layout-vertical.circle-sale.product.type-product.post-12596.status-publish.instock.product_cat-foregrips.product_cat-grips.product_tag-ar15.product_tag-m16.product_tag-pistol-grip.product_tag-rifle-accessories.product_tag-vertical-grip.has-post-thumbnail.taxable.shipping-taxable.purchasable.product-type-variable
+                            li.entry.has-media.col.span_1_of_3.owp-content-center.item-entry.owp-thumbs-layout-horizontal.owp-btn-big.owp-tabs-layout-vertical.circle-sale.product.type-product.post-12596.status-publish.instock.product_cat-foregrips.product_cat-grips.product_tag-ar15.product_tag-m16.product_tag-pistol-grip.product_tag-rifle-accessories.product_tag-vertical-grip.has-post-thumbnail.taxable.shipping-taxable.purchasable.product-type-variable(style="height: 492px !important;")
                               .product-inner.clr
                                 ul.woo-entry-inner.clr
-                                  li.image-wrap(style="height: 350px; max-height: 350px")
+                                  li.image-wrap(style="height: 350px !important; box-sizing: border-box")
                                     .woo-entry-image.clr
                                       a.woocommerce-LoopProduct-link.no-lightbox(href='/store/product/' + product.slug)
-                                        img.woo-entry-image-main(src='/' + product.images[0] alt=product.name loading='lazy' itemprop='image' width='480' height='480' style="max-height: 100%")
+                                        img.woo-entry-image-main(src='/' + product.images[0] alt=product.name loading='lazy' itemprop='image' width='480' height='480' style="max-height: 100%; max-width: 99%")
                                     // .woo-entry-image
                                     a.button.product_type_variable(href='/store/product/' + product.slug rel='nofollow') Деталі
                                   ul.woo-product-info
@@ -283,7 +283,26 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                                         if indx <= 3
                                           li.active
                                             a.woo-product-gallery-link.no-lightbox(href='/' + img)
-                                              img.attachment-thumbnail.size-thumbnail(src='/' + img alt='MTG – M-Lok® Tactical Grip' width='150' height='150' style="height: 60px; width: auto;" )
+                                              img.attachment-thumbnail.size-thumbnail(src='/' + img alt='MTG – M-Lok® Tactical Grip' width='150' height='150' style="height: 60px; width: auto; max-width: 100%; max-height: 100%" )
+                nav.woocommerce-pagination
+                  ul.page-numbers
+                    if data.pageNum !== 1
+                      li
+                        a.next.page-numbers(href='javascript:void(0)' @click.prevent=`initFilter('skip', '${parseInt(data.pageNum - 1)}')`) &larr;
+                    -var n = 1;
+                     while n <= data.paginationItems
+                      if n - 1 === data.pageNum || n === data.pageNum || n + 1 === data.pageNum
+                        if n === data.pageNum
+                          li
+                            a.next.page-numbers(href='javascript:void(0);') #{n}
+                        else
+                          li
+                            a.next.page-numbers(href='javacript:void(0);' @click.prevent=`initFilter('skip', '${n}')`) #{n}
+                      - n++;
+                    if parseInt(data.pageNum) != parseInt(data.paginationItems)
+                      li
+                        a.next.page-numbers(href="javascript:void(0);" @click.prevent=`initFilter('skip', '${parseInt(data.pageNum + 1)}')`) &rarr;
+               
     #canvas
       #box_wrapper
         include ../components/footer.pug                             
