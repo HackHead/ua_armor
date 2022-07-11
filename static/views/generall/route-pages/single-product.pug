@@ -214,33 +214,34 @@ include ../components/head.pug
                                           a.star-4(href='#') 4
                                           a.star-5(href='#').active 5
                                     .comment-date(style="position: absolute; right: 5%; top: 20%; font-size: 0.8em; font-weight: bold; opacity: 0.7") #{comment.date.toLocaleString('ru-RU', { timeZone: 'UTC' })}
-                
-                section.related.products()
-                  h2 Схожі товари
-                  ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
-                    .owl-stage-outer
-                      .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
-                        each related in data.relatedProducts
-                          .owl-item(style='width: 267.667px; margin-right: 30px;')
-                            li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
-                              .product-inner
-                                .product-img(style="max-width: 100%; margin: 0 auto;")
-                                  a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/product/' + related.slug)
-                                    img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + related.images[0] alt=''  width='900' height='900')
-                                .wrap-header
-                                  h2.woocommerce-loop-product__title
-                                    a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/product/' + related.slug) #{related.name}
-                                  span.cat-product
-                                    a(href='/store/category/' + related.slug rel='tag') #{related.category.name}
-                                // close product-wrap
-                                .wrap-footer
-                                  span.price
-                                    span.woocommerce-Price-amount.amount
-                                      span.woocommerce-Price-currencySymbol
-                                      | #{related.price}
-                                  .product-button
+                if data.relatedProducts
+                  section.related.products()
+                    h2 Схожі товари
+                    ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
+                      .owl-stage-outer
+                        .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
+                          each related in data.relatedProducts
+                            .owl-item(style='width: 267.667px; margin-right: 30px;')
+                              li.has-post-thumbnail.product.type-product.post-582.status-publish.first.instock.product_cat-equipment.featured.shipping-taxable.purchasable.product-type-simple
+                                .product-inner
+                                  .product-img(style="max-width: 100%; margin: 0 auto;")
+                                    a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/product/' + related.slug)
+                                      img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail(src='/' + related.images[0] alt=''  width='900' height='900')
+                                  .wrap-header
+                                    h2.woocommerce-loop-product__title
+                                      a.woocommerce-LoopProduct-link.woocommerce-loop-product__link(href='/store/product/' + related.slug) #{related.name}
+                                    span.cat-product
+                                      a(href='/store/category/' + related.slug rel='tag') #{related.category.name}
+                                  // close product-wrap
+                                  .wrap-footer
+                                    span.price
+                                      span.woocommerce-Price-amount.amount
+                                        span.woocommerce-Price-currencySymbol
+                                        | #{related.price} грн
+                                    .product-button
+                                      a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart(href='/store/product/' + related.slug rel='nofollow') Детальніше
+                      
                     
-                  
                     .owl-dots
       .product-added-popup
 include ../components/footer.pug

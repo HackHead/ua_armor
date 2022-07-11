@@ -132,22 +132,24 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                             a(href='/store/category/') Всі
                             span.count.cat-item-all
                         each cat,indx in data.categories
-                          if cat.slug === data.category
-                            li.cat-item.cat-item-8.current-cat
-                              a(href='/store/category/' + cat.slug) #{cat.name}
-                              span.count #{cat.productsCount}
-                          else
-                            li.cat-item.cat-item-8
-                              a(href='/store/category/' + cat.slug) #{cat.name}
-                              span.count #{cat.productsCount}
+                          if cat.parentId
+                            if cat.slug === data.category
+                              li.cat-item.cat-item-8.current-cat
+                                a(href='/store/category/' + cat.slug) #{cat.name}
+                                span.count #{cat.productsCount}
+                            else
+                              li.cat-item.cat-item-8
+                                a(href='/store/category/' + cat.slug) #{cat.name}
+                                span.count #{cat.productsCount}
                       else 
                         li.cat-item.cat-item-8.current-cat
                             a(href='/store/category/') Всі
                             span.count #{data.products.length}
                         each cat,indx in data.categories
-                          li.cat-item.cat-item-8
-                            a(href='/store/category/' + cat.slug) #{cat.name}
-                            span.count #{cat.productsCount}
+                          if cat.parentId
+                            li.cat-item.cat-item-8
+                              a(href='/store/category/' + cat.slug) #{cat.name}
+                              span.count #{cat.productsCount}
                 .sidebar-box.woocommerce.widget_product_categories.clr
                   h4.widget-title Наявність
                   ul.product-categories
