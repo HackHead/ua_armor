@@ -170,54 +170,39 @@ export const getStorePageView = async (req, res) => {
         
     };
     try {
-        const sort = req.query.sort || '-date',
-              limit = req.query.limit || 6,
-              skip = req.query.skip || 0,
-              search = req.query.search,
-              query = {},
-              params = {};
-        if(req.query.availability) params.availability = req.query.availability;
-        if(req.params.slug) page.category = req.params.slug;
-        if(req.query.min || req.query.max){
-            params.price = {}
-            if(req.query.min) {
-                query.min = req.query.min
-                params.price.$gte = Number(req.query.min);
-            };
-            if(req.query.max) {
-                query.max = req.query.max
-                params.price.$lte = Number(req.query.max);
-            };
-        }
-        
-        
-        query.sort = sort;
-        query.limit = limit;
-        query.skip = skip;
-        page.query = query;
-        
-        console.log(params)
-        query.availability = params.availability;
+        const {sort = '-date', limit = 6, skip = 0, availability = null, min = 0, max = 9999999} = req.query;
+        const slug = req.params.slug || /.*/;
 
-        const nameRegexp = new RegExp('^.{0,}' + search + '.{0,}$', 'i');
-        if(search) params.name = {$regex:  nameRegexp};
-        let products;
-        if(req.params.slug){
-            products = await Product.find(params).populate('category', 'slug', {slug: req.params.slug }).skip(skip).limit(limit).sort(sort);
-            if(req.session.cart) {
-                const cart = await Cart.findOne().populate('products.productId');
-            }
-        } else {
-            products = await Product.find(params).populate('category').skip(skip).limit(limit).sort(sort);
+        const products = await Product.find({
+            max: req.query.max,
+            min: req.query.min,
+            availability: (req.query.availability) ? req.query.availability: /.*/,
+        }).populate('category', 'slug', {slug: slug}).skip((page - 1) * limit).limit(limit * 1).sort(req.query.sort);;
+        
+        page.query = req.query;
+        const pageQuery = {
+            sort: sort,
+            limit: limit,
+            skip: skip,
+            availability: availability,
+            min: min,
+            max: max,
         }
-        
-        
-        
+        page.query = pageQuery
+
+
+
+
+
+
+
+
+
 
 
         if(products) page.products = products;
 
-        const categories = await Category.find();
+        const categories = await Category.find()
         if(categories) page.categories = categories;
         
         if(req.session.cart){

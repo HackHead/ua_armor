@@ -223,12 +223,15 @@ export const deleteCategory = async (req, res) => {
         await Comment.deleteMany(
             { "product": {$in: productsIDs} },
         ).populate('product');
-        await Product.deleteMany(
-            { "_id": {$in: productsIDs} },
-        );
+
         await Order.deleteMany({
             "products.productId": {$in: productsIDs}
         }).populate({path: 'products.productId'});
+
+        await Product.deleteMany(
+            { "_id": {$in: productsIDs} },
+        );
+        
         return res.json({data: 'success'})
     } catch (err) {
         return res.json({data: err})
@@ -269,9 +272,12 @@ export const createOrder = async(req, res) => {
 
        }).save()
 
-       return res.send(`Замовлення успішно створене, очікуйте на дзвінок`)
+       return res.redirect('/store/category')
     } catch (err) {
-        throw new Error(err)
+        const data = {
+            message: err
+        };
+        res.status(400).send(err)
     }
 }
 
@@ -303,6 +309,7 @@ export const getOrdersPageView = async(req, res) => {
             render.paginationItems = paginationItems;
             render.pageNum = parseInt(page)
             res.render('admin/route-pages/orders', {data: render})
+            
     } catch (err) {
         const data = {
             message: err

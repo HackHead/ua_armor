@@ -9,7 +9,7 @@ import Role from '../models/Role.js'
 import Feature from '../models/Feature.js'
 import Slide from '../models/Slide.js'
 import Cart from '../models/Cart.js'
-import Order from '../models/Cart.js'
+import Order from '../models/Order.js'
 
 import misc from "../config/misc.js";
 import jwt from "jsonwebtoken"
@@ -237,22 +237,33 @@ export const getNewCategoryView = async(req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         const id = req.params?.id;
-        const deleted = await Product.findOneAndDelete({_id: id}).populate('category').exec();
+        const product = await Product.findOne({_id: id}).populate('category').exec();
         await Cart.deleteMany({}); // Delete this
+        
+        const productsIDs = []
+         productsIDs.push(product._id)
+
         await Comment.deleteMany(
-            { "product": {$eq: id} },
+            { "product": {$in: productsIDs} },
         ).populate('product');
+
+        
+        
         await Order.deleteMany({
-            "products.productId": {$eq: id}
+            "products.productId": {$in: productsIDs}
+        }).populate({path: 'products.productId'});
+        
+        await Order.deleteMany({
+            "products.productId": {$in: productsIDs}
         }).populate({path: 'products.productId'});
 
-        if(!deleted) return res.status(400).send('Такого товара не существует')
-        const cat = deleted.category._id;
-        await Category.findOneAndUpdate({_id: cat}, {"$inc": {productsCount: -1}})
+        await Product.deleteOne({_id: product._id});
+
+        await Category.findOneAndUpdate({_id: product.category._id}, {"$inc": {productsCount: -1}})
         res.redirect('/admin/products')
     } catch (err) {
         const data = {
-            message: 'Во время выполнения запроса произошла непредвиденная ошибка'
+            message: err
         }
         return res.status(400).render('admin/status-pages/400', {data: data});
     }
