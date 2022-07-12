@@ -17,6 +17,8 @@
                   a(href='/store/category') Магазин
                 li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
                   a(href='/contacts') Контакти
+                li#menu-item-156.menu-item.menu-item-type-post_type.menu-item-object-page
+                  a(href='/cart') Корзина
             .d-none.d-xl-flex.align-items-center
               .widget.widget_search
                 form(role='search' method='get' action='/store/category/')
@@ -59,7 +61,7 @@
                         p(style="width: 100%; text-align: center") Ваша корзина порожня
               a(href='tel:'+data.misc.contacts.phone style="font-weight: bold; color: #f2c014") #{data.misc.contacts.phone}
 
-    span.toggle_menu
+    span.toggle_menu(@click="toggleNavigation()")
       span
   
     

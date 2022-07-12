@@ -23,7 +23,7 @@ include ../components/head.pug
         .container(v-if="cartLen")
           .row
             .col-12
-              .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
+              .fw-divider-space(style='margin-top: 40px;')
                 
                 #content.col-12.column-main
                   article#post-623.post-623.page.type-page.status-publish.hentry
@@ -84,7 +84,7 @@ include ../components/head.pug
                                         span.woocommerce-Price-currencySymbol &pound;
                                         | {{cart.totalPromotion}}грн.
                             .wc-proceed-to-checkout
-                              a.checkout-button.button.alt.wc-forward(href='/order')
+                              a.checkout-button.button.alt.wc-forward(href='/order' style="max-width: 100%; text-align: center; white-space: break-spaces;")
                                 | Сформувати замовлення
             .col-12
               .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')

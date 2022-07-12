@@ -330,6 +330,10 @@
           
       }
       },
+      toggleNavigation(){
+        document.querySelector('span.toggle_menu').classList.toggle('mobile-active');
+        document.querySelector('.page_header').classList.toggle('mobile-active');
+      },
       initTimer(){
         function getTimeRemaining(endtime) {
           const total = Date.parse(endtime) - Date.parse(new Date());

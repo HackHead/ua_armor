@@ -43,6 +43,24 @@ style().
     grid-column: span 2;
     grid-row: span 2;
   }
+  @media screen and (max-width: 768px){
+    .grid-wrapper .wide {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .grid-wrapper .tall {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .grid-wrapper .big {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .portfolio__grid-item {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
   .portfolio__grid-item {
     position: relative;
     cursor: pointer;
@@ -127,12 +145,6 @@ style().
         
                     
                   .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-        //- div(style="margin: 200px 0 200px 0")
-        //-   h3.special-heading.text-center
-        //-     span.big(style="margin: 0 10px 0;")
-        //-       mark Категорії 
-        //-     span.big(style="margin: 0 10px 0;")
-        //-       mark(style="color: #000;")  товарів
         section.portfolio
           .portfolio__content
             .grid-wrapper.portfolio__grid.js-cursor(data-cursor-type="blend")
@@ -166,7 +178,7 @@ style().
               .big.portfolio__grid-item
                 img.js-cursor(src='/generall/img/soldiers.jpg' data-cursor-type="blend" alt='' width="1071" height="714")
                 a(href="/store/category/Sumki-Bauli") Сумки
-              .portfolio__grid-item
+              div.portfolio__grid-item
                 img.js-cursor(src='/generall/img/weapon_1.jpg' data-cursor-type="blend" alt='' width="476" height="714")
                 a(href="/store/category/Kaski-Bronezhileti") Каски
               .tall.div.portfolio__grid-item
@@ -183,16 +195,10 @@ style().
                 a(href="/store/category/Aptechki-i-nabori") Аптечки
 
         if data.catalog_products.length
-          section#section-044c9f1.ls.s-pt-60.s-pb-60.s-pt-md-90.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
+          section#section-044c9f1.ls.s-pb-md-90.s-pt-xl-110.s-pb-xl-110
             .container-fluid
               .row
                 .col-xs-12.col-12
-                  .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 40px;')
-                  h3.special-heading.text-center
-                    span.big
-                      mark Каталог
-                      |  товарів
-                  .fw-divider-space.divider-30.divider-lg-40.divider-xxl-60
                   .uws-products.carousel(data-loop='true' data-dots='false' data-nav='false' data-center='true' data-autoplay='true' data-speed='5000' data-responsive-xl='6' data-responsive-lg='3' data-responsive-md='3' data-responsive-sm='1' data-responsive-xs='1' data-margin='30')
                     .columns-3(data-index='0')
                       ul.products.columns-3.owl-carousel.owl-shadowitems.owl-theme.top-nav-arrows.owl-loaded.owl-drag.owl-center()
@@ -207,7 +213,7 @@ style().
                                         a(href="/store/product/" + product.slug)
                                           if product.sale > 0
                                             span.onsale(style="font-size: 1em") Знижка!
-                                          img(src='/' + product.images[0] alt=product.name style="max-width: 100%; max-height: 271px")
+                                          img(src='/' + product.images[0] alt=product.name style="width: auto; max-heigth: 250px")
                                       .wrap-header
                                         h2
                                           a(href="/store/product/" + product.slug) #{product.name.slice(0, 15)}...
