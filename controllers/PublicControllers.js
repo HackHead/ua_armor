@@ -173,7 +173,7 @@ export const getStorePageView = async (req, res) => {
         const minPrice = await Product.findOne().limit(1).sort('price');
         const maxPrice = await Product.findOne().limit(1).sort('-price');
 
-        const {sort = '-date', limit = 6, skip = 1, availability = null, min = minPrice.price, max = maxPrice.price} = req.query;
+        const {sort = '-date', limit = 6, skip = 1, availability = null, search, min = minPrice.price, max = maxPrice.price} = req.query;
         const slug = req.params.slug || /.*/;
 
         const products = await Product.find({
@@ -181,7 +181,8 @@ export const getStorePageView = async (req, res) => {
             price: {
                 $gte: min,
                 $lte: max,
-            }
+            },
+            name: (search) ? { $regex: '.*' + search + '.*' } : { $regex: '.*' }
         }).populate('category', 'slug', {slug: slug}).skip((skip - 1) * limit).limit(limit * 1).sort(req.query.sort);;
         
 
