@@ -85,13 +85,36 @@ head
         float: none;
       }
     }
-    @media screen and (max-width: 768px){
-      .result-count {
+    .mobile-filters {
+      display: none
+    }
+    .mobile-filters {
+        width: 80%;
         display: none;
+        margin: 0 10% 40px !important;
+        background: #f2c014 !important;
+        border: solid 2px #f2c014 !important;
       }
+    @media screen and (max-width: 960px){
+       .mobile-filters {
+        display: block !important;
+      }
+    }
+    @media screen and (max-width: 768px){
+       
       .oceanwp-toolbar.clr{
         border-bottom: none !important;
         margin-bottom: 40px
+      }
+      .result-count {
+        display: none;
+      }
+      #outer-wrap.site.clr {
+        margin-top: 0;
+      }
+      
+      .mobile-filters.active {
+        background: transparent !important;
       }
     }
 body(class="archive post-type-archive post-type-archive-product wp-custom-logo wp-embed-responsive theme-oceanwp woocommerce-shop woocommerce woocommerce-page woocommerce-js tinvwl-theme-style oceanwp-theme sidebar-mobile default-breakpoint has-sidebar sidebar-content content-left-sidebar has-topbar has-breadcrumbs has-blog-grid pagination-center has-grid-list account-side-style elementor-default elementor-kit-9354 trigger-position-right quick-links-position-left trigger-size-small trigger-color-blue e--ua-firefox owp-qv-open")
@@ -118,7 +141,8 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
       #wrap.clr
         main#main.site-main.clr(role='main')
           #content-wrap.container.clr(style='position: relative;')
-            aside#right-sidebar.sidebar-container.widget-area.sidebar-primary
+            button.btn.btn-primary.mobile-filters(@click="toggleFilterSection();") Фільтри
+            aside#right-sidebar.hidden-xs.hidden-sm.hidden-md.sidebar-container.widget-area.sidebar-primary
               #right-sidebar-inner.clr
                 #woocommerce_price_filter-2.sidebar-box.woocommerce.widget_price_filter.clr
                   h4.widget-title &TScy;&iukcy;&ncy;&acy;

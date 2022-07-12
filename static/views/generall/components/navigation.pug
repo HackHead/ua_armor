@@ -59,7 +59,7 @@
                     .widget.woocommerce.widget_shopping_cart(v-else)
                       .widget_shopping_cart_content
                         p(style="width: 100%; text-align: center") Ваша корзина порожня
-              a(href='tel:'+data.misc.contacts.phone style="font-weight: bold; color: #f2c014") #{data.misc.contacts.phone}
+              a(href='tel:'+data.misc.contacts.phone style="font-weight: bold; color: #f2c014; white-space: nowrap;") #{data.misc.contacts.phone}
 
     span.toggle_menu(@click="toggleNavigation()")
       span

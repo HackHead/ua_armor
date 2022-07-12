@@ -334,6 +334,12 @@
         document.querySelector('span.toggle_menu').classList.toggle('mobile-active');
         document.querySelector('.page_header').classList.toggle('mobile-active');
       },
+      toggleFilterSection(){
+        const cont = document.querySelector('aside#right-sidebar');
+        cont.classList.toggle('hidden-xs')
+        cont.classList.toggle('hidden-sm')
+        cont.classList.toggle('hidden-md')
+      },
       initTimer(){
         function getTimeRemaining(endtime) {
           const total = Date.parse(endtime) - Date.parse(new Date());

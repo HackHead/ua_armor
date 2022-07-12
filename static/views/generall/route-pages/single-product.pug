@@ -88,14 +88,14 @@ include ../components/head.pug
                       button.single_add_to_cart_button.button.alt(type='button'  @click="addToCart($event)" data-product-id=data.product._id style="cursor: pointer" ) В корзину
                 .woocommerce-tabs.wc-tabs-wrapper
                   ul.tabs.wc-tabs(role='tablist')
-                    li#tab-title-description.description_tab.active(role='tab' aria-controls='tab-description')
+                    li#tab-title-description.description_tab(role='tab' :class="{ 'active': activeTab === 'description' }" aria-controls='tab-description')
                       a(href='javascript:void(0);' @click="activeTab = 'description';" class="tab-head")
                         | Опис
                     if data.features.length
-                      li.additional_information_tab(role='tab' aria-controls='tab-additional_information')
+                      li.additional_information_tab(role='tab' :class="{ 'active': activeTab === 'features' }" aria-controls='tab-additional_information')
                         a(href='javascript:void(0);' @click="activeTab = 'features';" class="tab-head")
                           | Характеристики
-                    li.reviews_tab(role='tab' aria-controls='tab-reviews' )
+                    li.reviews_tab(role='tab' :class="{ 'active': activeTab === 'comments' }" aria-controls='tab-reviews' )
                       if data.comments
                         a(href='javascript:void(0);' @click="activeTab = 'comments';" class="tab-head")
                           | Відгуки (#{data.comments.length})
@@ -217,7 +217,7 @@ include ../components/head.pug
                 if data.relatedProducts
                   section.related.products()
                     h2 Схожі товари
-                    ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='false' data-dots='true' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
+                    ul.products.columns-3.owl-carousel.bottom-left-nav.owl-theme.owl-shadowitems.owl-loaded.owl-drag(data-loop='true' data-nav='true' data-dots='false' data-center='false' data-autoplay='true' data-speed='5000' data-responsive-xl='3' data-responsive-lg='3' data-responsive-md='2' data-responsive-sm='1' data-responsive-xs='1' data-margin='30' data-draggable="false")
                       .owl-stage-outer
                         .owl-stage(style='transform: translate3d(-297px, 0px, 0px); transition: all 0.25s ease 0s; width: 1191px;')
                           each related in data.relatedProducts
