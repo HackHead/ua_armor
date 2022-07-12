@@ -88,6 +88,11 @@ style().
     background: rgba(255, 255, 255, .2);
     color: #f8f8f8 !important;
   }
+  @media screen and (max-width: 768px){
+    .portfolio__grid-item a {
+      opacity: 1;
+    }
+  }
   .portfolio__grid-item:hover::after {
     background: rgba(0, 0, 0, .3);
     transition: all .4s linear;
