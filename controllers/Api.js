@@ -115,7 +115,10 @@ export const addToCart = async (req, res) => {
              }            
          }
     } catch (err) {
-         throw new Error(err)
+         const data = {
+            message: err
+         }
+         return res.status(400).render('admin/status-pages/400', {data: data});
     }
 } 
  
@@ -202,8 +205,10 @@ export const getDeleteCategoryView = async (req, res) => {
     res.render('admin/route-pages/category-delete.pug', {data: page})
 }
 export const deleteCategory = async (req, res) => {
-    if(!req.body.category) throw new Error('Нужно указать категорию');
-
+    const data = {
+        message: 'Нужно указать категорию'
+    }
+    if(!req.body.category) return res.status(400).render('admin/status-pages/400', {data: data});
     try {
       
         const category = await Category.findOneAndDelete(
@@ -232,7 +237,7 @@ export const deleteCategory = async (req, res) => {
             { "_id": {$in: productsIDs} },
         );
         
-        return res.json({data: 'success'})
+        return res.redirect('/admin/category/delete')
     } catch (err) {
         return res.json({data: err})
     }

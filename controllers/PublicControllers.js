@@ -170,8 +170,8 @@ export const getStorePageView = async (req, res) => {
         
     };
     try {
-        const minPrice = await Product.findOne().limit(1).sort('price');
-        const maxPrice = await Product.findOne().limit(1).sort('-price');
+        const minPrice = await Product.findOne().limit(1).sort('price') || 0;
+        const maxPrice = await Product.findOne().limit(1).sort('-price') || 0;
 
         const {sort = '-date', limit = 6, skip = 1, availability = null, search, min = minPrice.price, max = maxPrice.price} = req.query;
         const slug = req.params.slug || /.*/;

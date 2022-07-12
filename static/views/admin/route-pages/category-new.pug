@@ -18,11 +18,11 @@ include ../components/head.pug
                   .card-body
                     .mb-3
                       label.form-label(for='exampleFormControlSelect1') Родительська категория
-                      select#exampleFormControlSelect1.form-select.form-select-lg(aria-label='Default select example' name="parentId")
+                      select#exampleFormControlSelect1.form-select.form-select-lg(hidden name="parentId")
                         option(value="" selected="") Выберите родительськую категорию
                         each category, index in data.categories
                           if !category.parentId
-                            option(value=category.id) #{category.name}
+                            option(value=category.id selected="") #{category.name}
                     .form-floating.mb-3
                       input#nameInput.form-control(name="name" required type='text' placeholder='')
                       label(for='nameInput') Название новой категории

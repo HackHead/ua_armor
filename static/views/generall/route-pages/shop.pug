@@ -137,6 +137,7 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
               .col-12
                 .fw-divider-space.hidden-xs.hidden-sm.hidden-md.hidden-lg.hidden-xl(style='margin-top: 20px;')
        
+    
     #outer-wrap.site.clr(style="margin-top: 80px")
       #wrap.clr
         main#main.site-main.clr(role='main')
@@ -281,7 +282,7 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                         else
                           a.view-all(href='#' data-filter-link="" data-filter-key="limit" data-filter-value="6" @click.prevent="initFilter('limit', 6)") 6
                   if data.products.length
-                    ul.products.oceanwp-row.clr.grid.tablet-col.tablet-2-col.mobile-col.mobile-2-col.infinite-scroll-wrap
+                    ul.products.oceanwp-row.clr.grid.tablet-2-col.mobile-2-col.infinite-scroll-wrap
                       each product, indx in data.products
                         if !product.hidden
                           span.total_products.d-none Категорії
