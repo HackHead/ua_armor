@@ -42,7 +42,6 @@ export const productValidation = (data) => {
 export const orderValidation = (data) => {
     const shema = Joi.object({
         session: Joi.string().required(),
-        email: Joi.string().email(),
         name: Joi.string().required(),
         phone: Joi.string().required(),
         address: Joi.string().required(),

@@ -6286,7 +6286,7 @@ img {
 }
 .s-overlay.ds:before {
   background-color: #131e25;
-  opacity: 0.9;
+  opacity: 0.4;
 }
 .s-overlay.ds.ms:before {
   opacity: 0.9;

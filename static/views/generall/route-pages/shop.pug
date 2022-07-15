@@ -158,13 +158,6 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                       else 
                         input(style="max-width: 45%; margin-left: 5%; color: rgba(0, 0, 0, .6); " name="max" placeholder="До" type="number")
                       button.btn.btn-primary(type="submit" style="font-size: 14px; margin: 1em auto;") Фільтрувати
-                      .d-none.price_slider_amount(data-step='10')
-                        .price_label(style='')
-                          | Ціна: 
-                          span.from $0
-                          |  &mdash; 
-                          span.to $700
-                        .clear
                 if data.categories
                   .sidebar-box.woocommerce.widget_product_categories.clr
                     h4.widget-title Категорії
@@ -309,7 +302,7 @@ body(class="archive post-type-archive post-type-archive-product wp-custom-logo w
                                         span.woocommerce-Price-amount.amount
                                           if product.sale > 0
                                             bdi.mr-2
-                                              span.woocommerce-Price-currencySymbol(style="text-decoration: line-through; color: silver") $ #{product.price}
+                                              span.woocommerce-Price-currencySymbol(style="text-decoration: line-through; color: silver") #{product.price}грн.
                                             bdi.ml-4
                                               span.woocommerce-Price-currencySymbol
                                               | #{Math.floor((product.price / 100 * (100 - product.sale)))}грн.

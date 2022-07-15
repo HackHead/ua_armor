@@ -16,13 +16,11 @@ export const getCart = async (req, res) => {
         return res.status(400).json({err: 'Session required'});
     }
     try {
-        if(req.session.cart){
-            const cart = await Cart.findOne({session: req.sessionID}).populate({
-                path: 'products.productId'
-            }).then((cart) => {
-                return res.json({cart: cart})
-            });
-        }
+        const cart = await Cart.findOne({session: req.sessionID}).populate({
+            path: 'products.productId'
+        }).then((cart) => {
+            return res.json({cart: cart})
+        });
     } catch (err) {
         const data = {
             message: err
@@ -32,93 +30,80 @@ export const getCart = async (req, res) => {
 }
 
 export const addToCart = async (req, res) => {
+    let ssid = req.sessionID;
+    if(!ssid) return res.status(400).json({mesage: 'Session is required'})
 
-    if(!req.session) return res.status(400).send({message: 'Session required'});
-    const ssid = req.sessionID;
-    const ObjectIdRegexp =  /^[a-fA-F0-9]{24}$/,
-          quantityRegexp = /^[0-9]{1,3}$/;
-     
-     if(!String(req.body.quantity).match(quantityRegexp)) {
-        return res.status(400).json({error: 'Wrong product quantity value'});
-     }
-     if(!req.body.product.match(ObjectIdRegexp)) {
-         return res.status(400).json({error: 'This product does not exist'});
-     }
-    try {
-         const cartExists = await Cart.findOne({session: ssid})
-         const product = await Product.findOne({_id: req.body.product});
+    const cartExists = await Cart.findOne({session: ssid})
+    const product = await Product.findOne({_id: req.body.product});
+
+    if(!product) return res.status(400).json({message: 'This product does not exist'})
+
+    let productPromotion = product.price;
+    if(product.sale > 0){
+        productPromotion = Math.floor((product.price / 100 * (100 - product.sale)))
+    }
+
+    if(!cartExists){
+        const savedCart = await new Cart({
+            session: ssid,
+            products: [
+                {productId: req.body.product, quantity: req.body.quantity || 1}
+            ],
+            total: product.price * parseInt(req.body.quantity),
+            totalPromotion: productPromotion * parseInt(req.body.quantity),
+        }).save()
+        savedCart.populate('products.productId').then((data) => {
+        console.log(data);
+        return res.json({cart: data})
+        })
         
-         let productPromotion = product.price;
-         if(product.sale > 0){
-            productPromotion = Math.floor((product.price / 100 * (100 - product.sale)))
-         }
-         if(!cartExists){
-             const savedCart = await new Cart({
-                 session: ssid,
-                 products: [
-                     {productId: req.body.product, quantity: req.body.quantity || 1}
-                 ],
-                 total: product.price * parseInt(req.body.quantity),
-                 totalPromotion: productPromotion * parseInt(req.body.quantity),
-             }).save()
-             savedCart.populate('products.productId').then((data) => {
-                console.log(data);
-                req.session.cart = savedCart._id
+    } else {
+        const inCart = await Cart.findOne({
+            "products.productId": {"$eq": req.body.product},
+            session: ssid
+        });
+        
+        if(inCart) {
+            
+            const updatedCart = await Cart.findOneAndUpdate(
+                { _id: inCart.id, "products.productId": req.body.product },
+                {
+                    "$inc": {
+                        "products.$.quantity": req.body.quantity,
+                        total: product.price * parseInt(req.body.quantity),
+                        totalPromotion: productPromotion * parseInt(req.body.quantity),
+                    },
+                },
+                {new: true}
+            ).populate({path:'products.productId' })
+            .exec((err, data) => {
+                req.session.cart = data._id
                 return res.json({cart: data})
-             })
-             
-         } else {
-             const inCart = await Cart.findOne({
-                 "products.productId": {"$eq": req.body.product}
-             });
-             
-             if(inCart) {
-                 
-                 const updatedCart = await Cart.findOneAndUpdate(
-                     { _id: inCart.id, "products.productId": req.body.product },
-                     {
-                         "$inc": {
-                             "products.$.quantity": req.body.quantity,
-                             total: product.price * parseInt(req.body.quantity),
-                             totalPromotion: productPromotion * parseInt(req.body.quantity),
-                         },
-                     },
-                     {new: true}
-                 ).populate({path:'products.productId' })
-                  .exec((err, data) => {
-                     req.session.cart = data._id
-                     return res.json({cart: data})
-                 })
- 
-                 
-             } else {
-                 const updatedCart = await Cart.findOneAndUpdate(
-                     {session: ssid},
-                     {
-                         "$push": {
-                             products: {
-                                 productId: req.body.product,
-                                 quantity: req.body.quantity || 1
-                             }
-                         },
-                         "$inc": {
-                            total: product.price * parseInt(req.body.quantity),
-                            totalPromotion: productPromotion * parseInt(req.body.quantity),
+            })
+
+            
+        } else {
+            const updatedCart = await Cart.findOneAndUpdate(
+                {session: ssid},
+                {
+                    "$push": {
+                        products: {
+                            productId: req.body.product,
+                            quantity: req.body.quantity || 1
                         }
-                     },
-                     {new: true}
-                 ).populate({path:'products.productId' })
-                  .exec((err, data) => {
-                    req.session.cart = data._id
-                    return res.json({cart: data})
-                })
-             }            
-         }
-    } catch (err) {
-         const data = {
-            message: err
-         }
-         return res.status(400).render('admin/status-pages/400', {data: data});
+                    },
+                    "$inc": {
+                    total: product.price * parseInt(req.body.quantity),
+                    totalPromotion: productPromotion * parseInt(req.body.quantity),
+                }
+                },
+                {new: true}
+            ).populate({path:'products.productId' })
+            .exec((err, data) => {
+            req.session.cart = data._id
+            return res.json({cart: data})
+        })
+        }            
     }
 } 
  
@@ -250,10 +235,8 @@ export const createOrder = async(req, res) => {
     if(!req.sessionID) return res.status(400).send('Session required');
     
     const orderValidationData = {
-    
         session: req.sessionID,
         name: req.body?.name,
-        email: req.body?.email,
         phone: req.body?.phone,
         address: req.body?.address,
         status: 'pending',

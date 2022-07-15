@@ -246,6 +246,8 @@
             this.cart = res?.data?.cart;
             this.cartLen = this?.cart?.products?.length
           }
+        }).catch((err) => {
+          console.log(err)
         })
       },
       async addToCart(e){

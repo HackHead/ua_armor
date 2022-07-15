@@ -10,9 +10,9 @@ footer.page_footer.ds.ms.c-gutter-100.c-mb-30.s-pt-60.s-pb-30.s-pt-md-90.s-pb-md
               | #{data.misc.footerAbout}
             .icons-list
             span.social-icons
-              a.fa.fa-2xp.fa-paper-plane(href='https://t.me/+'+ data.misc.contacts.telegram target='_blank' )
-              a.fa.fa-2xp.fa-instagram(href=data.misc.contacts.instagram target='_blank' )
-              a.fa.fa-2xp.fa-viber(href='viber://chat?number=%2B'+ data.misc.contacts.viber target='_blank' )
+              a.fa.fa-2xp.fa-paper-plane(href='https://t.me/+'+ data.misc.contacts.telegram target='_blank' style="transform: scale(1.2);")
+              a.fa.fa-2xp.fa-instagram(href=data.misc.contacts.instagram target='_blank' style="transform: scale(1.2);")
+              a.fa.fa-2xp.fa-viber(href='viber://chat?number=%2B'+ data.misc.contacts.viber target='_blank' style="transform: scale(1.2);")
       .col-xl-3.col-md-6.text-center.text-sm-left
         .widget-theme-wrapper.widget_no_background
           #mwt_bloginfo-3.widget.widget_bloginfo
@@ -32,8 +32,9 @@ footer.page_footer.ds.ms.c-gutter-100.c-mb-30.s-pt-60.s-pb-30.s-pt-md-90.s-pb-md
                     .icon-styled.icon-top
                       ion-icon(name='call')
                     p
-                      a(href='callto:+0800334150') #{data.misc.contacts.phone}
+                      a(href='tel:' + data.misc.contacts.phone) #{data.misc.contacts.phone}
                       br
+                      a(href="tel:380631676533") +38(063)167-65-33
                 li
                   .icon-inline
                     .icon-styled.icon-top
@@ -60,13 +61,13 @@ footer.page_footer.ds.ms.c-gutter-100.c-mb-30.s-pt-60.s-pb-30.s-pt-md-90.s-pb-md
             h3.widget-title Товари
             ul.product-categories
               li.cat-item.cat-item-27
-                a(href='/store/category/Kaski-Bronezhileti') Каски
+                a(href='/store/category/Odyag-Forma') Одяг/Форма
               li.cat-item.cat-item-15
-                a(href='/store/category/Kaski-Bronezhileti') Бронежилети
+                a(href='/store/category/Bronezhileti') Бронежилети
               li.cat-item.cat-item-28
-                a(href='/store/category/Rozgruzki-Sumki') Розгрузка
+                a(href='/store/category/Pidsumki-Rozgruzki') Підсумки/Розгрузка
               li.cat-item.cat-item-30
-                a(href='/store/category/Uniforma-i-bojovi-sorochki') Одяг
+                a(href='/store/category/Optika') Оптика
 // .page_footer
 section.page_copyright.copyright1.ds.s-pt-20.s-pb-20
   .container
